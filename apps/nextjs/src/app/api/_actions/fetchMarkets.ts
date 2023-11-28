@@ -1,4 +1,4 @@
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
 
 const fetchMarkets = async (): Promise<Market[]> => {
   const response = await fetch("/api/markets");

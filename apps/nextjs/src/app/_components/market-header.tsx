@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 

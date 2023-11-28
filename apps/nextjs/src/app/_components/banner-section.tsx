@@ -1,4 +1,4 @@
-import { banners } from "~/data/testData";
+import { banners } from "~/types/types";
 import { Banner } from "./banner";
 
 export function BannerSection() {

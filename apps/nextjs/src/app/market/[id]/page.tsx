@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
+import ErrorPage from "~/app/_components/error-page";
+import LoadingPage from "~/app/_components/loading-page";
 import MarketHeader from "~/app/_components/market-header";
 import HighlightsPage from "~/app/_components/market-highlights";
 import MarketInfoPage from "~/app/_components/market-info-page";
@@ -33,11 +35,11 @@ export default function MarketPage({ params }: { params: { id: string } }) {
   };
 
   if (marketStatus === "pending") {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (marketStatus === "error") {
-    return <div>Cannot get Market</div>;
+    return <ErrorPage />;
   }
 
   return (

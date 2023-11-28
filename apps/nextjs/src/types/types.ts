@@ -1,5 +1,3 @@
-import { openingHour } from "./../../../../packages/db/schema/schema";
-
 export interface Author {
   id: string;
   firstName: string;
@@ -125,4 +123,19 @@ export interface OpeningHour {
   dayOfWeek: string;
   open: string;
   close: string;
+}
+
+export interface Vendor {
+  id: string;
+  code: string;
+  bannerUrl: string;
+  logoUrl: string;
+  name: string;
+  nameTH: string;
+  about: string;
+  aboutTH: string;
+  priceRange: string;
+  marketId: string;
+  createdAt: string;
+  ratings: Ratings;
 }

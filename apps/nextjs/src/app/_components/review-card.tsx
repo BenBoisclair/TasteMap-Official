@@ -1,7 +1,7 @@
 import React from "react";
 import { MoreVertical } from "lucide-react";
 
-import type { Review } from "~/data/testData";
+import type { Review } from "~/types/types";
 import formatDate from "~/utils/formatDate";
 import RatingStarIcon from "./icons/rating-star-icon";
 
