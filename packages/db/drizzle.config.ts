@@ -10,10 +10,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 export default {
-  schema: "./schema",
-  driver: "mysql2",
+  schema: "./schema/schema.ts",
+  driver: "pg",
+  strict: true,
   dbCredentials: {
     connectionString: process.env.DATABASE_URL,
   },
-  tablesFilter: ["t3turbo_*"],
 } satisfies Config;
