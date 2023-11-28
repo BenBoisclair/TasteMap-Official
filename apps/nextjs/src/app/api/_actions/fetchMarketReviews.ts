@@ -1,4 +1,4 @@
-import type { ReviewsResponse } from "~/data/testData";
+import type { ReviewsResponse } from "~/types/types";
 
 const fetchMarketReviews = async ({
   marketId,

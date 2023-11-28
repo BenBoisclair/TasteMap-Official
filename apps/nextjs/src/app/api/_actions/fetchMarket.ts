@@ -1,4 +1,4 @@
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
 
 const fetchMarket = async ({
   marketId,

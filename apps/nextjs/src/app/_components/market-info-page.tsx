@@ -1,5 +1,5 @@
 // import IntToStringWeekday from "../(utils)/IntToStringWeekday";
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
 import convertTimeFormat from "~/utils/convertTimeFormat";
 import OpeningHourItem from "./opening-hour-item";
 

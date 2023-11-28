@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
 import { MarketStatusIcon } from "./market-status-icon";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";

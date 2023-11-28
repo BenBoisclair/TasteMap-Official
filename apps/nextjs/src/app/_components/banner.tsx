@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import type { Banner } from "~/data/testData";
+import type { Banner } from "~/types/types";
 
 export function Banner({ banner }: { banner: Banner }) {
   return (

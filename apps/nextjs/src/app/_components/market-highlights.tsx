@@ -1,4 +1,5 @@
-import type { Market } from "~/data/testData";
+import type { Market } from "~/types/types";
+import RecommenedForYouSection from "./recommended-for-you-section";
 import UniqueServicesSection from "./unique-services-section";
 
 interface HighlightsPageProps {
@@ -11,8 +12,8 @@ export default function HighlightsPage({
 }: HighlightsPageProps) {
   return (
     <div id="HighlightsPage" className="py-8">
-      {/* <UniqueServicesSection marketId={market.id} /> */}
-      {/* <RecommenedForYouSection marketId={market.id} /> */}
+      <UniqueServicesSection marketId={market.id} />
+      <RecommenedForYouSection marketId={market.id} />
       {/* <ExploreByCategoriesSection /> */}
       {/* <RatingAndReviewSection
         id={marketInfo.marGuid}

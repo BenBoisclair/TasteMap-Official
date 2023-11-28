@@ -36,19 +36,22 @@ export default function RatingAndReviewSection({
 
       <div className="px-5 py-2">
         <div className="mt-4 flex flex-wrap px-2">
-          <div className="flex flex-col items-center justify-center">
-            <div className="text-center">
-              <div className="mr-2 flex items-center leading-tight">
-                <div className="mr-1">
-                  <RatingStarIcon size={24} />
+          {reviewsData && reviewStatus === "success" && (
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-center">
+                <div className="mr-2 flex items-center leading-tight">
+                  <div className="mr-1">
+                    <RatingStarIcon size={24} />
+                  </div>
+                  <p className="text-[32px] font-bold">
+                    {reviewsData?.average?.toFixed(2) ?? 0}
+                  </p>
                 </div>
-                <p className="text-[32px] font-bold">
-                  {reviewsData?.average?.toFixed(2) ?? 0}
-                </p>
+                <p className="whitespace-nowrap text-sm">{`(${reviewsData?.total} reviews)`}</p>
               </div>
-              <p className="whitespace-nowrap text-sm">{`(${reviewsData?.total} reviews)`}</p>
             </div>
-          </div>
+          )}
+
           <div className="flex flex-col gap-1">
             {reviewsData?.reviewAspects.map((aspect, key) => (
               <AspectBar aspect={aspect} key={key} />

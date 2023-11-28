@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import type { Tag } from "~/data/testData";
+import type { Tag } from "~/types/types";
 import { cn } from "~/utils/cn";
 
 export function Tag({
