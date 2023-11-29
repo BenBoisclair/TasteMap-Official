@@ -1,15 +1,15 @@
 import type { ReviewsResponse } from "~/types/types";
 
-const fetchMarketReviews = async ({
+const fetchVendorReviews = async ({
   id,
 }: {
   id: string;
 }): Promise<ReviewsResponse> => {
-  const response = await fetch(`/api/markets/${id}/reviews`);
+  const response = await fetch(`/api/vendors/${id}/reviews`);
   if (!response.ok) {
-    throw new Error(`Error fetching reviews for market: ${id}`);
+    throw new Error(`Error fetching reviews for vendor: ${id}`);
   }
   return response.json() as Promise<ReviewsResponse>;
 };
 
-export default fetchMarketReviews;
+export default fetchVendorReviews;

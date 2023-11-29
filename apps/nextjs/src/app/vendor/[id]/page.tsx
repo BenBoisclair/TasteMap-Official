@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import LoadingPage from "~/app/_components/loading-page";
+import RatingAndReviewSection from "~/app/_components/rating-and-reviews-section";
 import Tabs from "~/app/_components/tabs";
 import VendorHeader from "~/app/_components/vendor-header";
 import VendorInfoPage from "~/app/_components/vendor-info-page";
@@ -55,13 +56,9 @@ export default function Vendor({ params }: { params: { id: string } }) {
         tabs={["Info", "Reviews"]}
       />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
-      {/* {activeTab === "Reviews" && (
-        <RatingAndReviewSection
-          title={false}
-          id={params.vendId}
-          type="VENDOR_BRANCH"
-        />
-      )} */}
+      {activeTab === "Reviews" && (
+        <RatingAndReviewSection id={vendorId} type="Vendor" />
+      )}
     </div>
   );
 }

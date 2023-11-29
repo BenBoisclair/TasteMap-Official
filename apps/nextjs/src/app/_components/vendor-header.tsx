@@ -61,7 +61,7 @@ const VendorHeader = ({ vendor }: { vendor: Vendor }) => {
         <div className="absolute top-0 flex h-full w-full items-end p-5">
           <div className="relative h-[75px] w-[75px] overflow-hidden rounded-full bg-white">
             <Image
-              src={vendor?.logoUrl || `https://placehold.co/600x400/png`}
+              src={vendor?.logoUrl || `/logos/tastemap_logo.png`}
               sizes="100vw"
               fill={true}
               style={{
@@ -103,21 +103,23 @@ const VendorHeader = ({ vendor }: { vendor: Vendor }) => {
           id="marTags"
           className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium"
         >
-          <div id="productTags" className="flex items-center">
-            <p className="mr-2">Products</p>
-            <div
-              id="PTags"
-              className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
-            >
-              {productTags?.map((tag, key: number) => {
-                return (
-                  <Tag key={key} type={tag.type} size="lg">
-                    {tag.name}
-                  </Tag>
-                );
-              })}
+          {productTags.length > 0 && (
+            <div id="productTags" className="flex items-center">
+              <p className="mr-2">Products</p>
+              <div
+                id="PTags"
+                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
+              >
+                {productTags?.map((tag, key: number) => {
+                  return (
+                    <Tag key={key} type={tag.type} size="lg">
+                      {tag.name}
+                    </Tag>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

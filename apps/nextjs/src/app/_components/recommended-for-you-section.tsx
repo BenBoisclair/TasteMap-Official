@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight } from "lucide-react";
 
-import type { Vendor } from "~/types/types";
 import fetchMarketVendors from "../api/_actions/fetchMarketVendors";
-import { Ratings } from "./ratings";
+import { RecommendedForYouSectionSkeleton } from "./recommended-for-you-section-skeleton";
+import { VendorCard } from "./vendor-card";
 
 interface RecommendedForYouSectionProps {
   marketId: string;
@@ -21,9 +20,6 @@ export default function RecommenedForYouSection({
     queryFn: () => fetchMarketVendors({ marketId }),
   });
 
-  if (vendorsStatus === "pending") {
-    return <div>Loading...</div>;
-  }
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between">
@@ -33,33 +29,13 @@ export default function RecommenedForYouSection({
         </Link>
       </div>
       <div className="no-scrollbar flex gap-4 overflow-x-auto px-5 pt-2">
-        {vendors?.slice(0, 10).map((vendor, index) => {
-          return <VendorCard vendor={vendor} key={index} />;
-        })}
+        {vendors &&
+          vendorsStatus === "success" &&
+          vendors?.slice(0, 10).map((vendor, index) => {
+            return <VendorCard vendor={vendor} key={index} />;
+          })}
+        {vendorsStatus === "pending" && <RecommendedForYouSectionSkeleton />}
       </div>
     </div>
   );
 }
-
-const VendorCard = ({ vendor }: { vendor: Vendor }) => {
-  return (
-    <div className="flex w-[130px] flex-col">
-      <div className="relative flex h-[90px] w-[130px] place-content-center overflow-hidden rounded-3xl">
-        <Image
-          src={vendor.bannerUrl || ""}
-          alt={`${vendor.name}'s Banner`}
-          fill={true}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
-      <div className="mt-1">
-        <div className="truncate font-bold">{vendor.name}</div>
-        <Ratings
-          average={vendor?.ratings?.average}
-          total={vendor?.ratings?.total}
-          size="small"
-        />
-      </div>
-    </div>
-  );
-};
