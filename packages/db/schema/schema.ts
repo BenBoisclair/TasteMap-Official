@@ -280,7 +280,7 @@ export const vendorRelations = relations(vendor, ({ one, many }) => ({
     references: [market.id],
   }),
   openingHours: many(openingHour),
-  paymentOptions: many(paymentOption),
+  paymentOptions: many(vendorOnPaymentOption),
   reviews: many(review),
   userFavourites: many(favourites),
   tags: many(vendorsOnTags),
@@ -297,7 +297,7 @@ export const paymentOption = pgTable("payment_option", {
 });
 
 export const paymentOptionRelations = relations(paymentOption, ({ many }) => ({
-  vendors: many(vendor),
+  vendors: many(vendorOnPaymentOption),
 }));
 
 export const vendorOnPaymentOption = pgTable(
@@ -343,6 +343,17 @@ export const vendorsOnTags = pgTable(
     pk: primaryKey({ columns: [t.vendorId, t.tagId] }),
   }),
 );
+
+export const vendorOnTagsRelation = relations(vendorsOnTags, ({ one }) => ({
+  vendor: one(vendor, {
+    fields: [vendorsOnTags.vendorId],
+    references: [vendor.id],
+  }),
+  tag: one(tag, {
+    fields: [vendorsOnTags.tagId],
+    references: [tag.id],
+  }),
+}));
 
 export const promotion = pgTable("promotion", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
