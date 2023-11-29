@@ -1,0 +1,66 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
+
+import LoadingPage from "~/app/_components/loading-page";
+import Tabs from "~/app/_components/tabs";
+import VendorHeader from "~/app/_components/vendor-header";
+import VendorInfoPage from "~/app/_components/vendor-info-page";
+import fetchVendor from "~/app/api/_actions/fetchVendor";
+
+export default function Vendor({ params }: { params: { id: string } }) {
+  const vendorId = params.id;
+  //   const router = useRouter();
+
+  const { data: vendor, status: vendorStatus } = useQuery({
+    queryKey: ["oneVendor", vendorId],
+    queryFn: () => fetchVendor({ vendorId }),
+  });
+
+  const [activeTab, setActiveTab] = useState<string>("Info");
+
+  const { ref: headerRef, inView } = useInView({
+    threshold: 0,
+    rootMargin: "-50px",
+  });
+
+  const handleTabSelect = (tabName: string) => {
+    setActiveTab(tabName);
+    if (!inView) {
+      window?.scrollTo(0, 380);
+    }
+  };
+
+  //   const handleBackButton = () => {
+  //     router.back();
+  //   };
+
+  if (vendorStatus === "pending") {
+    return <LoadingPage />;
+  }
+
+  if (vendorStatus === "error") {
+    return <div>Error</div>;
+  }
+  return (
+    <div>
+      <VendorHeader vendor={vendor} />
+      <Tabs
+        activeTab={activeTab}
+        handleTabSelect={handleTabSelect}
+        tabs={["Info", "Reviews"]}
+      />
+      {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
+      {/* {activeTab === "Reviews" && (
+        <RatingAndReviewSection
+          title={false}
+          id={params.vendId}
+          type="VENDOR_BRANCH"
+        />
+      )} */}
+    </div>
+  );
+}
