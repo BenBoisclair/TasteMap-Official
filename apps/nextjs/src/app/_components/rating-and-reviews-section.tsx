@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import fetchMarketReviews from "../api/_actions/fetchMarketReviews";
+import fetchVendorReviews from "../api/_actions/fetchVendorReviews";
 import AspectBar from "./aspect-bar";
 import RatingStarIcon from "./icons/rating-star-icon";
 import ReviewItem from "./review-card";
@@ -18,9 +19,10 @@ export default function RatingAndReviewSection({
   id,
   type = "Market", // handleTabSelect = () => {},
 }: RatingAndReviewSectionProps) {
+  const fetchData = type === "Market" ? fetchMarketReviews : fetchVendorReviews;
   const { data: reviewsData, status: reviewStatus } = useQuery({
     queryKey: [type.toLowerCase() + "Reviews", id],
-    queryFn: () => fetchMarketReviews({ marketId: id }),
+    queryFn: () => fetchData({ id }),
   });
 
   return (

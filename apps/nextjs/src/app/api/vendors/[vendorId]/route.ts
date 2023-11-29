@@ -46,8 +46,6 @@ export const GET = async (
       try {
         const { tags, paymentOptions, ...restOfData } = oneVendor!;
 
-        console.log(oneVendor);
-
         const aggregationRatings = await db
           .select({
             total: sql<number>`cast(count(${review.id}) as int)`,

@@ -138,4 +138,11 @@ export interface Vendor {
   marketId: string;
   createdAt: string;
   ratings: Ratings;
+  tags: Tag[];
+  paymentOptions: PaymentOption[];
+}
+
+export interface PaymentOption {
+  id: string;
+  name: string;
 }

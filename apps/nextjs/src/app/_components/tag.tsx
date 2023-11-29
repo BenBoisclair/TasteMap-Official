@@ -9,7 +9,7 @@ export function Tag({
   children,
 }: {
   type: string;
-  size?: "default" | "lg";
+  size?: "default" | "lg" | "sm";
   children: ReactNode;
 }) {
   return (
@@ -19,6 +19,7 @@ export function Tag({
         "bg-gray": type === "Facility",
         "px-2 py-[2px]": size === "default",
         "px-2 py-1": size === "lg",
+        "px-1 py-0.5": size === "sm",
       })}
     >
       <span
@@ -27,6 +28,7 @@ export function Tag({
           "text-[#7C7C7C]": type === "Facility",
           "text-xs": size === "default",
           "text-sm": size === "lg",
+          " text-3xs": size === "sm",
         })}
       >
         {children}

@@ -10,6 +10,23 @@ export const GET = async (
   const allVendors = await db.query.vendor
     .findMany({
       where: eq(vendor.marketId, marketId),
+      with: {
+        tags: {
+          columns: {
+            tagId: false,
+            vendorId: false,
+          },
+          with: {
+            tag: {
+              columns: {
+                id: true,
+                name: true,
+                type: true,
+              },
+            },
+          },
+        },
+      },
     })
     .then(async (vendors) => {
       const vendorsWithReview = await Promise.all(
@@ -29,7 +46,7 @@ export const GET = async (
           return {
             ...vendor,
             ratings,
-            // tags: vendor?.tags.map(({ tag }) => tag),
+            tags: vendor?.tags.map(({ tag }) => tag),
           };
         }),
       );
