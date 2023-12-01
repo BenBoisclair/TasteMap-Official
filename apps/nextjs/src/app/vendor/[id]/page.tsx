@@ -18,7 +18,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
   //   const router = useRouter();
 
   const { data: vendor, status: vendorStatus } = useQuery({
-    queryKey: ["oneVendor", vendorId],
+    queryKey: ["vendor", vendorId],
     queryFn: () => fetchVendor({ vendorId }),
   });
 
@@ -57,7 +57,12 @@ export default function Vendor({ params }: { params: { id: string } }) {
       />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
       {activeTab === "Reviews" && (
-        <RatingAndReviewSection id={vendorId} type="Vendor" />
+        <RatingAndReviewSection
+          id={vendorId}
+          type="Vendor"
+          name={vendor.name}
+          imageUrl={vendor.bannerUrl}
+        />
       )}
     </div>
   );

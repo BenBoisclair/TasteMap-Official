@@ -7,6 +7,7 @@ import {
   text,
   time,
   timestamp,
+  unique,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -179,20 +180,27 @@ export const openingHourRelation = relations(openingHour, ({ one }) => ({
   }),
 }));
 
-export const review = pgTable("review", {
-  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+export const review = pgTable(
+  "review",
+  {
+    id: varchar("id", { length: 20 }).primaryKey().notNull(),
 
-  rating: integer("rating").notNull(),
-  content: text("content").notNull(),
+    rating: integer("rating").notNull(),
+    content: text("content").notNull(),
 
-  marketReviewedID: varchar("market_id").references(() => market.id),
-  vendorReviewedID: varchar("vendor_id").references(() => vendor.id),
-  authorId: varchar("author")
-    .notNull()
-    .references(() => users.id),
+    marketReviewedID: varchar("market_id").references(() => market.id),
+    vendorReviewedID: varchar("vendor_id").references(() => vendor.id),
+    authorId: varchar("author")
+      .notNull()
+      .references(() => users.externalId),
 
-  createdAt: timestamp("created_at").defaultNow(),
-});
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (t) => ({
+    authorIdToMarketId: unique().on(t.authorId, t.marketReviewedID),
+    authorIdToVendorId: unique().on(t.authorId, t.vendorReviewedID),
+  }),
+);
 
 export const reviewRelations = relations(review, ({ one, many }) => ({
   market: one(market, {
@@ -205,7 +213,7 @@ export const reviewRelations = relations(review, ({ one, many }) => ({
   }),
   user: one(users, {
     fields: [review.authorId],
-    references: [users.id],
+    references: [users.externalId],
   }),
   reviewLikes: many(reviewLike),
   reviewAspects: many(reviewAspect),

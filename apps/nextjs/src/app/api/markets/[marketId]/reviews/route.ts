@@ -1,5 +1,10 @@
+import { auth } from "@clerk/nextjs/server";
+
 import { db, eq, sql } from "@acme/db";
 import { review, reviewAspect, users } from "@acme/db/schema/schema";
+
+import type { InsertReview } from "~/app/api/_actions/writeMarketReview";
+import { insertReviewSchema } from "~/types/types";
 
 export const GET = async (
   request: Request,
@@ -40,7 +45,7 @@ export const GET = async (
     .select()
     .from(review)
     .where(eq(review.marketReviewedID, marketId))
-    .leftJoin(users, eq(users.id, review.authorId));
+    .leftJoin(users, eq(users.externalId, review.authorId));
 
   const allReviews = allReviewsRaw.map((review) => {
     return {
@@ -64,4 +69,60 @@ export const GET = async (
   return new Response(JSON.stringify(responseObject), {
     headers: { "Content-Type": "application/json" },
   });
+};
+
+export const POST = async (
+  request: Request,
+  { params }: { params: { marketId: string } },
+) => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return Response.json(
+      { message: "User needs to be logged in" },
+      { status: 401 },
+    );
+  }
+
+  const marketId = params.marketId;
+
+  try {
+    // use Zod
+    const reviewData = (await request.json()) as InsertReview;
+
+    const reviewsValidated = insertReviewSchema.parse(reviewData);
+
+    if (!reviewsValidated) {
+      return Response.json({ message: `Invalid review Data` }, { status: 400 });
+    } else {
+      const reviewWrite = await db
+        .insert(review)
+        .values({
+          ...reviewsValidated,
+          marketReviewedID: marketId,
+          authorId: userId,
+        })
+        .onConflictDoNothing({
+          target: [review.marketReviewedID, review.authorId],
+        })
+        .returning();
+
+      if (reviewWrite.length === 0) {
+        return Response.json(
+          { message: "Whoops! You already have a review!" },
+          { status: 409 },
+        );
+      }
+
+      // return new Response(JSON.stringify(reviewWrite), {
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      return Response.json({ message: "Review Created!" }, { status: 200 });
+    }
+  } catch (error) {
+    return Response.json(
+      { message: "Whoops.. creating review failed.." },
+      { status: 404 },
+    );
+  }
 };
