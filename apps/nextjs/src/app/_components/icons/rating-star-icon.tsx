@@ -1,9 +1,15 @@
 export default function RatingStarIcon({
   size = 14,
   color = "yellow",
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
 }: {
   size?: number;
   color?: "yellow" | "black" | "gray";
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onClick?: () => void;
 }) {
   let fillColor;
   switch (color) {
@@ -26,6 +32,9 @@ export default function RatingStarIcon({
       viewBox="0 0 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       <path
         id="Vector"

@@ -18,7 +18,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
   const [activeTab, setActiveTab] = useState<string>("Highlights");
 
   const { data: market, status: marketStatus } = useQuery({
-    queryKey: ["oneMarket", marketId],
+    queryKey: ["market", marketId],
     queryFn: () => fetchMarket({ marketId }),
   });
 
@@ -61,6 +61,8 @@ export default function MarketPage({ params }: { params: { id: string } }) {
       {activeTab === "Reviews" && (
         <RatingAndReviewSection
           id={marketId}
+          name={market.name}
+          imageUrl={market.bannerUrl}
           type={"Market"}
           handleTabSelect={handleTabSelect}
         />

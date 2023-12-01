@@ -47,8 +47,8 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
               className="mt-2 flex w-full items-center text-sm font-medium"
             >
               <Ratings
-                average={market.ratings.average}
-                total={market.ratings.total}
+                average={market?.ratings?.average}
+                total={market?.ratings?.total}
               />
               <span className="m-1 h-[3px] w-[3px] rounded-full bg-black"></span>
               <div id="writeReview" className="underline">

@@ -1,3 +1,7 @@
+import { createInsertSchema } from "drizzle-zod";
+
+import { review } from "@acme/db/schema/schema";
+
 export interface Author {
   id: string;
   firstName: string;
@@ -146,3 +150,6 @@ export interface PaymentOption {
   id: string;
   name: string;
 }
+
+// Zod Validators
+export const insertReviewSchema = createInsertSchema(review);
