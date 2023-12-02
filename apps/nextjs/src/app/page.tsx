@@ -1,5 +1,5 @@
 // import { Suspense } from "react";
-import { HomePageHeader } from "./_components/homepage-header";
+// import { HomePageHeader } from "./_components/homepage-header";
 import { MarketsNearYouSection } from "./_components/markets-near-you-section";
 import NavBar from "./_components/nav-bar";
 
@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <main className="flex h-screen w-full flex-col bg-neutral">
       <NavBar />
-      <HomePageHeader />
+      {/* <HomePageHeader /> */}
       <MarketsNearYouSection />
     </main>
   );
