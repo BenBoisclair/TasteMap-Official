@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import type { Market } from "~/types/types";
+import NavBar from "./nav-bar";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 
@@ -17,6 +18,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
   return (
     <>
       <div id="marHeader">
+        <NavBar />
         {/* <NavBarInBusiness inView={inView} /> */}
         <div
           id="bannerWrapper"

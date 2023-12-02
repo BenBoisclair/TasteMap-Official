@@ -31,6 +31,7 @@ const RatingChooser = ({
             onMouseEnter={() => setHover(ratingValue)}
             onMouseLeave={() => setHover(rating)}
             onClick={() => setRating(ratingValue)}
+            className=" cursor-pointer"
           />
         );
       })}

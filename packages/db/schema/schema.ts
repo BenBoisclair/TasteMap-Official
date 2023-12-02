@@ -243,15 +243,25 @@ export const reviewLikeRelations = relations(reviewLike, ({ one }) => ({
   }),
 }));
 
-export const reviewAspect = pgTable("review_aspect", {
-  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+export const reviewAspect = pgTable(
+  "review_aspect",
+  {
+    id: varchar("id", { length: 20 }).primaryKey().notNull(),
 
-  name: text("name").notNull(),
-  rating: integer("rating").notNull(),
-  reviewId: varchar("review_id"),
+    name: text("name").notNull(),
+    rating: integer("rating").notNull(),
+    reviewId: varchar("review_id")
+      .references(() => review.id, {
+        onDelete: "cascade",
+      })
+      .notNull(),
 
-  createdAt: timestamp("created_at").defaultNow(),
-});
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (t) => ({
+    aspectIdToReviewId: unique().on(t.id, t.reviewId),
+  }),
+);
 
 export const reviewAspectRelations = relations(reviewAspect, ({ one }) => ({
   review: one(review, {

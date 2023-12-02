@@ -1,13 +1,17 @@
+import { auth } from "@clerk/nextjs";
+
 import { db, eq, sql } from "@acme/db";
 import { review, reviewAspect, users } from "@acme/db/schema/schema";
+
+import type { InsertReview } from "~/app/api/_actions/writeReview";
+import type { InsertReviewAspect } from "~/types/types";
+import { insertReviewAspectSchema, insertReviewSchema } from "~/types/types";
 
 export const GET = async (
   request: Request,
   { params }: { params: { vendorId: string } },
 ) => {
   const vendorId = params.vendorId;
-
-  console.log(vendorId);
 
   // Aggregate query to get total count and average rating
   const aggregationReviewRatings = await db
@@ -41,7 +45,7 @@ export const GET = async (
     .select()
     .from(review)
     .where(eq(review.vendorReviewedID, vendorId))
-    .leftJoin(users, eq(users.id, review.authorId));
+    .leftJoin(users, eq(users.externalId, review.authorId));
 
   const allReviews = allReviewsRaw.map((review) => {
     return {
@@ -65,4 +69,79 @@ export const GET = async (
   return new Response(JSON.stringify(responseObject), {
     headers: { "Content-Type": "application/json" },
   });
+};
+
+export const POST = async (
+  request: Request,
+  { params }: { params: { vendorId: string } },
+) => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return Response.json(
+      { message: "User needs to be logged in" },
+      { status: 401 },
+    );
+  }
+
+  const vendorId = params.vendorId;
+
+  try {
+    const { reviewAspects, reviewData } = (await request.json()) as {
+      reviewData: InsertReview;
+      reviewAspects: InsertReviewAspect[];
+    };
+
+    const reviewsValidated = insertReviewSchema.parse(reviewData);
+    const reviewAspectsValidated = reviewAspects.map((aspect) => {
+      return insertReviewAspectSchema.parse(aspect);
+    });
+
+    if (!reviewsValidated || !reviewAspectsValidated) {
+      return Response.json({ message: `Invalid review Data` }, { status: 400 });
+    } else {
+      const reviewWrite = await db.transaction(async (tx) => {
+        const reviewWriteStatus = await tx
+          .insert(review)
+          .values({
+            ...reviewsValidated,
+            vendorReviewedID: vendorId,
+            authorId: userId,
+          })
+          .onConflictDoNothing({
+            target: [review.vendorReviewedID, review.authorId],
+          })
+          .returning();
+        await tx
+          .insert(reviewAspect)
+          .values(reviewAspectsValidated)
+          .onConflictDoNothing({
+            target: [reviewAspect.id, reviewAspect.reviewId],
+          })
+          .returning();
+        return reviewWriteStatus;
+      });
+
+      if (reviewWrite.length === 0 && !reviewWrite) {
+        return Response.json(
+          { message: "Whoops! You already have a review!" },
+          { status: 409 },
+        );
+      }
+
+      // if (reviewWrite[0] !== undefined) {
+      //   await db.insert(reviewAspect).values(reviewAspects).returning();
+      // }
+
+      // return new Response(JSON.stringify(reviewWrite), {
+      //   headers: { "Content-Type": "application/json" },
+      // });
+      return Response.json({ message: "Review Created!" }, { status: 200 });
+    }
+  } catch (error) {
+    return Response.json(
+      { message: "Whoops.. creating review failed.." },
+      { status: 404 },
+    );
+  }
 };

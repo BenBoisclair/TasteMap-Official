@@ -6,8 +6,9 @@ import { ArrowLeft } from "lucide-react";
 import { nanoid } from "nanoid";
 import toast from "react-hot-toast";
 
-import type { InsertReview } from "../api/_actions/writeMarketReview";
-import writeMarketReview from "../api/_actions/writeMarketReview";
+import type { InsertReviewAspect } from "~/types/types";
+import type { InsertReview } from "../api/_actions/writeReview";
+import writeReview from "../api/_actions/writeReview";
 import RatingChooser from "./rating-chooser";
 
 export const WriteReviewModal = ({
@@ -28,20 +29,21 @@ export const WriteReviewModal = ({
   const { user, isSignedIn } = useUser();
   const [overall, setOverall] = useState<number>(5);
   const queryClient = useQueryClient();
+  const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
     type === "Market"
       ? [
-          { name: "Facility", score: 5 },
-          { name: "Safety", score: 5 },
-          { name: "Convenience", score: 5 },
-          { name: "Culture", score: 5 },
+          { id: nanoid(20), name: "Facility", rating: 5 },
+          { id: nanoid(20), name: "Safety", rating: 5 },
+          { id: nanoid(20), name: "Convenience", rating: 5 },
+          { id: nanoid(20), name: "Culture", rating: 5 },
         ]
       : type === "Vendor"
         ? [
-            { name: "Taste", score: 5 },
-            { name: "Hygiene", score: 5 },
-            { name: "Service", score: 5 },
+            { id: nanoid(20), name: "Taste", rating: 5 },
+            { id: nanoid(20), name: "Hygiene", rating: 5 },
+            { id: nanoid(20), name: "Service", rating: 5 },
           ]
         : [],
   );
@@ -49,10 +51,22 @@ export const WriteReviewModal = ({
   const [reviewContent, setReviewContent] = useState<string>("");
 
   const createReview = useMutation({
-    mutationFn: async (reviewData: InsertReview) => {
-      return await writeMarketReview({
-        reviewData: reviewData,
-        marketId: id,
+    mutationFn: async ({
+      reviewData,
+      reviewAspects,
+      id,
+      type,
+    }: {
+      reviewData: InsertReview;
+      reviewAspects: InsertReviewAspect[];
+      id: string;
+      type: string;
+    }) => {
+      return await writeReview({
+        reviewAspects,
+        reviewData,
+        id,
+        type,
       }).then(async (data) => {
         if (data?.status === 409 || data?.status === 404) {
           toast.error(data?.data.message);
@@ -84,17 +98,25 @@ export const WriteReviewModal = ({
       return;
     }
     createReview.mutate({
-      id: nanoid(20),
-      rating: overall,
-      content: reviewContent,
-      authorId: user.id,
+      reviewData: {
+        id: reviewId,
+        rating: overall,
+        content: reviewContent,
+        authorId: user.id,
+      },
+      reviewAspects: aspects.map((aspect) => ({
+        ...aspect,
+        reviewId,
+      })),
+      id: id,
+      type: type === "Market" ? "markets" : "vendors",
     });
     setWriteReviewToggle(!writeReviewToggle);
   };
 
   const handleAspectRatingChange = (index: number, newRating: number) => {
     const updatedAspects = aspects.map((aspect, idx) =>
-      idx === index ? { ...aspect, score: newRating } : aspect,
+      idx === index ? { ...aspect, rating: newRating } : aspect,
     );
     setAspects(updatedAspects);
   };
@@ -140,7 +162,7 @@ export const WriteReviewModal = ({
                   <RatingChooser
                     className="ml-10 gap-2"
                     size={20}
-                    rating={aspect.score}
+                    rating={aspect.rating}
                     setRating={(rating) =>
                       handleAspectRatingChange(index, rating)
                     }

@@ -46,8 +46,8 @@ export default function RatingAndReviewSection({
         )}
       </div> */}
 
-        <div className=" px-5 py-2">
-          <div className="mt-4 flex flex-wrap px-2">
+        <div className=" flex flex-col px-5 py-2">
+          <div className="mt-4 flex px-2">
             {reviewsData && reviewStatus === "success" && (
               <div className="flex flex-col items-center justify-center">
                 <div className="text-center">
@@ -80,7 +80,7 @@ export default function RatingAndReviewSection({
             </button>
           </div>
           {reviewsData && reviewStatus === "success" && (
-            <div className="mt-7 flex flex-col gap-6">
+            <div className="mt-10 flex flex-col gap-6">
               {reviewsData?.reviews.map((review, key) => {
                 return <ReviewItem review={review} key={key} />;
               })}
