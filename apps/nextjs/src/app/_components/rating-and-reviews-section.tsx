@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { MessageSquarePlusIcon } from "lucide-react";
+import toast from "react-hot-toast";
 
 import fetchMarketReviews from "../api/_actions/fetchMarketReviews";
 import fetchVendorReviews from "../api/_actions/fetchVendorReviews";
@@ -26,6 +28,7 @@ export default function RatingAndReviewSection({
   imageUrl,
   type = "Market", // handleTabSelect = () => {},
 }: RatingAndReviewSectionProps) {
+  const { isSignedIn } = useUser();
   const [writeReviewToggle, setWriteReviewToggle] = useState<boolean>(false);
 
   const fetchData = type === "Market" ? fetchMarketReviews : fetchVendorReviews;
@@ -33,6 +36,14 @@ export default function RatingAndReviewSection({
     queryKey: ["reviews", id],
     queryFn: () => fetchData({ id }),
   });
+
+  const openWriteReviewModal = () => {
+    if (!isSignedIn) {
+      toast.error("Please Sign in to Write Reviews");
+      return;
+    }
+    setWriteReviewToggle(!writeReviewToggle);
+  };
 
   return (
     <>
@@ -72,7 +83,7 @@ export default function RatingAndReviewSection({
           </div>
           <div className="mt-6 flex">
             <button
-              onClick={() => setWriteReviewToggle(!writeReviewToggle)}
+              onClick={openWriteReviewModal}
               className="bord flex w-[350px] items-center justify-center gap-1 rounded-3xl bg-yellow py-[10px]"
             >
               <MessageSquarePlusIcon size={22} color="white" />
