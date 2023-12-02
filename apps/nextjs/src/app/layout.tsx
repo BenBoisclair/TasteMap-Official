@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 import ttnorms from "~/fonts/ttnorms";
 
@@ -43,7 +44,10 @@ export default function Layout(props: { children: React.ReactNode }) {
     <ClerkProvider>
       <html lang="en">
         <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
-          <Providers headers={headers()}>{props.children}</Providers>
+          <Providers headers={headers()}>
+            {props.children}
+            <Analytics />
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
