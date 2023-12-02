@@ -3,8 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 import { db, eq, sql } from "@acme/db";
 import { review, reviewAspect, users } from "@acme/db/schema/schema";
 
-import type { InsertReview } from "~/app/api/_actions/writeMarketReview";
-import { insertReviewSchema } from "~/types/types";
+import type { InsertReview } from "~/app/api/_actions/writeReview";
+import { insertReviewAspectSchema, insertReviewSchema } from "~/types/types";
+import type { InsertReviewAspect } from "~/types/types";
 
 export const GET = async (
   request: Request,
@@ -87,32 +88,51 @@ export const POST = async (
   const marketId = params.marketId;
 
   try {
-    // use Zod
-    const reviewData = (await request.json()) as InsertReview;
+    const { reviewAspects, reviewData } = (await request.json()) as {
+      reviewData: InsertReview;
+      reviewAspects: InsertReviewAspect[];
+    };
 
     const reviewsValidated = insertReviewSchema.parse(reviewData);
+    const reviewAspectsValidated = reviewAspects.map((aspect) => {
+      return insertReviewAspectSchema.parse(aspect);
+    });
 
-    if (!reviewsValidated) {
+    if (!reviewsValidated || !reviewAspectsValidated) {
       return Response.json({ message: `Invalid review Data` }, { status: 400 });
     } else {
-      const reviewWrite = await db
-        .insert(review)
-        .values({
-          ...reviewsValidated,
-          marketReviewedID: marketId,
-          authorId: userId,
-        })
-        .onConflictDoNothing({
-          target: [review.marketReviewedID, review.authorId],
-        })
-        .returning();
+      const reviewWrite = await db.transaction(async (tx) => {
+        const reviewWriteStatus = await tx
+          .insert(review)
+          .values({
+            ...reviewsValidated,
+            marketReviewedID: marketId,
+            authorId: userId,
+          })
+          .onConflictDoNothing({
+            target: [review.marketReviewedID, review.authorId],
+          })
+          .returning();
+        await tx
+          .insert(reviewAspect)
+          .values(reviewAspectsValidated)
+          .onConflictDoNothing({
+            target: [reviewAspect.id, reviewAspect.reviewId],
+          })
+          .returning();
+        return reviewWriteStatus;
+      });
 
-      if (reviewWrite.length === 0) {
+      if (reviewWrite.length === 0 && !reviewWrite) {
         return Response.json(
           { message: "Whoops! You already have a review!" },
           { status: 409 },
         );
       }
+
+      // if (reviewWrite[0] !== undefined) {
+      //   await db.insert(reviewAspect).values(reviewAspects).returning();
+      // }
 
       // return new Response(JSON.stringify(reviewWrite), {
       //   headers: { "Content-Type": "application/json" },

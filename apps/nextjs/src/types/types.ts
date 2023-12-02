@@ -1,6 +1,6 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { review } from "@acme/db/schema/schema";
+import { review, reviewAspect } from "@acme/db/schema/schema";
 
 export interface Author {
   id: string;
@@ -30,6 +30,8 @@ export interface ReviewAspect {
   name: string;
   average: number;
 }
+
+export type InsertReviewAspect = typeof reviewAspect.$inferInsert;
 
 export interface UniqueService {
   id: string;
@@ -153,3 +155,4 @@ export interface PaymentOption {
 
 // Zod Validators
 export const insertReviewSchema = createInsertSchema(review);
+export const insertReviewAspectSchema = createInsertSchema(reviewAspect);

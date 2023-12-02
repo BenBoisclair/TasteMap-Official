@@ -1,15 +1,17 @@
 import React from "react";
-import { MoreVertical } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 import type { Review } from "~/types/types";
 import formatDate from "~/utils/formatDate";
 import RatingStarIcon from "./icons/rating-star-icon";
+import { KebabMenu } from "./kebab-menu";
 
 interface ReviewItemProps {
   review: Review;
 }
 
 const ReviewItem = ({ review }: ReviewItemProps) => {
+  const { isSignedIn, user } = useUser();
   const renderStars = (count: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -26,6 +28,8 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
 
   const formattedDate = formatDate(review.createdAt);
 
+  console.log(review);
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -40,7 +44,14 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
             <span className="text-xs">{formattedDate}</span>
           </div>
         </div>
-        <MoreVertical size={18} />
+        {isSignedIn && review.authorId === user.id && (
+          <KebabMenu
+            reviewId={review.id}
+            businessId={
+              review.marketReviewedID ?? review.vendorReviewedID ?? ""
+            }
+          />
+        )}
       </div>
       <div className="mt-2 flex gap-0.5">{renderStars(review.rating)}</div>
       <div className="mt-3 text-xs">{review.content}</div>

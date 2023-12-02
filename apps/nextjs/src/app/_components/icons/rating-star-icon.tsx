@@ -4,12 +4,14 @@ export default function RatingStarIcon({
   onMouseEnter,
   onMouseLeave,
   onClick,
+  className = "",
 }: {
   size?: number;
   color?: "yellow" | "black" | "gray";
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onClick?: () => void;
+  className?: string;
 }) {
   let fillColor;
   switch (color) {
@@ -35,6 +37,7 @@ export default function RatingStarIcon({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      className={className}
     >
       <path
         id="Vector"
