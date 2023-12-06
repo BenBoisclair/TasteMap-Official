@@ -12,6 +12,7 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string(),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string(),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string(),
+    WEBHOOK_SECRET: z.string().optional(),
   },
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app isn't
@@ -46,7 +47,6 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
     WEBHOOK_SECRET: process.env.WEBHOOK_SECRET,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:
     !!process.env.CI ||
