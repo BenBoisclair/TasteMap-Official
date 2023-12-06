@@ -35,7 +35,7 @@ export function NavBar({ className = "" }: { className?: string }) {
       <div
         onClick={() => toggleMenu()}
         className={cn(
-          `absolute z-40 h-screen w-full bg-black/30 duration-500 ease-in-out`,
+          `fixed top-0 z-40 h-screen w-full bg-black/30 duration-500 ease-in-out`,
           {
             hidden: !isMenuOpen,
           },
@@ -56,7 +56,7 @@ export const SideMenu = ({
     <>
       <div
         className={cn(
-          `fixed left-0 z-50 h-screen w-[300px] bg-white duration-500 ease-in-out`,
+          `fixed left-0 top-0 z-50 h-screen w-[300px] bg-white duration-500 ease-in-out`,
           {
             "left-[0%]": isMenuOpen,
             "left-[-100%]": !isMenuOpen,

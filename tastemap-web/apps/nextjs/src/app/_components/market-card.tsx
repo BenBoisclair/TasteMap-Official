@@ -38,8 +38,8 @@ export function MarketCard({ market }: { market: Market }) {
         <div className="mt-[10px] flex items-center gap-2">
           <MarketStatusIcon status={"OPEN"} />
           <Ratings
-            total={market.ratings.total}
-            average={market.ratings.average}
+            total={market?.ratings?.total}
+            average={market?.ratings?.average}
           />
         </div>
         <div className="mt-[10px] flex flex-col gap-2">
