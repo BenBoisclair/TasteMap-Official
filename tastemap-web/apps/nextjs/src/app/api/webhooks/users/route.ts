@@ -91,10 +91,16 @@ export async function POST(req: Request) {
     };
 
     try {
-      await db.insert(users).values(userInfo).onConflictDoUpdate({
-        target: users.externalId,
-        set: userInfo,
-      });
+      const createdUser = await db
+        .insert(users)
+        .values(userInfo)
+        .onConflictDoUpdate({
+          target: users.email,
+          set: userInfo,
+        })
+        .returning();
+
+      console.log(createdUser);
     } catch (error) {
       console.error(error);
     }
