@@ -14,6 +14,7 @@ export default function HighlightsPage({
     <div id="HighlightsPage" className="py-8">
       <UniqueServicesSection marketId={market.id} />
       <RecommenedForYouSection marketId={market.id} />
+
       {/* <ExploreByCategoriesSection /> */}
       {/* <RatingAndReviewSection
         id={marketInfo.marGuid}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import type { Market } from "~/types/types";
+import { cn } from "~/utils/cn";
 import NavBar from "./nav-bar";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
@@ -11,14 +12,20 @@ interface MarketHeaderProps {
   inView: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
   const productTags = market?.tags?.filter((tag) => tag.type === "Product");
   const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
   return (
     <>
       <div id="marHeader">
-        <NavBar />
+        <div className="absolute left-0 top-0 h-full w-full">
+          <NavBar
+            className={cn(`z-40`, {
+              "bg-transparent text-white": inView,
+              "bg-white text-black": !inView,
+            })}
+          />
+        </div>
         {/* <NavBarInBusiness inView={inView} /> */}
         <div
           id="bannerWrapper"
