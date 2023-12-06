@@ -104,7 +104,7 @@ export async function POST(req: Request) {
       return Response.json({ message: "User Created" });
     } catch (error) {
       console.error(error);
-      return Response.json({ message: "Error creating User" }, { status: 404 });
+      return Response.error();
     }
   }
 
@@ -120,12 +120,12 @@ export async function POST(req: Request) {
 
         if (userExists) {
           await db.delete(users).where(eq(users.externalId, id));
-          return Response.json({ message: "User Deleted" });
+          return Response.error();
         }
       }
     } catch (error) {
       console.error(error);
-      return Response.json({ message: "Error deleting User" }, { status: 404 });
+      return Response.error();
     }
   }
 
