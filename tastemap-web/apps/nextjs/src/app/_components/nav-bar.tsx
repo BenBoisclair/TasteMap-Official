@@ -10,13 +10,18 @@ import { cn } from "~/utils/cn";
 import LogInButton from "./log-in-button";
 import { SideMenuSignedIn } from "./side-menu-signed-in";
 
-export function NavBar() {
+export function NavBar({ className = "" }: { className?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <>
-      <nav className="sticky top-0 z-30 flex items-center justify-between bg-white px-5 py-4">
+      <nav
+        className={cn(
+          `sticky top-0 z-30 flex items-center justify-between bg-white px-5 py-4`,
+          className,
+        )}
+      >
         <button onClick={() => toggleMenu()} className="cursor-pointer">
           <Menu size={30} />
         </button>
