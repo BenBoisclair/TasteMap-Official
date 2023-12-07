@@ -18,7 +18,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
   return (
     <>
       <div id="marHeader">
-        <div className="absolute left-0 top-0 h-full w-full">
+        <div className="absolute left-0 top-0 w-full">
           <NavBar
             className={cn(`z-40`, {
               "bg-transparent text-white": inView,
