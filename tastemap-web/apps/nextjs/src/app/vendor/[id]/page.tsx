@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -49,7 +48,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
   }
   return (
     <div>
-      <VendorHeader vendor={vendor} />
+      <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
       <Tabs
         activeTab={activeTab}
         handleTabSelect={handleTabSelect}

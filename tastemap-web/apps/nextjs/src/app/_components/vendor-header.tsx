@@ -1,48 +1,29 @@
 import Image from "next/image";
 
 import type { Vendor } from "~/types/types";
+import { cn } from "~/utils/cn";
+import NavBar from "./nav-bar";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 
-const VendorHeader = ({ vendor }: { vendor: Vendor }) => {
+interface VendorHeaderProps {
+  vendor: Vendor;
+  headerRef: (node?: Element | null | undefined) => void;
+  inView: boolean;
+}
+
+const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
   const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
   return (
     <div id="vendHeader">
-      {/* <nav
-          className={cn(
-            `fixed top-0 z-30 w-full from-black/60 px-4 pb-2 pt-4`,
-            {
-              "bg-gradient-to-b": inView,
-              "bg-white": !inView,
-            },
-          )}
-        >
-          <div
-            className="flex items-center justify-between"
-            onClick={handleBackButton}
-          >
-            <span
-              className={cn(
-                `material-symbols-outlined size-28`,
-                `text-${inView ? "white" : "black"}`,
-              )}
-            >
-              arrow_back
-            </span>
-            <div className="ml-4 flex grow flex-col text-white">
-              <span className="font-medium">{`At ${vendorInfo.marName}`}</span>
-              <span className="text-sm">{`${vendorInfo.vendBBranchZone}`}</span>
-            </div>
-            <span
-              className={twMerge(
-                `material-symbols-outlined size-28`,
-                `text-${inView ? "white" : "black"}`,
-              )}
-            >
-              favorite
-            </span>
-          </div>
-        </nav> */}
+      <div className="absolute left-0 top-0 h-full w-full">
+        <NavBar
+          className={cn(`z-40`, {
+            "bg-transparent text-white": inView,
+            "bg-white text-black": !inView,
+          })}
+        />
+      </div>
       <div
         id="bannerWrapper"
         className="w-full overflow-hidden"
@@ -74,8 +55,8 @@ const VendorHeader = ({ vendor }: { vendor: Vendor }) => {
         </div>
       </div>
       <div
-        // ref={headerRef}
-        id="marInfo"
+        ref={headerRef}
+        id="vendorInfo"
         className="w-full bg-white pb-5 text-black"
       >
         <div className="flex px-5 pt-5">

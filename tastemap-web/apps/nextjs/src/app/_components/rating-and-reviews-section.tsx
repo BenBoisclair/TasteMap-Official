@@ -81,6 +81,7 @@ export default function RatingAndReviewSection({
               ))}
             </div>
           </div>
+
           <div className="mt-6 flex">
             <button
               onClick={openWriteReviewModal}
