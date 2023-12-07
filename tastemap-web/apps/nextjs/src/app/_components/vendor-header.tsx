@@ -16,7 +16,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
   const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
   return (
     <div id="vendHeader">
-      <div className="absolute left-0 top-0 h-full w-full">
+      <div className="absolute left-0 top-0 w-full">
         <NavBar
           className={cn(`z-40`, {
             "bg-transparent text-white": inView,
