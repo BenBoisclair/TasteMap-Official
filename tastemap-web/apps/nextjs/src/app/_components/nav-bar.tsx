@@ -32,15 +32,18 @@ export function NavBar({ className = "" }: { className?: string }) {
       </nav>
       <SideMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       {/* Dark Background Overlay */}
-      <div
-        onClick={() => toggleMenu()}
-        className={cn(
-          `fixed top-0 z-40 h-screen w-full bg-black/30 duration-500 ease-in-out`,
-          {
-            hidden: !isMenuOpen,
-          },
-        )}
-      />
+      {isMenuOpen && (
+        <div
+          onClick={() => toggleMenu()}
+          className={cn(
+            `fixed top-0 h-screen w-full bg-black/30 duration-500 ease-in-out`,
+            {
+              "z-40": isMenuOpen,
+              "-z-40 hidden": !isMenuOpen,
+            },
+          )}
+        />
+      )}
     </>
   );
 }
