@@ -52,10 +52,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
       />
 
       {activeTab === "Highlights" && (
-        <HighlightsPage
-          market={market}
-          // handleTabSelect={handleTabSelect}
-        />
+        <HighlightsPage market={market} handleTabSelect={handleTabSelect} />
       )}
       {activeTab === "Map & Info" && <MarketInfoPage market={market} />}
       {activeTab === "Reviews" && (

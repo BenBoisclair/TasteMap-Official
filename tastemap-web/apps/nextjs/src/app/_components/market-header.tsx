@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import type { Market } from "~/types/types";
 import { cn } from "~/utils/cn";
@@ -18,15 +19,13 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
   return (
     <>
       <div id="marHeader">
-        <div className="absolute left-0 top-0 w-full">
-          <NavBar
-            className={cn(`z-40`, {
-              "bg-transparent text-white": inView,
-              "bg-white text-black": !inView,
-            })}
-          />
-        </div>
-        {/* <NavBarInBusiness inView={inView} /> */}
+        <NavBar
+          className={cn(`z-40`, {
+            "bg-transparent text-white": inView,
+            "bg-white text-black": !inView,
+          })}
+        />
+
         <div
           id="bannerWrapper"
           className="w-full overflow-hidden"
@@ -60,9 +59,9 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
                 total={market?.ratings?.total}
               />
               <span className="m-1 h-[3px] w-[3px] rounded-full bg-black"></span>
-              <div id="writeReview" className="underline">
+              <Link href="#RatingsAndReviews" className="underline">
                 write a review
-              </div>
+              </Link>
             </div>
           </div>
           <div

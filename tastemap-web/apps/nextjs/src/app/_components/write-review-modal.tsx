@@ -29,6 +29,7 @@ export const WriteReviewModal = ({
   const { user, isSignedIn } = useUser();
   const [overall, setOverall] = useState<number>(5);
   const queryClient = useQueryClient();
+
   const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
@@ -90,8 +91,6 @@ export const WriteReviewModal = ({
     },
   });
 
-  //Make aspects go into the reviews too
-
   const submitReview = () => {
     if (!isSignedIn) {
       toast.error("Please Sign in to Write Reviews");
@@ -123,7 +122,7 @@ export const WriteReviewModal = ({
 
   return (
     <>
-      <div className="absolute left-0 top-0 z-40 h-full w-full bg-neutral">
+      <div className="fixed left-0 top-0 z-40 h-full w-full bg-neutral">
         <div className="flex items-center  gap-6 bg-white p-5">
           <ArrowLeft
             className=" shrink-0"

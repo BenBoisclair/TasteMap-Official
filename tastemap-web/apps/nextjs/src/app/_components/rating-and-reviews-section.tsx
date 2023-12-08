@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
-import { MessageSquarePlusIcon } from "lucide-react";
+import { ChevronRight, MessageSquarePlusIcon } from "lucide-react";
 import toast from "react-hot-toast";
 
 import fetchMarketReviews from "../api/_actions/fetchMarketReviews";
@@ -26,7 +26,8 @@ export default function RatingAndReviewSection({
   id,
   name,
   imageUrl,
-  type = "Market", // handleTabSelect = () => {},
+  type = "Market",
+  handleTabSelect,
 }: RatingAndReviewSectionProps) {
   const { isSignedIn } = useUser();
   const [writeReviewToggle, setWriteReviewToggle] = useState<boolean>(false);
@@ -47,15 +48,15 @@ export default function RatingAndReviewSection({
 
   return (
     <>
-      <div className="mb-5 mt-2">
-        {/* <div className="flex justify-between px-5">
-        <h1 className="text-lg font-bold">Ratings and reviews</h1>
-        {handleTabSelect && (
-          <div onClick={() => handleTabSelect("Reviews")}>
-            <span className="material-symbols-outlined">chevron_right</span>
-          </div>
-        )}
-      </div> */}
+      <div className="mb-5 mt-10" id="RatingsAndReviews">
+        <div className="flex justify-between px-5">
+          <h1 className="text-lg font-bold">Ratings and reviews</h1>
+          {handleTabSelect && (
+            <button onClick={() => handleTabSelect("Reviews")}>
+              <ChevronRight />
+            </button>
+          )}
+        </div>
 
         <div className=" flex flex-col px-5 py-2">
           <div className="mt-4 flex px-2">

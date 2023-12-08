@@ -18,7 +18,7 @@ export function NavBar({ className = "" }: { className?: string }) {
     <>
       <nav
         className={cn(
-          `sticky top-0 z-30 flex items-center justify-between bg-white px-5 py-4`,
+          `fixed top-0 z-30 flex w-full items-center justify-between bg-white px-5 py-4`,
           className,
         )}
       >
