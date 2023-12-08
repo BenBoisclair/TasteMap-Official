@@ -1,14 +1,15 @@
 import Image from "next/image";
 
-import type { Banner } from "~/types/types";
+import type { EventBanner } from "~/types/types";
 
-export function Banner({ banner }: { banner: Banner }) {
+export function Banner({ banner }: { banner: EventBanner }) {
   return (
     <div className="relative h-[200px] w-[350px] shrink-0 overflow-hidden rounded-3xl">
       <Image
-        src={banner.image}
-        alt={banner.name}
+        src={banner.imageUrl ?? ""}
+        alt={banner?.name ?? "Event Banner"}
         fill={true}
+        priority={true}
         style={{ objectFit: "cover" }}
       />
     </div>
