@@ -20,7 +20,8 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
       <div className="absolute left-0 top-0 w-full">
         <NavBar
           className={cn(`z-40`, {
-            "bg-transparent text-white": inView,
+            "bg-transparent bg-gradient-to-b from-black/60 to-transparent text-white":
+              inView,
             "bg-white text-black": !inView,
           })}
         />
