@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import type { Vendor } from "~/types/types";
 import { cn } from "~/utils/cn";
@@ -71,9 +72,13 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
                 total={vendor?.ratings?.total}
               />
               <span className="m-1 h-[3px] w-[3px] rounded-full bg-black"></span>
-              <div id="writeReview" className="underline">
+              <Link
+                href="#RatingsAndReviews"
+                id="writeReview"
+                className="underline"
+              >
                 write a review
-              </div>
+              </Link>
             </div>
           </div>
           <div>

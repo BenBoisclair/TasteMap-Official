@@ -1,14 +1,16 @@
 import type { Market } from "~/types/types";
+import RatingAndReviewSection from "./rating-and-reviews-section";
 import RecommenedForYouSection from "./recommended-for-you-section";
 import UniqueServicesSection from "./unique-services-section";
 
 interface HighlightsPageProps {
   market: Market;
-  //   handleTabSelect: (tabName: string) => void;
+  handleTabSelect?: (tabName: string) => void;
 }
 
 export default function HighlightsPage({
-  market, //   handleTabSelect,
+  market,
+  handleTabSelect,
 }: HighlightsPageProps) {
   return (
     <div id="HighlightsPage" className="py-8">
@@ -16,10 +18,15 @@ export default function HighlightsPage({
       <RecommenedForYouSection marketId={market.id} />
 
       {/* <ExploreByCategoriesSection /> */}
-      {/* <RatingAndReviewSection
-        id={marketInfo.marGuid}
-        handleTabSelect={handleTabSelect}
-      /> */}
+      <div>
+        <RatingAndReviewSection
+          id={market.id}
+          name={market.name}
+          imageUrl={market.bannerUrl}
+          type="Market"
+          handleTabSelect={handleTabSelect}
+        />
+      </div>
     </div>
   );
 }
