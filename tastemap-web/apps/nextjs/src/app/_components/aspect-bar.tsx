@@ -16,7 +16,7 @@ export default function AspectBar({ aspect }: AspectBarProps) {
         ></div>
       </div>
       <div className="flex w-1 justify-center">
-        <span>{aspect.average}</span>
+        <span>{aspect.average.toFixed(1)}</span>
       </div>
     </div>
   );

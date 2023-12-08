@@ -27,15 +27,16 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
   };
 
   const formattedDate = formatDate(review.createdAt);
+  const firstLetter = review?.author?.firstName.charAt(0);
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div
-            className={`mr-2 flex h-[35px] w-[35px] items-center justify-center rounded-full bg-yellow font-bold`}
+            className={`mr-2 flex h-[35px] w-[35px] items-center justify-center rounded-full bg-gradient-to-b from-yellow from-40% to-orange font-bold`}
           >
-            <span className="text-white ">U</span>
+            <span className="text-white ">{firstLetter}</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold">{`${review.author.firstName} ${review.author.lastName}`}</span>
