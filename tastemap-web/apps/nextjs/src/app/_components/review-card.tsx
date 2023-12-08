@@ -28,8 +28,6 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
 
   const formattedDate = formatDate(review.createdAt);
 
-  console.log(review);
-
   return (
     <div>
       <div className="flex items-center justify-between">
