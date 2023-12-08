@@ -54,6 +54,7 @@ export const GET = async (
         id: review?.user?.id,
         firstName: review?.user?.firstName,
         lastName: review?.user?.lastName,
+        imageUrl: review?.user?.imageUrl,
       },
     };
   });
