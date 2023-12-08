@@ -424,3 +424,12 @@ export const promotionUsageRelations = relations(
     }),
   }),
 );
+
+export const eventBanners = pgTable("event_banner", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  imageUrl: varchar("image_url", { length: 2000 }),
+  name: text("name"),
+  date: text("date"),
+
+  createdAt: timestamp("created_at").defaultNow(),
+});
