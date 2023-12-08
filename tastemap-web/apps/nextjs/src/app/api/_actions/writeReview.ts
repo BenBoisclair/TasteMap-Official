@@ -17,9 +17,6 @@ const writeReview = async ({
 }) => {
   if (!reviewData) return;
 
-  console.log(reviewData);
-  console.log(type);
-
   const response = await fetch(`/api/${type}/${id}/reviews`, {
     method: "POST",
     headers: {
