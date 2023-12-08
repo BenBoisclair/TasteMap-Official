@@ -77,11 +77,11 @@ export const WriteReviewModal = ({
           });
           if (type === "Market") {
             await queryClient.invalidateQueries({
-              queryKey: [id],
+              queryKey: ["market", id],
             });
           } else if (type === "Vendor") {
             await queryClient.invalidateQueries({
-              queryKey: [id],
+              queryKey: ["vendor", id],
             });
           }
 
