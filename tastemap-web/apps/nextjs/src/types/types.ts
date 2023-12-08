@@ -46,47 +46,13 @@ export interface UniqueService {
   createdAt: string;
 }
 
-export const banners = [
-  {
-    id: "1",
-    name: "Test Banner",
-    name_th: "แบนเนอร์ทดสอบ",
-    description: "Test Description",
-    description_th: "คำอธิบายทดสอบ",
-
-    image: "https://placehold.co/600x400/png",
-
-    end_date: "2021-01-01T00:00:00.000Z",
-    created_at: "2021-01-01T00:00:00.000Z",
-    updated_at: "2021-01-01T00:00:00.000Z",
-  },
-  {
-    id: "2",
-    name: "Test Banner 2",
-    name_th: "แบนเนอร์ทดสอบ 2",
-    description: "Test Description 2",
-    description_th: "คำอธิบายทดสอบ 2",
-
-    image: "https://placehold.co/600x400/png",
-
-    end_date: "2021-01-01T00:00:00.000Z",
-    created_at: "2021-01-01T00:00:00.000Z",
-    updated_at: "2021-01-01T00:00:00.000Z",
-  },
-];
-
-export interface Banner {
+export interface EventBanner {
   id: string;
-  name: string;
-  name_th: string;
-  description: string;
-  description_th: string;
+  imageUrl: string | null;
+  name: string | null;
+  date: string | null;
 
-  image: string;
-
-  end_date: string;
   created_at: string;
-  updated_at: string;
 }
 
 export interface Tag {
