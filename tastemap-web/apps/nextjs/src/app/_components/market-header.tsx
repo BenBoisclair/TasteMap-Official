@@ -21,7 +21,8 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
       <div id="marHeader">
         <NavBar
           className={cn(`z-40`, {
-            "bg-transparent text-white": inView,
+            "bg-transparent bg-gradient-to-b from-black/60 to-transparent text-white":
+              inView,
             "bg-white text-black": !inView,
           })}
         />
