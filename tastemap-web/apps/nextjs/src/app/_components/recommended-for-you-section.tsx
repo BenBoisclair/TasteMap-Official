@@ -22,8 +22,8 @@ export default function RecommenedForYouSection({
 
   return (
     <div className="mt-5">
-      <div className="flex items-center justify-between">
-        <h1 className="px-5 text-lg font-bold">Recommended for you</h1>
+      <div className="flex items-center justify-between px-5 ">
+        <h1 className="text-lg font-bold">Recommended for you</h1>
         <Link href={`/market/${marketId}/recommendations`}>
           <ChevronRight />
         </Link>

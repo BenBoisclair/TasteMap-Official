@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Heart, Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 import LogInButton from "./log-in-button";
@@ -26,8 +26,8 @@ export function NavBar({ className = "" }: { className?: string }) {
           <Menu size={30} />
         </button>
         <div className="flex gap-4">
-          <Search size={30} />
-          <Heart size={30} />
+          {/* <Search size={30} />
+          <Heart size={30} /> */}
         </div>
       </nav>
       <SideMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
