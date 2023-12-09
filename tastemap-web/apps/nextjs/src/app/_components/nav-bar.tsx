@@ -3,6 +3,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Menu, X } from "lucide-react";
 
@@ -70,9 +72,33 @@ export const SideMenu = ({
           <div className="flex cursor-pointer  justify-end p-4">
             <X size={28} onClick={() => toggleMenu()} />
           </div>
-          <div className="px-5 pb-5">
+          <div className="flex h-full px-5 pb-5">
             <SignedOut>
-              <LogInButton />
+              <div className="flex h-full flex-col items-center">
+                <span className="mb-2 font-medium">
+                  Join us in supporting local Tourism!
+                </span>
+                <LogInButton />
+                <Link
+                  href={`/`}
+                  className="mt-5 w-full border-b-2 border-neutral py-5"
+                >
+                  <span className="text-xl font-bold">Home</span>
+                </Link>
+                <div className="flex w-full flex-col gap-4 border-b-2 border-neutral py-5 text-xl font-bold">
+                  <span>Language</span>
+                  <span>FAQs</span>
+                  <span>Report issues</span>
+                </div>
+                <div className="flow-col flex w-full grow items-end justify-center">
+                  <Image
+                    src={`/mascot/TastyBoiSurprised.png`}
+                    alt="TastyBoi!"
+                    width={200}
+                    height={300}
+                  />
+                </div>
+              </div>
             </SignedOut>
             <SignedIn>
               <SideMenuSignedIn />
