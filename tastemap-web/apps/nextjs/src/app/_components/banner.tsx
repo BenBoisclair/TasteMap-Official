@@ -4,7 +4,7 @@ import type { EventBanner } from "~/types/types";
 
 export function Banner({ banner }: { banner: EventBanner }) {
   return (
-    <div className="relative h-[200px] w-[350px] shrink-0 overflow-hidden rounded-3xl">
+    <div className="relative h-[175px] w-[300px] shrink-0 overflow-hidden rounded-3xl">
       <Image
         src={banner.imageUrl ?? ""}
         alt={banner?.name ?? "Event Banner"}
