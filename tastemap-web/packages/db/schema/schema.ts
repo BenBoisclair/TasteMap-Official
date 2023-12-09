@@ -280,6 +280,12 @@ export const vendor = pgTable("vendor", {
   name: text("name").notNull(),
   nameTH: text("name_th"),
 
+  ingredients: text("ingredients"),
+  ingredientsTH: text("ingredients_th"),
+
+  ownerName: text("owner_name"),
+  ownerTelephone: text("owner_telephone"),
+
   about: text("about").notNull(),
   aboutTH: text("about_th"),
 
@@ -303,6 +309,7 @@ export const vendorRelations = relations(vendor, ({ one, many }) => ({
   userFavourites: many(favourites),
   tags: many(vendorsOnTags),
   promotions: many(promotion),
+  media: many(mediaFiles),
 }));
 
 export const paymentOption = pgTable("payment_option", {
@@ -433,3 +440,22 @@ export const eventBanners = pgTable("event_banner", {
 
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export const mediaFiles = pgTable("media_files", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  mediaUrl: varchar("media_url", { length: 2000 }).notNull(),
+  type: text("type").notNull(),
+
+  vendorId: varchar("vendor_id")
+    .notNull()
+    .references(() => vendor.id),
+
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const mediaFilesRelations = relations(mediaFiles, ({ one }) => ({
+  vendor: one(vendor, {
+    fields: [mediaFiles.vendorId],
+    references: [vendor.id],
+  }),
+}));
