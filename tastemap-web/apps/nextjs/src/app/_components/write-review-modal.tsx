@@ -122,7 +122,7 @@ export const WriteReviewModal = ({
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-40 h-full w-full bg-neutral">
+      <div className="fixed left-0 top-0 z-40 h-screen w-full overflow-auto bg-neutral">
         <div className="flex items-center  gap-6 bg-white p-5">
           <ArrowLeft
             className=" shrink-0"
@@ -181,7 +181,7 @@ export const WriteReviewModal = ({
             onChange={(e) => setReviewContent(e.target.value)}
           />
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mb-8 mt-4 flex justify-center">
           <button
             onClick={submitReview}
             className="rounded-3xl bg-yellow px-4 py-2"
