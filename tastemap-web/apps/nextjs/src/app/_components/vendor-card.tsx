@@ -12,14 +12,16 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
 
   return (
     <div className="flex w-[200px] flex-col">
-      <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
-        <Image
-          src={vendor.bannerUrl || ""}
-          alt={`${vendor.name}'s Banner`}
-          fill={true}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
+      <Link href={`/vendor/${vendor.id}`}>
+        <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
+          <Image
+            src={vendor.bannerUrl || ""}
+            alt={`${vendor.name}'s Banner`}
+            fill={true}
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+      </Link>
       <div className="mt-1 flex flex-col gap-2">
         <Link href={`/vendor/${vendor.id}`}>
           <div className="truncate text-lg font-bold">{vendor.name}</div>
