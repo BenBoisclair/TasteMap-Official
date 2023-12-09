@@ -49,7 +49,7 @@ export const SideMenuSignedIn = () => {
           <span>Report issues</span>
         </div>
       </div>
-      <div className="mb-10">
+      <div className="mb-10 grow">
         <LogOutButton />
       </div>
     </div>
