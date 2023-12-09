@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
 
-function TasteMapLogo() {
+function TasteMapLogo({ size = 20 }: { size?: number }) {
   return (
     <Image
       src="/logos/tastemap_logo.png"
-      width={20}
-      height={20}
+      width={size}
+      height={size}
       alt={`TasteMap Logo`}
     />
   );

@@ -101,18 +101,29 @@ export interface OpeningHour {
 export interface Vendor {
   id: string;
   code: string;
-  bannerUrl: string;
-  logoUrl: string;
+  bannerUrl: string | null;
+  logoUrl: string | null;
   name: string;
-  nameTH: string;
+  nameTH: string | null;
+  ingredients: string | null;
+  ingredients_th: string | null;
+  owner_name: string | null;
+  owner_telephone: string | null;
   about: string;
-  aboutTH: string;
+  aboutTH: string | null;
   priceRange: string;
   marketId: string;
   createdAt: string;
   ratings: Ratings;
-  tags: Tag[];
-  paymentOptions: PaymentOption[];
+  tags: Tag[] | [];
+  media: Media[] | [];
+  paymentOptions: PaymentOption[] | [];
+}
+
+export interface Media {
+  id: string;
+  mediaUrl: string;
+  type: string;
 }
 
 export interface PaymentOption {

@@ -60,7 +60,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
           id={vendorId}
           type="Vendor"
           name={vendor.name}
-          imageUrl={vendor.bannerUrl}
+          imageUrl={vendor.bannerUrl ?? ""}
         />
       )}
     </div>

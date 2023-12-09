@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 import type { Vendor } from "~/types/types";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
+import TasteMapLogo from "./taste-map-logo";
 
 export default function VendorCardRecommendations({
   vendor,
@@ -14,7 +15,7 @@ export default function VendorCardRecommendations({
   vendor: Vendor;
   classNames?: string;
 }) {
-  const productTags = vendor.tags.filter((tag) => tag.type === "Product");
+  const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
   return (
     <div
       className={twMerge(
@@ -22,17 +23,23 @@ export default function VendorCardRecommendations({
         classNames,
       )}
     >
-      <div className=" relative mr-5 h-[120px] w-[120px] shrink-0 rounded-3xl ">
-        <Image
-          src={vendor.bannerUrl}
-          alt={`${vendor.name} Banner`}
-          fill={true}
-          style={{
-            objectFit: "cover",
-          }}
-          className=" rounded-3xl "
-        />
-      </div>
+      {vendor.bannerUrl ? (
+        <div className=" relative mr-5 h-[120px] w-[120px] shrink-0 rounded-3xl ">
+          <Image
+            src={vendor.bannerUrl ?? ""}
+            alt={`${vendor.name} Banner`}
+            fill={true}
+            style={{
+              objectFit: "cover",
+            }}
+            className=" rounded-3xl "
+          />
+        </div>
+      ) : (
+        <div className=" mr-5 flex h-[120px] w-[120px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+          <TasteMapLogo size={100} />
+        </div>
+      )}
       <div className="flex grow flex-col justify-between overflow-hidden">
         <Link href={`/vendor/${vendor.id}`}>
           <h1 className="font-bold">{vendor.name}</h1>
@@ -42,12 +49,13 @@ export default function VendorCardRecommendations({
           total={vendor?.ratings?.total}
         />
         <div className="mt-2 flex gap-1">
-          {productTags.slice(0, 2).map((tag) => (
-            <Tag type={tag.type} key={tag.id} size="default">
-              {tag.name}
-            </Tag>
-          ))}
-          {productTags?.length > 2 && (
+          {productTags.length > 0 &&
+            productTags.slice(0, 2).map((tag) => (
+              <Tag type={tag.type} key={tag.id} size="default">
+                {tag.name}
+              </Tag>
+            ))}
+          {productTags.length > 0 && productTags?.length > 2 && (
             <Tag type="Product" size="default">
               +{productTags?.length - 2}
             </Tag>
