@@ -6,10 +6,13 @@ import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 
 export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
-  const productTags = vendor.tags.filter((tag) => tag.type === "Product");
+  const productTags = vendor.tags
+    .filter((tag) => tag.type === "Product") // Keep existing filter on type
+    .sort((a, b) => a.name.length - b.name.length); // Then sort by length of name
+
   return (
-    <div className="flex w-[130px] flex-col">
-      <div className="relative flex h-[90px] w-[130px] place-content-center overflow-hidden rounded-3xl">
+    <div className="flex w-[200px] flex-col">
+      <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
         <Image
           src={vendor.bannerUrl || ""}
           alt={`${vendor.name}'s Banner`}
@@ -17,25 +20,22 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <div className="mt-1">
+      <div className="mt-1 flex flex-col gap-2">
         <Link href={`/vendor/${vendor.id}`}>
-          <div className="truncate font-bold">{vendor.name}</div>
+          <div className="truncate text-lg font-bold">{vendor.name}</div>
         </Link>
         <Ratings
           average={vendor?.ratings?.average}
           total={vendor?.ratings?.total}
-          size="small"
         />
-        <div className="mt-2 flex gap-1">
+        <div className="mt-1 flex gap-1">
           {productTags.slice(0, 2).map((tag) => (
-            <Tag type={tag.type} key={tag.id} size="sm">
+            <Tag type={tag.type} key={tag.id}>
               {tag.name}
             </Tag>
           ))}
           {productTags?.length > 2 && (
-            <Tag type="Product" size="sm">
-              +{productTags?.length - 2}
-            </Tag>
+            <Tag type="Product">+{productTags?.length - 2}</Tag>
           )}
         </div>
       </div>
