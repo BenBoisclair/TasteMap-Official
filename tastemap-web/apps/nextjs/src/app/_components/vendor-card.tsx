@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Vendor } from "~/types/types";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
+import TasteMapLogo from "./taste-map-logo";
 
 export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
   const productTags = vendor.tags
@@ -13,14 +14,20 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
   return (
     <div className="flex w-[200px] flex-col">
       <Link href={`/vendor/${vendor.id}`}>
-        <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
-          <Image
-            src={vendor.bannerUrl || ""}
-            alt={`${vendor.name}'s Banner`}
-            fill={true}
-            style={{ objectFit: "cover" }}
-          />
-        </div>
+        {vendor.bannerUrl ? (
+          <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
+            <Image
+              src={vendor.bannerUrl ?? ""}
+              alt={`${vendor.name}'s Banner`}
+              fill={true}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+        ) : (
+          <div className="flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+            <TasteMapLogo size={100} />
+          </div>
+        )}
       </Link>
       <div className="mt-1 flex flex-col gap-2">
         <Link href={`/vendor/${vendor.id}`}>

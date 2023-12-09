@@ -25,6 +25,8 @@ export default function RecommendationsPage({
     queryFn: () => fetchMarketVendors({ marketId }),
   });
 
+  console.log(vendors);
+
   if (vendorsStatus === "pending") {
     return <LoadingPage />;
   }
@@ -38,20 +40,6 @@ export default function RecommendationsPage({
           </button>
           <div className="grow text-xl font-bold">Recommended for You</div>
         </div>
-        {/* <div className="px-5 pb-5">
-          
-          <div className="flex items-center rounded-3xl bg-neutral-200 px-4 py-2">
-            <div className="mr-2">
-              <SearchIcon color="gray" width="20" height="20" />
-            </div>
-            <input
-              className="border-none bg-transparent font-medium"
-              placeholder="Shop names, tags, etc."
-              onChange={(e) => setQuery(e.target.value)}
-              value={query}
-            />
-          </div>
-        </div> */}
       </div>
       <div className="z-10 flex flex-col gap-2 bg-transparent">
         {vendors?.map((vendor, index) => (

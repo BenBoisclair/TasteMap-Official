@@ -40,11 +40,18 @@ export const GET = async (
             },
           },
         },
+        media: {
+          columns: {
+            id: true,
+            mediaUrl: true,
+            type: true,
+          },
+        },
       },
     })
     .then(async (oneVendor) => {
       try {
-        const { tags, paymentOptions, ...restOfData } = oneVendor!;
+        const { tags, paymentOptions, media, ...restOfData } = oneVendor!;
 
         const aggregationRatings = await db
           .select({
@@ -64,6 +71,7 @@ export const GET = async (
           tags: tags.map(({ tag }) => tag) ?? [],
           paymentOptions:
             paymentOptions.map(({ paymentOption }) => paymentOption) ?? [],
+          media: media.map((media) => media),
         };
       } catch (error) {
         console.log(error);
