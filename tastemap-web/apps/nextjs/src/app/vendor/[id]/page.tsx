@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
+import EventElements from "~/app/_components/event-elements";
 import LoadingPage from "~/app/_components/loading-page";
 import RatingAndReviewSection from "~/app/_components/rating-and-reviews-section";
 import Tabs from "~/app/_components/tabs";
@@ -47,7 +48,9 @@ export default function Vendor({ params }: { params: { id: string } }) {
     return <div>Error</div>;
   }
   return (
-    <div>
+    <div className="relative">
+      <EventElements />
+
       <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
       <Tabs
         activeTab={activeTab}

@@ -2,7 +2,6 @@ import type { EventBanner } from "~/types/types";
 
 const fetchEventBanners = async (): Promise<EventBanner[]> => {
   const response = await fetch(`/api/eventbanners`);
-  console.log(response);
   if (!response.ok) {
     throw new Error(`Error fetching event banners`);
   }

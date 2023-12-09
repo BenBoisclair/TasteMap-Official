@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import ErrorPage from "~/app/_components/error-page";
+import EventElements from "~/app/_components/event-elements";
 import LoadingPage from "~/app/_components/loading-page";
 import MarketHeader from "~/app/_components/market-header";
 import HighlightsPage from "~/app/_components/market-highlights";
@@ -43,7 +44,8 @@ export default function MarketPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <>
+    <div className="relative">
+      <EventElements />
       <MarketHeader headerRef={headerRef} inView={inView} market={market} />
       <Tabs
         activeTab={activeTab}
@@ -64,6 +66,6 @@ export default function MarketPage({ params }: { params: { id: string } }) {
           handleTabSelect={handleTabSelect}
         />
       )}
-    </>
+    </div>
   );
 }

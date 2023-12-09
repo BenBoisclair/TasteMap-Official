@@ -12,7 +12,7 @@ export function BannerSection() {
   });
 
   return (
-    <div className="no-scrollbar flex gap-2  overflow-x-scroll px-5">
+    <div className="no-scrollbar flex gap-4  overflow-x-scroll px-5">
       {bannersStatus === "success" &&
         banners?.map((banner) => <Banner banner={banner} key={banner.id} />)}
       {bannersStatus === "pending" && (
