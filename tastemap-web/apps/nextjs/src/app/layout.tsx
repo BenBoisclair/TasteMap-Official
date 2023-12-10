@@ -48,7 +48,6 @@ export default function Layout(props: { children: React.ReactNode }) {
         <Head>
           {/* Browser Color */}
           <meta name="theme-color" content="#FFD14E" />
-          <link rel="manifest" href="/app/manifest.json" />
           {/* Hotjar Tracking Code for taste-map.com */}
         </Head>
         <Script
