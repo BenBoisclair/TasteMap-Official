@@ -32,7 +32,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
         style={{ position: "relative", height: "240px" }}
       >
         <Image
-          src={vendor?.bannerUrl || `https://placehold.co/600x400/png`}
+          src={vendor?.bannerUrl ?? `https://placehold.co/600x400/png`}
           sizes="100vw"
           fill={true}
           style={{
@@ -44,7 +44,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
         <div className="absolute top-0 flex h-full w-full items-end p-5">
           <div className="relative h-[75px] w-[75px] overflow-hidden rounded-full bg-white">
             <Image
-              src={vendor?.logoUrl || `/logos/tastemap_logo.png`}
+              src={vendor?.logoUrl ?? `/logos/tastemap_logo.png`}
               sizes="100vw"
               fill={true}
               style={{

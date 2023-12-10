@@ -183,6 +183,7 @@ export const WriteReviewModal = ({
         </div>
         <div className="mb-8 mt-4 flex justify-center">
           <button
+            id="Write a Review Button"
             onClick={submitReview}
             className="rounded-3xl bg-yellow px-4 py-2"
           >

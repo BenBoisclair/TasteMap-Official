@@ -71,6 +71,7 @@ export const KebabMenu = ({
             className="absolute right-0 mt-2 overflow-hidden whitespace-nowrap rounded-lg bg-white shadow-lg"
           >
             <button
+              id="Delete Review"
               onClick={toggleDeleteModal}
               className=" block cursor-pointer px-4 py-2 hover:bg-orange/50"
             >
@@ -88,12 +89,14 @@ export const KebabMenu = ({
           </span>
           <div className="mt-4 flex justify-end gap-2">
             <button
+              id="Confirm Delete Review"
               onClick={async () => handleDeleteReview({ reviewId })}
               className="rounded-3xl bg-orange px-2 py-1 font-medium text-white hover:bg-orange-800"
             >
               Yes, delete
             </button>
             <button
+              id="Cancel Delete Review"
               onClick={toggleDeleteModal}
               className="cursor-pointer rounded-3xl border px-2 py-1 hover:bg-neutral active:bg-neutral"
             >

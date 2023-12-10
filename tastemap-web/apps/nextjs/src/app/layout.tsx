@@ -45,6 +45,8 @@ export default function Layout(props: { children: React.ReactNode }) {
     <ClerkProvider>
       <html lang="en">
         <head>
+          {/* Browser Color */}
+          <meta name="theme-color" content="#FFD14E" />
           {/* Hotjar Tracking Code for taste-map.com */}
           <Script
             id="HotJarAnalytics"

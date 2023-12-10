@@ -35,7 +35,7 @@ export default function RecommendationsPage({
     <div className="h-full bg-neutral">
       <div className="bg-white">
         <div className="flex items-center px-5 py-4">
-          <button className="pr-3" onClick={handleBack}>
+          <button id="Back Button" className="pr-3" onClick={handleBack}>
             <ChevronLeft />
           </button>
           <div className="grow text-xl font-bold">Recommended for You</div>
