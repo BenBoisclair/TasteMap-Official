@@ -15,7 +15,7 @@ export default function Tabs({ activeTab, handleTabSelect, tabs }: TabProps) {
             <button
               key={index}
               data-active={activeTab === tab}
-              id={tab}
+              id={"Select Tabs"}
               className="tab-item cursor-pointer px-5 py-3 font-bold"
               onClick={() => handleTabSelect(tab)}
             >

@@ -52,7 +52,7 @@ export default function RatingAndReviewSection({
         <div className="flex justify-between px-5">
           <h1 className="text-lg font-bold">Ratings and reviews</h1>
           {handleTabSelect && (
-            <button onClick={() => handleTabSelect("Reviews")}>
+            <button id="Back Button" onClick={() => handleTabSelect("Reviews")}>
               <ChevronRight />
             </button>
           )}
@@ -85,6 +85,7 @@ export default function RatingAndReviewSection({
 
           <div className="mt-6 flex">
             <button
+              id="Write a Review"
               onClick={openWriteReviewModal}
               className="bord flex w-[350px] items-center justify-center gap-1 rounded-3xl bg-yellow py-[10px]"
             >
