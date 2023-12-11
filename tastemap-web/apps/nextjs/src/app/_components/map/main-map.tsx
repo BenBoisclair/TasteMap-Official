@@ -17,7 +17,7 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
   const markerClicked = useCallback((market: Market) => {
     setCurrentMarket(market);
     setOpenTab((prevOpenTab) => !prevOpenTab);
-  }, []); // Include all dependencies of markerClicked here
+  }, []);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -25,14 +25,13 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
     const map = new mapboxgl.Map({
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v10",
+      style: "mapbox://styles/mapbox/outdoors-v11",
       center: [100.45661, 13.776288],
       zoom: 13,
     });
 
     markets.forEach((market) => {
       const markerEl = document.createElement("div");
-      // const currentOrNot = market.id === currentMarket?.id;
       createRoot(markerEl).render(
         <Marker onClick={() => markerClicked(market)} market={market} />,
       );
@@ -61,7 +60,7 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
     <>
       <div
         ref={mapContainer}
-        className="absolute left-0 top-0 z-50 h-screen w-full border"
+        className="absolute left-0 top-0 z-50 h-screen w-full"
       />
       {currentMarket && shouldRenderMenuTab === true && (
         <MenuTab
