@@ -20,7 +20,7 @@ export function NavBar({ className = "" }: { className?: string }) {
     <>
       <nav
         className={cn(
-          ` fixed top-0 z-30 flex w-full items-center justify-between bg-white px-5 py-4`,
+          ` fixed top-0 z-[200] flex w-full items-center justify-between bg-white px-5 py-4`,
           className,
         )}
       >
@@ -40,7 +40,7 @@ export function NavBar({ className = "" }: { className?: string }) {
           className={cn(
             `fixed top-0 h-screen w-full bg-black/30 duration-500 ease-in-out`,
             {
-              "z-40": isMenuOpen,
+              "z-[150]": isMenuOpen,
               "-z-40 hidden": !isMenuOpen,
             },
           )}
@@ -61,7 +61,7 @@ export const SideMenu = ({
     <>
       <div
         className={cn(
-          `fixed left-0 top-0 z-50 h-screen w-[300px] bg-white duration-500 ease-in-out`,
+          `fixed left-0 top-0 z-[200] h-screen w-[300px] bg-white duration-500 ease-in-out`,
           {
             "left-[0%]": isMenuOpen,
             "left-[-100%]": !isMenuOpen,
