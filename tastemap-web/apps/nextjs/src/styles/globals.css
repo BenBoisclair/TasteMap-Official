@@ -64,3 +64,29 @@
   padding: 30px; /* Optional: for internal spacing */
   z-index: 1000; /* Ensure it's above other elements */
 }
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.menuTab-enter {
+  animation: slideUp 0.5s ease forwards;
+}
+
+.menuTab-exit {
+  animation: slideDown 0.5s ease forwards;
+}

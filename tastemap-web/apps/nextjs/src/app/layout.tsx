@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import ttnorms from "~/fonts/ttnorms";
 
 import "~/styles/globals.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import Head from "next/head";
 import { headers } from "next/headers";
@@ -48,6 +49,10 @@ export default function Layout(props: { children: React.ReactNode }) {
         <Head>
           {/* Browser Color */}
           <meta name="theme-color" content="#FFD14E" />
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css"
+            rel="stylesheet"
+          />
           {/* Hotjar Tracking Code for taste-map.com */}
         </Head>
         <Script
