@@ -13,7 +13,7 @@ import NavBar from "./_components/nav-bar";
 export const runtime = "edge";
 
 export default function HomePage() {
-  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
   return (
     <>
       <NavBar />
