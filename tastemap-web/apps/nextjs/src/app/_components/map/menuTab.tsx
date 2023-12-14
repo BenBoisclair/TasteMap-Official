@@ -23,7 +23,6 @@ const MenuTab = ({
     (tag) => tag.type === "Facility",
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const handlers = useSwipeable({
     onSwipedDown: () => setOpenTab(false),
     delta: 10,
