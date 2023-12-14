@@ -61,7 +61,7 @@ const MenuTab = ({
           <p className="font-medium">{currentMarket.type}</p>
           <div className="flex items-center gap-2 text-sm font-medium">
             <RatingStarIcon />
-            <span>{currentMarket.ratings.average}</span>
+            <span>{currentMarket.ratings.average.toFixed(1)}</span>
             <div className="h-0.5 w-0.5 rounded-full bg-black" />
             <span className=" underline underline-offset-2">{`${currentMarket.ratings.total} reviews`}</span>
           </div>
