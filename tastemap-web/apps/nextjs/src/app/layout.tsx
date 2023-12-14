@@ -69,6 +69,21 @@ export default function Layout(props: { children: React.ReactNode }) {
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
+        <Script
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+
+        <Script id="GoogleAnalytics" strategy="lazyOnload">
+          {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+        </Script>
         <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
           <Providers headers={headers()}>
             {props.children}
