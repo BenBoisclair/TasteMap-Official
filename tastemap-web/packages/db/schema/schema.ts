@@ -31,7 +31,6 @@ export const userRelations = relations(users, ({ many }) => ({
   reviews: many(review),
   reviewLikes: many(reviewLike),
   favourites: many(favourites),
-  promotionUsages: many(promotionUsage),
 }));
 
 export const favourites = pgTable("favourites", {
@@ -408,29 +407,6 @@ export const promotionRelations = relations(promotion, ({ one }) => ({
     references: [vendor.id],
   }),
 }));
-
-export const promotionUsage = pgTable("promotion_usage", {
-  id: varchar("id", { length: 20 }).primaryKey().notNull(),
-
-  totalPrice: integer("total_price").notNull(),
-
-  userId: varchar("user_id")
-    .notNull()
-    .references(() => users.id),
-
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const promotionUsageRelations = relations(
-  promotionUsage,
-  ({ one, many }) => ({
-    promotions: many(promotion),
-    user: one(users, {
-      fields: [promotionUsage.userId],
-      references: [users.id],
-    }),
-  }),
-);
 
 export const eventBanners = pgTable("event_banner", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
