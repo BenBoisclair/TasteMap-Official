@@ -63,11 +63,17 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
         className="absolute left-0 top-0 z-50 h-screen w-full"
       />
       {currentMarket && shouldRenderMenuTab === true && (
-        <MenuTab
-          currentMarket={currentMarket}
-          openTab={openTab}
-          setOpenTab={setOpenTab}
-        />
+        <>
+          <button
+            onClick={() => setOpenTab((prev) => !prev)}
+            className="absolute left-0 top-0 z-[240] h-screen w-full bg-black/10"
+          />
+          <MenuTab
+            currentMarket={currentMarket}
+            openTab={openTab}
+            setOpenTab={setOpenTab}
+          />
+        </>
       )}
     </>
   );
