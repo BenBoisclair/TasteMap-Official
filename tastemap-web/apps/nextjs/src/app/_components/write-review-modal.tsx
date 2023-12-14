@@ -45,6 +45,7 @@ export const WriteReviewModal = ({
             { id: nanoid(20), name: "Taste", rating: 5 },
             { id: nanoid(20), name: "Hygiene", rating: 5 },
             { id: nanoid(20), name: "Service", rating: 5 },
+            { id: nanoid(20), name: "Price", rating: 5 },
           ]
         : [],
   );
