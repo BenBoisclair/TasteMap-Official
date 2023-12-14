@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight, MessageSquarePlusIcon } from "lucide-react";
-import toast from "react-hot-toast";
 
 import fetchMarketReviews from "../api/_actions/fetchMarketReviews";
 import fetchVendorReviews from "../api/_actions/fetchVendorReviews";
@@ -31,6 +31,7 @@ export default function RatingAndReviewSection({
 }: RatingAndReviewSectionProps) {
   const { isSignedIn } = useUser();
   const [writeReviewToggle, setWriteReviewToggle] = useState<boolean>(false);
+  const router = useRouter();
 
   const fetchData = type === "Market" ? fetchMarketReviews : fetchVendorReviews;
   const { data: reviewsData, status: reviewStatus } = useQuery({
@@ -40,7 +41,7 @@ export default function RatingAndReviewSection({
 
   const openWriteReviewModal = () => {
     if (!isSignedIn) {
-      toast.error("Please Sign in to Write Reviews");
+      router.push("/auth/sign-in");
       return;
     }
     setWriteReviewToggle(!writeReviewToggle);
