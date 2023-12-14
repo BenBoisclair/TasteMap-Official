@@ -12,6 +12,7 @@ import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { cn } from "~/utils/cn";
+import GoogleAnalytics from "./_components/google-analytics";
 import { Providers } from "./providers";
 
 // const fontSans = Inter({
@@ -69,21 +70,9 @@ export default function Layout(props: { children: React.ReactNode }) {
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
-        <Script
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-        />
-
-        <Script id="GoogleAnalytics" strategy="lazyOnload">
-          {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-                    page_path: window.location.pathname,
-                    });
-                `}
-        </Script>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
         <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
           <Providers headers={headers()}>
             {props.children}
