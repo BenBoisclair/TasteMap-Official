@@ -5,6 +5,7 @@ import type { Vendor } from "~/types/types";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 import TasteMapLogo from "./taste-map-logo";
+import VerifiedBadge from "./verified-badge";
 
 export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
   const productTags = vendor.tags
@@ -22,6 +23,9 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
               fill={true}
               style={{ objectFit: "cover" }}
             />
+            <div className="absolute top-0 flex h-full w-full items-start justify-end p-2">
+              <VerifiedBadge />
+            </div>
           </div>
         ) : (
           <div className="flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-3xl bg-neutral">

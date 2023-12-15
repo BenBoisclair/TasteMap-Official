@@ -90,6 +90,7 @@ export interface Market {
   openingHours: OpeningHour[];
   ratings: Ratings;
   tags: MarketTag[];
+  isVerified: boolean;
 }
 
 export interface OpeningHour {
@@ -118,6 +119,16 @@ export interface Vendor {
   tags: Tag[] | [];
   media: Media[] | [];
   paymentOptions: PaymentOption[] | [];
+  informationItems: InformationItems[] | [];
+  isVerified: boolean;
+}
+
+export interface InformationItems {
+  id: string;
+  imageUrl: string | null;
+  name: string | null;
+  description: string | null;
+  sequence: number | null;
 }
 
 export interface Media {

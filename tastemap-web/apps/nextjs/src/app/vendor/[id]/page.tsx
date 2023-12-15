@@ -47,6 +47,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
   if (vendorStatus === "error") {
     return <div>Error</div>;
   }
+
   return (
     <div className="relative">
       <EventElements />

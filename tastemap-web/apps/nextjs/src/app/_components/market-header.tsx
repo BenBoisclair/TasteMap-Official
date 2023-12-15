@@ -6,6 +6,7 @@ import { cn } from "~/utils/cn";
 import NavBar from "./nav-bar";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
+import VerifiedBadge from "./verified-badge";
 
 interface MarketHeaderProps {
   market: Market;
@@ -42,6 +43,9 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
             alt={`Market Banner`}
             priority={true}
           />
+          <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
+            <VerifiedBadge />
+          </div>
         </div>
         <div
           ref={headerRef}
