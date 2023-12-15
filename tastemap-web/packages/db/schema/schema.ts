@@ -1,6 +1,8 @@
 import { relations } from "drizzle-orm";
 import {
+  boolean,
   integer,
+  jsonb,
   numeric,
   pgTable,
   primaryKey,
@@ -24,14 +26,62 @@ export const users = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: varchar("email_verified"),
 
+  preferences: varchar("preferences", { length: 20 }),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
+export const userRelations = relations(users, ({ many, one }) => ({
   reviews: many(review),
   reviewLikes: many(reviewLike),
   favourites: many(favourites),
+  preferences: one(userPreferences),
 }));
+
+export const userPreferences = pgTable("user_preferences", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  userId: varchar("user_id", { length: 20 }).references(() => users.id),
+  interests: jsonb("interests"), // Stores an array of interests
+  dietaryRequirements: jsonb("dietary_requirements"), // Stores an array of dietary requirements
+  ageGroup: varchar("age_group"), // Could be a categorical value like '18-25', '26-35', etc.
+  country: varchar("country", { length: 50 }),
+  gender: varchar("gender", { length: 20 }),
+  otherPreferences: jsonb("other_preferences"), // Flexibility for future data
+
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at"),
+});
+
+export const userPreferencesRelations = relations(
+  userPreferences,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [userPreferences.userId],
+      references: [users.id],
+    }),
+  }),
+);
+
+export const informationItem = pgTable("information_item", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  vendorId: varchar("vendor_id").references(() => vendor.id),
+
+  imageUrl: varchar("imageUrl", { length: 2000 }),
+  name: text("name"),
+  description: text("description"),
+  sequence: integer("sequence"),
+
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const informationItemRelations = relations(
+  informationItem,
+  ({ one }) => ({
+    vendor: one(vendor, {
+      fields: [informationItem.vendorId],
+      references: [vendor.id],
+    }),
+  }),
+);
 
 export const favourites = pgTable("favourites", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
@@ -77,6 +127,8 @@ export const market = pgTable("market", {
 
   latitude: numeric("latitude"),
   longitude: numeric("longitude"),
+
+  isVerified: boolean("is_verified").default(false),
 
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -294,6 +346,8 @@ export const vendor = pgTable("vendor", {
     .notNull()
     .references(() => market.id),
 
+  isVerified: boolean("is_verified").default(false),
+
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -309,6 +363,7 @@ export const vendorRelations = relations(vendor, ({ one, many }) => ({
   tags: many(vendorsOnTags),
   promotions: many(promotion),
   media: many(mediaFiles),
+  informationItems: many(informationItem),
 }));
 
 export const paymentOption = pgTable("payment_option", {
