@@ -42,9 +42,11 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
           alt={`${vendor?.name} Banner`}
           priority={true}
         />
-        <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-          <VerifiedBadge />
-        </div>
+        {vendor.isVerified && (
+          <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
+            <VerifiedBadge />
+          </div>
+        )}
         <div className="absolute top-0 flex h-full w-full items-end p-5">
           <div className="relative h-[75px] w-[75px] overflow-hidden rounded-full bg-white">
             <Image
