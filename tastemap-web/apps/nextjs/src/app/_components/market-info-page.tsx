@@ -9,10 +9,10 @@ interface MarketInfoPageProps {
 
 export default function MarketInfoPage({ market }: MarketInfoPageProps) {
   return (
-    <div id="InfoPage" className="py-8">
+    <div id="InfoPage" className="py-8 text-sm">
       <div className="px-5">
         <h1 className="text-lg font-bold">About</h1>
-        <div className="h-full w-full font-medium text-neutral-400">
+        <div className="h-full w-full font-medium text-black">
           {market.about}
         </div>
       </div>
@@ -61,7 +61,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
       {/* <div className="px-5 mt-5">
         <div className="flex items-center">
           <h2 className="text-lg font-bold mr-2">How to get there</h2>
-          <div className="bg-neutral-200 text-neutral-400 rounded-2xl text-sm px-2 font-medium">
+          <div className="bg-neutral-200 text-black rounded-2xl text-sm px-2 font-medium">
             Open in Google Map
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
       <div className="px-5">
         <h2 className="mt-5 text-lg font-bold">Brief history</h2>
         <div className="mt-2">
-          <div className="flex h-fit w-full font-medium text-neutral-400">
+          <div className="flex h-fit w-full font-medium text-black">
             {market.history}
           </div>
         </div>
