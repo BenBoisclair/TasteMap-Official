@@ -1,7 +1,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Dialog } from "@headlessui/react";
-import { BookOpenText } from "lucide-react";
+import {
+  BookOpenText,
+  Coins,
+  Info,
+  PlayCircle,
+  Refrigerator,
+  Wallet,
+} from "lucide-react";
 
 import type { InformationItems, Media, Vendor } from "~/types/types";
 import { Tag } from "./tag";
@@ -15,7 +22,10 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
   return (
     <div id="InfoPage" className="whitespace-pre-line py-8 text-sm">
       <div className="px-5">
-        <h1 className="text-lg font-bold">About</h1>
+        <div className="flex items-center gap-1">
+          <Info size={25} />
+          <h1 className="text-lg font-bold">About</h1>
+        </div>
         <div className=" mt-2 h-full w-full font-medium text-black">
           {vendor.about}
         </div>
@@ -25,14 +35,20 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
       )}
       {vendor?.ingredients && (
         <div className="mt-5 px-5">
-          <h1 className="text-lg font-bold">Ingredients</h1>
+          <div className="flex items-center gap-1">
+            <Refrigerator size={25} />
+            <h1 className="text-lg font-bold">Ingredients</h1>
+          </div>
           <div className="mt-2 h-full w-full font-medium text-black">
             {vendor.ingredients}
           </div>
         </div>
       )}
       <div className="mt-5 px-5">
-        <h1 className="text-lg font-bold">Price Range</h1>
+        <div className="flex items-center gap-1">
+          <Coins size={25} />
+          <h1 className="text-lg font-bold">Price Range</h1>
+        </div>
         <div className="mt-2 h-full w-full font-medium text-black">
           {vendor.priceRange}
         </div>
@@ -40,7 +56,10 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
       {vendor?.media.length > 0 && <MediaSection media={vendor?.media} />}
       {vendor?.paymentOptions.length > 0 && (
         <div className="mt-5 px-5">
-          <h1 className="text-lg font-bold">Payment Options</h1>
+          <div className="flex items-center gap-1">
+            <Wallet size={25} />
+            <h1 className="text-lg font-bold">Payment Options</h1>
+          </div>
           <div className="mt-2 flex gap-3">
             {vendor?.paymentOptions.map((option) => (
               <Tag type="Facility" key={option.id} size="lg">
@@ -170,7 +189,10 @@ const InformationCardModal = ({
 const MediaSection = ({ media }: { media?: Media[] }) => {
   return (
     <div className="mt-5">
-      <h1 className="px-5 text-lg font-bold">Media</h1>
+      <div className="flex items-center gap-1 px-5">
+        <PlayCircle size={25} />
+        <h1 className="text-lg font-bold">Media</h1>
+      </div>
       <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-black">
         {media?.map((oneMedia) => {
           return <MediaCard media={oneMedia} key={oneMedia.id} />;
