@@ -10,6 +10,7 @@ export default {
           800: "#3F3F3F",
           600: "#6F6F6F",
           DEFAULT: "#F3F3F3",
+          200: "#F6F4ED",
         },
         gray: "#E4E3DE",
         green: {

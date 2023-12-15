@@ -1,5 +1,5 @@
-import { db, eq, sql } from "@acme/db";
-import { review, vendor } from "@acme/db/schema/schema";
+import { asc, db, eq, sql } from "@acme/db";
+import { informationItem, review, vendor } from "@acme/db/schema/schema";
 
 export const GET = async (
   request: Request,
@@ -25,6 +25,16 @@ export const GET = async (
               },
             },
           },
+        },
+        informationItems: {
+          columns: {
+            id: true,
+            name: true,
+            description: true,
+            imageUrl: true,
+            sequence: true,
+          },
+          orderBy: [asc(informationItem.sequence)],
         },
         paymentOptions: {
           columns: {

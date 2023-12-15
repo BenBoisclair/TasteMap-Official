@@ -6,10 +6,13 @@ import type { Market } from "~/types/types";
 import { MarketStatusIcon } from "./market-status-icon";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
+import VerifiedBadge from "./verified-badge";
 
 export function MarketCard({ market }: { market: Market }) {
   const productTags = market.tags.filter((tag) => tag.type === "Product");
   const facilityTags = market.tags.filter((tag) => tag.type === "Facility");
+
+  console.log(market);
 
   return (
     <div className="shrink-0 overflow-hidden">
@@ -20,13 +23,16 @@ export function MarketCard({ market }: { market: Market }) {
           fill={true}
           style={{ objectFit: "cover" }}
         />
-        <div className="absolute h-full w-full p-3">
+        <div className="absolute flex h-full w-full flex-col justify-between p-3">
           <div className="flex items-center justify-end text-white">
             {/* <div className="flex items-center gap-1">
               <div className="w-2 h-2 bg-white rounded-full"/>
             <span className="font-black">0km</span>
             </div> */}
             <Heart strokeWidth={3} />
+          </div>
+          <div className="flex justify-end">
+            {market.isVerified && <VerifiedBadge />}
           </div>
         </div>
       </div>

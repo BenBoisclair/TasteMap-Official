@@ -7,6 +7,7 @@ import type { Vendor } from "~/types/types";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
 import TasteMapLogo from "./taste-map-logo";
+import VerifiedBadge from "./verified-badge";
 
 export default function VendorCardRecommendations({
   vendor,
@@ -42,12 +43,15 @@ export default function VendorCardRecommendations({
       )}
       <div className="flex grow flex-col justify-between overflow-hidden">
         <Link href={`/vendor/${vendor.id}`}>
-          <h1 className="font-bold">{vendor.name}</h1>
+          <h1 className="line-clamp-2 font-bold">{vendor.name}</h1>
         </Link>
-        <Ratings
-          average={vendor?.ratings?.average}
-          total={vendor?.ratings?.total}
-        />
+        <div className="flex items-center gap-2">
+          <Ratings
+            average={vendor?.ratings?.average}
+            total={vendor?.ratings?.total}
+          />
+          {vendor.isVerified && <VerifiedBadge toggleBorder={false} />}
+        </div>
         <div className="mt-2 flex gap-1">
           {productTags.length > 0 &&
             productTags.slice(0, 2).map((tag) => (

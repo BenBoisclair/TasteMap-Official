@@ -26,7 +26,7 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
         {/* {service.openingHours.length > 0 && (
           <p className="text-2xs font-medium">{`${service.openingHours[0].openHour} - ${service.openingHours[0].closeHour} • ${service.openingHours[0].closeHour}`}</p>
         )} */}
-        <p className="text-2xs font-medium">
+        <p className="text-sm font-medium">
           {service.price <= 0 ? "Free" : service.price + " baht"}
         </p>
       </div>
