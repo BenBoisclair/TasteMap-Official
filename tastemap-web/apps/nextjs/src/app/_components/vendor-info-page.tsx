@@ -94,7 +94,9 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
           />
         </div>
         <div className=" max-w-[172px] p-3">
-          <h3 className="text-lg font-bold text-black">{item.name}</h3>
+          <h3 className="line-clamp-1 text-lg font-bold text-black">
+            {item.name}
+          </h3>
           <p className=" line-clamp-2 text-sm font-medium text-black">
             {item.description}
           </p>
