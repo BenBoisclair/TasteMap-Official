@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Heart } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import type { Vendor } from "~/types/types";
@@ -20,12 +19,12 @@ export default function VendorCardRecommendations({
   return (
     <div
       className={twMerge(
-        "flex cursor-pointer rounded-[40px] bg-white p-5",
+        "flex cursor-pointer rounded-[40px] bg-white p-3",
         classNames,
       )}
     >
       {vendor.bannerUrl ? (
-        <div className=" relative mr-5 h-[120px] w-[120px] shrink-0 rounded-3xl ">
+        <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-3xl ">
           <Image
             src={vendor.bannerUrl ?? ""}
             alt={`${vendor.name} Banner`}
@@ -37,7 +36,7 @@ export default function VendorCardRecommendations({
           />
         </div>
       ) : (
-        <div className=" mr-5 flex h-[120px] w-[120px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+        <div className=" mr-4 flex h-[120px] w-[120px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
           <TasteMapLogo size={100} />
         </div>
       )}
@@ -65,9 +64,6 @@ export default function VendorCardRecommendations({
             </Tag>
           )}
         </div>
-      </div>
-      <div>
-        <Heart />
       </div>
     </div>
   );
