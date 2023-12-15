@@ -1,4 +1,6 @@
 // import IntToStringWeekday from "../(utils)/IntToStringWeekday";
+import { BookText, CalendarDays, Info } from "lucide-react";
+
 import type { Market } from "~/types/types";
 import convertTimeFormat from "~/utils/convertTimeFormat";
 import OpeningHourItem from "./opening-hour-item";
@@ -11,13 +13,19 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
   return (
     <div id="InfoPage" className="py-8 text-sm">
       <div className="px-5">
-        <h1 className="text-lg font-bold">About</h1>
-        <div className="h-full w-full font-medium text-black">
+        <div className="flex items-center gap-1">
+          <Info size={25} />
+          <h1 className="text-lg font-bold">About</h1>
+        </div>
+        <div className="mt-2 h-full w-full font-medium text-black">
           {market.about}
         </div>
       </div>
-      <div className="px-5">
-        <h2 className="mt-5 text-lg font-bold">Opening hours</h2>
+      <div className="mt-5 px-5">
+        <div className="flex items-center gap-1">
+          <CalendarDays size={25} />
+          <h1 className="text-lg font-bold">Opening hours</h1>
+        </div>
         <div className="py-1">
           {market.openingHours.map((hour, index) => {
             return (
@@ -107,8 +115,11 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
           })}
         </div>
       </div> */}
-      <div className="px-5">
-        <h2 className="mt-5 text-lg font-bold">Brief history</h2>
+      <div className="mt-5 px-5">
+        <div className="flex items-center gap-1">
+          <BookText size={25} />
+          <h2 className="text-lg font-bold">History</h2>
+        </div>
         <div className="mt-2">
           <div className="flex h-fit w-full font-medium text-black">
             {market.history}

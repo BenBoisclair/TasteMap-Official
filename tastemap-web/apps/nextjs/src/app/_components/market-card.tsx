@@ -12,8 +12,6 @@ export function MarketCard({ market }: { market: Market }) {
   const productTags = market.tags.filter((tag) => tag.type === "Product");
   const facilityTags = market.tags.filter((tag) => tag.type === "Facility");
 
-  console.log(market);
-
   return (
     <div className="shrink-0 overflow-hidden">
       <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
