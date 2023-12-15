@@ -13,7 +13,7 @@ interface VendorInfoPageProps {
 
 export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
   return (
-    <div id="InfoPage" className="whitespace-pre-line py-8">
+    <div id="InfoPage" className="whitespace-pre-line py-8 text-sm">
       <div className="px-5">
         <h1 className="text-lg font-bold">About</h1>
         <div className=" mt-2 h-full w-full font-medium text-black">
@@ -26,14 +26,14 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
       {vendor?.ingredients && (
         <div className="mt-5 px-5">
           <h1 className="text-lg font-bold">Ingredients</h1>
-          <div className="mt-2 h-full w-full font-medium text-neutral-400">
+          <div className="mt-2 h-full w-full font-medium text-black">
             {vendor.ingredients}
           </div>
         </div>
       )}
       <div className="mt-5 px-5">
         <h1 className="text-lg font-bold">Price Range</h1>
-        <div className="mt-2 h-full w-full font-medium text-neutral-400">
+        <div className="mt-2 h-full w-full font-medium text-black">
           {vendor.priceRange}
         </div>
       </div>
@@ -65,7 +65,7 @@ export const InformationSection = ({
         <BookOpenText size={25} />
         <h1 className="text-lg font-bold">Flash Cards</h1>
       </div>
-      <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-neutral-400">
+      <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-black">
         {InformationItems?.map((InformationItem) => {
           return (
             <InformationCard item={InformationItem} key={InformationItem.id} />
@@ -82,9 +82,9 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
     <>
       <button
         onClick={() => setOpenCard(!openCard)}
-        className="flex flex-col rounded-3xl bg-white p-2 pb-5 text-start"
+        className="flex flex-col rounded-3xl bg-white pb-3 text-start"
       >
-        <div className="relative flex h-[90px] w-[172px] overflow-hidden rounded-2xl">
+        <div className="relative flex h-[120px] w-[190px] overflow-hidden rounded-t-3xl">
           <Image
             // Once you change the imageUrl to be not null, remove the ??
             src={item?.imageUrl ?? ""}
@@ -93,7 +93,7 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
             style={{ objectFit: "cover" }}
           />
         </div>
-        <div className="mt-1 max-w-[172px]">
+        <div className=" max-w-[172px] p-3">
           <h3 className="text-lg font-bold text-black">{item.name}</h3>
           <p className=" line-clamp-2 text-sm font-medium text-black">
             {item.description}
@@ -167,9 +167,9 @@ const InformationCardModal = ({
 
 const MediaSection = ({ media }: { media?: Media[] }) => {
   return (
-    <div className="mt-5 px-5">
-      <h1 className="text-lg font-bold">Media</h1>
-      <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-neutral-400">
+    <div className="mt-5">
+      <h1 className="px-5 text-lg font-bold">Media</h1>
+      <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-black">
         {media?.map((oneMedia) => {
           return <MediaCard media={oneMedia} key={oneMedia.id} />;
         })}
