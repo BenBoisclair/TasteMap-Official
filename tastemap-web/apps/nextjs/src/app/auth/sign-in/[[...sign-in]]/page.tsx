@@ -40,7 +40,7 @@ const SignUpPage = () => {
             elements: {
               formButtonPrimary: "bg-yellow rounded-3xl text-black",
               formFieldInput:
-                "rounded-3xl border-none text-black placeholder:gray-400 bg-neutral-400 font-medium",
+                "rounded-3xl border-none text-black placeholder:gray-400 bg-neutral font-medium",
               card: "rounded-3xl bg-white shadow-none",
               logoBox: "hidden",
               header: "hidden",
