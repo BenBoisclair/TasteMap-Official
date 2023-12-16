@@ -96,11 +96,11 @@ export const InformationSection = ({
 };
 
 export const InformationCard = ({ item }: { item: InformationItems }) => {
-  const [openCard, setOpenCard] = useState(false);
+  const [isCardOpen, setIsCardOpen] = useState(false);
   return (
     <>
       <button
-        onClick={() => setOpenCard(!openCard)}
+        onClick={() => setIsCardOpen(!isCardOpen)}
         className="flex flex-col rounded-3xl bg-white pb-3 text-start"
       >
         <div className="relative flex h-[120px] w-[190px] overflow-hidden rounded-t-3xl">
@@ -124,8 +124,8 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
 
       <InformationCardModal
         item={item}
-        openCard={openCard}
-        setOpenCard={setOpenCard}
+        isCardOpen={isCardOpen}
+        setIsCardOpen={setIsCardOpen}
       />
     </>
   );
@@ -133,19 +133,19 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
 
 interface InformationCardModalProps {
   item: InformationItems;
-  openCard: boolean;
-  setOpenCard: (value: boolean) => void;
+  isCardOpen: boolean;
+  setIsCardOpen: (value: boolean) => void;
 }
 
 const InformationCardModal = ({
   item,
-  openCard,
-  setOpenCard,
+  isCardOpen,
+  setIsCardOpen,
 }: InformationCardModalProps) => {
   return (
     <Dialog
-      open={openCard}
-      onClose={() => setOpenCard(false)}
+      open={isCardOpen}
+      onClose={() => setIsCardOpen(false)}
       className={"fixed inset-0 z-[200] flex items-center justify-center"}
     >
       <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
@@ -173,7 +173,7 @@ const InformationCardModal = ({
           {item.description}
         </Dialog.Description>
         <button
-          onClick={() => setOpenCard(false)}
+          onClick={() => setIsCardOpen(false)}
           className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600"
         >
           <span className="text-xl font-bold">Got it!</span>

@@ -44,7 +44,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
             priority={true}
           />
           <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-            <VerifiedBadge />
+            <VerifiedBadge size="lg" />
           </div>
         </div>
         <div

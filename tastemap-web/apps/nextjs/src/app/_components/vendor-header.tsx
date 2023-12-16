@@ -44,7 +44,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
         />
         {vendor.isVerified && (
           <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-            <VerifiedBadge />
+            <VerifiedBadge size="lg" />
           </div>
         )}
         <div className="absolute top-0 flex h-full w-full items-end p-5">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Heart } from "lucide-react";
 
 import type { Market } from "~/types/types";
+import isMarketOpen from "~/utils/isMarketOpen";
 import { MarketStatusIcon } from "./market-status-icon";
 import { Ratings } from "./ratings";
 import { Tag } from "./tag";
@@ -11,6 +12,8 @@ import VerifiedBadge from "./verified-badge";
 export function MarketCard({ market }: { market: Market }) {
   const productTags = market.tags.filter((tag) => tag.type === "Product");
   const facilityTags = market.tags.filter((tag) => tag.type === "Facility");
+
+  const isOpen = isMarketOpen(market.openingHours);
 
   return (
     <div className="shrink-0 overflow-hidden">
@@ -35,42 +38,42 @@ export function MarketCard({ market }: { market: Market }) {
             </div>
           </div>
         </div>
-      </Link>
-      <div className="mt-[10px] flex flex-col">
-        <Link href={`/market/${market.id}`}>
+
+        <div className="mt-[10px] flex flex-col">
           <h1 className=" text-xl font-black">{market.name}</h1>
           <p className="font-medium">{market.type}</p>
-        </Link>
-        <div className="mt-[10px] flex items-center gap-2">
-          <MarketStatusIcon status={"OPEN"} />
-          <Ratings
-            total={market?.ratings?.total}
-            average={market?.ratings?.average}
-          />
-        </div>
-        <div className="mt-[10px] flex flex-col gap-2">
-          <div className="flex gap-2">
-            {productTags.slice(0, 3).map((tag) => (
-              <Tag type={tag.type} key={tag.id}>
-                {tag.name}
-              </Tag>
-            ))}
-            {productTags?.length > 3 && (
-              <Tag type="Product">+{productTags?.length - 3}</Tag>
-            )}
+
+          <div className="mt-[10px] flex items-center gap-2">
+            <MarketStatusIcon status={isOpen ? "OPEN" : "CLOSED"} />
+            <Ratings
+              total={market?.ratings?.total}
+              average={market?.ratings?.average}
+            />
           </div>
-          <div className="flex gap-2">
-            {facilityTags.slice(0, 3).map((tag) => (
-              <Tag type={tag.type} key={tag.id}>
-                {tag.name}
-              </Tag>
-            ))}
-            {facilityTags?.length > 3 && (
-              <Tag type="Facility">+{facilityTags?.length - 3}</Tag>
-            )}
+          <div className="mt-[10px] flex flex-col gap-2">
+            <div className="flex gap-2">
+              {productTags.slice(0, 3).map((tag) => (
+                <Tag type={tag.type} key={tag.id}>
+                  {tag.name}
+                </Tag>
+              ))}
+              {productTags?.length > 3 && (
+                <Tag type="Product">+{productTags?.length - 3}</Tag>
+              )}
+            </div>
+            <div className="flex gap-2">
+              {facilityTags.slice(0, 3).map((tag) => (
+                <Tag type={tag.type} key={tag.id}>
+                  {tag.name}
+                </Tag>
+              ))}
+              {facilityTags?.length > 3 && (
+                <Tag type="Facility">+{facilityTags?.length - 3}</Tag>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
