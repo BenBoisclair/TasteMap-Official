@@ -1,3 +1,5 @@
+"use client";
+
 import Snowfall from "react-snowfall";
 
 const EventElements = () => {
