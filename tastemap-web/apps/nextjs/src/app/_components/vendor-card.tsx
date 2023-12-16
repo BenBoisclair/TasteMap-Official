@@ -41,16 +41,18 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
           average={vendor?.ratings?.average}
           total={vendor?.ratings?.total}
         />
-        <div className="mt-1 flex gap-1">
-          {productTags.slice(0, 2).map((tag) => (
-            <Tag type={tag.type} key={tag.id}>
-              {tag.name}
-            </Tag>
-          ))}
-          {productTags?.length > 2 && (
-            <Tag type="Product">+{productTags?.length - 2}</Tag>
-          )}
-        </div>
+        {productTags.length > 0 && (
+          <div className="mt-1 flex gap-1">
+            {productTags.slice(0, 2).map((tag) => (
+              <Tag type={tag.type} key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
+            {productTags?.length > 2 && (
+              <Tag type="Product">+{productTags?.length - 2}</Tag>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
