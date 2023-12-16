@@ -48,8 +48,6 @@ export default function Layout(props: { children: React.ReactNode }) {
     <ClerkProvider>
       <html lang="en">
         <Head>
-          {/* Browser Color */}
-          <meta name="theme-color" content="#FFD14E" />
           <link
             href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css"
             rel="stylesheet"
