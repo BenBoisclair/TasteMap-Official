@@ -151,9 +151,9 @@ const InformationCardModal = ({
         "fixed inset-0 z-[200] flex items-center justify-center bg-black/30"
       }
     >
-      <div className="bg-black-30 fixed inset-0" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/10" aria-hidden="true" />
       <Dialog.Panel
-        className={"flex h-fit w-fit flex-col rounded-3xl bg-white p-5"}
+        className={"z-[200] flex h-fit w-fit flex-col rounded-3xl bg-white p-5"}
       >
         <div className="mb-4 flex">
           <TasteMapLogo size={24} />
