@@ -27,7 +27,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
           <h1 className="text-lg font-bold">Opening hours</h1>
         </div>
         <div className="py-1">
-          {market.openingHours.map((hour, index) => {
+          {market?.openingHours.map((hour, index) => {
             return (
               <OpeningHourItem
                 day={hour.dayOfWeek}
