@@ -27,7 +27,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
   };
 
   const formattedDate = formatDate(review.createdAt);
-  const firstLetter = review?.author?.firstName.charAt(0);
+  const firstLetter = review?.author?.firstName?.charAt(0);
 
   return (
     <div>
