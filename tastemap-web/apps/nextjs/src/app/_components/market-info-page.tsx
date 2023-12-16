@@ -3,6 +3,7 @@ import { BookText, CalendarDays, Info } from "lucide-react";
 
 import type { Market } from "~/types/types";
 import convertTimeFormat from "~/utils/convertTimeFormat";
+import dayToNumber from "~/utils/dayToNumber";
 import isMarketOpen from "~/utils/isMarketOpen";
 import OpeningHourItem from "./opening-hour-item";
 
@@ -11,6 +12,10 @@ interface MarketInfoPageProps {
 }
 
 export default function MarketInfoPage({ market }: MarketInfoPageProps) {
+  const sortedOpeningHours = market.openingHours.sort(
+    (a, b) => dayToNumber(a.dayOfWeek) - dayToNumber(b.dayOfWeek),
+  );
+
   return (
     <div id="InfoPage" className="py-8 text-sm">
       <div className="px-5">
@@ -28,7 +33,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
           <h1 className="text-lg font-bold">Opening hours</h1>
         </div>
         <div className="py-1">
-          {market?.openingHours.map((hour, index) => {
+          {sortedOpeningHours.map((hour, index) => {
             const isOpen = isMarketOpen(hour);
             return (
               <OpeningHourItem
