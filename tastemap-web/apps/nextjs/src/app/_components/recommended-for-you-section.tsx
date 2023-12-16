@@ -31,7 +31,7 @@ export default function RecommenedForYouSection({
       <div className="no-scrollbar flex gap-4 overflow-x-auto px-5 pt-2">
         {vendors &&
           vendorsStatus === "success" &&
-          vendors?.slice(0, 10).map((vendor, index) => {
+          vendors.slice(0, 10).map((vendor, index) => {
             return <VendorCard vendor={vendor} key={index} />;
           })}
         {vendorsStatus === "pending" && <RecommendedForYouSectionSkeleton />}
