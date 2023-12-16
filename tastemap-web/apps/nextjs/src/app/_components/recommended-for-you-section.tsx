@@ -20,6 +20,10 @@ export default function RecommenedForYouSection({
     queryFn: () => fetchMarketVendors({ marketId }),
   });
 
+  if (vendorsStatus === "success" && (!vendors || vendors.length === 0)) {
+    return null; // Don't render the section if there are no services
+  }
+
   return (
     <div className="mt-5">
       <div className="flex items-center justify-between px-5 ">

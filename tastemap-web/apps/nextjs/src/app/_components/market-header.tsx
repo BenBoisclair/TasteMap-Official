@@ -43,9 +43,11 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
             alt={`Market Banner`}
             priority={true}
           />
-          <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-            <VerifiedBadge size="lg" />
-          </div>
+          {market.isVerified && (
+            <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
+              <VerifiedBadge size="lg" />
+            </div>
+          )}
         </div>
         <div
           ref={headerRef}
@@ -73,36 +75,40 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
             id="marTags"
             className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium"
           >
-            <div id="productTags" className="flex items-center">
-              <p className="mr-2">Products</p>
-              <div
-                id="PTags"
-                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
-              >
-                {productTags?.map((tag, key: number) => {
-                  return (
-                    <Tag key={key} type={tag.type} size="lg">
-                      {tag.name}
-                    </Tag>
-                  );
-                })}
+            {productTags.length > 0 && (
+              <div id="productTags" className="flex items-center">
+                <p className="mr-2">Products</p>
+                <div
+                  id="PTags"
+                  className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
+                >
+                  {productTags?.map((tag, key: number) => {
+                    return (
+                      <Tag key={key} type={tag.type} size="lg">
+                        {tag.name}
+                      </Tag>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div id="facilityTags" className="flex items-center">
-              <p className="mr-2">Facilities</p>
-              <div
-                id="FTags"
-                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
-              >
-                {facilityTags?.map((tag, key: number) => {
-                  return (
-                    <Tag key={key} type={tag.type} size="lg">
-                      {tag.name}
-                    </Tag>
-                  );
-                })}
+            )}
+            {facilityTags.length > 0 && (
+              <div id="facilityTags" className="flex items-center">
+                <p className="mr-2">Facilities</p>
+                <div
+                  id="FTags"
+                  className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll"
+                >
+                  {facilityTags?.map((tag, key: number) => {
+                    return (
+                      <Tag key={key} type={tag.type} size="lg">
+                        {tag.name}
+                      </Tag>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { format, isWithinInterval } from "date-fns";
+import { addDays, format, isWithinInterval } from "date-fns";
 
 import type { OpeningHour } from "~/types/types";
 
@@ -28,13 +28,18 @@ export default function isMarketOpen(
     openTime[0],
     openTime[1],
   );
-  const closingDate = new Date(
+  let closingDate = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
     closeTime[0],
     closeTime[1],
   );
+
+  // Adjust closingDate to next day if closing time is earlier than opening time
+  if (closingDate < openingDate) {
+    closingDate = addDays(closingDate, 1);
+  }
 
   return isWithinInterval(now, {
     start: openingDate,
