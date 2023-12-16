@@ -21,6 +21,7 @@
     "@tanstack/react-query-devtools": "^5.8.7",
     "@tanstack/react-query-next-experimental": "5.8.7",
     "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.2",
     "clsx": "^2.0.0",
     "drizzle-orm": "^0.29.0",
     "drizzle-zod": "^0.5.1",

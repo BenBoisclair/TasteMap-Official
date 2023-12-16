@@ -10,6 +10,7 @@ import Head from "next/head";
 import { headers } from "next/headers";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "~/utils/cn";
 import GoogleAnalytics from "./_components/google-analytics";
@@ -77,6 +78,7 @@ export default function Layout(props: { children: React.ReactNode }) {
           <Providers headers={headers()}>
             {props.children}
             <Analytics />
+            <SpeedInsights />
           </Providers>
         </body>
       </html>
