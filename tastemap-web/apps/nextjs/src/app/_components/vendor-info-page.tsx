@@ -147,11 +147,9 @@ const InformationCardModal = ({
     <Dialog
       open={openCard}
       onClose={() => setOpenCard(false)}
-      className={
-        "fixed inset-0 z-[200] flex items-center justify-center bg-black/30"
-      }
+      className={"fixed inset-0 z-[200] flex items-center justify-center"}
     >
-      <div className="fixed inset-0 bg-black/10" aria-hidden="true" />
+      <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
       <Dialog.Panel
         className={"z-[200] flex h-fit w-fit flex-col rounded-3xl bg-white p-5"}
       >
