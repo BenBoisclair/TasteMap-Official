@@ -20,6 +20,14 @@ export const GET = async () => {
             },
           },
         },
+        openingHours: {
+          columns: {
+            id: true,
+            dayOfWeek: true,
+            open: true,
+            close: true,
+          },
+        },
       },
     })
     .then(async (markets) => {

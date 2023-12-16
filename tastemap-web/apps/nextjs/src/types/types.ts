@@ -94,6 +94,7 @@ export interface Market {
 }
 
 export interface OpeningHour {
+  id: string;
   dayOfWeek: string;
   open: string;
   close: string;

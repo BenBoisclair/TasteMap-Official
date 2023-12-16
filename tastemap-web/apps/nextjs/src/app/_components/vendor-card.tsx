@@ -24,7 +24,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
               style={{ objectFit: "cover" }}
             />
             <div className="absolute top-0 flex h-full w-full items-start justify-end p-2">
-              <VerifiedBadge />
+              <VerifiedBadge size="sm" />
             </div>
           </div>
         ) : (

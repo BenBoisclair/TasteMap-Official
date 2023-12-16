@@ -3,6 +3,7 @@
 import { Fragment, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "@headlessui/react";
+import { Coins } from "lucide-react";
 
 import type { UniqueService } from "~/types/types";
 import TasteMapLogo from "./taste-map-logo";
@@ -68,7 +69,10 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
           <Dialog.Title className={"mt-3 max-w-[275px] text-xl font-bold"}>
             {service.name}
           </Dialog.Title>
-          <Dialog.Description className={"mt-2 flex gap-1 text-lg"}>
+          <Dialog.Description
+            className={"mt-2 flex items-center gap-1 text-lg"}
+          >
+            <Coins size={20} />
             <span className=" font-medium">Price:</span>
             <span>
               {" "}
