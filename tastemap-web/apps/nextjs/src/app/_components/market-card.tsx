@@ -14,26 +14,28 @@ export function MarketCard({ market }: { market: Market }) {
 
   return (
     <div className="shrink-0 overflow-hidden">
-      <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
-        <Image
-          src={market.bannerUrl || ""}
-          alt={`${market.name}'s Banner`}
-          fill={true}
-          style={{ objectFit: "cover" }}
-        />
-        <div className="absolute flex h-full w-full flex-col justify-between p-3">
-          <div className="flex items-center justify-end text-white">
-            {/* <div className="flex items-center gap-1">
+      <Link href={`/market/${market.id}`}>
+        <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
+          <Image
+            src={market.bannerUrl || ""}
+            alt={`${market.name}'s Banner`}
+            fill={true}
+            style={{ objectFit: "cover" }}
+          />
+          <div className="absolute flex h-full w-full flex-col justify-between p-3">
+            <div className="flex items-center justify-end text-white">
+              {/* <div className="flex items-center gap-1">
               <div className="w-2 h-2 bg-white rounded-full"/>
             <span className="font-black">0km</span>
             </div> */}
-            <Heart strokeWidth={3} />
-          </div>
-          <div className="flex justify-end">
-            {market.isVerified && <VerifiedBadge />}
+              <Heart strokeWidth={3} />
+            </div>
+            <div className="flex justify-end">
+              {market.isVerified && <VerifiedBadge />}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="mt-[10px] flex flex-col">
         <Link href={`/market/${market.id}`}>
           <h1 className=" text-xl font-black">{market.name}</h1>

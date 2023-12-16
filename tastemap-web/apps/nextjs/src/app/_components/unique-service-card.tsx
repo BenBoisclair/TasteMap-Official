@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "@headlessui/react";
 
@@ -30,61 +30,59 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
         />
         <div className="overlay absolute inset-0  overflow-hidden rounded-3xl"></div>
         <div id="ServiceInfo" className="absolute bottom-0 w-full px-4 py-3">
-          <div>
-            <p className="truncate font-bold">{service.name}</p>
+          <div className="truncate">
+            <span className="font-bold">{service.name}</span>
           </div>
           {/* {service.openingHours.length > 0 && (
           <p className="text-2xs font-medium">{`${service.openingHours[0].openHour} - ${service.openingHours[0].closeHour} • ${service.openingHours[0].closeHour}`}</p>
         )} */}
-          <p className="text-sm font-medium">
+          <span className="text-sm font-medium">
             {service.price <= 0 ? "Free" : service.price + " baht"}
-          </p>
+          </span>
         </div>
       </button>
-      {isServiceOpen && (
-        <>
-          <Dialog
-            open={isServiceOpen}
-            onClose={() => setIsServiceOpen(false)}
-            className={"fixed inset-0 z-[200] flex items-center justify-center"}
+
+      <Dialog
+        open={isServiceOpen}
+        onClose={() => setIsServiceOpen(false)}
+        className={"fixed inset-0 z-[200] flex items-center justify-center"}
+      >
+        <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
+        <Dialog.Panel
+          className={
+            "z-[200] flex h-fit w-fit flex-col rounded-3xl bg-white p-5"
+          }
+        >
+          <div className="mb-4 flex">
+            <TasteMapLogo size={24} />
+          </div>
+          <div className="relative flex h-[155px] w-[275px] overflow-hidden rounded-2xl">
+            <Image
+              // Once you change the imageUrl to be not null, remove the ??
+              src={service?.imageUrl ?? ""}
+              alt={`${service?.name} Information Item`}
+              fill={true}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
+          <Dialog.Title className={"mt-3 max-w-[275px] text-xl font-bold"}>
+            {service.name}
+          </Dialog.Title>
+          <Dialog.Description className={"mt-2 flex gap-1 text-lg"}>
+            <span className=" font-medium">Price:</span>
+            <span>
+              {" "}
+              {service.price <= 0 ? "Free" : service.price + " baht"}
+            </span>
+          </Dialog.Description>
+          <button
+            onClick={() => setIsServiceOpen(false)}
+            className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600"
           >
-            <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
-            <Dialog.Panel
-              className={
-                "z-[200] flex h-fit w-fit flex-col rounded-3xl bg-white p-5"
-              }
-            >
-              <div className="mb-4 flex">
-                <TasteMapLogo size={24} />
-              </div>
-              <div className="relative flex h-[155px] w-[275px] overflow-hidden rounded-2xl">
-                <Image
-                  // Once you change the imageUrl to be not null, remove the ??
-                  src={service?.imageUrl ?? ""}
-                  alt={`${service?.name} Information Item`}
-                  fill={true}
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <Dialog.Title className={"mt-3 max-w-[275px] text-xl font-bold"}>
-                {service.name}
-              </Dialog.Title>
-              <Dialog.Description className={"mt-2"}>
-                <div className="flex gap-1 text-lg">
-                  <h2 className=" font-medium">Price:</h2>
-                  {service.price <= 0 ? "Free" : service.price + " baht"}
-                </div>
-              </Dialog.Description>
-              <button
-                onClick={() => setIsServiceOpen(false)}
-                className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600"
-              >
-                <span className="text-xl font-bold">Got it!</span>
-              </button>
-            </Dialog.Panel>
-          </Dialog>
-        </>
-      )}
+            <span className="text-xl font-bold">Got it!</span>
+          </button>
+        </Dialog.Panel>
+      </Dialog>
     </>
   );
 };

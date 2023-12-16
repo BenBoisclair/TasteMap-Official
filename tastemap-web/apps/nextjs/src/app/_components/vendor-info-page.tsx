@@ -121,13 +121,12 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
           </p>
         </div>
       </button>
-      {openCard && (
-        <InformationCardModal
-          item={item}
-          openCard={openCard}
-          setOpenCard={setOpenCard}
-        />
-      )}
+
+      <InformationCardModal
+        item={item}
+        openCard={openCard}
+        setOpenCard={setOpenCard}
+      />
     </>
   );
 };
