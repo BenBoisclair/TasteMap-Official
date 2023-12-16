@@ -13,7 +13,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "~/utils/cn";
-import GoogleAnalytics from "./_components/google-analytics";
 import { Providers } from "./providers";
 
 // const fontSans = Inter({
@@ -71,9 +70,9 @@ export default function Layout(props: { children: React.ReactNode }) {
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+        {/* {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
-        ) : null}
+        ) : null} */}
         <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
           <Providers headers={headers()}>
             {props.children}
