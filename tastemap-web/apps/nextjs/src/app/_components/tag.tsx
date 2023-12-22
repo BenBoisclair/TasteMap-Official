@@ -16,7 +16,7 @@ export function Tag({
     <div
       className={cn(` flex items-center rounded-3xl`, {
         "bg-yellow": type === "Product",
-        "bg-gray": type === "Facility",
+        "bg-neutral-200": type === "Facility",
         "px-2 py-[2px]": size === "default",
         "px-2 py-1": size === "lg",
         "px-1 py-0.5": size === "sm",

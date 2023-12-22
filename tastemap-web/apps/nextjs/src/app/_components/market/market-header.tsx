@@ -6,7 +6,8 @@ import { cn } from "~/utils/cn";
 import VerifiedBadge from "../icons/verified-badge";
 import NavBar from "../navbar/nav-bar";
 import { Ratings } from "../sections/RatingsAndReviews/ratings";
-import { Tag } from "../tag";
+
+// import { Tag } from "../tag";
 
 interface MarketHeaderProps {
   market: Market;
@@ -15,8 +16,8 @@ interface MarketHeaderProps {
 }
 
 const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
-  const productTags = market?.tags?.filter((tag) => tag.type === "Product");
-  const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
+  // const productTags = market?.tags?.filter((tag) => tag.type === "Product");
+  // const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
   return (
     <>
       <div id="marHeader">
@@ -52,7 +53,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
         <div
           ref={headerRef}
           id="marInfo"
-          className="w-full bg-white pb-5 text-black"
+          className="mb-1 w-full rounded-b-3xl bg-white pb-5 text-black"
         >
           <div className="px-5 pt-5">
             <h1 className="text-2xl font-bold">{market?.name}</h1>
@@ -71,7 +72,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
               </Link>
             </div>
           </div>
-          <div
+          {/* <div
             id="marTags"
             className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium"
           >
@@ -109,7 +110,7 @@ const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </>

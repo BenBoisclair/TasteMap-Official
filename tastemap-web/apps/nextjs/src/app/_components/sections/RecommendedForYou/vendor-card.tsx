@@ -16,7 +16,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
     <div className="flex w-[200px] flex-col">
       <Link href={`/vendor/${vendor.id}`}>
         {vendor.bannerUrl ? (
-          <div className="relative flex h-[120px] w-[200px] place-content-center overflow-hidden rounded-3xl">
+          <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
             <Image
               src={vendor.bannerUrl ?? ""}
               alt={`${vendor.name}'s Banner`}
@@ -32,28 +32,26 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
             <TasteMapLogo size={100} />
           </div>
         )}
-      </Link>
-      <div className="mt-1 flex flex-col gap-2">
-        <Link href={`/vendor/${vendor.id}`}>
+        <div className="mt-1 flex flex-col gap-2">
           <div className="truncate text-lg font-bold">{vendor.name}</div>
-        </Link>
-        <Ratings
-          average={vendor?.ratings?.average}
-          total={vendor?.ratings?.total}
-        />
-        {productTags.length > 0 && (
-          <div className="mt-1 flex gap-1">
-            {productTags.slice(0, 2).map((tag) => (
-              <Tag type={tag.type} key={tag.id}>
-                {tag.name}
-              </Tag>
-            ))}
-            {productTags?.length > 2 && (
-              <Tag type="Product">+{productTags?.length - 2}</Tag>
-            )}
-          </div>
-        )}
-      </div>
+          <Ratings
+            average={vendor?.ratings?.average}
+            total={vendor?.ratings?.total}
+          />
+          {productTags.length > 0 && (
+            <div className="mt-1 flex gap-1">
+              {productTags.slice(0, 2).map((tag) => (
+                <Tag type={tag.type} key={tag.id}>
+                  {tag.name}
+                </Tag>
+              ))}
+              {productTags?.length > 2 && (
+                <Tag type="Product">+{productTags?.length - 2}</Tag>
+              )}
+            </div>
+          )}
+        </div>
+      </Link>
     </div>
   );
 };

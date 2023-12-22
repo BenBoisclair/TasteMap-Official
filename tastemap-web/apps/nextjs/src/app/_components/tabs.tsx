@@ -8,15 +8,15 @@ interface TabProps {
 
 export default function Tabs({ activeTab, handleTabSelect, tabs }: TabProps) {
   return (
-    <div className="sticky top-12 z-20 border-b-2 border-neutral-600/30 bg-white">
-      <div className="flex justify-center pb-1">
-        <div className="flex w-full justify-around px-5">
+    <div className="sticky top-14 z-20 rounded-t-3xl bg-white">
+      <div className="flex justify-center">
+        <div className="flex w-full justify-around py-2">
           {tabs.slice(0, 3).map((tab, index) => (
             <button
               key={index}
               data-active={activeTab === tab}
               id={"Select Tabs"}
-              className="tab-item cursor-pointer px-5 py-3 font-bold"
+              className="tab-item cursor-pointer rounded-3xl px-5 py-2 font-bold"
               onClick={() => handleTabSelect(tab)}
             >
               {tab}

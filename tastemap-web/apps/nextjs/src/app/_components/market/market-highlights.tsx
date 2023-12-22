@@ -13,20 +13,17 @@ export default function HighlightsPage({
   handleTabSelect,
 }: HighlightsPageProps) {
   return (
-    <div id="HighlightsPage" className="py-8">
-      <UniqueServicesSection marketId={market.id} />
+    <div id="HighlightsPage" className="flex flex-col gap-8 bg-white py-8">
       <RecommenedForYouSection marketId={market.id} />
+      <UniqueServicesSection marketId={market.id} />
 
-      {/* <ExploreByCategoriesSection /> */}
-      <div>
-        <RatingAndReviewSection
-          id={market.id}
-          name={market.name}
-          imageUrl={market.bannerUrl}
-          type="Market"
-          handleTabSelect={handleTabSelect}
-        />
-      </div>
+      <RatingAndReviewSection
+        id={market.id}
+        name={market.name}
+        imageUrl={market.bannerUrl}
+        type="market"
+        handleTabSelect={handleTabSelect}
+      />
     </div>
   );
 }

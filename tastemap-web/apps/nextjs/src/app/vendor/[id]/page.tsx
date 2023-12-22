@@ -58,7 +58,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
       {activeTab === "Reviews" && (
         <RatingAndReviewSection
           id={vendorId}
-          type="Vendor"
+          type="vendor"
           name={vendor.name}
           imageUrl={vendor.bannerUrl ?? ""}
         />

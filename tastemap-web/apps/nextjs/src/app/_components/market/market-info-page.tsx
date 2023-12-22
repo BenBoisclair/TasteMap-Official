@@ -6,6 +6,7 @@ import convertTimeFormat from "~/utils/convertTimeFormat";
 import dayToNumber from "~/utils/dayToNumber";
 import isMarketOpen from "~/utils/isMarketOpen";
 import OpeningHourItem from "../opening-hour-item";
+import { Tag } from "../tag";
 
 interface MarketInfoPageProps {
   market: Market;
@@ -16,15 +17,31 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
     (a, b) => dayToNumber(a.dayOfWeek) - dayToNumber(b.dayOfWeek),
   );
 
+  const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
+
   return (
-    <div id="InfoPage" className="py-8 text-sm">
+    <div id="InfoPage" className="bg-white py-8 text-sm">
       <div className="px-5">
         <div className="flex items-center gap-1">
           <Info size={25} />
           <h1 className="text-lg font-bold">About</h1>
         </div>
-        <div className="mt-2 h-full w-full font-medium text-black">
+        <div className="mt-2 flex h-full w-full flex-col gap-4 font-medium text-black">
           {market.about}
+          {facilityTags.length > 0 && (
+            <div
+              id="FTags"
+              className="hide-scrollbar no-scrollbar flex items-center gap-2 overflow-scroll"
+            >
+              {facilityTags?.map((tag, key: number) => {
+                return (
+                  <Tag key={key} type={tag.type} size="default">
+                    {tag.name}
+                  </Tag>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-5 px-5">

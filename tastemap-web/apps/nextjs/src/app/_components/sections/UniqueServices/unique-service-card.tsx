@@ -18,7 +18,7 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
     <>
       <button
         onClick={() => setIsServiceOpen(true)}
-        className="relative h-[140px] w-[204px] flex-shrink-0 rounded-3xl text-start text-white"
+        className="relative h-[160px] w-[210px] flex-shrink-0 rounded-3xl text-start text-white"
       >
         <Image
           src={service.imageUrl || `https://placehold.co/600x400/png`}
@@ -57,7 +57,7 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
           <div className="mb-4 flex">
             <TasteMapLogo size={24} />
           </div>
-          <div className="relative flex h-[155px] w-[275px] overflow-hidden rounded-2xl">
+          <div className="relative flex h-[220px] w-[350px] overflow-hidden rounded-2xl">
             <Image
               // Once you change the imageUrl to be not null, remove the ??
               src={service?.imageUrl ?? ""}
