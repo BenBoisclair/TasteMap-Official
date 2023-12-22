@@ -6,7 +6,7 @@ import { createMedia } from '@tamagui/react-native-media-driver'
 
 import { animations } from './animations'
 
-const headingFont = createInterFont({
+const font = createInterFont({
   size: {
     6: 15,
   },
@@ -17,6 +17,13 @@ const headingFont = createInterFont({
   weight: {
     6: '400',
     7: '700',
+    100: '100',
+    200: '200',
+    300: '300',
+    400: '400',
+    500: '500',
+    600: '600',
+    700: '700',
   },
   color: {
     6: '$colorFocus',
@@ -34,21 +41,15 @@ const headingFont = createInterFont({
     15: -6,
   },
   face: {
-    700: { normal: 'InterBold' },
+    100: { normal: 'IBMPlexSansThin' },
+    200: { normal: 'IBMPlexSansExtraLight' },
+    300: { normal: 'IBMPlexSansLight' },
+    400: { normal: 'IBMPlexSansRegular' },
+    500: { normal: 'IBMPlexSansMedium' },
+    600: { normal: 'IBMPlexSansSemiBold' },
+    700: { normal: 'IBMPlexSansBold' },
   },
 })
-
-const bodyFont = createInterFont(
-  {
-    face: {
-      700: { normal: 'InterBold' },
-    },
-  },
-  {
-    sizeSize: (size) => Math.round(size * 1.1),
-    sizeLineHeight: (size) => Math.round(size * 1.1 + (size > 20 ? 10 : 10)),
-  }
-)
 
 export const config = createTamagui({
   defaultFont: 'body',
@@ -57,8 +58,8 @@ export const config = createTamagui({
   themeClassNameOnRoot: true,
   shorthands,
   fonts: {
-    body: bodyFont,
-    heading: headingFont,
+    body: font,
+    heading: font,
   },
   themes,
   tokens,

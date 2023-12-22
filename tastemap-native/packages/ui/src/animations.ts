@@ -33,4 +33,9 @@ export const animations = createAnimations({
     mass: 0.9,
     stiffness: 100,
   },
+  stillFastButNotTooFastIdk: {
+    damping: 100,
+    mass: 1,
+    stiffness: 200,
+  },
 })
