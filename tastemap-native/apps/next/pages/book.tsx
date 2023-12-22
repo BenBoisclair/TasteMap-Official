@@ -1,13 +1,13 @@
-import { UserDetailScreen } from 'app/features/user/detail-screen'
+import { BookScreen } from 'app/features/book/screen'
 import Head from 'next/head'
 
 export default function Page() {
   return (
     <>
       <Head>
-        <title>User</title>
+        <title>Book</title>
       </Head>
-      <UserDetailScreen />
+      <BookScreen />
     </>
   )
 }

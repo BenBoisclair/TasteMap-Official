@@ -1,4 +1,4 @@
-import { HomeScreen } from 'app/features/home/screen'
+import { BookScreen } from 'app/features/book/screen'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
@@ -6,11 +6,11 @@ export default function Screen() {
     <>
       <Stack.Screen
         options={{
-          title: 'Home',
+          title: 'Book',
           headerShown: false,
         }}
       />
-      <HomeScreen />
+      <BookScreen />
     </>
   )
 }

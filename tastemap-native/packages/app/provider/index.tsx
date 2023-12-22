@@ -1,4 +1,5 @@
 import { CustomToast, TamaguiProvider, TamaguiProviderProps, ToastProvider } from '@my/ui'
+import { useQueryClient, QueryClient, QueryClientProvider } from 'react-query'
 import { useColorScheme } from 'react-native'
 
 import { ToastViewport } from './ToastViewport'
@@ -6,6 +7,8 @@ import config from '../tamagui.config'
 
 export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'config'>) {
   const scheme = useColorScheme()
+  const queryClient = new QueryClient()
+
   return (
     <TamaguiProvider
       config={config}
@@ -23,10 +26,12 @@ export function Provider({ children, ...rest }: Omit<TamaguiProviderProps, 'conf
           ]
         }
       >
-        {children}
+        <QueryClientProvider client={queryClient}>
+          {children}
 
-        <CustomToast />
-        <ToastViewport />
+          <CustomToast />
+          <ToastViewport />
+        </QueryClientProvider>
       </ToastProvider>
     </TamaguiProvider>
   )

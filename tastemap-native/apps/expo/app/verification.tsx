@@ -1,4 +1,4 @@
-import { UserDetailScreen } from 'app/features/user/detail-screen'
+import { VerificationScreen } from 'app/features/verification/screen'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
@@ -6,10 +6,11 @@ export default function Screen() {
     <>
       <Stack.Screen
         options={{
-          title: 'User',
+          title: 'Verification',
+          headerShown: false,
         }}
       />
-      <UserDetailScreen />
+      <VerificationScreen />
     </>
   )
 }
