@@ -5,7 +5,7 @@ import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
 
 import type { Market } from "~/types/types";
-import Marker from "../marker";
+import Marker from "./marker";
 import MenuTab from "./menuTab";
 
 const MainMap = ({ markets }: { markets: Market[] }) => {

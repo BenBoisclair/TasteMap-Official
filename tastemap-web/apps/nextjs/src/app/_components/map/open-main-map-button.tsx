@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Map, X } from "lucide-react";
 
-import fetchMarkets from "~/app/api/_actions/fetchMarkets";
+import type { Market } from "~/types/types";
+import fetchAt from "~/utils/fetchAt";
 import MainMap from "./main-map";
 
 const OpenMainMapButton = ({
@@ -15,7 +16,7 @@ const OpenMainMapButton = ({
 }) => {
   const { data: markets, status: marketsStatus } = useQuery({
     queryKey: ["allMarkets"],
-    queryFn: fetchMarkets,
+    queryFn: () => fetchAt<Market[]>("/api/markets"),
   });
 
   const toggleMapOpen = () => {
