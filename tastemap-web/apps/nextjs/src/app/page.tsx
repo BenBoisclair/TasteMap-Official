@@ -5,10 +5,10 @@
 import { useState } from "react";
 
 import EventElements from "./_components/event-elements";
-import { HomePageHeader } from "./_components/homepage-header";
 import OpenMainMapButton from "./_components/map/open-main-map-button";
-import { MarketsNearYouSection } from "./_components/markets-near-you-section";
-import NavBar from "./_components/nav-bar";
+import NavBar from "./_components/navbar/nav-bar";
+import { HomePageHeader } from "./_components/sections/HomeHeader/homepage-header";
+import { MarketsNearYouSection } from "./_components/sections/MarketsNearYou/markets-near-you-section";
 
 export const runtime = "edge";
 

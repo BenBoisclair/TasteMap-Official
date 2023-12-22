@@ -6,20 +6,20 @@ import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import EventElements from "~/app/_components/event-elements";
-import LoadingPage from "~/app/_components/loading-page";
-import RatingAndReviewSection from "~/app/_components/rating-and-reviews-section";
+import LoadingPage from "~/app/_components/pages/loading-page";
+import RatingAndReviewSection from "~/app/_components/sections/RatingsAndReviews/rating-and-reviews-section";
 import Tabs from "~/app/_components/tabs";
-import VendorHeader from "~/app/_components/vendor-header";
-import VendorInfoPage from "~/app/_components/vendor-info-page";
-import fetchVendor from "~/app/api/_actions/fetchVendor";
+import VendorHeader from "~/app/_components/vendor/vendor-header";
+import VendorInfoPage from "~/app/_components/vendor/vendor-info-page";
+import type { Vendor } from "~/types/types";
+import fetchAt from "~/utils/fetchAt";
 
 export default function Vendor({ params }: { params: { id: string } }) {
   const vendorId = params.id;
-  //   const router = useRouter();
 
-  const { data: vendor, status: vendorStatus } = useQuery({
+  const { data: vendor, status } = useQuery({
     queryKey: ["vendor", vendorId],
-    queryFn: () => fetchVendor({ vendorId }),
+    queryFn: () => fetchAt<Vendor>(`/api/vendors/${vendorId}`),
   });
 
   const [activeTab, setActiveTab] = useState<string>("Info");
@@ -36,15 +36,11 @@ export default function Vendor({ params }: { params: { id: string } }) {
     }
   };
 
-  //   const handleBackButton = () => {
-  //     router.back();
-  //   };
-
-  if (vendorStatus === "pending") {
+  if (status === "pending") {
     return <LoadingPage />;
   }
 
-  if (vendorStatus === "error") {
+  if (status === "error") {
     return <div>Error</div>;
   }
 
