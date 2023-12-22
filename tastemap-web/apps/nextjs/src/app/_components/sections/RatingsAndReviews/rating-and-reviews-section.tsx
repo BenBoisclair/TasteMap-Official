@@ -18,7 +18,7 @@ interface RatingAndReviewSectionProps {
   id: string;
   name: string;
   imageUrl: string;
-  type: "Market" | "Vendor";
+  type: "market" | "vendor";
   handleTabSelect?: (tabname: string) => void;
 }
 
@@ -26,7 +26,7 @@ export default function RatingAndReviewSection({
   id,
   name,
   imageUrl,
-  type = "Market",
+  type = "market",
   handleTabSelect,
 }: RatingAndReviewSectionProps) {
   const { isSignedIn } = useUser();
@@ -48,7 +48,7 @@ export default function RatingAndReviewSection({
 
   return (
     <>
-      <div className="mb-5 mt-10" id="RatingsAndReviews">
+      <div className="mb-5 bg-white" id="RatingsAndReviews">
         <div className="flex justify-between px-5">
           <h1 className="text-lg font-bold">Ratings and reviews</h1>
           {handleTabSelect && (
@@ -94,7 +94,7 @@ export default function RatingAndReviewSection({
             </button>
           </div>
           {reviewsData && reviewStatus === "success" && (
-            <div className="mt-10 flex flex-col gap-6">
+            <div className="mt-10 flex flex-col gap-8">
               {reviewsData?.reviews.map((review, key) => {
                 return <ReviewItem review={review} key={key} />;
               })}

@@ -6,6 +6,7 @@
   --background-color: 255, 255, 255;
   --text-color: #3f3f3f;
   --primary-color: #fece5d;
+  --active-tab-bg-color: #f6f4ed;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -21,13 +22,19 @@
   content: "";
   display: block;
   position: absolute;
-  bottom: -4px;
-  left: 25%;
-  width: 50%;
+  bottom: 1px;
+  left: 32%;
+  width: 35%;
   height: 3px;
   background-color: var(--primary-color);
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.tab-item[data-active="true"] {
+  background-color: var(
+    --active-tab-bg-color
+  ); /* Apply red background when active */
 }
 
 .tab-item[data-active="true"]::after {

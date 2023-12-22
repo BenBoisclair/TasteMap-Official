@@ -40,7 +40,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative bg-neutral-200">
       <EventElements />
       {market && (
         <>
@@ -58,7 +58,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
               id={marketId}
               name={market?.name}
               imageUrl={market?.bannerUrl}
-              type={"Market"}
+              type={"market"}
               handleTabSelect={handleTabSelect}
             />
           )}

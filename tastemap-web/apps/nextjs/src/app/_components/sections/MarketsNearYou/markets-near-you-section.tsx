@@ -13,8 +13,6 @@ export function MarketsNearYouSection() {
     queryFn: () => fetchAt<Market[]>("/api/markets"),
   });
 
-  console.log(markets);
-
   return (
     <div className="mt-2 w-full rounded-3xl bg-white py-5">
       <div className="px-5">
