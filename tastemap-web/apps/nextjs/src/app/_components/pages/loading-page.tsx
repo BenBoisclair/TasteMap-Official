@@ -2,17 +2,21 @@ import Image from "next/image";
 
 export default function LoadingPage() {
   return (
-    <div className="flex h-screen justify-center text-center">
+    <div className="flex h-screen justify-center bg-yellow text-center">
       <div className="mb-24 flex flex-col justify-center">
         <Image
-          src="/logos/tastemap_logo.png"
-          width={100}
-          height={100}
+          src="/logos/tastemap_logo_white.png"
+          width={160}
+          height={160}
           alt="TasteMap Logo"
           className="mx-auto animate-pulse"
         />
-        <span className="mt-4 animate-pulse text-2xl font-bold">TasteMap</span>
-        <span className="mt-4 text-2xl font-bold text-yellow">Loading...</span>
+        <span className="mt-2 animate-pulse text-[38px] font-bold">
+          TasteMap
+        </span>
+        <span className="animate-pulse text-3xl font-medium">
+          Taste the Local.
+        </span>
       </div>
     </div>
   );
