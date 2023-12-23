@@ -31,7 +31,7 @@ export default function Tabs({
               key={index}
               data-active={activeTab === tab}
               id={"Select Tabs"}
-              className="tab-item cursor-pointer rounded-3xl px-5 py-2 font-bold md:w-full"
+              className="tab-item w-full cursor-pointer rounded-3xl px-5 py-2 font-bold"
               onClick={() => handleTabSelect(tab)}
             >
               {tab}
