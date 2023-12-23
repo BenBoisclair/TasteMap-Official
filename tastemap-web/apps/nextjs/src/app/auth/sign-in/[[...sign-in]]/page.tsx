@@ -21,6 +21,15 @@ const SignUpPage = () => {
           We’re so happy to see you again. Fill in your email and password below
           to re-witness the magic.
         </p>
+        <div className="mt-2 flex justify-center gap-2">
+          <span className="font-medium">No account?</span>
+          <Link
+            href="/auth/sign-up"
+            className="font-bold text-yellow underline"
+          >
+            Register now!
+          </Link>
+        </div>
       </div>
       <div className="flex justify-center">
         <SignIn
@@ -45,6 +54,8 @@ const SignUpPage = () => {
               logoBox: "hidden",
               header: "hidden",
               socialButtonsBlockButton: "rounded-3xl",
+              footer: "text-3xl flex",
+              footerActionLink: "font-bold underline",
             },
           }}
         />
