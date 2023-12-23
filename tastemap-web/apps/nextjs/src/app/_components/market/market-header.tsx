@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { Market } from "~/types/types";
-import { cn } from "~/utils/cn";
+import removeSubstrings from "~/utils/removeSubstrings";
 import VerifiedBadge from "../icons/verified-badge";
 import NavBar from "../navbar/nav-bar";
 import { Ratings } from "../sections/RatingsAndReviews/ratings";
@@ -17,48 +17,43 @@ interface MarketHeaderProps {
   inView: boolean;
 }
 
-const MarketHeader = ({ market, headerRef, inView }: MarketHeaderProps) => {
+const MarketHeader = ({ market, headerRef }: MarketHeaderProps) => {
   // const productTags = market?.tags?.filter((tag) => tag.type === "Product");
   // const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
   return (
     <>
       <div id="marHeader">
-        <NavBar
-          className={cn(`z-40`, {
-            "bg-transparent bg-gradient-to-b from-black/60 to-transparent text-white":
-              inView,
-            "bg-white text-black": !inView,
-          })}
-        />
-
-        <div
-          id="bannerWrapper"
-          className="w-full overflow-hidden"
-          style={{ position: "relative", height: "240px" }}
-        >
-          <Image
-            src={market?.bannerUrl || `https://placehold.co/600x400/png`}
-            sizes="100vw"
-            fill={true}
-            style={{
-              objectFit: "cover",
-            }}
-            alt={`Market Banner`}
-            priority={true}
-          />
-          {market.isVerified && (
-            <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-              <VerifiedBadge size="lg" />
-            </div>
-          )}
+        <NavBar />
+        <div className="mt-[60px] h-[200px] bg-white">
+          <div id="bannerWrapper" className="relative mx-4 flex h-full md:mx-0">
+            <Image
+              src={market?.bannerUrl || `https://placehold.co/600x400/png`}
+              fill={true}
+              style={{
+                objectFit: "cover",
+              }}
+              className="rounded-3xl md:rounded-none"
+              alt={`Market Banner`}
+              priority={true}
+            />
+          </div>
         </div>
         <div
           ref={headerRef}
           id="marInfo"
-          className="mb-1 w-full rounded-b-3xl bg-white pb-5 text-black"
+          className="mb-1 w-full rounded-b-3xl bg-white pb-5 "
         >
-          <div className="px-5 pt-5">
-            <h1 className="text-2xl font-bold">{market?.name}</h1>
+          <div className="px-5 pt-2">
+            <div className="flex items-center justify-between">
+              <h1 className="text-[26px] font-bold">
+                {removeSubstrings(market?.name, ["Floating Market"])}
+              </h1>
+              {market.isVerified && (
+                <div>
+                  <VerifiedBadge size="lg" variant="icon" />
+                </div>
+              )}
+            </div>
             <p className="font-medium">{market?.type}</p>
             <div
               id="marRatingInfo"

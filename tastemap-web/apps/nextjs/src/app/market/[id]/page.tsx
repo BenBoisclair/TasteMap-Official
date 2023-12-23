@@ -48,6 +48,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
           <Tabs
             activeTab={activeTab}
             handleTabSelect={handleTabSelect}
+            inView={inView}
             tabs={["Highlights", "Map & Info", "Reviews"]}
           />
 
