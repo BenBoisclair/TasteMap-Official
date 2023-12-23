@@ -1,3 +1,5 @@
+"use client";
+
 // import IntToStringWeekday from "../(utils)/IntToStringWeekday";
 import { BookText, CalendarDays, Info } from "lucide-react";
 

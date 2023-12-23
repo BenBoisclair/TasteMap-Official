@@ -1,3 +1,5 @@
+"use client";
+
 import type { Market } from "~/types/types";
 import RatingAndReviewSection from "../sections/RatingsAndReviews/rating-and-reviews-section";
 import RecommenedForYouSection from "../sections/RecommendedForYou/recommended-for-you-section";
