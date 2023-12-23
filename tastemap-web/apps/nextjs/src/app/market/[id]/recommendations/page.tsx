@@ -6,7 +6,8 @@ import { ChevronLeft } from "lucide-react";
 
 import LoadingPage from "~/app/_components/pages/loading-page";
 import VendorCardRecommendations from "~/app/_components/sections/RecommendedForYou/vendor-card-recommendations";
-import fetchMarketVendors from "~/app/api/_actions/fetchMarketVendors";
+import type { Vendor } from "~/types/types";
+import fetchAt from "~/utils/fetchAt";
 
 export default function RecommendationsPage({
   params,
@@ -22,7 +23,7 @@ export default function RecommendationsPage({
 
   const { data: vendors, status: vendorsStatus } = useQuery({
     queryKey: ["marketRecommendedVendors", marketId],
-    queryFn: () => fetchMarketVendors({ marketId }),
+    queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
   });
 
   console.log(vendors);

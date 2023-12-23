@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { headers } from "next/headers";
 import type { WebhookEvent } from "@clerk/nextjs/server";
+import { nanoid } from "nanoid";
 import { Webhook } from "svix";
 
 import { db, eq } from "@acme/db";
 import { users } from "@acme/db/schema/schema";
-
-import { generatePublicId } from "~/utils/generate-id";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -77,7 +76,7 @@ export async function POST(req: Request) {
     }
 
     const userInfo = {
-      id: generatePublicId(),
+      id: nanoid(20),
       externalId: id,
       username: attributes?.username ? `@${attributes?.username}` : "",
       firstName: attributes?.first_name,
