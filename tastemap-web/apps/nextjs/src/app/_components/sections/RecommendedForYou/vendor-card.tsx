@@ -13,7 +13,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
     .sort((a, b) => a.name.length - b.name.length); // Then sort by length of name
 
   return (
-    <div className="flex w-[200px] flex-col">
+    <div className="flex w-[210px] flex-col">
       <Link href={`/vendor/${vendor.id}`}>
         {vendor.bannerUrl ? (
           <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
@@ -28,7 +28,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
             </div>
           </div>
         ) : (
-          <div className="flex h-[120px] w-[200px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+          <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
             <TasteMapLogo size={100} />
           </div>
         )}

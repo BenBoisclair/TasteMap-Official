@@ -24,7 +24,7 @@ export default function VendorCardRecommendations({
       )}
     >
       {vendor.bannerUrl ? (
-        <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-3xl ">
+        <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-xl">
           <Image
             src={vendor.bannerUrl ?? ""}
             alt={`${vendor.name} Banner`}
@@ -36,7 +36,7 @@ export default function VendorCardRecommendations({
           />
         </div>
       ) : (
-        <div className=" mr-4 flex h-[120px] w-[120px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+        <div className=" mr-4 flex h-[120px] w-[150px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
           <TasteMapLogo size={100} />
         </div>
       )}
