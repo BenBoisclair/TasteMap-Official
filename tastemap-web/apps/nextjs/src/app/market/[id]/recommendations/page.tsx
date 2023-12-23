@@ -26,8 +26,6 @@ export default function RecommendationsPage({
     queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
   });
 
-  console.log(vendors);
-
   if (vendorsStatus === "pending") {
     return <LoadingPage />;
   }
