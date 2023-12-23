@@ -10,6 +10,7 @@ import { Menu, X } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 import LogInButton from "../auth/log-in-button";
+import TasteMapFullLogo from "../icons/taste-map-logo-full";
 import { SideMenuSignedIn } from "./side-menu-signed-in";
 
 export function NavBar({ className = "" }: { className?: string }) {
@@ -20,17 +21,20 @@ export function NavBar({ className = "" }: { className?: string }) {
     <>
       <nav
         className={cn(
-          ` fixed top-0 z-[200] flex w-full items-center justify-between bg-white px-5 py-4`,
+          ` fixed top-0 z-[200] flex w-full items-center bg-white px-5 py-3.5`,
           className,
         )}
       >
         <button onClick={() => toggleMenu()} className="cursor-pointer">
           <Menu size={30} />
         </button>
-        <div className="flex gap-4">
-          {/* <Search size={30} />
-          <Heart size={30} /> */}
+        <div className=" flex grow justify-center pr-10">
+          <TasteMapFullLogo />
         </div>
+        {/* <div className="flex gap-4">
+          <Search size={30} />
+          <Heart size={30} />
+        </div> */}
       </nav>
       <SideMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       {/* Dark Background Overlay */}
