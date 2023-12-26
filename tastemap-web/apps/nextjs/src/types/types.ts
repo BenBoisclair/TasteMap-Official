@@ -122,6 +122,7 @@ export interface Vendor {
   paymentOptions: PaymentOption[] | [];
   informationItems: InformationItems[] | [];
   isVerified: boolean;
+  sequence: number | null;
 }
 
 export interface InformationItems {

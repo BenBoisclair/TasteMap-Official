@@ -1,5 +1,6 @@
 import { relations } from "drizzle-orm";
 import {
+  bigint,
   boolean,
   integer,
   jsonb,
@@ -347,6 +348,7 @@ export const vendor = pgTable("vendor", {
     .references(() => market.id),
 
   isVerified: boolean("is_verified").default(false),
+  sequence: integer("sequence"),
 
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -490,3 +492,37 @@ export const mediaFilesRelations = relations(mediaFiles, ({ one }) => ({
     references: [vendor.id],
   }),
 }));
+
+export const nativeUser = pgTable(
+  "native_user",
+  {
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+    phoneNumber: text("phone_number").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => {
+    return {
+      nativeUserPhoneNumberKey: unique("native_user_phone_number_key").on(
+        table.phoneNumber,
+      ),
+    };
+  },
+);
+
+export const nativeBook = pgTable("native_book", {
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  id: bigint("id", { mode: "number" }).primaryKey().notNull(),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  userId: bigint("user_id", { mode: "number" })
+    .notNull()
+    .references(() => nativeUser.id),
+  date: timestamp("date", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  type: text("type").notNull(),
+  category: text("category").notNull(),
+  amount: text("amount").notNull(),
+});
