@@ -1,4 +1,4 @@
-import { db, desc, eq, sql } from "@acme/db";
+import { asc, db, desc, eq, sql } from "@acme/db";
 import { review, vendor } from "@acme/db/schema/schema";
 
 export const GET = async (
@@ -27,7 +27,7 @@ export const GET = async (
           },
         },
       },
-      orderBy: [desc(vendor.isVerified)],
+      orderBy: [desc(vendor.isVerified), asc(vendor.sequence)],
     })
     .then(async (vendors) => {
       const vendorsWithReview = await Promise.all(
