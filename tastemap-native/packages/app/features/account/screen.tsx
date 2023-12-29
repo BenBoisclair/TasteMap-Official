@@ -5,12 +5,13 @@ import { YStack, Text, Button } from '@my/ui'
 import { SolitoImage } from 'solito/image'
 import { useQuery } from 'react-query'
 import { getApi } from 'app/utils/fetch'
+import { Keyboard } from 'react-native'
 
 export function AccountScreen() {
   const { data, isLoading } = useQuery('account', async () => await getApi('/user/account'))
 
   return (
-    <YStack f={1} backgroundColor="#FFF">
+    <YStack f={1} backgroundColor="#FFF" onPress={() => Keyboard.dismiss()}>
       <YStack f={1} backgroundColor="#F6F4ED" padding={16} paddingTop={60}>
         <YStack
           display="flex"

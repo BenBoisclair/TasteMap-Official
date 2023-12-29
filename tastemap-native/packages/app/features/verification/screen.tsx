@@ -16,6 +16,7 @@ import { useTimer } from 'app/utils/hooks'
 import { useMutation } from 'react-query'
 import { postApi } from 'app/utils/fetch'
 import { useRouter } from 'solito/router'
+import { Keyboard } from 'react-native'
 
 export function VerificationScreen() {
   const [isError, setIsError] = useState(false)
@@ -49,7 +50,13 @@ export function VerificationScreen() {
   }, [])
 
   return (
-    <YStack f={1} justifyContent="center" alignItems="center" backgroundColor="#FFF">
+    <YStack
+      f={1}
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor="#FFF"
+      onPress={() => Keyboard.dismiss()}
+    >
       <Frame5094 isError={isError} setIsError={setIsError} onNavigate={onNavigate} />
       <Bottom>
         <NextButton text="ยืนยัน" onNavigate={onNavigate} />

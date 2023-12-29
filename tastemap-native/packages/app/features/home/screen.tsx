@@ -9,6 +9,7 @@ import { Bottom } from '../../components/core'
 import { YStack, Text, Input } from '@my/ui'
 import { useMutation } from 'react-query'
 import { postApi } from 'app/utils/fetch'
+import { Keyboard } from 'react-native'
 
 export function HomeScreen() {
   const { mutateAsync } = useMutation((body: LoginRequestBody) => postApi('/auth/login', body))
@@ -16,7 +17,7 @@ export function HomeScreen() {
   const [isError, setIsError] = useState(false)
   const { push } = useSlowRouter()
 
-  const [getAuth] = getAuthStorage()
+  const [getAuth, setAuth] = getAuthStorage()
 
   const onNavigate = async () => {
     const successResponse = await mutateAsync(
@@ -41,13 +42,19 @@ export function HomeScreen() {
       //   access_token: '',
       //   expiration_date: '',
       // })
-      console.log(await getAuth())
+      // console.log(await getAuth())
       ;(await getAuth()).access_token !== '' && push('/book')
     })()
   }, [])
 
   return (
-    <YStack f={1} justifyContent="center" alignItems="center" backgroundColor="#FFF">
+    <YStack
+      f={1}
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor="#FFF"
+      onPress={() => Keyboard.dismiss()}
+    >
       <Frame5094 isError={isError} setIsError={setIsError} />
       <Bottom>
         <NextButton text="ไปต่อ" onNavigate={onNavigate} />

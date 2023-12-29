@@ -51,3 +51,6 @@ export const createWithCloseSheet =
     callback()
     setIsSheetOpen(false)
   }
+export const addComma = (amount: string | number) => {
+  return typeof amount === 'string' ? Number(amount).toLocaleString() : amount.toLocaleString()
+}

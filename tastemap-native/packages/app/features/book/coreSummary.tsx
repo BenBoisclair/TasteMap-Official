@@ -1,7 +1,8 @@
 import { Books } from '../../../../apps/next/pages/api/book/interface'
-import { YStack, Text } from '@my/ui'
 import { getApi } from 'app/utils/fetch'
 import { useQuery } from 'react-query'
+import { YStack, Text } from '@my/ui'
+import { addComma } from './utils'
 
 export const CoreSummary = () => {
   const { data } = useQuery('books', () => getApi('/book/today'))
@@ -41,10 +42,12 @@ export const CoreSummary = () => {
             letterSpacing={0.35}
           >
             {books.length !== 0 &&
-              `${books
-                .filter((book) => book.type === 'INCOME')
-                .map((book) => Number(book.amount))
-                .reduce((a, b) => a + b)} บาท`}
+              `${addComma(
+                books
+                  .filter((book) => book.type === 'INCOME')
+                  .map((book) => Number(book.amount))
+                  .reduce((a, b) => a + b)
+              )} บาท`}
           </Text>
         </YStack>
         <YStack display="flex" flexDirection="column" alignItems="flex-start" alignSelf="stretch">
@@ -67,10 +70,12 @@ export const CoreSummary = () => {
             letterSpacing={0.35}
           >
             {books.length !== 0 &&
-              `${books
-                .filter((book) => book.type === 'EXPENSE')
-                .map((book) => Number(book.amount))
-                .reduce((a, b) => a + b)} บาท`}
+              `${addComma(
+                books
+                  .filter((book) => book.type === 'EXPENSE')
+                  .map((book) => Number(book.amount))
+                  .reduce((a, b) => a + b)
+              )} บาท`}
           </Text>
         </YStack>
       </YStack>
@@ -109,11 +114,13 @@ export const CoreSummary = () => {
             letterSpacing={0.35}
           >
             {books.length !== 0 &&
-              `${books
-                .map((book) =>
-                  book.type === 'EXPENSE' ? Number(-book.amount) : Number(book.amount)
-                )
-                .reduce((a, b) => a + b)} บาท`}
+              `${addComma(
+                books
+                  .map((book) =>
+                    book.type === 'EXPENSE' ? Number(-book.amount) : Number(book.amount)
+                  )
+                  .reduce((a, b) => a + b)
+              )} บาท`}
           </Text>
         </YStack>
       </YStack>

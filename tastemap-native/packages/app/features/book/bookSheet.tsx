@@ -153,8 +153,10 @@ const BookSheetContent = () => {
 
   const handleAmountChange = (amount: string) => {
     const numberRegex = /^\d+$/
+    amount.length !== 0 && console.log(amount[0])
     return (
       (numberRegex.test(amount) || amount.length === 0) &&
+      !(amount.length >= 2 && amount[0] === '0') &&
       setLedgerOperation((ledgerOperation) => {
         return {
           ...ledgerOperation,
@@ -217,7 +219,7 @@ const BookSheetContent = () => {
             paddingHorizontal={16}
             borderRadius={10}
           >
-            <Text display="flex" alignItems="center" alignSelf="stretch">
+            <Text display="flex" color="#6F6F6F" alignItems="center" alignSelf="stretch">
               รายรับจากการขาย
             </Text>
           </YStack>
@@ -256,6 +258,7 @@ const BookSheetContent = () => {
         </YStack>
         <Input
           display="flex"
+          color="#3F3F3F"
           value={ledgerOperation.amount}
           onChangeText={handleAmountChange}
           height={40}
@@ -294,12 +297,8 @@ const BookSheetBottom = ({ refetch }: { refetch: BookRefetch }) => {
 
   type BindedMutate = () => Promise<{ data: any; error: null } | { data: null; error: any }>
   const partialOnCreateOrUpdate = (bindedMutate: BindedMutate) => async () => {
-    const successResponse = await bindedMutate()
-    if (successResponse.error) {
-      console.error(successResponse.error)
-    }
-
-    withCloseSheet(() => {
+    withCloseSheet(async () => {
+      bindedMutate()
       setLedgerOperation((ledgerOperation) => {
         return {
           ...ledgerOperation,

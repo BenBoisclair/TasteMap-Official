@@ -13,12 +13,12 @@ export const BookDialog = ({ refetch }: { refetch: BookRefetch }) => {
   )
 
   const onDelete = async () => {
+    setIsDiaglogOpen(false)
     const deleteResponse = await mutateAsync(ledgerOperation.id)
     if (deleteResponse.error) {
       // do something
     }
     await refetch()
-    setIsDiaglogOpen(false)
   }
 
   return (

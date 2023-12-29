@@ -1,11 +1,11 @@
-import { createWithOpenSheet, LedgerAction, useLedgerOperation } from './utils'
+import { createWithOpenSheet, LedgerAction, useLedgerOperation, addComma } from './utils'
+import { createWithDiaglogOpen, useIsDialogOpen } from 'app/atoms/isDialogOpen'
 import { Book, Books } from '../../../../apps/next/pages/api/book/interface'
 import { Dispatch, SetStateAction, useState } from 'react'
-import { createWithDiaglogOpen, useIsDialogOpen } from 'app/atoms/isDialogOpen'
 import { useIsSheetOpen } from 'app/atoms/isSheetOpen'
-import { BookToggleStatus } from './core'
 import { YStack, Text, Button } from '@my/ui'
 import { SolitoImage } from 'solito/image'
+import { BookToggleStatus } from './core'
 
 type FilterOption = 'ALL' | 'INCOME' | 'EXPENSE'
 
@@ -297,7 +297,7 @@ const CoreBookFilledOptions = ({
           fontFamily="$body"
           fontSize={14}
           fontStyle="normal"
-          fontWeight="600"
+          fontWeight={filterOption === 'ALL' ? '600' : '400'}
           letterSpacing={0.14}
         >
           รวม
@@ -332,7 +332,7 @@ const CoreBookFilledOptions = ({
           fontFamily="$body"
           fontSize={14}
           fontStyle="normal"
-          fontWeight="400"
+          fontWeight={filterOption === 'INCOME' ? '600' : '400'}
           letterSpacing={0.14}
         >
           แค่รายรับ
@@ -367,7 +367,7 @@ const CoreBookFilledOptions = ({
           fontFamily="$body"
           fontSize={14}
           fontStyle="normal"
-          fontWeight="400"
+          fontWeight={filterOption === 'EXPENSE' ? '600' : '400'}
           letterSpacing={0.14}
         >
           แค่รายจ่าย
@@ -479,7 +479,7 @@ const CoreBookFilledLists = ({
           fontWeight="400"
           letterSpacing={0.16}
         >
-          {`${book.type === 'INCOME' ? '+' : '-'}${book.amount}`}
+          {`${book.type === 'INCOME' ? '+' : '-'}${addComma(book.amount)}`}
         </Text>
       </YStack>
     )
@@ -521,9 +521,11 @@ const CoreBookFilledLists = ({
           fontWeight="600"
           letterSpacing={0.16}
         >
-          {books
-            .map((e) => Number(`${e.type === 'EXPENSE' ? '-' : ''}${e.amount}`))
-            .reduce((a, b) => a + b)}
+          {addComma(
+            books
+              .map((e) => Number(`${e.type === 'EXPENSE' ? '-' : ''}${e.amount}`))
+              .reduce((a, b) => a + b)
+          )}
         </Text>
       </YStack>
     </YStack>

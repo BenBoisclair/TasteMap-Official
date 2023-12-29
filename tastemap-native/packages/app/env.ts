@@ -5,7 +5,7 @@ const envSchema = z.object({
 })
 
 const env = {
-  PUBLIC_API_URL: __DEV__ ? 'http://localhost:3000' : 'https://tastemap.com',
+  PUBLIC_API_URL: 'https://taste-map-official.vercel.app',
 }
 
 export default envSchema.parse(env)

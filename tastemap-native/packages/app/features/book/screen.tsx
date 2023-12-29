@@ -6,12 +6,13 @@ import { useState } from 'react'
 import { CoreSummary } from './coreSummary'
 import { CoreBook } from './core'
 import { YStack } from '@my/ui'
+import { Keyboard } from 'react-native'
 
 export function BookScreen() {
   const [coreState, setCoreState] = useState(BookState.BOOK)
 
   return (
-    <YStack f={1} backgroundColor="#FFF">
+    <YStack f={1} backgroundColor="#FFF" onPress={() => Keyboard.dismiss()}>
       <FinancialMenuBar bookState={coreState} setBookState={setCoreState} />
       <YStack
         flex={1}
