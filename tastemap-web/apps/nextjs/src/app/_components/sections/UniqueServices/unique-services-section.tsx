@@ -26,8 +26,8 @@ export default function UniqueServicesSection({
 
   return (
     <div id="UniqueServices">
-      <h1 className="px-5 text-lg font-bold">Unique Services</h1>
-      <div className="no-scrollbar flex gap-1.5 overflow-x-auto px-5 pt-2">
+      <h1 className="px-5 text-xl font-bold">Unique Services</h1>
+      <div className="no-scrollbar mt-4 flex gap-1.5 overflow-x-auto px-5">
         {services?.map((service, index: number) => {
           return (
             <div key={index}>

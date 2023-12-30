@@ -50,7 +50,7 @@ export default function RatingAndReviewSection({
     <>
       <div className="mb-5 bg-white" id="RatingsAndReviews">
         <div className="flex justify-between px-5">
-          <h1 className="text-lg font-bold">Ratings and reviews</h1>
+          <h1 className="text-xl font-bold">Ratings and reviews</h1>
           {handleTabSelect && (
             <button id="Back Button" onClick={() => handleTabSelect("Reviews")}>
               <ChevronRight />
