@@ -43,7 +43,7 @@ export default function VendorCardRecommendations({
         </div>
       )}
       <div className="flex grow flex-col justify-between overflow-hidden">
-        <Link href={`/vendor/${vendor.id}`}>
+        <Link href={`/vendors/${vendor.id}`}>
           <h1 className="line-clamp-2 font-bold">{vendor.name}</h1>
         </Link>
         <div className="flex items-center gap-2">
