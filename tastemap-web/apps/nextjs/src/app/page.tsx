@@ -7,6 +7,7 @@ import { useState } from "react";
 import EventElements from "./_components/event-elements";
 import OpenMainMapButton from "./_components/map/open-main-map-button";
 import NavBar from "./_components/navbar/nav-bar";
+import CategoriesSection from "./_components/sections/categories-section";
 import { HomePageHeader } from "./_components/sections/HomeHeader/homepage-header";
 import { MarketsNearYouSection } from "./_components/sections/MarketsNearYou/markets-near-you-section";
 
@@ -19,11 +20,12 @@ export default function HomePage() {
       <NavBar />
       <OpenMainMapButton setIsMapOpen={setIsMapOpen} isMapOpen={isMapOpen} />
       {!isMapOpen && (
-        <main className="flex h-screen w-full flex-col bg-neutral">
+        <main className="mb-10 flex h-screen w-full flex-col gap-2 bg-neutral">
           <EventElements />
 
           <HomePageHeader />
           <MarketsNearYouSection />
+          <CategoriesSection />
         </main>
       )}
     </>

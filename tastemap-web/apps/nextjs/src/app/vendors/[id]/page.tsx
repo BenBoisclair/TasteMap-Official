@@ -52,6 +52,7 @@ export default function Vendor({ params }: { params: { id: string } }) {
       <Tabs
         activeTab={activeTab}
         handleTabSelect={handleTabSelect}
+        inView={inView}
         tabs={["Info", "Reviews"]}
       />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}

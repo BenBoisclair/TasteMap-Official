@@ -64,7 +64,7 @@ importers:
         version: 2.30.0
       drizzle-orm:
         specifier: ^0.29.0
-        version: 0.29.1(@planetscale/database@1.11.0)(postgres@3.4.3)
+        version: 0.29.1
       drizzle-zod:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.29.1)(zod@3.22.4)
@@ -95,9 +95,6 @@ importers:
       react-intersection-observer:
         specifier: ^9.5.3
         version: 9.5.3(react@18.2.0)
-      react-snowfall:
-        specifier: ^1.2.1
-        version: 1.2.1(react-dom@18.2.0)(react@18.2.0)
       react-swipeable:
         specifier: ^7.0.1
         version: 7.0.1(react@18.2.0)
@@ -2873,6 +2870,69 @@ packages:
       - utf-8-validate
     dev: true
 
+  /drizzle-orm@0.29.1:
+    resolution: {integrity: sha512-yItc4unfHnk8XkDD3/bdC63vdboTY7e7I03lCF1OJYABXSIfQYU9BFTQJXMMovVeb3T1/OJWwfW/70T1XPnuUA==}
+    peerDependencies:
+      '@aws-sdk/client-rds-data': '>=3'
+      '@cloudflare/workers-types': '>=3'
+      '@libsql/client': '*'
+      '@neondatabase/serverless': '>=0.1'
+      '@opentelemetry/api': ^1.4.1
+      '@planetscale/database': '>=1'
+      '@types/better-sqlite3': '*'
+      '@types/pg': '*'
+      '@types/sql.js': '*'
+      '@vercel/postgres': '*'
+      better-sqlite3: '>=7'
+      bun-types: '*'
+      knex: '*'
+      kysely: '*'
+      mysql2: '>=2'
+      pg: '>=8'
+      postgres: '>=3'
+      sql.js: '>=1'
+      sqlite3: '>=5'
+    peerDependenciesMeta:
+      '@aws-sdk/client-rds-data':
+        optional: true
+      '@cloudflare/workers-types':
+        optional: true
+      '@libsql/client':
+        optional: true
+      '@neondatabase/serverless':
+        optional: true
+      '@opentelemetry/api':
+        optional: true
+      '@planetscale/database':
+        optional: true
+      '@types/better-sqlite3':
+        optional: true
+      '@types/pg':
+        optional: true
+      '@types/sql.js':
+        optional: true
+      '@vercel/postgres':
+        optional: true
+      better-sqlite3:
+        optional: true
+      bun-types:
+        optional: true
+      knex:
+        optional: true
+      kysely:
+        optional: true
+      mysql2:
+        optional: true
+      pg:
+        optional: true
+      postgres:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+    dev: false
+
   /drizzle-orm@0.29.1(@planetscale/database@1.11.0)(postgres@3.4.3):
     resolution: {integrity: sha512-yItc4unfHnk8XkDD3/bdC63vdboTY7e7I03lCF1OJYABXSIfQYU9BFTQJXMMovVeb3T1/OJWwfW/70T1XPnuUA==}
     peerDependencies:
@@ -2945,7 +3005,7 @@ packages:
       drizzle-orm: '>=0.23.13'
       zod: '*'
     dependencies:
-      drizzle-orm: 0.29.1(@planetscale/database@1.11.0)(postgres@3.4.3)
+      drizzle-orm: 0.29.1
       zod: 3.22.4
     dev: false
 
@@ -5251,10 +5311,6 @@ packages:
       scheduler: 0.23.0
     dev: false
 
-  /react-fast-compare@3.2.2:
-    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-    dev: false
-
   /react-ga@3.3.1(prop-types@15.8.1)(react@18.2.0):
     resolution: {integrity: sha512-4Vc0W5EvXAXUN/wWyxvsAKDLLgtJ3oLmhYYssx+YzphJpejtOst6cbIHCIyF50Fdxuf5DDKqRYny24yJ2y7GFQ==}
     peerDependencies:
@@ -5289,17 +5345,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: false
-
-  /react-snowfall@1.2.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-d2UR3nDq3F0DJGaTfJ0QNbBo76UZHtT9wHFj+ePxAl4FgSxWBhxB/Bjn06f5iDBwhgwiZ7CZmv3lwfNvjo6a+w==}
-    peerDependencies:
-      react: "^16.8 ||\_17.x || 18.x"
-      react-dom: ^16.8 || 17.x || 18.x
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-fast-compare: 3.2.2
     dev: false
 
   /react-swipeable@7.0.1(react@18.2.0):
