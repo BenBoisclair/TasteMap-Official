@@ -153,7 +153,6 @@ const BookSheetContent = () => {
 
   const handleAmountChange = (amount: string) => {
     const numberRegex = /^\d+$/
-    amount.length !== 0 && console.log(amount[0])
     return (
       (numberRegex.test(amount) || amount.length === 0) &&
       !(amount.length >= 2 && amount[0] === '0') &&

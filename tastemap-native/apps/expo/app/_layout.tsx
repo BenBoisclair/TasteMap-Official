@@ -1,8 +1,11 @@
+import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream'
+import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding'
+import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
+import { useColorScheme } from 'react-native'
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
-import { useColorScheme } from 'react-native'
 
 export default function HomeLayout() {
   const [loaded] = useFonts({
@@ -17,6 +20,10 @@ export default function HomeLayout() {
     IBMPlexSansBold: require('../assets/fonts/IBMPlexSansThai-Bold.ttf'),
   })
   const scheme = useColorScheme()
+
+  polyfillFetch()
+  polyfillEncoding()
+  polyfillReadableStream()
 
   if (!loaded) {
     return null
