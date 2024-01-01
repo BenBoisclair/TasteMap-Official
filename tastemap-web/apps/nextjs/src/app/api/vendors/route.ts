@@ -1,10 +1,19 @@
 import { asc, db, desc, eq, sql } from "@acme/db";
-import { review, vendor } from "@acme/db/schema/schema";
+import { review, tag, vendor } from "@acme/db/schema/schema";
+import { NextRequest } from "next/server";
 
-export const GET = async () => {
+export const GET = async (request: NextRequest) => {
+  const params = request.nextUrl.searchParams;
+  const searchTag = params.get("tag");
+  console.log("tag", searchTag);
   const allVendors = await db.query.vendor
     .findMany({
       with: {
+        market: {
+          columns: {
+            name: true,
+          },
+        },
         tags: {
           columns: {
             tagId: false,
@@ -23,9 +32,15 @@ export const GET = async () => {
       },
       orderBy: [desc(vendor.isVerified), asc(vendor.sequence)],
     })
-    .then(async (vendors) => {
+    .then(async vendors => {
+      const filteredVendors = !!searchTag
+        ? vendors.filter(vendor =>
+            vendor.tags.some(({ tag }) => tag.name === searchTag)
+          )
+        : vendors;
+
       const vendorsWithReview = await Promise.all(
-        vendors.map(async (vendor) => {
+        filteredVendors.map(async vendor => {
           const aggregationQuery = await db
             .select({
               total: sql<number>`cast(count(${review.id}) as int)`,
@@ -43,16 +58,16 @@ export const GET = async () => {
             ratings,
             tags: vendor?.tags.map(({ tag }) => tag),
           };
-        }),
+        })
       );
 
       return vendorsWithReview;
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(error);
       return Response.json(
         { message: "Vendors not found" },
-        { status: 404, statusText: "Vendors not found" },
+        { status: 404, statusText: "Vendors not found" }
       );
     });
 

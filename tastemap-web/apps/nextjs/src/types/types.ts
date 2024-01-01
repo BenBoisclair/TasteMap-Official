@@ -103,6 +103,9 @@ export interface OpeningHour {
 export interface Vendor {
   id: string;
   code: string;
+  market: {
+    name: string;
+  } | null;
   bannerUrl: string | null;
   logoUrl: string | null;
   name: string;
