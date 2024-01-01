@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 async function fetchAt<T>(
   url: string,
-  options?: Record<string, any>,
+  options?: Record<string, any>
 ): Promise<T> {
   // Construct the full URL based on the provided options.
   // If parameters are provided, append them to the URL.
@@ -9,9 +8,9 @@ async function fetchAt<T>(
   if (options?.params) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const params = new URLSearchParams(options.params).toString();
-    fullUrl = `${url}/${params}`;
+    fullUrl = `${url}?${params}`;
   }
-
+  console.log("fullUrl", fullUrl);
   const response = await fetch(fullUrl);
 
   if (!response.ok) {

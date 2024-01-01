@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
-import { RecommendedForYouSectionSkeleton } from "../../skeletons/recommended-for-you-section-skeleton";
+import { VendorSectionSkeleton } from "../../skeletons/recommended-for-you-section-skeleton";
 import { VendorCard } from "./vendor-card";
 
 interface RecommendedForYouSectionProps {
@@ -39,7 +39,7 @@ export default function RecommenedForYouSection({
           vendors.slice(0, 10).map((vendor, index) => {
             return <VendorCard vendor={vendor} key={index} />;
           })}
-        {vendorsStatus === "pending" && <RecommendedForYouSectionSkeleton />}
+        {vendorsStatus === "pending" && <VendorSectionSkeleton />}
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ export default function SearchInMarketPage({
   const [search, setSearch] = useState<string>("");
   const debouncedSearch = useDebounce(search);
   const [filteredVendors, setFilteredVendors] = useState<Vendor[]>([]);
-  const [tags, setTags] = useState<string[]>([category ? category : ""]);
+  const [tags, setTags] = useState<string[]>(category ? [category] : []);
 
   const handleBack = () => {
     router.back();
@@ -38,26 +38,26 @@ export default function SearchInMarketPage({
   });
 
   useEffect(() => {
-    if (vendors && vendors.length > 0) {
+    if (vendors && vendors.length > 0 && !!tags) {
       // Filter vendors based on the search input
-      const filtered = vendors.filter((vendor) => {
+      const filtered = vendors.filter(vendor => {
         const searchLower = debouncedSearch.toLowerCase();
-        const tagsLower = tags.map((tag) => tag.toLowerCase());
+        const tagsLower = tags.map(tag => tag.toLowerCase());
 
         // Check if the vendor matches the search text
         const matchesSearch =
           vendor.name.toLowerCase().includes(searchLower) ||
           (vendor.tags &&
-            vendor.tags.some((tag) =>
-              tag.name.toLowerCase().includes(searchLower),
+            vendor.tags.some(tag =>
+              tag.name.toLowerCase().includes(searchLower)
             ));
 
         // Check if the vendor has any of the tags selected
         const matchesTags =
           tagsLower.length === 0 ||
           (vendor.tags &&
-            vendor.tags.some((tag) =>
-              tagsLower.includes(tag.name.toLowerCase()),
+            vendor.tags.some(tag =>
+              tagsLower.includes(tag.name.toLowerCase())
             ));
 
         // A vendor matches the filter if it matches the search AND any of the tags
@@ -69,7 +69,7 @@ export default function SearchInMarketPage({
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     // Check if backspace is pressed and search is empty
-    if (event.key === "Backspace" && search.length === 0 && tags.length > 0) {
+    if (event.key === "Backspace" && search.length === 0 && !!tags) {
       // Prevent the default backspace action
       event.preventDefault();
 
@@ -101,8 +101,8 @@ export default function SearchInMarketPage({
               </Tag>
             ))}
             <input
-              onKeyDown={(e) => handleKeyDown(e)}
-              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={e => handleKeyDown(e)}
+              onChange={e => setSearch(e.target.value)}
               value={search}
               className="w-full bg-transparent outline-none ring-0"
               placeholder="Shop name, tags, etc"

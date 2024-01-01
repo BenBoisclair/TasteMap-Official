@@ -35,24 +35,24 @@ export default function SearchAllVendors() {
   useEffect(() => {
     if (vendors && vendors.length > 0) {
       // Filter vendors based on the search input
-      const filtered = vendors.filter((vendor) => {
+      const filtered = vendors.filter(vendor => {
         const searchLower = debouncedSearch.toLowerCase();
-        const tagsLower = tags.map((tag) => tag.toLowerCase());
+        const tagsLower = tags.map(tag => tag.toLowerCase());
 
         // Check if the vendor matches the search text
         const matchesSearch =
           vendor.name.toLowerCase().includes(searchLower) ||
           (vendor.tags &&
-            vendor.tags.some((tag) =>
-              tag.name.toLowerCase().includes(searchLower),
+            vendor.tags.some(tag =>
+              tag.name.toLowerCase().includes(searchLower)
             ));
 
         // Check if the vendor has any of the tags selected
         const matchesTags =
           tagsLower.length === 0 ||
           (vendor.tags &&
-            vendor.tags.some((tag) =>
-              tagsLower.includes(tag.name.toLowerCase()),
+            vendor.tags.some(tag =>
+              tagsLower.includes(tag.name.toLowerCase())
             ));
 
         // A vendor matches the filter if it matches the search AND any of the tags
@@ -96,8 +96,8 @@ export default function SearchAllVendors() {
               </Tag>
             ))}
             <input
-              onKeyDown={(e) => handleKeyDown(e)}
-              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={e => handleKeyDown(e)}
+              onChange={e => setSearch(e.target.value)}
               value={search}
               className="w-full bg-transparent outline-none ring-0"
               placeholder="Shop name, tags, etc"

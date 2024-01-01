@@ -8,10 +8,17 @@ import TasteMapLogo from "../../assets/taste-map-logo";
 import VerifiedBadge from "../../icons/verified-badge";
 import { Tag } from "../../tag";
 import { Ratings } from "../RatingsAndReviews/ratings";
+import removeSubstrings from "~/utils/removeSubstrings";
 
-export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
+export const VendorCard = ({
+  vendor,
+  toggleMarketName = false,
+}: {
+  vendor: Vendor;
+  toggleMarketName?: boolean;
+}) => {
   const productTags = vendor.tags
-    .filter((tag) => tag.type === "Product") // Keep existing filter on type
+    .filter(tag => tag.type === "Product") // Keep existing filter on type
     .sort((a, b) => a.name.length - b.name.length); // Then sort by length of name
 
   return (
@@ -34,15 +41,23 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
             <TasteMapLogo size={100} />
           </div>
         )}
-        <div className="mt-1 flex flex-col gap-2">
+        <div className="mt-1 flex flex-col">
           <div className="truncate text-lg font-bold">{vendor.name}</div>
-          <Ratings
-            average={vendor?.ratings?.average}
-            total={vendor?.ratings?.total}
-          />
+          {toggleMarketName && (
+            <span className="font-medium -mt-1">
+              {!!vendor?.market?.name &&
+                removeSubstrings(vendor?.market?.name, ["Floating Market"])}
+            </span>
+          )}
+          <div className="my-1">
+            <Ratings
+              average={vendor?.ratings?.average}
+              total={vendor?.ratings?.total}
+            />
+          </div>
           {productTags.length > 0 && (
             <div className="mt-1 flex gap-1">
-              {productTags.slice(0, 2).map((tag) => (
+              {productTags.slice(0, 2).map(tag => (
                 <Tag type={tag.type} key={tag.id}>
                   {tag.name}
                 </Tag>
