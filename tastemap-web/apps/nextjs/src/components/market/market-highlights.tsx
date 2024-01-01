@@ -22,6 +22,7 @@ export default function HighlightsPage({
       <CategoriesSection
         marketId={market.id}
         isMarketVerified={market.isVerified}
+        variant="Icon"
       />
 
       <RatingAndReviewSection

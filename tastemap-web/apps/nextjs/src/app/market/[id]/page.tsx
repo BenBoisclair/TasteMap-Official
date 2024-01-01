@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import EventElements from "~/app/_components/event-elements";
-import MarketHeader from "~/app/_components/market/market-header";
-import HighlightsPage from "~/app/_components/market/market-highlights";
-import MarketInfoPage from "~/app/_components/market/market-info-page";
-import ErrorPage from "~/app/_components/pages/error-page";
-import LoadingPage from "~/app/_components/pages/loading-page";
-import RatingAndReviewSection from "~/app/_components/sections/RatingsAndReviews/rating-and-reviews-section";
-import Tabs from "~/app/_components/tabs";
+import EventElements from "~/components/event-elements";
+import MarketHeader from "~/components/market/market-header";
+import HighlightsPage from "~/components/market/market-highlights";
+import MarketInfoPage from "~/components/market/market-info-page";
+import ErrorPage from "~/components/pages/error-page";
+import LoadingPage from "~/components/pages/loading-page";
+import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import Tabs from "~/components/tabs";
 import useGetMarket from "~/utils/getMarket";
 
 export default function MarketPage({ params }: { params: { id: string } }) {

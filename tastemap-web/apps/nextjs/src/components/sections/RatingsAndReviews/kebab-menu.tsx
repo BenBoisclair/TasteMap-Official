@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { MoreVertical } from "lucide-react";
 import toast from "react-hot-toast";
 
-import deleteReview from "../../../api/_actions/deleteReview";
+import deleteReview from "../../../app/api/_actions/deleteReview";
 
 export const KebabMenu = ({
   reviewId,

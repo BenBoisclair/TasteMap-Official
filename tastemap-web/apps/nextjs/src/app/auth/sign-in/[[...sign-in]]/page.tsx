@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SignIn } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 
-import TasteMapLogo from "~/app/_components/assets/taste-map-logo";
+import TasteMapLogo from "~/components/assets/taste-map-logo";
 
 const SignUpPage = () => {
   return (

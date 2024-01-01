@@ -1,4 +1,6 @@
-import { UniqueServiceCardSkeleton } from "../skeletons/unique-service-card-skeleton";
+import React from "react";
+
+import { UniqueServiceCardSkeleton } from "./unique-service-card-skeleton";
 
 export const UniqueServiceSectionSkeleton = () => {
   return (
