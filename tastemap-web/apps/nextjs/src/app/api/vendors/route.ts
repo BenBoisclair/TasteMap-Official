@@ -5,7 +5,6 @@ import { NextRequest } from "next/server";
 export const GET = async (request: NextRequest) => {
   const params = request.nextUrl.searchParams;
   const searchTag = params.get("tag");
-  console.log("tag", searchTag);
   const allVendors = await db.query.vendor
     .findMany({
       with: {

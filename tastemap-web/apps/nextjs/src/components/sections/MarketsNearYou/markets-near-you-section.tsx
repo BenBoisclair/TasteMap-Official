@@ -16,14 +16,12 @@ export function MarketsNearYouSection() {
   return (
     <div className="w-full rounded-3xl bg-white py-5">
       <div className="px-5">
-        <h1 className="text-xl font-bold">Explore Markets</h1>
+        <h1 className="text-xl font-bold">Explore Markets Near You</h1>
       </div>
       <div className="no-scrollbar flex gap-5 overflow-x-scroll px-5 py-3">
         {markets &&
           marketsStatus === "success" &&
-          markets.map((market) => (
-            <MarketCard market={market} key={market.id} />
-          ))}
+          markets.map(market => <MarketCard market={market} key={market.id} />)}
         {marketsStatus === "pending" && <MarketsNearYouSectionSkeleton />}
       </div>
     </div>
