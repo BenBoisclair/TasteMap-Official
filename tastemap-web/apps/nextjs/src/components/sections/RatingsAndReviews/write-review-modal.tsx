@@ -9,8 +9,8 @@ import { nanoid } from "nanoid";
 import toast from "react-hot-toast";
 
 import type { InsertReviewAspect } from "~/types/types";
-import type { InsertReview } from "../../../api/_actions/writeReview";
-import writeReview from "../../../api/_actions/writeReview";
+import type { InsertReview } from "../../../app/api/_actions/writeReview";
+import writeReview from "../../../app/api/_actions/writeReview";
 import RatingChooser from "./rating-chooser";
 
 export const WriteReviewModal = ({

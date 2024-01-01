@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 
-import LoadingPage from "~/app/_components/pages/loading-page";
-import VendorCardRecommendations from "~/app/_components/sections/RecommendedForYou/vendor-card-recommendations";
+import LoadingPage from "~/components/pages/loading-page";
+import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 

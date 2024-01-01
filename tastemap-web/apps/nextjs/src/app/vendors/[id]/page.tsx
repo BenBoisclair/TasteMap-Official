@@ -5,12 +5,12 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
-import EventElements from "~/app/_components/event-elements";
-import LoadingPage from "~/app/_components/pages/loading-page";
-import RatingAndReviewSection from "~/app/_components/sections/RatingsAndReviews/rating-and-reviews-section";
-import Tabs from "~/app/_components/tabs";
-import VendorHeader from "~/app/_components/vendor/vendor-header";
-import VendorInfoPage from "~/app/_components/vendor/vendor-info-page";
+import EventElements from "~/components/event-elements";
+import LoadingPage from "~/components/pages/loading-page";
+import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import Tabs from "~/components/tabs";
+import VendorHeader from "~/components/vendor/vendor-header";
+import VendorInfoPage from "~/components/vendor/vendor-info-page";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 

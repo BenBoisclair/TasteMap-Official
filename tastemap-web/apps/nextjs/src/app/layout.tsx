@@ -13,7 +13,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "~/utils/cn";
-import GoogleAnalytics from "./_components/google-analytics";
+import GoogleAnalytics from "../components/google-analytics";
 import { Providers } from "./providers";
 
 // const fontSans = Inter({

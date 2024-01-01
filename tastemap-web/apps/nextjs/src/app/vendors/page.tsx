@@ -6,9 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, Frown, Search } from "lucide-react";
 
-import LoadingPage from "~/app/_components/pages/loading-page";
-import VendorCardRecommendations from "~/app/_components/sections/RecommendedForYou/vendor-card-recommendations";
-import { Tag } from "~/app/_components/tag";
+import LoadingPage from "~/components/pages/loading-page";
+import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
+import { Tag } from "~/components/tag";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
