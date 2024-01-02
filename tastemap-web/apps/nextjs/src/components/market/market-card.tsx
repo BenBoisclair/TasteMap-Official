@@ -28,30 +28,55 @@ export function MarketCard({ market }: { market: Market }) {
   const isOpen = isMarketOpen(market.openingHours);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
-      navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const { latitude, longitude } = coords;
-        setLocation({ latitude, longitude });
-      });
-    }
-  }, []);
+    // Define a function to fetch the user's location
+    const fetchLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          ({ coords }) => {
+            const { latitude, longitude } = coords;
+            setLocation({ latitude, longitude });
+          },
+          error => {
+            console.error("Geolocation error:", error); // Better to handle this with a state and show a UI message
+          }
+        );
+      }
+    };
+
+    // Fetch the initial location
+    fetchLocation();
+
+    // Set an interval to fetch location every 5 minutes
+    const interval = setInterval(fetchLocation, 300000); // 300000 ms = 5 minutes
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array means this effect runs once on mount
 
   useEffect(() => {
-    // Fetch data from API if `location` object is set
-    if (location) {
-      const distance = haversineDistance(
-        { latitude: location.latitude, longitude: location.longitude },
-        {
-          latitude: parseInt(market.latitude),
-          longitude: parseInt(market.longitude),
-        }
-      );
-      setDistanceFromUser(distance);
-    }
-  }, [location]);
+    // Function to calculate distance
+    const calculateDistance = () => {
+      if (location) {
+        const distance = haversineDistance(
+          { latitude: location.latitude, longitude: location.longitude },
+          {
+            latitude: parseInt(market.latitude),
+            longitude: parseInt(market.longitude),
+          }
+        );
+        setDistanceFromUser(distance);
+      }
+    };
 
-  console.log(distanceFromUser);
+    // Calculate the initial distance
+    calculateDistance();
+
+    // Set an interval to recalculate distance every 5 minutes
+    const interval = setInterval(calculateDistance, 300000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, [location]); // Dependency array includes location, so effect runs when location changes
 
   return (
     <div className="shrink-0 overflow-hidden">
