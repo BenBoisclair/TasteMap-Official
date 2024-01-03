@@ -10,10 +10,12 @@ import VendorsHomePageSection from "~/components/sections/Vendors/vendors-homepa
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "TasteMap | Explore Local",
+  metadataBase: new URL("https://www.taste-map.com"),
+  title: { default: "Explore | TasteMap", template: "%s | TasteMap" },
   description: "Platform for Local Tourism!",
   applicationName: "TasteMap",
   keywords: [
+    "TasteMap",
     "Tourism",
     "Map",
     "Food",
