@@ -42,7 +42,7 @@ export default function MarketPage({ params }: { params: { id: string } }) {
   return (
     <div className="relative bg-neutral-200">
       <EventElements />
-      {market && (
+      {!!market && (
         <>
           <MarketHeader headerRef={headerRef} inView={inView} market={market} />
           <Tabs

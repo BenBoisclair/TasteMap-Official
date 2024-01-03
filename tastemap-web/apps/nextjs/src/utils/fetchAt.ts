@@ -10,7 +10,7 @@ async function fetchAt<T>(
     const params = new URLSearchParams(options.params).toString();
     fullUrl = `${url}?${params}`;
   }
-  console.log("fullUrl", fullUrl);
+
   const response = await fetch(fullUrl);
 
   if (!response.ok) {

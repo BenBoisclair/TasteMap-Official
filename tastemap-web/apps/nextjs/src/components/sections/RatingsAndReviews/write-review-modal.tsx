@@ -35,21 +35,21 @@ export const WriteReviewModal = ({
   const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
-    type === "Market"
+    type === "market"
       ? [
           { id: nanoid(20), name: "Facility", rating: 5 },
           { id: nanoid(20), name: "Safety", rating: 5 },
           { id: nanoid(20), name: "Convenience", rating: 5 },
           { id: nanoid(20), name: "Culture", rating: 5 },
         ]
-      : type === "Vendor"
+      : type === "vendor"
         ? [
             { id: nanoid(20), name: "Taste", rating: 5 },
             { id: nanoid(20), name: "Hygiene", rating: 5 },
             { id: nanoid(20), name: "Service", rating: 5 },
             { id: nanoid(20), name: "Price", rating: 5 },
           ]
-        : [],
+        : []
   );
 
   const [reviewContent, setReviewContent] = useState<string>("");
@@ -71,7 +71,7 @@ export const WriteReviewModal = ({
         reviewData,
         id,
         type,
-      }).then(async (data) => {
+      }).then(async data => {
         if (data?.status === 409 || data?.status === 404) {
           toast.error(data?.data.message);
         } else if (data?.status === 200) {
@@ -106,7 +106,7 @@ export const WriteReviewModal = ({
         content: reviewContent,
         authorId: user.id,
       },
-      reviewAspects: aspects.map((aspect) => ({
+      reviewAspects: aspects.map(aspect => ({
         ...aspect,
         reviewId,
       })),
@@ -118,14 +118,14 @@ export const WriteReviewModal = ({
 
   const handleAspectRatingChange = (index: number, newRating: number) => {
     const updatedAspects = aspects.map((aspect, idx) =>
-      idx === index ? { ...aspect, rating: newRating } : aspect,
+      idx === index ? { ...aspect, rating: newRating } : aspect
     );
     setAspects(updatedAspects);
   };
 
   return (
-    <>
-      <div className="fixed left-0 top-0 z-40 h-screen w-full overflow-auto bg-neutral">
+    <div className="relative">
+      <div className="z-40 h-screen w-full overflow-auto bg-neutral">
         <div className="flex items-center  gap-6 bg-white p-5">
           <ArrowLeft
             className=" shrink-0"
@@ -165,7 +165,7 @@ export const WriteReviewModal = ({
                     className="ml-10 gap-2"
                     size={20}
                     rating={aspect.rating}
-                    setRating={(rating) =>
+                    setRating={rating =>
                       handleAspectRatingChange(index, rating)
                     }
                   />
@@ -181,7 +181,7 @@ export const WriteReviewModal = ({
             placeholder="Write your review..."
             className="mt-3 rounded-3xl bg-neutral px-5 py-4"
             value={reviewContent}
-            onChange={(e) => setReviewContent(e.target.value)}
+            onChange={e => setReviewContent(e.target.value)}
           />
         </div>
         <div className="mb-8 mt-4 flex justify-center">
@@ -194,6 +194,6 @@ export const WriteReviewModal = ({
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };

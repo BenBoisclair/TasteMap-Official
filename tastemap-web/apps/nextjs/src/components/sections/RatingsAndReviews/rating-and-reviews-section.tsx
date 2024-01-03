@@ -13,6 +13,7 @@ import { ReviewsSkeleton } from "../../skeletons/reviews-skeleton";
 import AspectBar from "./aspect-bar";
 import ReviewItem from "./review-card";
 import { WriteReviewModal } from "./write-review-modal";
+import { Dialog } from "@headlessui/react";
 
 interface RatingAndReviewSectionProps {
   id: string;
@@ -103,16 +104,21 @@ export default function RatingAndReviewSection({
           {reviewStatus === "pending" && <ReviewsSkeleton />}
         </div>
       </div>
-      {writeReviewToggle && (
-        <WriteReviewModal
-          name={name}
-          imageUrl={imageUrl}
-          type={type}
-          id={id}
-          writeReviewToggle={writeReviewToggle}
-          setWriteReviewToggle={setWriteReviewToggle}
-        />
-      )}
+      <Dialog
+        open={writeReviewToggle}
+        onClose={() => setWriteReviewToggle(false)}
+      >
+        <Dialog.Panel>
+          <WriteReviewModal
+            name={name}
+            imageUrl={imageUrl}
+            type={type}
+            id={id}
+            writeReviewToggle={writeReviewToggle}
+            setWriteReviewToggle={setWriteReviewToggle}
+          />
+        </Dialog.Panel>
+      </Dialog>
     </>
   );
 }
