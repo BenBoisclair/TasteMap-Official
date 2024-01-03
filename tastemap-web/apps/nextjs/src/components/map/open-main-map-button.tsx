@@ -21,7 +21,7 @@ const OpenMainMapButton = () => {
   };
 
   return (
-    <>
+    <div className="relative">
       <div className="fixed bottom-0 right-0 z-[200] flex w-full justify-end">
         <div className="p-5">
           <button
@@ -41,7 +41,7 @@ const OpenMainMapButton = () => {
           </Dialog.Panel>
         </Dialog>
       )}
-    </>
+    </div>
   );
 };
 
