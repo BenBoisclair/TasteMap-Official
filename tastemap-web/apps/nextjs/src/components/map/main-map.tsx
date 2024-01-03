@@ -16,7 +16,7 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
 
   const markerClicked = useCallback((market: Market) => {
     setCurrentMarket(market);
-    setOpenTab((prevOpenTab) => !prevOpenTab);
+    setOpenTab(prevOpenTab => !prevOpenTab);
   }, []);
 
   useEffect(() => {
@@ -30,10 +30,10 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
       zoom: 13,
     });
 
-    markets.forEach((market) => {
+    markets.forEach(market => {
       const markerEl = document.createElement("div");
       createRoot(markerEl).render(
-        <Marker onClick={() => markerClicked(market)} market={market} />,
+        <Marker onClick={() => markerClicked(market)} market={market} />
       );
 
       // Ensure the type is correctly set for the marker element
@@ -57,15 +57,12 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
   }, [openTab, shouldRenderMenuTab]);
 
   return (
-    <>
-      <div
-        ref={mapContainer}
-        className="absolute left-0 top-0 z-50 h-screen w-full"
-      />
+    <div className="relative">
+      <div ref={mapContainer} className="z-50 h-screen w-full" />
       {currentMarket && shouldRenderMenuTab === true && (
         <>
           <button
-            onClick={() => setOpenTab((prev) => !prev)}
+            onClick={() => setOpenTab(prev => !prev)}
             className="absolute left-0 top-0 z-[240] h-screen w-full bg-black/10"
           />
           <MenuTab
@@ -75,7 +72,7 @@ const MainMap = ({ markets }: { markets: Market[] }) => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

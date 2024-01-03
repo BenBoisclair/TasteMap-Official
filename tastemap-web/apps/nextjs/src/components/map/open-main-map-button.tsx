@@ -6,14 +6,11 @@ import { Map, X } from "lucide-react";
 import type { Market } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import MainMap from "./main-map";
+import { useState } from "react";
+import { Dialog } from "@headlessui/react";
 
-const OpenMainMapButton = ({
-  isMapOpen,
-  setIsMapOpen,
-}: {
-  isMapOpen: boolean;
-  setIsMapOpen: (isMapOpen: boolean) => void;
-}) => {
+const OpenMainMapButton = () => {
+  const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
   const { data: markets, status: marketsStatus } = useQuery({
     queryKey: ["allMarkets"],
     queryFn: () => fetchAt<Market[]>("/api/markets"),
@@ -22,9 +19,10 @@ const OpenMainMapButton = ({
   const toggleMapOpen = () => {
     setIsMapOpen(!isMapOpen);
   };
+
   return (
     <>
-      <div className="absolute bottom-0 right-0 z-[200] flex w-full justify-end">
+      <div className="fixed bottom-0 right-0 z-[200] flex w-full justify-end">
         <div className="p-5">
           <button
             disabled={marketsStatus === "pending"}
@@ -36,8 +34,12 @@ const OpenMainMapButton = ({
           </button>
         </div>
       </div>
-      {marketsStatus === "success" && isMapOpen && (
-        <MainMap markets={markets} />
+      {marketsStatus === "success" && (
+        <Dialog open={isMapOpen} onClose={() => setIsMapOpen(false)}>
+          <Dialog.Panel>
+            <MainMap markets={markets} />
+          </Dialog.Panel>
+        </Dialog>
       )}
     </>
   );
