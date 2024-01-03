@@ -9,38 +9,6 @@ import { MarketsNearYouSection } from "../components/sections/MarketsNearYou/mar
 import VendorsHomePageSection from "~/components/sections/Vendors/vendors-homepage-section";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "TasteMap | Explore Local",
-  description: "Platform for Local Tourism!",
-  applicationName: "TasteMap",
-  keywords: [
-    "Tourism",
-    "Map",
-    "Food",
-    "Markets",
-    "Thailand",
-    "Bangkok",
-    "Fashion",
-    "Local Tourism",
-    "Taling Chan Floating Market",
-    "Floating Market",
-    "Night Market",
-    "Flea Market",
-  ],
-  creator: "Benedict Boisclair",
-  publisher: "The Hominians Co.,Ltd.",
-  authors: [
-    {
-      name: "The Hominians Co.,Ltd.",
-      url: "https://www.instagram.com/thehominians/",
-    },
-    {
-      name: "Benedict Boisclair",
-      url: "https://www.linkedin.com/in/benedict-boisclair-971958169/",
-    },
-  ],
-};
-
 export default function HomePage() {
   return (
     <>

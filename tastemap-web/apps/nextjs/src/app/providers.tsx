@@ -22,12 +22,12 @@ export function Providers(props: {
             staleTime: 5 * 60 * 1000,
           },
         },
-      }),
+      })
   );
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryStreamedHydration transformer={superjson}>
+      <ReactQueryStreamedHydration>
         {props.children}
         <Toaster position="top-center" />
       </ReactQueryStreamedHydration>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
 import ttnorms from "~/fonts/ttnorms";
@@ -15,6 +15,42 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "~/utils/cn";
 import GoogleAnalytics from "../components/google-analytics";
 import { Providers } from "./providers";
+
+export const viewport: Viewport = {
+  themeColor: "#FFD14E",
+};
+
+export const metadata: Metadata = {
+  title: { default: "Explore | TasteMap", template: "%s | TasteMap" },
+  description:
+    "Platform for local tourism! TasteMap helps you explore new delicacies in local markets and vendors- making your trip unforgetable! Worry less about what's in your food and learn more what make those delicacy special.",
+  keywords: [
+    "Tourism",
+    "Map",
+    "Food",
+    "Markets",
+    "Thailand",
+    "Bangkok",
+    "Fashion",
+    "Local Tourism",
+    "Taling Chan Floating Market",
+    "Floating Market",
+    "Night Market",
+    "Flea Market",
+  ],
+  creator: "Benedict Boisclair",
+  publisher: "The Hominians Co.,Ltd.",
+  authors: [
+    {
+      name: "The Hominians Co.,Ltd.",
+      url: "https://www.instagram.com/thehominians/",
+    },
+    {
+      name: "Benedict Boisclair",
+      url: "https://www.linkedin.com/in/benedict-boisclair-971958169/",
+    },
+  ],
+};
 
 export default function Layout(props: { children: React.ReactNode }) {
   return (
