@@ -1,5 +1,5 @@
+"use client";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronRight } from "lucide-react";
 import { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { VendorCard } from "../RecommendedForYou/vendor-card";
