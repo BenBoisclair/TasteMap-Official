@@ -3,6 +3,11 @@ import { SignUp } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 
 import TasteMapLogo from "~/components/assets/taste-map-logo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Register",
+};
 
 const SignUpPage = () => {
   return (
