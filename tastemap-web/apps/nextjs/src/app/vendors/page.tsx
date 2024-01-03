@@ -12,6 +12,7 @@ import { Tag } from "~/components/tag";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
+import ErrorPage from "~/components/pages/error-page";
 
 export default function SearchAllVendors() {
   const router = useRouter();
@@ -76,6 +77,10 @@ export default function SearchAllVendors() {
 
   if (vendorsStatus === "pending") {
     return <LoadingPage />;
+  }
+
+  if (vendorsStatus === "error") {
+    return <ErrorPage />;
   }
 
   return (

@@ -5,10 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 import { Toaster } from "react-hot-toast";
-import superjson from "superjson";
-
-// import { env } from "~/env.mjs";
-// import { api } from "~/utils/api";
 
 export function Providers(props: {
   children: React.ReactNode;
@@ -22,12 +18,12 @@ export function Providers(props: {
             staleTime: 5 * 60 * 1000,
           },
         },
-      }),
+      })
   );
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryStreamedHydration transformer={superjson}>
+      <ReactQueryStreamedHydration>
         {props.children}
         <Toaster position="top-center" />
       </ReactQueryStreamedHydration>

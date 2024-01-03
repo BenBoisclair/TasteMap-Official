@@ -1,70 +1,62 @@
-"use client";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+  useQuery,
+} from "@tanstack/react-query";
+import { Market } from "~/types/types";
+import fetchAt from "~/utils/fetchAt";
+import MarketUI from "./market-ui";
+import { Metadata } from "next";
+import getQueryClient from "~/utils/getQueryClient";
+import { db, eq } from "@acme/db";
+import { market } from "@acme/db/schema/schema";
 
-import { useState } from "react";
-import { useInView } from "react-intersection-observer";
+export async function getMarket(marketId: string) {
+  "use server";
+  const marketData = await db.query.market.findFirst({
+    where: eq(market.id, marketId),
+  });
+  return marketData;
+}
 
-import EventElements from "~/components/event-elements";
-import MarketHeader from "~/components/market/market-header";
-import HighlightsPage from "~/components/market/market-highlights";
-import MarketInfoPage from "~/components/market/market-info-page";
-import ErrorPage from "~/components/pages/error-page";
-import LoadingPage from "~/components/pages/loading-page";
-import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
-import Tabs from "~/components/tabs";
-import useGetMarket from "~/utils/getMarket";
-
-export default function MarketPage({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
   const marketId = params.id;
-  const [activeTab, setActiveTab] = useState<string>("Highlights");
+  const market = await getMarket(marketId);
 
-  const [market, status, error] = useGetMarket(marketId);
+  if (!market) {
+    return {
+      title: `Not Found`,
+      description: `The page you're looking for doesn't exist`,
+    };
+  }
 
-  const { ref: headerRef, inView } = useInView({
-    threshold: 0,
-    rootMargin: "-50px",
+  return {
+    title: `${market.name}`,
+    description: `${market.about}`,
+  };
+}
+
+export default async function MarketPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const marketId = params.id;
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["market", marketId],
+    queryFn: () => fetchAt<Market>(`/api/markets/${marketId}`),
   });
 
-  const handleTabSelect = (tabName: string) => {
-    setActiveTab(tabName);
-    if (!inView) {
-      window?.scrollTo(0, 380);
-    }
-  };
-
-  if (status === "pending") {
-    return <LoadingPage />;
-  }
-
-  if (error && !market) {
-    return <ErrorPage />;
-  }
-
   return (
-    <div className="relative bg-neutral-200">
-      <EventElements />
-      {market && (
-        <>
-          <MarketHeader headerRef={headerRef} inView={inView} market={market} />
-          <Tabs
-            activeTab={activeTab}
-            handleTabSelect={handleTabSelect}
-            inView={inView}
-            tabs={["Highlights", "Map & Info", "Reviews"]}
-          />
-
-          {activeTab === "Highlights" && <HighlightsPage market={market} />}
-          {activeTab === "Map & Info" && <MarketInfoPage market={market} />}
-          {activeTab === "Reviews" && (
-            <RatingAndReviewSection
-              id={marketId}
-              name={market?.name}
-              imageUrl={market?.bannerUrl}
-              type={"market"}
-              handleTabSelect={handleTabSelect}
-            />
-          )}
-        </>
-      )}
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <MarketUI params={{ id: marketId }} />
+    </HydrationBoundary>
   );
 }

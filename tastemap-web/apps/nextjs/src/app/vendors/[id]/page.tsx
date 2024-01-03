@@ -1,69 +1,62 @@
-"use client";
-
-import { useState } from "react";
-// import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { useInView } from "react-intersection-observer";
-
-import EventElements from "~/components/event-elements";
-import LoadingPage from "~/components/pages/loading-page";
-import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
-import Tabs from "~/components/tabs";
-import VendorHeader from "~/components/vendor/vendor-header";
-import VendorInfoPage from "~/components/vendor/vendor-info-page";
-import type { Vendor } from "~/types/types";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+  useQuery,
+} from "@tanstack/react-query";
+import { Market, Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
+import { Metadata } from "next";
+import getQueryClient from "~/utils/getQueryClient";
+import { db, eq } from "@acme/db";
+import { vendor } from "@acme/db/schema/schema";
+import VendorUI from "./vendor-ui";
 
-export default function Vendor({ params }: { params: { id: string } }) {
+export async function getVendor(vendorId: string) {
+  "use server";
+  const vendorData = await db.query.vendor.findFirst({
+    where: eq(vendor.id, vendorId),
+  });
+  return vendorData;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
   const vendorId = params.id;
+  const vendor = await getVendor(vendorId);
 
-  const { data: vendor, status } = useQuery({
+  if (!vendor) {
+    return {
+      title: `Not Found`,
+      description: `The page you're looking for doesn't exist`,
+    };
+  }
+
+  return {
+    title: `${vendor.name}`,
+    description: `${vendor.about}`,
+  };
+}
+
+export default async function VendorPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const vendorId = params.id;
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
     queryKey: ["vendor", vendorId],
     queryFn: () => fetchAt<Vendor>(`/api/vendors/${vendorId}`),
   });
 
-  const [activeTab, setActiveTab] = useState<string>("Info");
-
-  const { ref: headerRef, inView } = useInView({
-    threshold: 0,
-    rootMargin: "-50px",
-  });
-
-  const handleTabSelect = (tabName: string) => {
-    setActiveTab(tabName);
-    if (!inView) {
-      window?.scrollTo(0, 380);
-    }
-  };
-
-  if (status === "pending") {
-    return <LoadingPage />;
-  }
-
-  if (status === "error") {
-    return <div>Error</div>;
-  }
-
   return (
-    <div className="relative">
-      <EventElements />
-
-      <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
-      <Tabs
-        activeTab={activeTab}
-        handleTabSelect={handleTabSelect}
-        inView={inView}
-        tabs={["Info", "Reviews"]}
-      />
-      {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
-      {activeTab === "Reviews" && (
-        <RatingAndReviewSection
-          id={vendorId}
-          type="vendor"
-          name={vendor.name}
-          imageUrl={vendor.bannerUrl ?? ""}
-        />
-      )}
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <VendorUI params={{ id: vendorId }} />
+    </HydrationBoundary>
   );
 }
