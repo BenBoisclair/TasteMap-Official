@@ -13,6 +13,7 @@ import VendorHeader from "~/components/vendor/vendor-header";
 import VendorInfoPage from "~/components/vendor/vendor-info-page";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
+import ErrorPage from "~/components/pages/error-page";
 
 export default function VendorUI({ params }: { params: { id: string } }) {
   const vendorId = params.id;
@@ -41,7 +42,7 @@ export default function VendorUI({ params }: { params: { id: string } }) {
   }
 
   if (status === "error") {
-    return <div>Error</div>;
+    return <ErrorPage />;
   }
 
   return (

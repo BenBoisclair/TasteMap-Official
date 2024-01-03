@@ -7,7 +7,6 @@ import CategoriesSection from "../components/sections/categories-section";
 import { HomePageHeader } from "../components/sections/HomeHeader/homepage-header";
 import { MarketsNearYouSection } from "../components/sections/MarketsNearYou/markets-near-you-section";
 import VendorsHomePageSection from "~/components/sections/Vendors/vendors-homepage-section";
-import { Metadata } from "next";
 
 export default function HomePage() {
   return (

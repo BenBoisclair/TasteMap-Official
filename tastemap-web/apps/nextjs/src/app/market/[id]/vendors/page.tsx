@@ -12,6 +12,7 @@ import { Tag } from "~/components/tag";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
+import ErrorPage from "~/components/pages/error-page";
 
 export default function SearchInMarketPage({
   params,
@@ -81,6 +82,10 @@ export default function SearchInMarketPage({
 
   if (vendorsStatus === "pending") {
     return <LoadingPage />;
+  }
+
+  if (vendorsStatus === "error") {
+    return <ErrorPage />;
   }
 
   return (

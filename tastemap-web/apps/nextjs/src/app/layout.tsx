@@ -21,6 +21,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.taste-map.com"),
   title: { default: "Explore | TasteMap", template: "%s | TasteMap" },
   description:
     "Platform for local tourism! TasteMap helps you explore new delicacies in local markets and vendors- making your trip unforgetable! Worry less about what's in your food and learn more what make those delicacy special.",

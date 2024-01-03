@@ -8,6 +8,7 @@ import LoadingPage from "~/components/pages/loading-page";
 import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
+import ErrorPage from "~/components/pages/error-page";
 
 export default function RecommendationsUI({
   params,
@@ -28,6 +29,10 @@ export default function RecommendationsUI({
 
   if (vendorsStatus === "pending") {
     return <LoadingPage />;
+  }
+
+  if (vendorsStatus === "error") {
+    return <ErrorPage />;
   }
 
   return (
