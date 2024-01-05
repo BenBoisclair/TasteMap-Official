@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import EventElements from "~/components/event-elements";
@@ -18,7 +19,7 @@ import useMarket from "~/utils/getMarket";
 
 export default function MarketView({ params }: { params: { id: string } }) {
   const marketId = params.id;
-  const [activeTab, setActiveTab] = useState<string>("Highlights");
+  const searchParams = useSearchParams();
 
   const { data: market, status } = useQuery({
     queryKey: ["market", marketId],
@@ -30,13 +31,6 @@ export default function MarketView({ params }: { params: { id: string } }) {
     rootMargin: "-50px",
   });
 
-  const handleTabSelect = (tabName: string) => {
-    setActiveTab(tabName);
-    if (!inView) {
-      window?.scrollTo(0, 380);
-    }
-  };
-
   if (status === "pending") {
     return <LoadingPage />;
   }
@@ -45,6 +39,8 @@ export default function MarketView({ params }: { params: { id: string } }) {
     return <ErrorPage />;
   }
 
+  const activeTab = searchParams.get("tab");
+
   return (
     <div className="relative bg-neutral-200">
       <EventElements />
@@ -52,8 +48,6 @@ export default function MarketView({ params }: { params: { id: string } }) {
         <>
           <MarketHeader headerRef={headerRef} inView={inView} market={market} />
           <Tabs
-            activeTab={activeTab}
-            handleTabSelect={handleTabSelect}
             inView={inView}
             tabs={["Highlights", "Map & Info", "Reviews"]}
           />
@@ -66,7 +60,6 @@ export default function MarketView({ params }: { params: { id: string } }) {
               name={market?.name}
               imageUrl={market?.bannerUrl}
               type={"market"}
-              handleTabSelect={handleTabSelect}
             />
           )}
         </>

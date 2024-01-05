@@ -7,9 +7,6 @@ import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experime
 import { Toaster } from "react-hot-toast";
 import superjson from "superjson";
 
-// import { env } from "~/env.mjs";
-// import { api } from "~/utils/api";
-
 export function Providers(props: {
   children: React.ReactNode;
   headers?: Headers;
@@ -22,7 +19,7 @@ export function Providers(props: {
             staleTime: 5 * 60 * 1000,
           },
         },
-      }),
+      })
   );
 
   return (

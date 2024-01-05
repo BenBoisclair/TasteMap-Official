@@ -80,7 +80,7 @@ export function MarketCard({ market }: { market: Market }) {
 
   return (
     <div className="shrink-0 overflow-hidden">
-      <Link href={`/market/${market.id}`}>
+      <Link href={`/market/${market.id}?tab=Highlights`}>
         <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
           <Image
             src={market.bannerUrl || ""}

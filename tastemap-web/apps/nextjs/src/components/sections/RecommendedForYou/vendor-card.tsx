@@ -23,7 +23,7 @@ export const VendorCard = ({
 
   return (
     <div className="flex w-[210px] flex-col">
-      <Link href={`/vendors/${vendor.id}`}>
+      <Link href={`/vendors/${vendor.id}?tab=Info`}>
         {vendor.bannerUrl ? (
           <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
             <Image
