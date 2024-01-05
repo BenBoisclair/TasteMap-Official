@@ -1,11 +1,12 @@
+"use client";
 import type { QueryStatus } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 
 import type { Market } from "~/types/types";
 import fetchAt from "./fetchAt";
 
-const useGetMarket = (
-  marketId: string,
+const useMarket = (
+  marketId: string
 ): [
   market: Market | undefined,
   status: QueryStatus,
@@ -23,4 +24,4 @@ const useGetMarket = (
   return [market, status, error];
 };
 
-export default useGetMarket;
+export default useMarket;

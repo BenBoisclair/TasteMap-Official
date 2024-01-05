@@ -1,9 +1,12 @@
 async function fetchAt<T>(
   url: string,
-  options?: Record<string, any>
+  options?: Record<string, any>,
+  initialData?: T
 ): Promise<T> {
-  // Construct the full URL based on the provided options.
-  // If parameters are provided, append them to the URL.
+  // If initialData is provided, return it immediately, skipping the fetch.
+  if (initialData) {
+    return initialData;
+  }
   let fullUrl = url;
   if (options?.params) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
