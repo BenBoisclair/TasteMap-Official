@@ -1,7 +1,7 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { Tag, Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
-import { queryClient } from "~/utils/queryClient";
+import queryClient from "~/utils/queryClient";
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
 import { db } from "@acme/db";
@@ -24,13 +24,13 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const vendors = await db.query.vendor.findMany();
+// export async function generateStaticParams() {
+//   const vendors = await db.query.vendor.findMany();
 
-  return (vendors as any)
-    .slice(0, 20)
-    .map((vendor: Vendor) => ({ id: vendor.id }));
-}
+//   return (vendors as any)
+//     .slice(0, 4)
+//     .map((vendor: Vendor) => ({ id: vendor.id }));
+// }
 
 export default async function VendorPage({
   params: { id: vendorId },

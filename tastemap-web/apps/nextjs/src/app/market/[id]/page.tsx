@@ -2,7 +2,7 @@ import { HydrationBoundary, dehydrate, useQuery } from "@tanstack/react-query";
 import MarketView from "./market-view";
 import fetchAt from "~/utils/fetchAt";
 import { Market, Tag } from "~/types/types";
-import { queryClient } from "~/utils/queryClient";
+import queryClient from "~/utils/queryClient";
 import { Metadata } from "next";
 import { db } from "@acme/db";
 
@@ -19,20 +19,18 @@ export async function generateMetadata({
 
   return {
     title: market.name,
-    description: `${market.name} ${market.about + market.history} ${
-      market.aboutTH + market.historyTH
-    }`,
+    description: market.about,
     keywords: market.tags.map((tag: Tag) => tag.name),
   };
 }
 
-export async function generateStaticParams() {
-  const markets = await db.query.market.findMany();
+// export async function generateStaticParams() {
+//   const markets = await db.query.market.findMany();
 
-  return (markets as any)
-    .slice(0, 20)
-    .map((market: Market) => ({ id: market.id }));
-}
+//   return (markets as any)
+//     .slice(0, 4)
+//     .map((market: Market) => ({ id: market.id }));
+// }
 
 export default async function MarketPage({
   params: { id: marketId },
