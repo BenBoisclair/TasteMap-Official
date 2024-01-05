@@ -3,7 +3,25 @@ import { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { queryClient } from "~/utils/queryClient";
 import VendorView from "./vendor-view";
+import { Metadata } from "next";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const vendorId = params.id;
+
+  const vendor = await fetch(
+    process.env.NEXT_PUBLIC_URL + `/api/vendors/${vendorId}`
+  ).then(res => res.json());
+
+  return {
+    title: vendor.name,
+    description: vendor.about,
+    // keywords: vendor.tags.map(tag => tag.name),
+  };
+}
 export default async function VendorPage({
   params: { id: vendorId },
 }: {
