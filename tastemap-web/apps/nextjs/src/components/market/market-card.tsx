@@ -33,7 +33,7 @@ export function MarketCard({ market }: { market: Market }) {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           ({ coords }) => {
-            const { latitude, longitude } = coords;
+            const { longitude, latitude } = coords;
             setLocation({ latitude, longitude });
           },
           error => {
@@ -60,8 +60,8 @@ export function MarketCard({ market }: { market: Market }) {
         const distance = haversineDistance(
           { latitude: location.latitude, longitude: location.longitude },
           {
-            latitude: parseInt(market.latitude),
-            longitude: parseInt(market.longitude),
+            latitude: parseFloat(market.latitude),
+            longitude: parseFloat(market.longitude),
           }
         );
         setDistanceFromUser(distance);
