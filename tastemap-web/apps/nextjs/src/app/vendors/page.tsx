@@ -15,13 +15,10 @@ import { useDebounce } from "~/utils/useDebounce";
 import { checkIfEqualToTags } from "~/utils/checkIfEqualToTags";
 import { capitalizeWords } from "~/utils/capitalizeWords";
 
-export default function SearchAllVendors({
-  searchParams,
-}: {
-  searchParams?: { category: string };
-}) {
+export default function SearchAllVendors() {
   const router = useRouter();
-  const category = searchParams?.category;
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
 
   const [search, setSearch] = useState<string>("");
   const debouncedSearch = useDebounce(search);

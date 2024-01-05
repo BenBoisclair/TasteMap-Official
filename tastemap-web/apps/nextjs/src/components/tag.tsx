@@ -16,7 +16,7 @@ export function Tag({
   children: ReactNode;
 }) {
   return (
-    <Link href={`/vendors?category=${children}`}>
+    <Link href={`/vendors?category=${children}`} replace={true}>
       <div
         className={cn(` flex items-center rounded-3xl`, {
           "bg-yellow": type === "Product",
