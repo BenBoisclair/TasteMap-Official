@@ -1,5 +1,5 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { Vendor } from "~/types/types";
+import { Tag, Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { queryClient } from "~/utils/queryClient";
 import VendorView from "./vendor-view";
@@ -19,9 +19,18 @@ export async function generateMetadata({
   return {
     title: vendor.name,
     description: vendor.about,
-    // keywords: vendor.tags.map(tag => tag.name),
+    // keywords: vendor.tags.map((tag: Tag) => tag.name),
   };
 }
+
+export async function generateStaticParams() {
+  const vendor = await fetch(process.env.NEXT_PUBLIC_URL + `/api/vendors`).then(
+    res => res.json()
+  );
+
+  return vendor.map((vendor: Vendor) => ({ vendorId: vendor.id }));
+}
+
 export default async function VendorPage({
   params: { id: vendorId },
 }: {
