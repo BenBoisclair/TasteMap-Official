@@ -41,6 +41,8 @@ export default function Tabs({ tabs, inView }: TabProps) {
                 id={"Select Tabs"}
                 className="tab-item w-full cursor-pointer rounded-3xl px-5 py-2 font-bold"
                 href={tabUrl}
+                scroll={true}
+                replace={true}
               >
                 {tab}
               </Link>
