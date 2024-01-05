@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import EventElements from "../components/event-elements";
 import OpenMainMapButton from "../components/map/open-main-map-button";
 import NavBar from "../components/navbar/nav-bar";

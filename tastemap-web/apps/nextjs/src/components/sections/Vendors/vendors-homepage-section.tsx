@@ -17,8 +17,8 @@ const VendorsHomePageSection = ({
     queryFn: () => fetchAt<Vendor[]>(`/api/vendors?tag=${tag}`),
   });
 
-  if (vendorsStatus === "success" && (!vendors || vendors.length === 0)) {
-    return null; // Don't render the section if there are no services
+  if (vendorsStatus === "success" && !vendors) {
+    return null;
   }
 
   return (
@@ -27,7 +27,7 @@ const VendorsHomePageSection = ({
         <h1 className="text-xl font-bold">{name}</h1>
       </div>
       <div className="no-scrollbar mt-4 flex gap-4 overflow-x-auto px-5">
-        {vendors &&
+        {!!vendors &&
           vendorsStatus === "success" &&
           vendors.slice(0, 20).map((vendor, index) => {
             return (
