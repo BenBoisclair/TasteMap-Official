@@ -4,6 +4,7 @@ import fetchAt from "~/utils/fetchAt";
 import { queryClient } from "~/utils/queryClient";
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
+import { db } from "@acme/db";
 
 export async function generateMetadata({
   params,
@@ -24,11 +25,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const vendor = await fetch(process.env.NEXT_PUBLIC_URL + `/api/vendors`).then(
-    res => res.json()
-  );
+  const vendors = await db.query.vendor.findMany();
 
-  return vendor.map((vendor: Vendor) => ({ vendorId: vendor.id }));
+  return (vendors as any).map((vendor: Vendor) => ({ id: vendor.id }));
 }
 
 export default async function VendorPage({
