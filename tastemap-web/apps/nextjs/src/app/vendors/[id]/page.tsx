@@ -20,7 +20,7 @@ export async function generateMetadata({
   return {
     title: vendor.name,
     description: vendor.about,
-    // keywords: vendor.tags.map((tag: Tag) => tag.name),
+    keywords: vendor.tags.map((tag: Tag) => tag.name),
   };
 }
 
