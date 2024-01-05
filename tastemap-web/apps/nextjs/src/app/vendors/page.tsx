@@ -13,10 +13,13 @@ import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
 
-export default function SearchAllVendors() {
+export default function SearchAllVendors({
+  searchParams,
+}: {
+  searchParams?: { category: string };
+}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category");
+  const category = searchParams?.category;
 
   const [search, setSearch] = useState<string>("");
   const debouncedSearch = useDebounce(search);
