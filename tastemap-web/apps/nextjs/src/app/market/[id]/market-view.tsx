@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -12,13 +13,17 @@ import LoadingPage from "~/components/pages/loading-page";
 import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
 import Tabs from "~/components/tabs";
 import { Market } from "~/types/types";
+import fetchAt from "~/utils/fetchAt";
 import useMarket from "~/utils/getMarket";
 
 export default function MarketView({ params }: { params: { id: string } }) {
   const marketId = params.id;
   const [activeTab, setActiveTab] = useState<string>("Highlights");
 
-  const [market, status, error] = useMarket(marketId);
+  const { data: market, status } = useQuery({
+    queryKey: ["market", marketId],
+    queryFn: () => fetchAt<Market>(`/api/markets/${marketId}`),
+  });
 
   const { ref: headerRef, inView } = useInView({
     threshold: 0,
@@ -36,7 +41,7 @@ export default function MarketView({ params }: { params: { id: string } }) {
     return <LoadingPage />;
   }
 
-  if (error && !market) {
+  if (status === "error") {
     return <ErrorPage />;
   }
 
