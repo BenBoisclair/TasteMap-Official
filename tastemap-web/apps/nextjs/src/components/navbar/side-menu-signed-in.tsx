@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 
 import LogOutButton from "../auth/log-out-button";
+import { GeneralSideBar } from "./nav-bar";
 
 export const SideMenuSignedIn = () => {
   const { user } = useUser();
@@ -28,7 +29,7 @@ export const SideMenuSignedIn = () => {
         </div>
       </div>
       <div className="mt-4 flex grow flex-col text-lg font-bold">
-        <div className="flex flex-col gap-4 border-b-[3px] border-neutral py-5">
+        <div className="flex flex-col gap-4 py-5">
           {user?.publicMetadata.role === "Admin" ? (
             <Link href="/dashboard">
               <span>Admin Dashboard</span>
@@ -36,18 +37,14 @@ export const SideMenuSignedIn = () => {
           ) : null}
           <Link href="/">Home</Link>
         </div>
-        <div className="flex flex-col gap-4 py-5">
+        <div className="flex flex-col gap-4 py-5 border-y-[3px] border-neutral">
           <span>Your reviews</span>
           <span>Favorites</span>
         </div>
-        <div className="flex flex-col gap-4 border-b-[3px] border-t-[3px] border-neutral py-5">
+        {/* <div className="flex flex-col gap-4 border-b-[3px] border-t-[3px] border-neutral py-5">
           <span>Write a review</span>
-        </div>
-        <div className="flex flex-col gap-4  py-5">
-          <span>Language</span>
-          <span>FAQs</span>
-          <span>Report issues</span>
-        </div>
+        </div> */}
+        <GeneralSideBar />
       </div>
       <div className="mb-10 grow">
         <LogOutButton />

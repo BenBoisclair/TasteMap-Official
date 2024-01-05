@@ -15,14 +15,14 @@ import { SideMenuSignedIn } from "./side-menu-signed-in";
 
 export function NavBar({ className = "" }: { className?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
   return (
     <>
       <nav
         className={cn(
           ` fixed top-0 z-[200] flex w-full items-center bg-white px-5 py-3.5`,
-          className,
+          className
         )}
       >
         <button onClick={() => toggleMenu()} className="cursor-pointer">
@@ -46,7 +46,7 @@ export function NavBar({ className = "" }: { className?: string }) {
             {
               "z-[150]": isMenuOpen,
               "-z-40 hidden": !isMenuOpen,
-            },
+            }
           )}
         />
       )}
@@ -69,7 +69,7 @@ export const SideMenu = ({
           {
             "left-[0%]": isMenuOpen,
             "left-[-100%]": !isMenuOpen,
-          },
+          }
         )}
       >
         <div className="h-full w-full">
@@ -80,7 +80,8 @@ export const SideMenu = ({
             <SignedOut>
               <div className="flex h-full flex-col items-center">
                 <span className="mb-2 font-medium">
-                  Join us in supporting local Tourism!
+                  Join us in supporting{" "}
+                  <span className="text-green">local Tourism!</span>
                 </span>
                 <LogInButton />
                 <Link
@@ -89,11 +90,7 @@ export const SideMenu = ({
                 >
                   <span className="text-xl font-bold">Home</span>
                 </Link>
-                <div className="flex w-full flex-col gap-4 border-b-2 border-neutral py-5 text-xl font-bold">
-                  <span>Language</span>
-                  <span>FAQs</span>
-                  <span>Report issues</span>
-                </div>
+                <GeneralSideBar />
                 <div className="flow-col flex w-full grow items-end justify-center">
                   <Image
                     src={`/mascot/TastyBoiSurprised.png`}
@@ -114,3 +111,17 @@ export const SideMenu = ({
   );
 };
 export default NavBar;
+
+export const GeneralSideBar = () => {
+  return (
+    <div className="flex w-full flex-col gap-4 border-b-2 border-neutral py-5 text-lg font-bold">
+      <span className=" text-base text-neutral-400 font-medium">General</span>
+      {/* <span>Language</span>
+                  <span>FAQs</span>
+                  <span>Report issues</span> */}
+      <Link href={`/policy`}>
+        <span>Privacy Policy</span>
+      </Link>
+    </div>
+  );
+};

@@ -21,9 +21,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "TasteMap | Explore Local",
+  title: {
+    template: "%s | TasteMap",
+    default: "TasteMap",
+  },
   description: "Platform for Local Tourism!",
-  applicationName: "TasteMap",
   keywords: [
     "Tourism",
     "Map",
