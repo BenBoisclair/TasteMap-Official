@@ -12,6 +12,8 @@ import { Tag } from "~/components/tag";
 import type { Vendor } from "~/types/types";
 import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
+import { checkIfEqualToTags } from "~/utils/checkIfEqualToTags";
+import { capitalizeWords } from "~/utils/capitalizeWords";
 
 export default function SearchAllVendors({
   searchParams,
@@ -36,44 +38,52 @@ export default function SearchAllVendors({
   });
 
   useEffect(() => {
-    if (vendors && vendors.length > 0) {
-      // Filter vendors based on the search input
+    if (vendors && vendors.length > 0 && tags.length > 0) {
+      // Filter vendors based on the search input and tags
       const filtered = vendors.filter(vendor => {
         const searchLower = debouncedSearch.toLowerCase();
+        const vendorTagsLower = vendor.tags
+          ? vendor.tags.map(tag => tag.name.toLowerCase())
+          : [];
         const tagsLower = tags.map(tag => tag.toLowerCase());
 
         // Check if the vendor matches the search text
         const matchesSearch =
           vendor.name.toLowerCase().includes(searchLower) ||
-          (vendor.tags &&
-            vendor.tags.some(tag =>
-              tag.name.toLowerCase().includes(searchLower)
-            ));
+          vendorTagsLower.some(tag => tag.includes(searchLower));
 
-        // Check if the vendor has any of the tags selected
-        const matchesTags =
-          tagsLower.length === 0 ||
-          (vendor.tags &&
-            vendor.tags.some(tag =>
-              tagsLower.includes(tag.name.toLowerCase())
-            ));
+        // Check if the vendor has all of the tags selected
+        const matchesTags = tagsLower.every(tag =>
+          vendorTagsLower.includes(tag)
+        );
 
-        // A vendor matches the filter if it matches the search AND any of the tags
+        // A vendor matches the filter if it matches the search AND all of the tags
         return matchesSearch && matchesTags;
       });
       setFilteredVendors(filtered);
+    } else {
+      // If there are no tags selected, show all vendors
+      if (!!vendors) {
+        setFilteredVendors(vendors);
+      }
     }
   }, [debouncedSearch, vendors, tags]);
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    // Check if backspace is pressed and search is empty
-    if (event.key === "Backspace" && search.length === 0 && tags.length > 0) {
-      // Prevent the default backspace action
+  const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Backspace" && search.length === 0 && !!tags) {
       event.preventDefault();
-
-      // Remove the last tag from the tags array
       const newTags = tags.slice(0, -1);
       setTags(newTags);
+    }
+
+    if (event.key === "Enter") {
+      event.preventDefault();
+      // Await the check and store the result
+      const tagExists = await checkIfEqualToTags(search);
+      if (tagExists) {
+        setTags(prev => [...prev, capitalizeWords(search)]);
+        setSearch("");
+      }
     }
   };
 
