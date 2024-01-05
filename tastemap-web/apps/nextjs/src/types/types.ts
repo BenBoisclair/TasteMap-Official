@@ -105,6 +105,7 @@ export interface Vendor {
   code: string;
   market: {
     name: string;
+    id: string;
   } | null;
   bannerUrl: string | null;
   logoUrl: string | null;

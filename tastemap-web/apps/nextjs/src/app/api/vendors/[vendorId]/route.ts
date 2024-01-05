@@ -3,7 +3,7 @@ import { informationItem, review, vendor } from "@acme/db/schema/schema";
 
 export const GET = async (
   request: Request,
-  { params }: { params: { vendorId: string } },
+  { params }: { params: { vendorId: string } }
 ) => {
   const vendorId = params.vendorId;
 
@@ -11,6 +11,12 @@ export const GET = async (
     .findFirst({
       where: eq(vendor.id, vendorId),
       with: {
+        market: {
+          columns: {
+            name: true,
+            id: true,
+          },
+        },
         tags: {
           columns: {
             tagId: false,
@@ -59,7 +65,7 @@ export const GET = async (
         },
       },
     })
-    .then(async (oneVendor) => {
+    .then(async oneVendor => {
       try {
         const { tags, paymentOptions, media, ...restOfData } = oneVendor!;
 
@@ -81,17 +87,17 @@ export const GET = async (
           tags: tags.map(({ tag }) => tag) ?? [],
           paymentOptions:
             paymentOptions.map(({ paymentOption }) => paymentOption) ?? [],
-          media: media.map((media) => media),
+          media: media.map(media => media),
         };
       } catch (error) {
         console.log(error);
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(error);
       return Response.json(
         { message: "Vendor not found" },
-        { status: 404, statusText: "Vendor not found" },
+        { status: 404, statusText: "Vendor not found" }
       );
     });
 

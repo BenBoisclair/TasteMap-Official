@@ -17,7 +17,7 @@ interface VendorHeaderProps {
 }
 
 const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
-  const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
+  const productTags = vendor?.tags?.filter(tag => tag.type === "Product");
   return (
     <div id="vendHeader">
       <div className="absolute left-0 top-0 w-full">
@@ -72,6 +72,11 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
         <div className="flex px-5 pt-5">
           <div className="flex grow flex-col">
             <h1 className="text-2xl font-bold">{vendor?.name}</h1>
+            <Link href={`/market/${vendor?.market?.id}?tab=Highlights`}>
+              <span className="text-lg font-medium">
+                {vendor?.market?.name}
+              </span>
+            </Link>
             <div
               id="marRatingInfo"
               className="mt-2 flex w-full items-center text-sm font-medium"
