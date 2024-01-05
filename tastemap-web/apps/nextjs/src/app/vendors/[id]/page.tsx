@@ -27,7 +27,9 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const vendors = await db.query.vendor.findMany();
 
-  return (vendors as any).map((vendor: Vendor) => ({ id: vendor.id }));
+  return (vendors as any)
+    .slice(0, 20)
+    .map((vendor: Vendor) => ({ id: vendor.id }));
 }
 
 export default async function VendorPage({
