@@ -91,6 +91,7 @@ export interface Market {
   ratings: Ratings;
   tags: MarketTag[];
   isVerified: boolean;
+  isFavourite: boolean;
 }
 
 export interface OpeningHour {

@@ -12,6 +12,7 @@ import type { InsertReviewAspect } from "~/types/types";
 import type { InsertReview } from "../../../app/api/_actions/writeReview";
 import writeReview from "../../../app/api/_actions/writeReview";
 import RatingChooser from "./rating-chooser";
+import queryClient from "~/utils/queryClient";
 
 export const WriteReviewModal = ({
   name,
@@ -30,7 +31,6 @@ export const WriteReviewModal = ({
 }) => {
   const { user, isSignedIn } = useUser();
   const [overall, setOverall] = useState<number>(5);
-  const queryClient = useQueryClient();
 
   const reviewId = nanoid(20);
 

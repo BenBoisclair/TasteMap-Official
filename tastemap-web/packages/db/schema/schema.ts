@@ -88,17 +88,20 @@ export const favourites = pgTable("favourites", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
   marketId: varchar("market_id").references(() => market.id),
   vendorId: varchar("vendor_id").references(() => vendor.id),
-  userId: varchar("user_id")
+  userExternalId: varchar("user_external_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.externalId),
 
   createdAt: timestamp("created_at").defaultNow(),
-});
+}, (t) => ({
+  marketIdUserId: unique('marketId_UserId').on(t.marketId, t.userExternalId),
+  vendorIdUserId: unique('vendorId_UserId').on(t.vendorId, t.userExternalId)
+}));
 
 export const favouritesRelations = relations(favourites, ({ one }) => ({
   user: one(users, {
-    fields: [favourites.userId],
-    references: [users.id],
+    fields: [favourites.userExternalId],
+    references: [users.externalId],
   }),
   market: one(market, {
     fields: [favourites.marketId],

@@ -1,35 +1,42 @@
 async function fetchAt<T>(
   url: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET",
   options?: Record<string, any>,
   initialData?: T
 ): Promise<T> {
-  // If initialData is provided, return it immediately, skipping the fetch.
   if (initialData) {
     return initialData;
   }
+
   let fullUrl = url;
-  if (options?.params) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  if (options?.params && method === "GET") {
+    // Typically, only GET requests have URL parameters
     const params = new URLSearchParams(options.params).toString();
     fullUrl = `${url}?${params}`;
   }
 
-  const response = await fetch(fullUrl);
+  const fetchOptions: RequestInit = {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      ...options?.headers, // Spread in any additional headers
+    },
+  };
+
+  // Include the body in the request for POST, PUT, and PATCH methods
+  if (["POST", "PUT", "PATCH"].includes(method) && options?.body) {
+    fetchOptions.body = JSON.stringify(options.body);
+  }
+
+  const response = await fetch(fullUrl, fetchOptions);
 
   if (!response.ok) {
-    throw new Error(`Error fetching data from ${fullUrl}`);
+    throw new Error(
+      `Error fetching data from ${fullUrl} with method ${method}`
+    );
   }
 
   return response.json() as Promise<T>;
 }
 
 export default fetchAt;
-
-// Fetch event banners.
-// const eventBanners = await fetchAt<EventBanner[]>('/api/eventbanners');
-
-// Fetch a specific market.
-// const market = await fetchAt<Market>('/api/markets', { params: { marketId: '1' }});
-
-// Fetch market reviews.
-// const reviews = await fetchAt<ReviewsResponse>('/api/markets/1/reviews');

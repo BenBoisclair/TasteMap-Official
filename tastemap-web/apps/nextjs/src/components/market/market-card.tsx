@@ -13,6 +13,7 @@ import { Tag } from "../tag";
 import { useEffect, useState } from "react";
 import haversineDistance from "~/utils/haversineDistance";
 import { cn } from "~/utils/cn";
+import FavouriteHeart from "../favouriteHeart";
 
 export function MarketCard({ market }: { market: Market }) {
   const [location, setLocation] = useState<{
@@ -80,37 +81,39 @@ export function MarketCard({ market }: { market: Market }) {
 
   return (
     <div className="shrink-0 overflow-hidden">
-      <Link href={`/market/${market.id}?tab=Highlights`}>
-        <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
-          <Image
-            src={market.bannerUrl || ""}
-            alt={`${market.name}'s Banner`}
-            fill={true}
-            style={{ objectFit: "cover" }}
-          />
-          <div className="absolute flex h-full w-full flex-col justify-between p-3">
-            <div
-              className={cn(`flex items-center text-white`, {
-                "justify-between": !!distanceFromUser,
-                "justify-end": !distanceFromUser,
-              })}
-            >
-              {!!distanceFromUser && (
-                <div className="flex items-center gap-1">
-                  <div className="w-2 h-2 bg-white rounded-full" />
-                  <span className="font-black">
-                    {`${distanceFromUser.toFixed(2)} km`}
-                  </span>
-                </div>
-              )}
-              <Heart strokeWidth={3} />
-            </div>
-            <div className="flex justify-end">
-              {market.isVerified && <VerifiedBadge />}
-            </div>
+      <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
+        <Image
+          src={market.bannerUrl || ""}
+          alt={`${market.name}'s Banner`}
+          fill={true}
+          style={{ objectFit: "cover" }}
+        />
+        <div className="absolute flex h-full w-full flex-col justify-between p-3">
+          <div
+            className={cn(`flex items-center text-white`, {
+              "justify-between": !!distanceFromUser,
+              "justify-end": !distanceFromUser,
+            })}
+          >
+            {!!distanceFromUser && (
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-white rounded-full" />
+                <span className="font-black">
+                  {`${distanceFromUser.toFixed(2)} km`}
+                </span>
+              </div>
+            )}
+            <FavouriteHeart
+              isFavourite={market.isFavourite}
+              marketId={market.id}
+            />
+          </div>
+          <div className="flex justify-end">
+            {market.isVerified && <VerifiedBadge />}
           </div>
         </div>
-
+      </div>
+      <Link href={`/market/${market.id}?tab=Highlights`}>
         <div className="mt-[10px] flex flex-col">
           <h1 className=" text-xl font-black">{market.name}</h1>
           <p className="font-medium">{market.type}</p>
