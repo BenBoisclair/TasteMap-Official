@@ -12,7 +12,6 @@ import type { InsertReviewAspect } from "~/types/types";
 import type { InsertReview } from "../../../app/api/_actions/writeReview";
 import writeReview from "../../../app/api/_actions/writeReview";
 import RatingChooser from "./rating-chooser";
-import queryClient from "~/utils/queryClient";
 
 export const WriteReviewModal = ({
   name,
@@ -31,18 +30,19 @@ export const WriteReviewModal = ({
 }) => {
   const { user, isSignedIn } = useUser();
   const [overall, setOverall] = useState<number>(5);
+  const queryClient = useQueryClient();
 
   const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
-    type === "market"
+    type === "Market"
       ? [
           { id: nanoid(20), name: "Facility", rating: 5 },
           { id: nanoid(20), name: "Safety", rating: 5 },
           { id: nanoid(20), name: "Convenience", rating: 5 },
           { id: nanoid(20), name: "Culture", rating: 5 },
         ]
-      : type === "vendor"
+      : type === "Vendor"
         ? [
             { id: nanoid(20), name: "Taste", rating: 5 },
             { id: nanoid(20), name: "Hygiene", rating: 5 },
@@ -78,11 +78,11 @@ export const WriteReviewModal = ({
           await queryClient.invalidateQueries({
             queryKey: ["reviews", id],
           });
-          if (type === "Market") {
+          if (type === "market") {
             await queryClient.invalidateQueries({
               queryKey: ["market", id],
             });
-          } else if (type === "Vendor") {
+          } else if (type === "vendor") {
             await queryClient.invalidateQueries({
               queryKey: ["vendor", id],
             });
@@ -124,8 +124,8 @@ export const WriteReviewModal = ({
   };
 
   return (
-    <div className="relative">
-      <div className="z-40 h-screen w-full overflow-auto bg-neutral">
+    <>
+      <div className="fixed left-0 top-0 z-40 h-screen w-full overflow-auto bg-neutral">
         <div className="flex items-center  gap-6 bg-white p-5">
           <ArrowLeft
             className=" shrink-0"
@@ -184,7 +184,7 @@ export const WriteReviewModal = ({
             onChange={e => setReviewContent(e.target.value)}
           />
         </div>
-        <div className="mb-8 mt-4 flex justify-center">
+        <div className="mb-8 mt-4 flex justify-center items-center flex-col">
           <button
             id="Write a Review Button"
             onClick={submitReview}
@@ -192,8 +192,14 @@ export const WriteReviewModal = ({
           >
             <span className="text-xl font-bold">Submit review.</span>
           </button>
+          <button
+            onClick={() => setWriteReviewToggle(false)}
+            className="mt-4 border-2 rounded-3xl px-4 py-2"
+          >
+            <span className="font-medium text-lg">Close.</span>
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };

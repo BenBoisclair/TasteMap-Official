@@ -1,3 +1,4 @@
+"use client";
 import { useMutation } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
 import fetchAt from "~/utils/fetchAt";
@@ -14,7 +15,6 @@ export default function FavouriteHeart({
   marketId,
   vendorId,
 }: FavouriteHeartProps) {
-  const id = marketId ? marketId : vendorId;
   const like = useMutation({
     mutationFn: async () =>
       await fetchAt("/api/favourites", "POST", {
@@ -23,8 +23,8 @@ export default function FavouriteHeart({
           vendorId: vendorId ? vendorId : undefined,
         },
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["allMarkets"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["allMarkets"] });
     },
   });
 
