@@ -1,10 +1,7 @@
-import { HydrationBoundary, dehydrate, useQuery } from "@tanstack/react-query";
 import MarketView from "./market-view";
-import fetchAt from "~/utils/fetchAt";
 import { Market, Tag } from "~/types/types";
-import queryClient from "~/utils/queryClient";
 import { Metadata } from "next";
-import { db } from "@acme/db";
+import { getMarket } from "~/app/_actions/markets";
 
 export async function generateMetadata({
   params,
@@ -13,9 +10,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const marketId = params.id;
 
-  const market: Market = await fetch(
-    process.env.NEXT_PUBLIC_URL + `/api/markets/${marketId}`
-  ).then(res => res.json());
+  const market = await getMarket(marketId);
+
+  if (!market)
+    return {
+      title: "Loading",
+    };
 
   return {
     title: market.name,
@@ -24,27 +24,12 @@ export async function generateMetadata({
   };
 }
 
-// export async function generateStaticParams() {
-//   const markets = await db.query.market.findMany();
-
-//   return (markets as any)
-//     .slice(0, 4)
-//     .map((market: Market) => ({ id: market.id }));
-// }
-
 export default async function MarketPage({
   params: { id: marketId },
 }: {
   params: { id: string };
 }) {
-  await queryClient.prefetchQuery({
-    queryKey: ["market", marketId],
-    queryFn: () => fetchAt<Market>(`/api/markets/${marketId}`),
-  });
+  const market = await getMarket(marketId);
 
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <MarketView params={{ id: marketId }} />
-    </HydrationBoundary>
-  );
+  return <MarketView params={{ id: marketId }} market={market} />;
 }

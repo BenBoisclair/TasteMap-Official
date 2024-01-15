@@ -1,5 +1,5 @@
 import { Banner } from "./banner";
-import { getEventBanners } from "~/app/_actions/getEventBanners";
+import { getEventBanners } from "~/app/_actions/eventbanners";
 
 export async function BannerSection() {
   const banners = await getEventBanners();

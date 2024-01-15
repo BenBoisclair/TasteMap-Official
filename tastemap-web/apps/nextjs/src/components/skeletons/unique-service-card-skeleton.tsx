@@ -7,7 +7,7 @@ export const UniqueServiceCardSkeleton = ({
 }) => {
   return (
     <div
-      className={cn(`h-[140px] w-[204px] rounded-3xl bg-neutral`, className)}
+      className={cn(`h-[160px] w-[210px] rounded-3xl bg-neutral`, className)}
     />
   );
 };

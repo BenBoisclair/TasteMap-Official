@@ -1,45 +1,24 @@
-"use client";
-
-import { useQuery } from "@tanstack/react-query";
-
-import type { UniqueService } from "~/types/types";
-import fetchAt from "~/utils/fetchAt";
-import { UniqueServiceSectionSkeleton } from "../../skeletons/unique-service-section-skeleton";
 import UniqueServiceCard from "./unique-service-card";
+import { getUniqueServices } from "~/app/_actions/actions";
+
+export const dynamic = "force-dynamic";
 
 interface UniqueServicesSectionProps {
   marketId: string;
 }
 
-export default function UniqueServicesSection({
+export default async function UniqueServicesSection({
   marketId,
 }: UniqueServicesSectionProps) {
-  const { data: services, status: servicesStatus } = useQuery({
-    queryKey: ["UniqueServices", marketId],
-    queryFn: () =>
-      fetchAt<UniqueService[]>(`/api/markets/${marketId}/unique-services`),
-  });
-
-  if (servicesStatus === "success" && (!services || services.length === 0)) {
-    return null; // Don't render the section if there are no services
-  }
+  const services = await getUniqueServices(marketId);
 
   return (
     <div id="UniqueServices">
       <h1 className="px-5 text-xl font-bold">Unique Services</h1>
       <div className="no-scrollbar mt-4 flex gap-1.5 overflow-x-auto px-5">
         {services?.map((service, index: number) => {
-          return (
-            <div key={index}>
-              {/* <Link
-                href={`/market/${market.id}/services?page=${index}`}
-                scroll={false}> */}
-              <UniqueServiceCard service={service} key={service.id} />
-              {/* </Link> */}
-            </div>
-          );
+          return <UniqueServiceCard service={service} key={index} />;
         })}
-        {servicesStatus === "pending" && <UniqueServiceSectionSkeleton />}
       </div>
     </div>
   );

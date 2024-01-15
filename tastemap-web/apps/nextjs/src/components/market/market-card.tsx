@@ -98,10 +98,13 @@ export function MarketCard({ market }: { market: Market }) {
                 </div>
               </div>
             )}
-            <FavouriteHeart
-              isFavourite={market.isFavourite}
-              marketId={market.id}
-            />
+            {market.isFavourite !== null &&
+              market.isFavourite !== undefined && (
+                <FavouriteHeart
+                  isFavourite={market.isFavourite}
+                  marketId={market.id}
+                />
+              )}
           </div>
           <div className="flex justify-end">
             {market.isVerified && <VerifiedBadge />}

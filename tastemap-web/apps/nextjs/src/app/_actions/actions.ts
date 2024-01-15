@@ -1,7 +1,12 @@
 "use server";
 
 import { asc, db, desc, eq, sql } from "@acme/db";
-import { favourites, review, vendor } from "@acme/db/schema/schema";
+import {
+  favourites,
+  review,
+  uniqueService,
+  vendor,
+} from "@acme/db/schema/schema";
 import { auth } from "@clerk/nextjs";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
@@ -133,13 +138,15 @@ export async function getMarkets() {
 
 type getVendorsProps = {
   tag?: string;
+  marketId?: string;
 };
 
-export async function getVendors({ tag }: getVendorsProps) {
+export async function getVendors({ tag, marketId }: getVendorsProps) {
   try {
     const searchTag = tag;
     const { userId } = auth();
     const allVendors = await db.query.vendor.findMany({
+      where: marketId ? eq(vendor.marketId, marketId) : undefined,
       with: {
         market: {
           columns: {
@@ -209,4 +216,13 @@ export async function getVendors({ tag }: getVendorsProps) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getUniqueServices(marketId: string) {
+  const allUniqueServices = await db
+    .select()
+    .from(uniqueService)
+    .where(eq(uniqueService.marketId, marketId));
+
+  return allUniqueServices;
 }

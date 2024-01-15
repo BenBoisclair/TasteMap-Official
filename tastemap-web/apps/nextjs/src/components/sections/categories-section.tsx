@@ -10,7 +10,7 @@ const CategoriesSection = ({
   variant = "Default",
 }: {
   marketId?: string;
-  isMarketVerified?: boolean;
+  isMarketVerified?: boolean | null;
   variant?: "Default" | "Icon";
 }) => {
   // Array of category objects

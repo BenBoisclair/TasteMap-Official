@@ -1,30 +1,21 @@
-"use client";
-
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { ChevronRight } from "lucide-react";
 
-import type { Vendor } from "~/types/types";
-import fetchAt from "~/utils/fetchAt";
-import { VendorSectionSkeleton } from "../../skeletons/recommended-for-you-section-skeleton";
+import { ChevronRight } from "lucide-react";
 import { VendorCard } from "./vendor-card";
+import { getVendors } from "~/app/_actions/actions";
+
+export const dynamic = "force-dynamic";
 
 interface RecommendedForYouSectionProps {
   marketId: string;
 }
 
-export default function RecommenedForYouSection({
+export default async function RecommendedForYouSection({
   marketId,
 }: RecommendedForYouSectionProps) {
-  const { data: vendors, status: vendorsStatus } = useQuery({
-    queryKey: ["allVendors", { marketId: marketId }],
-    queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
-    staleTime: 5 * 1000,
+  const vendors = await getVendors({
+    marketId: marketId,
   });
-
-  if (vendorsStatus === "success" && (!vendors || vendors.length === 0)) {
-    return null; // Don't render the section if there are no services
-  }
 
   return (
     <div>
@@ -35,12 +26,10 @@ export default function RecommenedForYouSection({
         </Link>
       </div>
       <div className="no-scrollbar mt-4 flex gap-4 overflow-x-auto px-5">
-        {vendors &&
-          vendorsStatus === "success" &&
+        {!!vendors &&
           vendors.slice(0, 10).map((vendor, index) => {
             return <VendorCard vendor={vendor} key={index} />;
           })}
-        {vendorsStatus === "pending" && <VendorSectionSkeleton />}
       </div>
     </div>
   );

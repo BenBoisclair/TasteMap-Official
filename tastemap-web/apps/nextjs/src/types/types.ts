@@ -37,13 +37,13 @@ export type InsertReviewAspect = typeof reviewAspect.$inferInsert;
 export interface UniqueService {
   id: string;
   marketId: string;
-  imageUrl: string;
+  imageUrl: string | null;
   name: string;
-  nameTH: string;
+  nameTH: string | null;
   about: string;
-  aboutTH: string;
+  aboutTH: string | null;
   price: number;
-  createdAt: string;
+  createdAt: Date | null;
 }
 
 export interface EventBanner {
@@ -86,12 +86,11 @@ export interface Market {
   latitude: string | null;
   longitude: string | null;
   createdAt: string | null;
-  marketTags: MarketTag[] | null;
   openingHours: OpeningHour[];
   ratings: Ratings | undefined | null;
   tags: MarketTag[];
   isVerified: boolean | null;
-  isFavourite: boolean;
+  isFavourite?: boolean;
 }
 
 export interface OpeningHour {
