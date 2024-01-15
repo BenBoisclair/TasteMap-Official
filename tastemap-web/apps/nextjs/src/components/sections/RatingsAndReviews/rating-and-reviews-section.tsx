@@ -17,7 +17,7 @@ import { WriteReviewModal } from "./write-review-modal";
 interface RatingAndReviewSectionProps {
   id: string;
   name: string;
-  imageUrl: string;
+  imageUrl: string | null;
   type: "market" | "vendor";
   handleTabSelect?: (tabname: string) => void;
 }
@@ -106,7 +106,7 @@ export default function RatingAndReviewSection({
       {writeReviewToggle && (
         <WriteReviewModal
           name={name}
-          imageUrl={imageUrl}
+          imageUrl={imageUrl || ""}
           type={type}
           id={id}
           writeReviewToggle={writeReviewToggle}

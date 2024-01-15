@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <>
       <NavBar />
-      <OpenMainMapButton />
+      {/* <OpenMainMapButton /> */}
       <main className="pb-10 flex w-full flex-col gap-2 bg-neutral">
         <EventElements />
         <HomePageHeader />

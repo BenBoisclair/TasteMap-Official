@@ -54,7 +54,7 @@ export async function favouriteAction({
 
       // console.log("Favourited!");
     }
-    revalidatePath("/");
+    revalidatePath("/", "layout");
   } catch (error) {
     console.error("Error querying the database", error);
   }

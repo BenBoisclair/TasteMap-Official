@@ -144,7 +144,6 @@ export function MarketCard({ market }: { market: Market }) {
           </div>
         </div>
       </div>
-      {/* </Link> */}
     </div>
   );
 }
