@@ -17,8 +17,9 @@ export default function RecommenedForYouSection({
   marketId,
 }: RecommendedForYouSectionProps) {
   const { data: vendors, status: vendorsStatus } = useQuery({
-    queryKey: ["marketRecommendedVendors", marketId],
+    queryKey: ["allVendors", { marketId: marketId }],
     queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
+    staleTime: 5 * 1000,
   });
 
   if (vendorsStatus === "success" && (!vendors || vendors.length === 0)) {

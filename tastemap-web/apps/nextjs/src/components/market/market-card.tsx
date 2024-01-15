@@ -23,8 +23,8 @@ export function MarketCard({ market }: { market: Market }) {
   const [distanceFromUser, setDistanceFromUser] = useState<number | undefined>(
     undefined
   );
-  const productTags = market.tags.filter(tag => tag.type === "Product");
-  const facilityTags = market.tags.filter(tag => tag.type === "Facility");
+  const productTags = market?.tags?.filter(tag => tag.type === "Product");
+  const facilityTags = market?.tags?.filter(tag => tag.type === "Facility");
 
   const isOpen = isMarketOpen(market.openingHours);
 
@@ -38,7 +38,7 @@ export function MarketCard({ market }: { market: Market }) {
             setLocation({ latitude, longitude });
           },
           error => {
-            console.error("Geolocation error:", error); // Better to handle this with a state and show a UI message
+            console.error("Geolocation error:", error);
           }
         );
       }
@@ -46,23 +46,19 @@ export function MarketCard({ market }: { market: Market }) {
 
     // Fetch the initial location
     fetchLocation();
-
-    // Set an interval to fetch location every 5 minutes
     const interval = setInterval(fetchLocation, 300000); // 300000 ms = 5 minutes
-
-    // Cleanup the interval on component unmount
     return () => clearInterval(interval);
   }, []); // Empty dependency array means this effect runs once on mount
 
   useEffect(() => {
     // Function to calculate distance
     const calculateDistance = () => {
-      if (location) {
+      if (location && market.latitude && market.longitude) {
         const distance = haversineDistance(
           { latitude: location.latitude, longitude: location.longitude },
           {
-            latitude: parseFloat(market.latitude),
-            longitude: parseFloat(market.longitude),
+            latitude: parseFloat(market?.latitude),
+            longitude: parseFloat(market?.longitude),
           }
         );
         setDistanceFromUser(distance);

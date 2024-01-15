@@ -1,17 +1,10 @@
-"use client";
-
-import { useQuery } from "@tanstack/react-query";
-
-import type { Market } from "~/types/types";
-import fetchAt from "~/utils/fetchAt";
 import { MarketCard } from "../../market/market-card";
-import { MarketsNearYouSectionSkeleton } from "../../skeletons/markets-near-you-section-skeleton";
+import { getMarkets } from "~/app/actions";
 
-export function MarketsNearYouSection() {
-  const { data: markets, status: marketsStatus } = useQuery({
-    queryKey: ["allMarkets"],
-    queryFn: () => fetchAt<Market[]>("/api/markets"),
-  });
+export const dynamic = "force-dynamic";
+
+export async function MarketsNearYouSection() {
+  const markets = await getMarkets();
 
   return (
     <div className="w-full rounded-3xl bg-white py-5">
@@ -20,9 +13,7 @@ export function MarketsNearYouSection() {
       </div>
       <div className="no-scrollbar flex gap-5 overflow-x-scroll px-5 py-3">
         {markets &&
-          marketsStatus === "success" &&
           markets.map(market => <MarketCard market={market} key={market.id} />)}
-        {marketsStatus === "pending" && <MarketsNearYouSectionSkeleton />}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default async function MarketVendorsPage({
 }) {
   const marketId = params.id;
   await queryClient.prefetchQuery({
-    queryKey: ["marketRecommendedVendors", marketId],
+    queryKey: ["allVendors", { marketId: marketId }],
     queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
   });
 

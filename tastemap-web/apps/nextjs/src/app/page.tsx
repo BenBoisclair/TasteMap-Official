@@ -6,6 +6,8 @@ import { HomePageHeader } from "../components/sections/HomeHeader/homepage-heade
 import { MarketsNearYouSection } from "../components/sections/MarketsNearYou/markets-near-you-section";
 import VendorsHomePageSection from "~/components/sections/Vendors/vendors-homepage-section";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import { MarketsNearYouSectionSkeleton } from "~/components/skeletons/markets-near-you-section-skeleton";
 
 export const metadata: Metadata = {
   title: "Explore Local",
@@ -20,7 +22,9 @@ export default function HomePage() {
       <main className="pb-10 flex w-full flex-col gap-2 bg-neutral">
         <EventElements />
         <HomePageHeader />
-        <MarketsNearYouSection />
+        <Suspense fallback={<MarketsNearYouSectionSkeleton />}>
+          <MarketsNearYouSection />
+        </Suspense>
         <CategoriesSection />
         <VendorsHomePageSection name="Grab a Quick Bite!" tag="Quick%20Bites" />
         <VendorsHomePageSection name="Souvenirs to Take Home" tag="Souvenirs" />

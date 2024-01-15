@@ -9,6 +9,7 @@ import VerifiedBadge from "../../icons/verified-badge";
 import { Tag } from "../../tag";
 import { Ratings } from "../RatingsAndReviews/ratings";
 import removeSubstrings from "~/utils/removeSubstrings";
+import FavouriteHeart from "~/components/favouriteHeart";
 
 export const VendorCard = ({
   vendor,
@@ -23,24 +24,32 @@ export const VendorCard = ({
 
   return (
     <div className="flex w-[210px] flex-col">
-      <Link href={`/vendors/${vendor.id}?tab=Info`}>
+      <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
         {vendor.bannerUrl ? (
-          <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
+          <>
             <Image
               src={vendor.bannerUrl ?? ""}
               alt={`${vendor.name}'s Banner`}
               fill={true}
               style={{ objectFit: "cover" }}
             />
-            <div className="absolute top-0 flex h-full w-full items-start justify-end p-2">
-              <VerifiedBadge size="sm" />
-            </div>
-          </div>
+          </>
         ) : (
           <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
             <TasteMapLogo size={100} />
           </div>
         )}
+        <div className="absolute top-0 flex h-full w-full items-start justify-end p-2 gap-2">
+          <VerifiedBadge size="sm" />
+
+          <FavouriteHeart
+            color="white"
+            vendorId={vendor.id}
+            isFavourite={vendor.isFavourite}
+          />
+        </div>
+      </div>
+      <Link href={`/vendors/${vendor.id}?tab=Info`}>
         <div className="mt-1 flex flex-col">
           <div className="truncate text-lg font-bold">{vendor.name}</div>
           {toggleMarketName && (

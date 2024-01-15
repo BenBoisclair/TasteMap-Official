@@ -14,6 +14,7 @@ import fetchAt from "~/utils/fetchAt";
 import { useDebounce } from "~/utils/useDebounce";
 import { capitalizeWords } from "~/utils/capitalizeWords";
 import { checkIfEqualToTags } from "~/utils/checkIfEqualToTags";
+import SearchBar from "~/components/search-bar";
 
 export default function MarketVendorsView({
   params,
@@ -35,7 +36,7 @@ export default function MarketVendorsView({
   };
 
   const { data: vendors, status: vendorsStatus } = useQuery({
-    queryKey: ["marketRecommendedVendors", marketId],
+    queryKey: ["allVendors", { marketId: marketId }],
     queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
   });
 
@@ -71,21 +72,16 @@ export default function MarketVendorsView({
     }
   }, [debouncedSearch, vendors, tags]);
 
-  const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Backspace" && search.length === 0 && !!tags) {
-      event.preventDefault();
-      const newTags = tags.slice(0, -1);
-      setTags(newTags);
-    }
+  const handleTagRemove = (index: number) => {
+    const newTags = tags.filter((_, i) => i !== index);
+    setTags(newTags);
+  };
 
-    if (event.key === "Enter") {
-      event.preventDefault();
-      // Await the check and store the result
-      const tagExists = await checkIfEqualToTags(search);
-      if (tagExists) {
-        setTags(prev => [...prev, capitalizeWords(search)]);
-        setSearch("");
-      }
+  const handleEnter = async () => {
+    const tagExists = await checkIfEqualToTags(search);
+    if (tagExists) {
+      setTags(prev => [...prev, capitalizeWords(search)]);
+      setSearch("");
     }
   };
 
@@ -102,23 +98,14 @@ export default function MarketVendorsView({
           </button>
           <div className="grow text-xl font-bold">Search in Market</div>
         </div>
-        <div id="SearchBar" className=" px-5">
-          <div className="flex w-full items-center gap-2 rounded-3xl bg-neutral px-3 py-2">
-            <Search size={25} color="gray" />
-            {tags.map((tag, index) => (
-              <Tag type="Product" key={index}>
-                {tag}
-              </Tag>
-            ))}
-            <input
-              onKeyDown={e => handleKeyDown(e)}
-              onChange={e => setSearch(e.target.value)}
-              value={search}
-              className="w-full bg-transparent outline-none ring-0"
-              placeholder="Shop name, tags, etc"
-            />
-          </div>
-        </div>
+        <SearchBar
+          search={search}
+          tags={tags}
+          onSearchChange={setSearch}
+          onTagChange={setTags}
+          onTagRemove={handleTagRemove}
+          onEnter={handleEnter}
+        />
       </div>
       <div className="z-10 flex flex-col gap-2 bg-transparent">
         {filteredVendors.length > 0 ? (

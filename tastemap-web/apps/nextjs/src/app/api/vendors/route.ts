@@ -1,10 +1,12 @@
 import { asc, db, desc, eq, sql } from "@acme/db";
 import { review, tag, vendor } from "@acme/db/schema/schema";
+import { auth } from "@clerk/nextjs";
 import { NextRequest } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   const params = request.nextUrl.searchParams;
   const searchTag = params.get("tag");
+  const { userId } = auth();
   const allVendors = await db.query.vendor
     .findMany({
       with: {
@@ -26,6 +28,11 @@ export const GET = async (request: NextRequest) => {
                 type: true,
               },
             },
+          },
+        },
+        userFavourites: {
+          columns: {
+            userExternalId: true,
           },
         },
       },
@@ -52,10 +59,17 @@ export const GET = async (request: NextRequest) => {
           const ratings =
             aggregationQuery.length > 0 ? aggregationQuery[0] : null;
 
+          const { userFavourites, ...otherVendorData } = vendor;
+
+          const isFavourite = userFavourites.some(
+            favourite => favourite.userExternalId === userId
+          );
+
           return {
             ...vendor,
             ratings,
             tags: vendor?.tags.map(({ tag }) => tag),
+            isFavourite: isFavourite,
           };
         })
       );

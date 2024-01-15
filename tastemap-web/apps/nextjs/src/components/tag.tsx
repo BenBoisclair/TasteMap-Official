@@ -9,10 +9,12 @@ import { cn } from "~/utils/cn";
 export function Tag({
   type,
   size = "default",
+  onClick,
   children,
 }: {
   type: string;
   size?: "default" | "lg" | "sm";
+  onClick?: () => void;
   children: ReactNode;
 }) {
   return (

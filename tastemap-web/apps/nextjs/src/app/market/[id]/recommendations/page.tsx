@@ -22,7 +22,7 @@ export default function RecommendationsPage({
   };
 
   const { data: vendors, status: vendorsStatus } = useQuery({
-    queryKey: ["marketRecommendedVendors", marketId],
+    queryKey: ["allVendors", { marketId: marketId }],
     queryFn: () => fetchAt<Vendor[]>(`/api/markets/${marketId}/vendors`),
   });
 

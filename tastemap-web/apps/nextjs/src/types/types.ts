@@ -68,29 +68,29 @@ export interface MarketTag {
 }
 
 export interface Ratings {
-  total: number;
-  average: number;
+  total: number | undefined;
+  average: number | undefined;
 }
 
 export interface Market {
   id: string;
   code: string;
-  bannerUrl: string;
+  bannerUrl: string | null;
   type: string;
   name: string;
-  nameTH: string;
+  nameTH: string | null;
   about: string;
-  aboutTH: string;
+  aboutTH: string | null;
   history: string;
-  historyTH: string;
-  latitude: string;
-  longitude: string;
-  createdAt: string;
+  historyTH: string | null;
+  latitude: string | null;
+  longitude: string | null;
+  createdAt: string | null;
   marketTags: MarketTag[] | null;
   openingHours: OpeningHour[];
-  ratings: Ratings;
+  ratings: Ratings | undefined | null;
   tags: MarketTag[];
-  isVerified: boolean;
+  isVerified: boolean | null;
   isFavourite: boolean;
 }
 
@@ -127,6 +127,7 @@ export interface Vendor {
   paymentOptions: PaymentOption[] | [];
   informationItems: InformationItems[] | [];
   isVerified: boolean;
+  isFavourite: boolean;
   sequence: number | null;
 }
 
@@ -148,6 +149,16 @@ export interface PaymentOption {
   id: string;
   name: string;
 }
+
+export type Favourites = {
+  id: string;
+  marketId: string | null;
+  vendorId: string | null;
+  userExternalId: string;
+  createdAt: string;
+  market: Market | null;
+  vendor: Vendor | null;
+};
 
 // Zod Validators
 export const insertReviewSchema = createInsertSchema(review);

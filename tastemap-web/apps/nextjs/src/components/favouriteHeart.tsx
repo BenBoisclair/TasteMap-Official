@@ -1,47 +1,34 @@
 "use client";
-import { useMutation } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
-import fetchAt from "~/utils/fetchAt";
-import queryClient from "~/utils/queryClient";
+import { favouriteAction } from "~/app/actions";
 
 type FavouriteHeartProps = {
   isFavourite: boolean;
   marketId?: string;
   vendorId?: string;
+  color?: string;
 };
 
 export default function FavouriteHeart({
   isFavourite,
   marketId,
   vendorId,
+  color = "white",
 }: FavouriteHeartProps) {
-  const like = useMutation({
-    mutationFn: async () =>
-      await fetchAt("/api/favourites", "POST", {
-        body: {
-          marketId: marketId ? marketId : undefined,
-          vendorId: vendorId ? vendorId : undefined,
-        },
-      }),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["allMarkets"] });
-    },
-  });
-
   return (
-    <>
-      <button
-        disabled={like.isPending}
-        onClick={() => {
-          like.mutate();
-        }}
-      >
+    <form
+      action={favouriteAction.bind(null, {
+        marketId: marketId,
+        vendorId: vendorId,
+      })}
+    >
+      <button type="submit">
         {isFavourite ? (
-          <Heart strokeWidth={3} fill="red" />
+          <Heart strokeWidth={3} color={color} fill="#EF4E3D" />
         ) : (
-          <Heart strokeWidth={3} />
+          <Heart strokeWidth={3} color={color} />
         )}
       </button>
-    </>
+    </form>
   );
 }
