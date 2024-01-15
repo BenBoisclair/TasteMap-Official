@@ -16,7 +16,7 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
   const [isServiceOpen, setIsServiceOpen] = useState<boolean>(false);
   return (
     <>
-      <button
+      <div
         onClick={() => setIsServiceOpen(true)}
         className="relative h-[160px] w-[210px] flex-shrink-0 rounded-3xl text-start text-white"
       >
@@ -32,16 +32,16 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
         <div className="overlay absolute inset-0  overflow-hidden rounded-3xl"></div>
         <div id="ServiceInfo" className="absolute bottom-0 w-full px-4 py-3">
           <div className="truncate">
-            <span className="font-bold">{service.name}</span>
+            <div className="font-bold">{service.name}</div>
           </div>
           {/* {service.openingHours.length > 0 && (
           <p className="text-2xs font-medium">{`${service.openingHours[0].openHour} - ${service.openingHours[0].closeHour} • ${service.openingHours[0].closeHour}`}</p>
         )} */}
-          <span className="text-sm font-medium">
+          <div className="text-sm font-medium">
             {service.price <= 0 ? "Free" : service.price + " baht"}
-          </span>
+          </div>
         </div>
-      </button>
+      </div>
 
       <Dialog
         open={isServiceOpen}
@@ -73,17 +73,14 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
             className={"mt-2 flex items-center gap-1 text-lg"}
           >
             <Coins size={20} />
-            <span className=" font-medium">Price:</span>
-            <span>
-              {" "}
-              {service.price <= 0 ? "Free" : service.price + " baht"}
-            </span>
+            <div className=" font-medium">Price:</div>
+            <div> {service.price <= 0 ? "Free" : service.price + " baht"}</div>
           </Dialog.Description>
           <button
             onClick={() => setIsServiceOpen(false)}
             className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600"
           >
-            <span className="text-xl font-bold">Got it!</span>
+            <div className="text-xl font-bold">Got it!</div>
           </button>
         </Dialog.Panel>
       </Dialog>

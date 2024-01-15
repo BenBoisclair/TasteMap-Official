@@ -9,13 +9,9 @@ import { UniqueServiceSectionSkeleton } from "../skeletons/unique-service-sectio
 
 interface HighlightsPageProps {
   market: Market;
-  handleTabSelect?: (tabName: string) => void;
 }
 
-export default function HighlightsPage({
-  market,
-  handleTabSelect,
-}: HighlightsPageProps) {
+export default function HighlightsPage({ market }: HighlightsPageProps) {
   return (
     <div id="HighlightsPage" className="flex flex-col gap-8 bg-white py-8">
       <Suspense fallback={<VendorSectionSkeleton />}>
@@ -37,7 +33,7 @@ export default function HighlightsPage({
         name={market.name}
         imageUrl={market.bannerUrl}
         type="market"
-        handleTabSelect={handleTabSelect}
+        // handleTabSelect={handleTabSelect}
       />
     </div>
   );

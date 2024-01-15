@@ -16,25 +16,22 @@ interface MarketInfoPageProps {
 
 export default function MarketInfoPage({ market }: MarketInfoPageProps) {
   const sortedOpeningHours = market.openingHours.sort(
-    (a, b) => dayToNumber(a.dayOfWeek) - dayToNumber(b.dayOfWeek),
+    (a, b) => dayToNumber(a.dayOfWeek) - dayToNumber(b.dayOfWeek)
   );
 
-  const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
+  const facilityTags = market?.tags?.filter(tag => tag.type === "Facility");
 
   return (
     <div id="InfoPage" className="bg-white py-8 text-sm">
       <div className="px-5">
         <div className="flex items-center gap-1">
           <Info size={25} />
-          <h1 className="text-lg font-bold">About</h1>
+          <div className="text-lg font-bold">About</div>
         </div>
         <div className="mt-2 flex h-full w-full flex-col gap-4 font-medium text-black">
           {market.about}
           {facilityTags.length > 0 && (
-            <div
-              id="FTags"
-              className="hide-scrollbar no-scrollbar flex items-center gap-2 overflow-scroll"
-            >
+            <div className="hide-scrollbar no-scrollbar flex items-center gap-2 overflow-scroll">
               {facilityTags?.map((tag, key: number) => {
                 return (
                   <Tag key={key} type={tag.type} size="default">
@@ -49,7 +46,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
       <div className="mt-5 px-5">
         <div className="flex items-center gap-1">
           <CalendarDays size={25} />
-          <h1 className="text-lg font-bold">Opening hours</h1>
+          <div className="text-lg font-bold">Opening hours</div>
         </div>
         <div className="py-1">
           {sortedOpeningHours.map((hour, index) => {
@@ -59,7 +56,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
                 isOpen={isOpen}
                 day={hour.dayOfWeek}
                 hours={`${convertTimeFormat(
-                  hour.open,
+                  hour.open
                 )} am - ${convertTimeFormat(hour.close)} pm`}
                 key={index}
               />

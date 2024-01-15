@@ -22,12 +22,12 @@ export function Ratings({
   return (
     <div className="flex items-center gap-1">
       <RatingStarIcon size={starSize} />
-      <span
+      <div
         className={cn("text-sm font-medium", {
           "text-sm": size === "default",
           "text-2xs": size === "small",
         })}
-      >{`${average?.toFixed(1)} (${total})`}</span>
+      >{`${average?.toFixed(1)} (${total})`}</div>
     </div>
   );
 }

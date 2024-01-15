@@ -50,7 +50,7 @@ export default function RatingAndReviewSection({
     <>
       <div className="mb-5 bg-white" id="RatingsAndReviews">
         <div className="flex justify-between px-5">
-          <h1 className="text-xl font-bold">Ratings and reviews</h1>
+          <div className="text-xl font-bold">Ratings and reviews</div>
           {handleTabSelect && (
             <button id="Back Button" onClick={() => handleTabSelect("Reviews")}>
               <ChevronRight />
@@ -67,11 +67,11 @@ export default function RatingAndReviewSection({
                     <div className="mr-1">
                       <RatingStarIcon size={24} />
                     </div>
-                    <p className="text-[32px] font-bold">
+                    <div className="text-[32px] font-bold">
                       {reviewsData?.average?.toFixed(2) ?? 0}
-                    </p>
+                    </div>
                   </div>
-                  <p className="whitespace-nowrap text-sm">{`(${reviewsData?.total} reviews)`}</p>
+                  <div className="whitespace-nowrap text-sm">{`(${reviewsData?.total} reviews)`}</div>
                 </div>
               </div>
             )}

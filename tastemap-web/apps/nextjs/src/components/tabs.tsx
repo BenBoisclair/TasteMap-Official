@@ -9,15 +9,12 @@ import { createUrl } from "~/utils/createUrl";
 
 interface TabProps {
   tabs: string[];
-  inView: boolean;
+  inView?: boolean;
 }
 
 export default function Tabs({ tabs, inView }: TabProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  if (!inView) {
-    window?.scrollTo(0, 380);
-  }
   return (
     <div
       className={cn(`sticky top-14 z-20 bg-white`, {

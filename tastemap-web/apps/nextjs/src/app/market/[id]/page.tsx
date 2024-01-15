@@ -1,7 +1,13 @@
-import MarketView from "./market-view";
-import { Tag } from "~/types/types";
 import { Metadata } from "next";
 import { getMarket } from "~/app/_actions/markets";
+
+import EventElements from "~/components/event-elements";
+import MarketHeader from "~/components/market/market-header";
+import HighlightsPage from "~/components/market/market-highlights";
+import MarketInfoPage from "~/components/market/market-info-page";
+import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import Tabs from "~/components/tabs";
+import { Market, Tag } from "~/types/types";
 
 export async function generateMetadata({
   params,
@@ -25,11 +31,38 @@ export async function generateMetadata({
 }
 
 export default async function MarketPage({
-  params: { id: marketId },
+  params,
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const marketId = params.id;
+
   const market = await getMarket(marketId);
 
-  return <MarketView params={{ id: marketId }} market={market} />;
+  const activeTab = searchParams["tab"] || "Highlights";
+
+  return (
+    <div className="relative bg-neutral-200">
+      <EventElements />
+      {!!market && (
+        <div>
+          <MarketHeader market={market} />
+          <Tabs tabs={["Highlights", "Map & Info", "Reviews"]} />
+
+          {activeTab === "Highlights" && <HighlightsPage market={market} />}
+          {activeTab === "Map & Info" && <MarketInfoPage market={market} />}
+          {activeTab === "Reviews" && (
+            <RatingAndReviewSection
+              id={marketId}
+              name={market?.name}
+              imageUrl={market?.bannerUrl}
+              type={"market"}
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
