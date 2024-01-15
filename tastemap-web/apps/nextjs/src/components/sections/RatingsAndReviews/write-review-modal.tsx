@@ -35,14 +35,14 @@ export const WriteReviewModal = ({
   const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
-    type === "Market"
+    type === "market"
       ? [
           { id: nanoid(20), name: "Facility", rating: 5 },
           { id: nanoid(20), name: "Safety", rating: 5 },
           { id: nanoid(20), name: "Convenience", rating: 5 },
           { id: nanoid(20), name: "Culture", rating: 5 },
         ]
-      : type === "Vendor"
+      : type === "vendor"
         ? [
             { id: nanoid(20), name: "Taste", rating: 5 },
             { id: nanoid(20), name: "Hygiene", rating: 5 },
