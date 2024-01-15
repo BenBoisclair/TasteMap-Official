@@ -1,6 +1,8 @@
 import { MarketCard } from "../../market/market-card";
 import { getMarkets } from "~/app/_actions/actions";
 
+export const dynamic = "force-dynamic";
+
 export async function MarketsNearYouSection() {
   const markets = await getMarkets();
 
