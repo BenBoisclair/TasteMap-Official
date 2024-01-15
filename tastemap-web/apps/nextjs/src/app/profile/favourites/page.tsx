@@ -106,7 +106,7 @@ export default async function FavouritesPage({
           <div>
             Please{" "}
             <Link
-              href={`/auth/sign-in`}
+              href={`/auth/sign-in?after_sign_in_url=%2profile%2favourites&after_sign_up_url=%2profile%2favourites&redirect_url=%2profile%2favourites`}
               className="underline text-yellow-500 font-medium"
             >
               Log-in

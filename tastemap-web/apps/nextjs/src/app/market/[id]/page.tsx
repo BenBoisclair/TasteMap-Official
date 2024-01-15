@@ -42,32 +42,32 @@ export default async function MarketPage({
   const marketId = params.id;
   const market = await getMarket(marketId);
 
-  if (!market) {
-    return <LoadingPage />;
-  }
+  // if (!market) {
+  //   return <LoadingPage />;
+  // }
 
-  const marketJsonLd: WithContext<Place> = {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    name: market.name,
-    description: market.about,
-    // branchCode: market.code,
-    latitude: parseFloat(market.latitude!),
-    longitude: parseFloat(market.longitude!),
-    isAccessibleForFree: true,
-    publicAccess: true,
-    alternateName: market.nameTH || undefined,
-    additionalType: market.type,
-  };
+  // const marketJsonLd: WithContext<Place> = {
+  //   "@context": "https://schema.org",
+  //   "@type": "Place",
+  //   name: market.name,
+  //   description: market.about,
+  //   // branchCode: market.code,
+  //   latitude: parseFloat(market.latitude!),
+  //   longitude: parseFloat(market.longitude!),
+  //   isAccessibleForFree: true,
+  //   publicAccess: true,
+  //   alternateName: market.nameTH || undefined,
+  //   additionalType: market.type,
+  // };
 
   const activeTab = searchParams["tab"] || "Highlights";
 
   return (
     <div className="relative bg-neutral-200">
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(marketJsonLd) }}
-      />
+      /> */}
       <EventElements />
       {!!market && (
         <div>
