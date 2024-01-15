@@ -1,5 +1,5 @@
 import { MarketCard } from "../../market/market-card";
-import { getMarkets } from "~/app/actions";
+import { getMarkets } from "~/app/_actions/actions";
 
 export const dynamic = "force-dynamic";
 

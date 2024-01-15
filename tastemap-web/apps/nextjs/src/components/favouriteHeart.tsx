@@ -1,6 +1,6 @@
 "use client";
 import { Heart } from "lucide-react";
-import { favouriteAction } from "~/app/actions";
+import { favouriteAction } from "~/app/_actions/actions";
 
 type FavouriteHeartProps = {
   isFavourite: boolean;

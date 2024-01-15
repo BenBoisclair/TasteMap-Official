@@ -1,5 +1,5 @@
 import { VendorCard } from "../RecommendedForYou/vendor-card";
-import { getVendors } from "~/app/actions";
+import { getVendors } from "~/app/_actions/actions";
 
 export default async function VendorsHomePageSection({
   name,

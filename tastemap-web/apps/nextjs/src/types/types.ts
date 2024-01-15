@@ -52,7 +52,7 @@ export interface EventBanner {
   name: string | null;
   date: string | null;
 
-  created_at: string;
+  createdAt: Date | null;
 }
 
 export interface Tag {

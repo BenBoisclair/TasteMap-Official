@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart } from "lucide-react";
 
 import type { Market } from "~/types/types";
 import isMarketOpen from "~/utils/isMarketOpen";
