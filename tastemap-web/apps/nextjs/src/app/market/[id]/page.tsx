@@ -7,7 +7,9 @@ import HighlightsPage from "~/components/market/market-highlights";
 import MarketInfoPage from "~/components/market/market-info-page";
 import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
 import Tabs from "~/components/tabs";
+import { Place, WithContext } from "schema-dts";
 import { Market, Tag } from "~/types/types";
+import LoadingPage from "~/components/pages/loading-page";
 
 export async function generateMetadata({
   params,
@@ -38,13 +40,34 @@ export default async function MarketPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const marketId = params.id;
-
   const market = await getMarket(marketId);
+
+  if (!market) {
+    return <LoadingPage />;
+  }
+
+  const marketJsonLd: WithContext<Place> = {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    name: market.name,
+    description: market.about,
+    // branchCode: market.code,
+    latitude: parseFloat(market.latitude!),
+    longitude: parseFloat(market.longitude!),
+    isAccessibleForFree: true,
+    publicAccess: true,
+    alternateName: market.nameTH || undefined,
+    additionalType: market.type,
+  };
 
   const activeTab = searchParams["tab"] || "Highlights";
 
   return (
     <div className="relative bg-neutral-200">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(marketJsonLd) }}
+      />
       <EventElements />
       {!!market && (
         <div>

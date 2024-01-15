@@ -3,8 +3,9 @@
 import { db } from "@acme/db";
 import { market, review } from "@acme/db/schema/schema";
 import { eq, sql } from "drizzle-orm";
+import { Market } from "~/types/types";
 
-export async function getMarket(marketId: string) {
+export async function getMarket(marketId: string): Promise<Market | undefined> {
   try {
     const oneMarket = await db.query.market.findFirst({
       where: eq(market.id, marketId),
