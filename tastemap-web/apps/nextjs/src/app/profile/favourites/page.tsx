@@ -1,10 +1,11 @@
-import { ArrowLeft, Frown } from "lucide-react";
+import { ArrowLeft, Frown, LogIn, Unplug } from "lucide-react";
 import { MarketCard } from "~/components/market/market-card";
 import Link from "next/link";
 import { cn } from "~/utils/cn";
 import { getFavourites } from "~/app/_actions/favourites";
 import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
 import BackButton from "~/components/back-button";
+import { auth } from "@clerk/nextjs";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,7 @@ export default async function FavouritesPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const { userId } = auth();
   const favourites = await getFavourites();
 
   const tabs = ["Markets", "Vendors"];
@@ -90,6 +92,27 @@ export default async function FavouritesPage({
                 </Link>
               </div>
             )}
+        </div>
+      )}
+
+      {userId === null && (
+        <div className="flex flex-col items-center gap-4">
+          <Link
+            href={`/auth/sign-in`}
+            className="underline text-yellow-500 font-medium"
+          >
+            <LogIn size={35} />
+          </Link>
+          <div>
+            Please{" "}
+            <Link
+              href={`/auth/sign-in`}
+              className="underline text-yellow-500 font-medium"
+            >
+              Log-in
+            </Link>{" "}
+            to view your favourites!
+          </div>
         </div>
       )}
     </div>
