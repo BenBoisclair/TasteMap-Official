@@ -5,7 +5,7 @@ import { cn } from "~/utils/cn";
 import { getFavourites } from "~/app/_actions/favourites";
 import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
 import BackButton from "~/components/back-button";
-import { auth } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +14,7 @@ export default async function FavouritesPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { userId } = auth();
+  const user = await currentUser();
   const favourites = await getFavourites();
 
   const tabs = ["Markets", "Vendors"];
@@ -29,7 +29,7 @@ export default async function FavouritesPage({
       <div className="flex px-5 gap-2">
         {tabs.map((tab, index) => {
           return (
-            <Link key={index} href={`/profile/favourites?tab=${tab}`}>
+            <Link key={index} href={`/profile/favourites?tab=${tab}`} replace>
               <div
                 // onClick={() => chooseTab(tab)}
                 className={cn(" px-4 py-1 rounded-3xl text-sm font-medium", {
@@ -95,7 +95,7 @@ export default async function FavouritesPage({
         </div>
       )}
 
-      {userId === null && (
+      {user === null && (
         <div className="flex flex-col items-center gap-4">
           <Link
             href={`/auth/sign-in`}

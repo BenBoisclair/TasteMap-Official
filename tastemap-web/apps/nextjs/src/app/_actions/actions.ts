@@ -6,7 +6,6 @@ import { auth } from "@clerk/nextjs";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { Market, Vendor } from "~/types/types";
 import queryClient from "~/utils/queryClient";
 
 interface FavouriteActionProps {
@@ -44,7 +43,7 @@ export async function favouriteAction({
         .delete(favourites)
         .where(eq(favourites.id, existingFavourite.id));
 
-      console.log("Favourite deleted!");
+      // console.log("Favourite deleted!");
     } else {
       await db.insert(favourites).values({
         id: nanoid(20),
@@ -53,10 +52,9 @@ export async function favouriteAction({
         vendorId: vendorId || undefined,
       });
 
-      console.log("Favourited!");
-      queryClient.invalidateQueries({ queryKey: ["allMarkets"] });
+      // console.log("Favourited!");
     }
-    revalidatePath("/", "layout");
+    revalidatePath("/");
   } catch (error) {
     console.error("Error querying the database", error);
   }
