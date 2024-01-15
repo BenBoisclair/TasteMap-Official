@@ -12,7 +12,7 @@ export async function MarketsNearYouSection() {
         <h1 className="text-xl font-bold">Explore Markets Near You</h1>
       </div>
       <div className="no-scrollbar flex gap-5 overflow-x-scroll px-5 py-3">
-        {markets &&
+        {!!markets &&
           markets.map(market => <MarketCard market={market} key={market.id} />)}
       </div>
     </div>

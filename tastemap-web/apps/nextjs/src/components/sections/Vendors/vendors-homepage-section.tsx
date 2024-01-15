@@ -16,11 +16,12 @@ export default async function VendorsHomePageSection({
         <h1 className="text-xl font-bold">{name}</h1>
       </div>
       <div className="no-scrollbar mt-4 flex gap-4 overflow-x-auto px-5">
-        {vendors?.slice(0, 20).map((vendor, index) => {
-          return (
-            <VendorCard toggleMarketName={true} vendor={vendor} key={index} />
-          );
-        })}
+        {!!vendors &&
+          vendors?.slice(0, 20).map((vendor, index) => {
+            return (
+              <VendorCard toggleMarketName={true} vendor={vendor} key={index} />
+            );
+          })}
       </div>
     </div>
   );

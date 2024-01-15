@@ -56,7 +56,7 @@ export async function favouriteAction({
       console.log("Favourited!");
       queryClient.invalidateQueries({ queryKey: ["allMarkets"] });
     }
-    revalidatePath("/");
+    revalidatePath("/", "layout");
   } catch (error) {
     console.error("Error querying the database", error);
   }
