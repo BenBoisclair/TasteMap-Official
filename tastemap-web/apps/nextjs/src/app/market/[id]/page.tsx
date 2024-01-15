@@ -1,5 +1,5 @@
 import MarketView from "./market-view";
-import { Market, Tag } from "~/types/types";
+import { Tag } from "~/types/types";
 import { Metadata } from "next";
 import { getMarket } from "~/app/_actions/markets";
 

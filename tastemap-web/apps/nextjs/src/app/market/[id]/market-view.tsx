@@ -27,7 +27,7 @@ export default function MarketView({
     rootMargin: "-50px",
   });
 
-  const activeTab = searchParams.get("tab");
+  const activeTab = searchParams.get("tab") || "Highlights";
 
   return (
     <div className="relative bg-neutral-200">
