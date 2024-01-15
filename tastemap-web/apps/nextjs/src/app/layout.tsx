@@ -15,6 +15,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "~/utils/cn";
 import GoogleAnalytics from "../components/google-analytics";
 import { Providers } from "./providers";
+import { Organization, WithContext } from "schema-dts";
+import { tastemapJsonld } from "./jsonLd";
 
 export const viewport: Viewport = {
   themeColor: "#FFD14E",
@@ -58,12 +60,15 @@ export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(tastemapJsonld) }}
+        />
         <Head>
           <link
             href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css"
             rel="stylesheet"
           />
-          {/* Hotjar Tracking Code for taste-map.com */}
         </Head>
         <Script
           id="HotJarAnalytics"
