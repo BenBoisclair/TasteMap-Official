@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Menu, X } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 import LogInButton from "../auth/log-in-button";
@@ -31,10 +29,12 @@ export function NavBar({ className = "" }: { className?: string }) {
         <div className=" flex grow justify-center pr-10">
           <TasteMapFullLogo />
         </div>
-        {/* <div className="flex gap-4">
-          <Search size={30} />
-          <Heart size={30} />
-        </div> */}
+        <div className="flex gap-4 items-center">
+          {/* <Search size={30} /> */}
+          <Link href="/profile/favourites">
+            <Heart strokeWidth={2} size={28} />
+          </Link>
+        </div>
       </nav>
       <SideMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       {/* Dark Background Overlay */}

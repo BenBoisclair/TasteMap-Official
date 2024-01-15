@@ -1,6 +1,8 @@
 import { VendorCard } from "../RecommendedForYou/vendor-card";
 import { getVendors } from "~/app/_actions/actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function VendorsHomePageSection({
   name,
   tag,

@@ -47,7 +47,7 @@ export default function VendorCardRecommendations({
             </div>
           </>
         ) : (
-          <div className="flex justify-center items-center border-2 rounded-3xl h-full bg-neutral">
+          <div className="flex justify-center items-center rounded-3xl h-full bg-neutral">
             <TasteMapLogo size={100} />
             <div className="absolute top-0 w-full h-full flex flex-col items-end p-2.5">
               <FavouriteHeart
