@@ -20,6 +20,7 @@ export function MarketCard({ market }: { market: Market }) {
     latitude: number;
     longitude: number;
   }>();
+
   const [distanceFromUser, setDistanceFromUser] = useState<number | undefined>(
     undefined
   );
@@ -46,12 +47,12 @@ export function MarketCard({ market }: { market: Market }) {
 
     // Fetch the initial location
     fetchLocation();
-    const interval = setInterval(fetchLocation, 300000); // 300000 ms = 5 minutes
+    const interval = setInterval(fetchLocation, 300000); // Every 5 minutes
     return () => clearInterval(interval);
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   useEffect(() => {
-    // Function to calculate distance
+    // Function to calculate distance between market and user
     const calculateDistance = () => {
       if (location && market.latitude && market.longitude) {
         const distance = haversineDistance(
@@ -67,24 +68,23 @@ export function MarketCard({ market }: { market: Market }) {
 
     // Calculate the initial distance
     calculateDistance();
-
-    // Set an interval to recalculate distance every 5 minutes
-    const interval = setInterval(calculateDistance, 300000);
-
-    // Cleanup the interval on component unmount
+    const interval = setInterval(calculateDistance, 300000); // Every 5 minutes
     return () => clearInterval(interval);
-  }, [location]); // Dependency array includes location, so effect runs when location changes
+  }, [location]);
 
   return (
     <div className="shrink-0 overflow-hidden">
       <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
-        <Image
-          src={market.bannerUrl || ""}
-          alt={`${market.name}'s Banner`}
-          fill={true}
-          style={{ objectFit: "cover" }}
-        />
-        <div className="absolute flex h-full w-full flex-col justify-between p-3">
+        <Link href={`/market/${market.id}?tab=Highlights`}>
+          <Image
+            src={market.bannerUrl || ""}
+            alt={`${market.name}'s Banner`}
+            fill={true}
+            style={{ objectFit: "cover" }}
+          />
+        </Link>
+
+        <div className="absolute flex h-full w-full flex-col justify-between p-3 bg-transparent pointer-events-none">
           <div
             className={cn(`flex items-center text-white`, {
               "justify-between": !!distanceFromUser,
@@ -94,9 +94,9 @@ export function MarketCard({ market }: { market: Market }) {
             {!!distanceFromUser && (
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 bg-white rounded-full" />
-                <span className="font-black">
+                <div className="font-black">
                   {`${distanceFromUser.toFixed(2)} km`}
-                </span>
+                </div>
               </div>
             )}
             <FavouriteHeart
@@ -109,42 +109,43 @@ export function MarketCard({ market }: { market: Market }) {
           </div>
         </div>
       </div>
-      <Link href={`/market/${market.id}?tab=Highlights`}>
-        <div className="mt-[10px] flex flex-col">
-          <h1 className=" text-xl font-black">{market.name}</h1>
-          <p className="font-medium">{market.type}</p>
 
-          <div className="mt-[10px] flex items-center gap-2">
-            <MarketStatusIcon status={isOpen ? "OPEN" : "CLOSED"} />
-            <Ratings
-              total={market?.ratings?.total}
-              average={market?.ratings?.average}
-            />
+      <div className="mt-[10px] flex flex-col">
+        <Link href={`/market/${market.id}?tab=Highlights`}>
+          <h1 className=" text-xl font-black">{market.name}</h1>
+          <h2 className="font-medium">{market.type}</h2>
+        </Link>
+        <div className="mt-[10px] flex items-center gap-2">
+          <MarketStatusIcon status={isOpen ? "OPEN" : "CLOSED"} />
+          <Ratings
+            total={market?.ratings?.total}
+            average={market?.ratings?.average}
+          />
+        </div>
+        <div className="mt-[10px] flex flex-col gap-2">
+          <div className="flex gap-2">
+            {productTags.slice(0, 3).map(tag => (
+              <Tag type={tag.type} key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
+            {productTags?.length > 3 && (
+              <Tag type="Product">+{productTags?.length - 3}</Tag>
+            )}
           </div>
-          <div className="mt-[10px] flex flex-col gap-2">
-            <div className="flex gap-2">
-              {productTags.slice(0, 3).map(tag => (
-                <Tag type={tag.type} key={tag.id}>
-                  {tag.name}
-                </Tag>
-              ))}
-              {productTags?.length > 3 && (
-                <Tag type="Product">+{productTags?.length - 3}</Tag>
-              )}
-            </div>
-            <div className="flex gap-2">
-              {facilityTags.slice(0, 3).map(tag => (
-                <Tag type={tag.type} key={tag.id}>
-                  {tag.name}
-                </Tag>
-              ))}
-              {facilityTags?.length > 3 && (
-                <Tag type="Facility">+{facilityTags?.length - 3}</Tag>
-              )}
-            </div>
+          <div className="flex gap-2">
+            {facilityTags.slice(0, 3).map(tag => (
+              <Tag type={tag.type} key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
+            {facilityTags?.length > 3 && (
+              <Tag type="Facility">+{facilityTags?.length - 3}</Tag>
+            )}
           </div>
         </div>
-      </Link>
+      </div>
+      {/* </Link> */}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import VendorsHomePageSection from "~/components/sections/Vendors/vendors-homepa
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { MarketsNearYouSectionSkeleton } from "~/components/skeletons/markets-near-you-section-skeleton";
+import { VendorSectionSkeleton } from "~/components/skeletons/recommended-for-you-section-skeleton";
 
 export const metadata: Metadata = {
   title: "Explore Local",
@@ -26,8 +27,15 @@ export default function HomePage() {
           <MarketsNearYouSection />
         </Suspense>
         <CategoriesSection />
-        <VendorsHomePageSection name="Grab a Quick Bite!" tag="Quick%20Bites" />
-        <VendorsHomePageSection name="Souvenirs to Take Home" tag="Souvenirs" />
+        <Suspense fallback={<VendorSectionSkeleton />}>
+          <VendorsHomePageSection name="Grab a Quick Bite!" tag="Quick Bites" />
+        </Suspense>
+        <Suspense fallback={<VendorSectionSkeleton />}>
+          <VendorsHomePageSection
+            name="Souvenirs to Take Home"
+            tag="Souvenirs"
+          />
+        </Suspense>
       </main>
     </>
   );

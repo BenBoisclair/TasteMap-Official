@@ -1,12 +1,12 @@
 "use server";
 
-import { db, eq, sql } from "@acme/db";
-import { favourites, review } from "@acme/db/schema/schema";
+import { asc, db, desc, eq, sql } from "@acme/db";
+import { favourites, review, vendor } from "@acme/db/schema/schema";
 import { auth } from "@clerk/nextjs";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { Market } from "~/types/types";
+import { Market, Vendor } from "~/types/types";
 import queryClient from "~/utils/queryClient";
 
 interface FavouriteActionProps {
@@ -128,6 +128,86 @@ export async function getMarkets() {
       })
     );
     return marketsWithReview;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+type getVendorsProps = {
+  tag?: string;
+};
+
+export async function getVendors({ tag }: getVendorsProps) {
+  try {
+    const searchTag = tag;
+    const { userId } = auth();
+    const allVendors = await db.query.vendor.findMany({
+      with: {
+        market: {
+          columns: {
+            name: true,
+          },
+        },
+        tags: {
+          columns: {
+            tagId: false,
+            vendorId: false,
+          },
+          with: {
+            tag: {
+              columns: {
+                id: true,
+                name: true,
+                type: true,
+              },
+            },
+          },
+        },
+        userFavourites: {
+          columns: {
+            userExternalId: true,
+          },
+        },
+      },
+      orderBy: [desc(vendor.isVerified), asc(vendor.sequence)],
+    });
+
+    const filteredVendors = !!searchTag
+      ? allVendors.filter(
+          vendor => vendor?.tags.some(({ tag }) => tag.name === searchTag)
+        )
+      : allVendors;
+
+    const vendorsWithReview = await Promise.all(
+      filteredVendors.map(async vendor => {
+        const aggregationQuery = await db
+          .select({
+            total: sql<number>`cast(count(${review.id}) as int)`,
+            average: sql<number>`cast(avg(${review.rating}) as float)`,
+          })
+          .from(review)
+          .where(eq(review.vendorReviewedID, vendor.id))
+          .groupBy(review.vendorReviewedID);
+
+        const ratings =
+          aggregationQuery.length > 0 ? aggregationQuery[0] : null;
+
+        const { userFavourites, ...otherVendorData } = vendor;
+
+        const isFavourite = userFavourites.some(
+          favourite => favourite.userExternalId === userId
+        );
+
+        return {
+          ...vendor,
+          ratings,
+          tags: vendor?.tags.map(({ tag }) => tag),
+          isFavourite: isFavourite,
+          createdAt: vendor.createdAt ? vendor.createdAt.toISOString() : null,
+        };
+      })
+    );
+    return vendorsWithReview;
   } catch (error) {
     console.log(error);
   }

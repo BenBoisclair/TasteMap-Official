@@ -12,13 +12,13 @@ const VerifiedBadge = ({
   variant?: "default" | "icon";
 }) => {
   const defaultVariant = (
-    <>
+    <div>
       <div
         className={cn(
           ` flex items-center gap-1 rounded-3xl bg-white py-0.5 pl-1 pr-2 text-green`,
           {
             "border-2": toggleBorder,
-          },
+          }
         )}
       >
         <div
@@ -28,7 +28,7 @@ const VerifiedBadge = ({
               "h-[14px] w-[14px]": size === "sm",
               "h-[16px] w-[16px]": size === "md",
               "h-[20px] w-[20px]": size === "lg",
-            },
+            }
           )}
         >
           <Image
@@ -41,7 +41,7 @@ const VerifiedBadge = ({
             }}
           />
         </div>
-        <p
+        <div
           className={cn(`font-medium`, {
             "text-[10px]": size === "sm",
             "text-[12px]": size === "md",
@@ -49,9 +49,9 @@ const VerifiedBadge = ({
           })}
         >
           Partner
-        </p>
+        </div>
       </div>
-    </>
+    </div>
   );
 
   const iconVariant = (
@@ -61,7 +61,7 @@ const VerifiedBadge = ({
           ` flex items-center gap-1 rounded-3xl bg-white px-0.5 py-0.5 text-green`,
           {
             "border-2": toggleBorder,
-          },
+          }
         )}
       >
         <div
@@ -71,7 +71,7 @@ const VerifiedBadge = ({
               "h-[14px] w-[14px]": size === "sm",
               "h-[16px] w-[16px]": size === "md",
               "h-[20px] w-[20px]": size === "lg",
-            },
+            }
           )}
         >
           <Image

@@ -28,7 +28,7 @@ export function Tag({
           "px-1 py-0.5": size === "sm",
         })}
       >
-        <span
+        <div
           className={cn(`whitespace-nowrap font-medium`, {
             "text-yellow-600": type === "Product",
             "text-[#7C7C7C]": type === "Facility",
@@ -38,7 +38,7 @@ export function Tag({
           })}
         >
           {children}
-        </span>
+        </div>
       </div>
     </Link>
   );

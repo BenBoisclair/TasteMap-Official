@@ -106,27 +106,27 @@ export interface Vendor {
   code: string;
   market: {
     name: string;
-    id: string;
+    id?: string;
   } | null;
   bannerUrl: string | null;
   logoUrl: string | null;
   name: string;
   nameTH: string | null;
   ingredients: string | null;
-  ingredients_th: string | null;
-  owner_name: string | null;
-  owner_telephone: string | null;
+  ingredients_th?: string | null;
+  owner_name?: string | null;
+  owner_telephone?: string | null;
   about: string;
   aboutTH: string | null;
   priceRange: string;
   marketId: string;
-  createdAt: string;
-  ratings: Ratings;
+  createdAt: string | null;
+  ratings: Ratings | undefined | null;
   tags: Tag[] | [];
-  media: Media[] | [];
-  paymentOptions: PaymentOption[] | [];
-  informationItems: InformationItems[] | [];
-  isVerified: boolean;
+  media?: Media[] | null;
+  paymentOptions?: PaymentOption[] | [];
+  informationItems?: InformationItems[] | [];
+  isVerified: boolean | null;
   isFavourite: boolean;
   sequence: number | null;
 }

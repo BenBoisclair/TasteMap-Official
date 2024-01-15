@@ -22,7 +22,7 @@ export default function FavouriteHeart({
         vendorId: vendorId,
       })}
     >
-      <button type="submit">
+      <button type="submit" className=" pointer-events-auto">
         {isFavourite ? (
           <Heart strokeWidth={3} color={color} fill="#EF4E3D" />
         ) : (

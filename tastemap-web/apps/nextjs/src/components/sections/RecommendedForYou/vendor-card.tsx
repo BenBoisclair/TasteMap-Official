@@ -25,23 +25,22 @@ export const VendorCard = ({
   return (
     <div className="flex w-[210px] flex-col">
       <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
-        {vendor.bannerUrl ? (
-          <>
+        <Link href={`/vendors/${vendor.id}?tab=Info`}>
+          {vendor.bannerUrl ? (
             <Image
               src={vendor.bannerUrl ?? ""}
               alt={`${vendor.name}'s Banner`}
               fill={true}
               style={{ objectFit: "cover" }}
             />
-          </>
-        ) : (
-          <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
-            <TasteMapLogo size={100} />
-          </div>
-        )}
-        <div className="absolute top-0 flex h-full w-full items-start justify-end p-2 gap-2">
+          ) : (
+            <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+              <TasteMapLogo size={100} />
+            </div>
+          )}
+        </Link>
+        <div className="absolute top-0 flex h-full w-full items-start justify-end p-2 gap-2 pointer-events-none">
           <VerifiedBadge size="sm" />
-
           <FavouriteHeart
             color="white"
             vendorId={vendor.id}
@@ -49,35 +48,36 @@ export const VendorCard = ({
           />
         </div>
       </div>
-      <Link href={`/vendors/${vendor.id}?tab=Info`}>
-        <div className="mt-1 flex flex-col">
-          <div className="truncate text-lg font-bold">{vendor.name}</div>
+
+      <div className="mt-1 flex flex-col">
+        <Link href={`/vendors/${vendor.id}?tab=Info`}>
+          <h1 className="truncate text-lg font-bold">{vendor.name}</h1>
           {toggleMarketName && (
-            <span className="font-medium -mt-1">
+            <h2 className="font-medium -mt-1">
               {!!vendor?.market?.name &&
                 removeSubstrings(vendor?.market?.name, ["Floating Market"])}
-            </span>
+            </h2>
           )}
-          <div className="my-1">
-            <Ratings
-              average={vendor?.ratings?.average}
-              total={vendor?.ratings?.total}
-            />
-          </div>
-          {productTags.length > 0 && (
-            <div className="mt-1 flex gap-1">
-              {productTags.slice(0, 2).map(tag => (
-                <Tag type={tag.type} key={tag.id}>
-                  {tag.name}
-                </Tag>
-              ))}
-              {productTags?.length > 2 && (
-                <Tag type="Product">+{productTags?.length - 2}</Tag>
-              )}
-            </div>
-          )}
+        </Link>
+        <div className="my-1">
+          <Ratings
+            average={vendor?.ratings?.average}
+            total={vendor?.ratings?.total}
+          />
         </div>
-      </Link>
+        {productTags.length > 0 && (
+          <div className="mt-1 flex gap-1">
+            {productTags.slice(0, 2).map(tag => (
+              <Tag type={tag.type} key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
+            {productTags?.length > 2 && (
+              <Tag type="Product">+{productTags?.length - 2}</Tag>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
