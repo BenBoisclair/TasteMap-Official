@@ -11,6 +11,8 @@ import { VendorSectionSkeleton } from "~/components/skeletons/recommended-for-yo
 import { BannerSection } from "~/components/sections/HomeHeader/EventBanners/banner-section";
 import BannerSectionSkeleton from "~/components/sections/HomeHeader/EventBanners/banner-section-skeleton";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Explore Local",
   keywords: ["Homepage"],

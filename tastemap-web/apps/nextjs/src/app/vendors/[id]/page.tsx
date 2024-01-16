@@ -3,6 +3,8 @@ import VendorView from "./vendor-view";
 import { Metadata } from "next";
 import { getVendor } from "~/app/_actions/vendors";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

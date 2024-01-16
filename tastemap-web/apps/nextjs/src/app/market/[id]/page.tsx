@@ -8,6 +8,8 @@ import Tabs from "~/components/tabs";
 import { Market, Tag } from "~/types/types";
 import NavBar from "~/components/navbar/nav-bar";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

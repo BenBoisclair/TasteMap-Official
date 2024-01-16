@@ -12,4 +12,4 @@ const connectionString = process.env.DATABASE_URL!;
 
 const client = postgres(connectionString);
 
-export const db = remember("drizzle", () => drizzle(client, { schema }));
+export const db = drizzle(client, { schema });
