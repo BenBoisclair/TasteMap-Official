@@ -15,8 +15,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { cn } from "~/utils/cn";
 import GoogleAnalytics from "../components/google-analytics";
 import { Providers } from "./providers";
-import { Organization, WithContext } from "schema-dts";
 import { tastemapJsonld } from "./jsonLd";
+import Hotjar from "~/components/hotjar";
 
 export const viewport: Viewport = {
   themeColor: "#FFD14E",
@@ -28,22 +28,8 @@ export const metadata: Metadata = {
     default: "TasteMap",
   },
   description: "Platform for Local Tourism!",
-  keywords: [
-    "Tourism",
-    "Map",
-    "Food",
-    "Markets",
-    "Thailand",
-    "Bangkok",
-    "Fashion",
-    "Local Tourism",
-    "Taling Chan Floating Market",
-    "Floating Market",
-    "Night Market",
-    "Flea Market",
-  ],
-  creator: "Benedict Boisclair",
-  publisher: "The Hominians Co.,Ltd.",
+  keywords: ["Tourism", "Asia", "Food", "Markets", "Vendors"],
+  creator: "The Hominians Co.,Ltd.",
   authors: [
     {
       name: "The Hominians Co.,Ltd.",
@@ -59,31 +45,18 @@ export const metadata: Metadata = {
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(tastemapJsonld) }}
-        />
+      <html lang="en" suppressHydrationWarning={true}>
         <Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(tastemapJsonld) }}
+          />
           <link
             href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css"
             rel="stylesheet"
           />
         </Head>
-        <Script
-          id="HotJarAnalytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:3627500,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
-          }}
-        />
+        <Hotjar />
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}

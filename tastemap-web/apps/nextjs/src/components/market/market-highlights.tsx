@@ -13,7 +13,7 @@ interface HighlightsPageProps {
 
 export default function HighlightsPage({ market }: HighlightsPageProps) {
   return (
-    <div id="HighlightsPage" className="flex flex-col gap-8 bg-white py-8">
+    <div id="HighlightsPage" className="flex flex-col gap-6 bg-white py-8">
       <Suspense fallback={<VendorSectionSkeleton />}>
         <RecommendedForYouSection marketId={market.id} />
       </Suspense>
@@ -33,7 +33,6 @@ export default function HighlightsPage({ market }: HighlightsPageProps) {
         name={market.name}
         imageUrl={market.bannerUrl}
         type="market"
-        // handleTabSelect={handleTabSelect}
       />
     </div>
   );

@@ -59,7 +59,6 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
           </div>
           <div className="relative flex h-[220px] w-[350px] overflow-hidden rounded-2xl">
             <Image
-              // Once you change the imageUrl to be not null, remove the ??
               src={service?.imageUrl ?? ""}
               alt={`${service?.name} Information Item`}
               fill={true}

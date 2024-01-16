@@ -4,8 +4,6 @@ import { useState } from "react";
 // import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-
-import EventElements from "~/components/event-elements";
 import LoadingPage from "~/components/pages/loading-page";
 import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
 import Tabs from "~/components/tabs";
@@ -41,7 +39,6 @@ export default function VendorView({ params }: { params: { id: string } }) {
 
   return (
     <div className="relative">
-      <EventElements />
       <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
       <Tabs inView={inView} tabs={["Info", "Reviews"]} />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}

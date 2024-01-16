@@ -1,12 +1,13 @@
-"use client";
 import { Heart } from "lucide-react";
 import { favouriteAction } from "~/app/_actions/actions";
+import { cn } from "~/utils/cn";
 
 type FavouriteHeartProps = {
-  isFavourite: boolean;
+  isFavourite: boolean | undefined;
   marketId?: string;
   vendorId?: string;
   color?: string;
+  className?: string;
 };
 
 export default function FavouriteHeart({
@@ -14,6 +15,7 @@ export default function FavouriteHeart({
   marketId,
   vendorId,
   color = "white",
+  className,
 }: FavouriteHeartProps) {
   return (
     <form
@@ -21,6 +23,7 @@ export default function FavouriteHeart({
         marketId: marketId,
         vendorId: vendorId,
       })}
+      className={cn(className)}
     >
       <button type="submit" className=" pointer-events-auto">
         {isFavourite ? (

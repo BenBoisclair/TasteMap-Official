@@ -13,13 +13,13 @@ import { ReviewsSkeleton } from "../../skeletons/reviews-skeleton";
 import AspectBar from "./aspect-bar";
 import ReviewItem from "./review-card";
 import { WriteReviewModal } from "./write-review-modal";
+import WriteReviewButton from "~/components/write-review-button";
 
 interface RatingAndReviewSectionProps {
   id: string;
   name: string;
   imageUrl: string | null;
   type: "market" | "vendor";
-  handleTabSelect?: (tabname: string) => void;
 }
 
 export default function RatingAndReviewSection({
@@ -27,35 +27,17 @@ export default function RatingAndReviewSection({
   name,
   imageUrl,
   type = "market",
-  handleTabSelect,
 }: RatingAndReviewSectionProps) {
-  const { isSignedIn } = useUser();
-  const [writeReviewToggle, setWriteReviewToggle] = useState<boolean>(false);
-  const router = useRouter();
-
   const { data: reviewsData, status: reviewStatus } = useQuery({
     queryKey: ["reviews", id],
     queryFn: () => fetchAt<ReviewsResponse>(`/api/${type}s/${id}/reviews`),
   });
-
-  const openWriteReviewModal = () => {
-    if (!isSignedIn) {
-      router.push("/auth/sign-in");
-      return;
-    }
-    setWriteReviewToggle(!writeReviewToggle);
-  };
 
   return (
     <>
       <div className="mb-5 bg-white" id="RatingsAndReviews">
         <div className="flex justify-between px-5">
           <div className="text-xl font-bold">Ratings and reviews</div>
-          {handleTabSelect && (
-            <button id="Back Button" onClick={() => handleTabSelect("Reviews")}>
-              <ChevronRight />
-            </button>
-          )}
         </div>
 
         <div className=" flex flex-col px-5 py-2">
@@ -83,16 +65,14 @@ export default function RatingAndReviewSection({
             </div>
           </div>
 
-          <div className="mt-6 flex">
-            <button
-              id="Write a Review"
-              onClick={openWriteReviewModal}
-              className="bord flex w-[350px] items-center justify-center gap-1 rounded-3xl bg-yellow py-[10px]"
-            >
-              <MessageSquarePlusIcon size={22} color="white" />
-              <span className="font-bold">Write a review</span>
-            </button>
-          </div>
+          <WriteReviewButton
+            name={name}
+            id={id}
+            imageUrl={imageUrl}
+            type={type}
+            className="mt-10"
+          />
+
           {reviewsData && reviewStatus === "success" && (
             <div className="mt-10 flex flex-col gap-8">
               {reviewsData?.reviews.map((review, key) => {
@@ -103,16 +83,6 @@ export default function RatingAndReviewSection({
           {reviewStatus === "pending" && <ReviewsSkeleton />}
         </div>
       </div>
-      {writeReviewToggle && (
-        <WriteReviewModal
-          name={name}
-          imageUrl={imageUrl || ""}
-          type={type}
-          id={id}
-          writeReviewToggle={writeReviewToggle}
-          setWriteReviewToggle={setWriteReviewToggle}
-        />
-      )}
     </>
   );
 }

@@ -1,11 +1,11 @@
-import { ArrowLeft, Frown, LogIn, Unplug } from "lucide-react";
+import { Frown, LogIn } from "lucide-react";
 import { MarketCard } from "~/components/market/market-card";
 import Link from "next/link";
 import { cn } from "~/utils/cn";
 import { getFavourites } from "~/app/_actions/favourites";
 import VendorCardRecommendations from "~/components/sections/RecommendedForYou/vendor-card-recommendations";
 import BackButton from "~/components/back-button";
-import { auth, currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
 export const dynamic = "force-dynamic";
 

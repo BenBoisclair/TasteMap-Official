@@ -1,3 +1,4 @@
+import Section from "~/components/section";
 import UniqueServiceCard from "./unique-service-card";
 import { getUniqueServices } from "~/app/_actions/actions";
 
@@ -13,13 +14,13 @@ export default async function UniqueServicesSection({
   const services = await getUniqueServices(marketId);
 
   return (
-    <div id="UniqueServices">
-      <h1 className="px-5 text-xl font-bold">Unique Services</h1>
-      <div className="no-scrollbar mt-4 flex gap-1.5 overflow-x-auto px-5">
+    <Section>
+      <Section.Title>Unique Services</Section.Title>
+      <Section.Carousel gap={2}>
         {services?.map((service, index: number) => {
           return <UniqueServiceCard service={service} key={index} />;
         })}
-      </div>
-    </div>
+      </Section.Carousel>
+    </Section>
   );
 }
