@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import ttnorms from "~/fonts/ttnorms";
 
@@ -8,15 +9,14 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import Head from "next/head";
 import { headers } from "next/headers";
-import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "~/utils/cn";
-import GoogleAnalytics from "../components/google-analytics";
 import { Providers } from "./providers";
 import { tastemapJsonld } from "./jsonLd";
 import Hotjar from "~/components/hotjar";
+import GoogleAnalytics from "~/utils/google-analytics";
 
 export const viewport: Viewport = {
   themeColor: "#FFD14E",
@@ -60,6 +60,9 @@ export default function Layout(props: { children: React.ReactNode }) {
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics ga_id={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         ) : null}
+        {/* {process.env.NEXT_PUBLIC_GTM_ID ? (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        ) : null} */}
         <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
           <Providers headers={headers()}>
             {props.children}

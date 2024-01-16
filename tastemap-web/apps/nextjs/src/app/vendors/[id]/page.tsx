@@ -1,7 +1,7 @@
-import { Tag } from "~/types/types";
+import { Tag, Vendor } from "~/types/types";
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
-import { getVendor } from "~/app/_actions/vendors";
+import { getVendor, getVendors } from "~/app/_actions/vendors";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +24,7 @@ export async function generateMetadata({
 }
 
 // export async function generateStaticParams() {
-//   const vendors = await db.query.vendor.findMany();
+//   const vendors = await getVendors({});
 
 //   return (vendors as any)
 //     .slice(0, 4)

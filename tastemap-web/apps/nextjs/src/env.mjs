@@ -15,6 +15,7 @@ export const env = createEnv({
     NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: z.string(),
     NEXT_PUBLIC_GOOGLE_ANALYTICS: z.string(),
     NEXT_PUBLIC_URL: z.string(),
+    NEXT_PUBLIC_GTM_ID: z.string(),
   },
   /**
    * Specify your server-side environment variables schema here. This way you can ensure the app isn't
@@ -53,6 +54,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
     NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
   },
   skipValidation:
     !!process.env.CI ||
