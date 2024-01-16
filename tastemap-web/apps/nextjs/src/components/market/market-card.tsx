@@ -45,13 +45,13 @@ export function MarketCard({ market }: { market: Market }) {
           </div>
         </div>
         <Link
-          href={`/markets/${market.id}?tab=Highlights`}
+          href={`/market/${market.id}?tab=Highlights`}
           className="absolute top-0 w-full h-full"
         />
       </div>
 
       <div className="mt-[10px] flex flex-col">
-        <Link href={`/markets/${market.id}?tab=Highlights`}>
+        <Link href={`/market/${market.id}?tab=Highlights`}>
           <h1 className=" text-xl font-black">{market.name}</h1>
           <h2 className="font-medium">{market.type}</h2>
         </Link>

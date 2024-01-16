@@ -70,12 +70,10 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
         className="w-full bg-white pb-5 text-black rounded-b-3xl mb-1"
       >
         <div className="flex px-5 pt-5">
-          <div className="flex grow flex-col">
+          <div className="flex grow flex-col gap-1">
             <h1 className="text-2xl font-bold">{vendor?.name}</h1>
             <Link href={`/market/${vendor?.market?.id}?tab=Highlights`}>
-              <span className="text-lg font-medium">
-                {vendor?.market?.name}
-              </span>
+              <span className=" font-medium">{vendor?.market?.name}</span>
             </Link>
             <div
               id="marRatingInfo"
