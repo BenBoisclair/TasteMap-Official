@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <NavBar />
+      <NavBar page="Home" />
       {/* <OpenMainMapButton /> */}
       <main className="pb-10 flex w-full flex-col gap-2 bg-neutral">
         <HomePageHeader>

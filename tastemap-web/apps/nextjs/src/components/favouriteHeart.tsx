@@ -23,7 +23,7 @@ export default function FavouriteHeart({
         marketId: marketId,
         vendorId: vendorId,
       })}
-      className={cn(className)}
+      className={cn("z-50", className)}
     >
       <button type="submit" className=" pointer-events-auto">
         {isFavourite ? (

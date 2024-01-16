@@ -9,7 +9,7 @@ import type { InsertReviewAspect } from "~/types/types";
 
 export const GET = async (
   request: Request,
-  { params }: { params: { marketId: string } },
+  { params }: { params: { marketId: string } }
 ) => {
   const marketId = params.marketId;
 
@@ -36,7 +36,7 @@ export const GET = async (
     .where(eq(review.marketReviewedID, marketId))
     .groupBy(reviewAspect.name);
 
-  const reviewAspects = aggregatedReviewAspects.map((aspect) => ({
+  const reviewAspects = aggregatedReviewAspects.map(aspect => ({
     name: aspect.name,
     average: aspect.average,
   }));
@@ -48,7 +48,7 @@ export const GET = async (
     .where(eq(review.marketReviewedID, marketId))
     .leftJoin(users, eq(users.externalId, review.authorId));
 
-  const allReviews = allReviewsRaw.map((review) => {
+  const allReviews = allReviewsRaw.map(review => {
     return {
       ...review.review,
       author: {
@@ -75,14 +75,14 @@ export const GET = async (
 
 export const POST = async (
   request: Request,
-  { params }: { params: { marketId: string } },
+  { params }: { params: { marketId: string } }
 ) => {
   const { userId } = auth();
 
   if (!userId) {
     return Response.json(
       { message: "User needs to be logged in" },
-      { status: 401 },
+      { status: 401 }
     );
   }
 
@@ -95,14 +95,14 @@ export const POST = async (
     };
 
     const reviewsValidated = insertReviewSchema.parse(reviewData);
-    const reviewAspectsValidated = reviewAspects.map((aspect) => {
+    const reviewAspectsValidated = reviewAspects.map(aspect => {
       return insertReviewAspectSchema.parse(aspect);
     });
 
     if (!reviewsValidated || !reviewAspectsValidated) {
       return Response.json({ message: `Invalid review Data` }, { status: 400 });
     } else {
-      const reviewWrite = await db.transaction(async (tx) => {
+      const reviewWrite = await db.transaction(async tx => {
         const reviewWriteStatus = await tx
           .insert(review)
           .values({
@@ -127,7 +127,7 @@ export const POST = async (
       if (reviewWrite.length === 0 && !reviewWrite) {
         return Response.json(
           { message: "Whoops! You already have a review!" },
-          { status: 409 },
+          { status: 409 }
         );
       }
 
@@ -143,7 +143,7 @@ export const POST = async (
   } catch (error) {
     return Response.json(
       { message: "Whoops.. creating review failed.." },
-      { status: 404 },
+      { status: 404 }
     );
   }
 };

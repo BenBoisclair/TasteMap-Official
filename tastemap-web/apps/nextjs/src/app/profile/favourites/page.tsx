@@ -44,56 +44,43 @@ export default async function FavouritesPage({
         })}
       </div>
 
-      {chosenTab === "Markets" && (
+      {chosenTab === "Markets" && favourites?.data?.markets?.length === 0 ? (
+        <div className="flex flex-col items-center gap-1">
+          <Frown size={40} />
+          <div className="text-xl">You haven't favourited any markets.</div>
+          <Link href={`/`} className="mt-2">
+            <div className="flex bg-yellow px-2 py-1 rounded-3xl font-medium">
+              Explore
+            </div>
+          </Link>
+        </div>
+      ) : chosenTab === "Markets" && favourites?.data?.markets?.length !== 0 ? (
         <div className="flex flex-col mt-4 md:grid md:grid-cols-2 lg:grid-cols-4 px-5 gap-6">
           {favourites?.data.markets &&
             favourites?.data.markets.map(market => (
               <MarketCard key={market.id} market={market} />
             ))}
         </div>
-      )}
-      {chosenTab === "Markets" && (
-        <div className="flex flex-col mt-4 md:grid md:grid-cols-2 lg:grid-cols-4 px-5 gap-6">
-          {favourites?.data?.markets?.length === 0 && (
-            <div className="flex flex-col items-center gap-1">
-              <Frown size={40} />
-              <div className="text-xl">You haven't favourited any markets.</div>
-              <Link href={`/`} className="mt-2">
-                <div className="flex bg-yellow px-2 py-1 rounded-3xl font-medium">
-                  Explore
-                </div>
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
+      ) : null}
 
-      {chosenTab === "Vendors" && (
+      {chosenTab === "Vendors" && favourites?.data?.vendors?.length === 0 ? (
+        <div className="flex flex-col items-center gap-1">
+          <Frown size={40} />
+          <div className="text-xl">You haven't favourited any vendors.</div>
+          <Link href={`/`} className="mt-2">
+            <div className="flex bg-yellow px-2 py-1 rounded-3xl font-medium">
+              Explore
+            </div>
+          </Link>
+        </div>
+      ) : chosenTab === "Vendors" && favourites?.data?.vendors?.length !== 0 ? (
         <div className="flex flex-col mt-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:px-5 md:gap-6">
           {favourites?.data.vendors &&
             favourites?.data.vendors.map(vendor => (
               <VendorCardRecommendations key={vendor.id} vendor={vendor} />
             ))}
         </div>
-      )}
-      {chosenTab === "Vendors" && (
-        <div className="flex flex-col mt-4 md:grid md:grid-cols-2 lg:grid-cols-4 px-5 gap-6">
-          {!!favourites?.data.vendors &&
-            favourites?.data.vendors.length === 0 && (
-              <div className="flex flex-col items-center gap-1">
-                <Frown size={40} />
-                <div className="text-xl">
-                  You haven't favourited any vendors.
-                </div>
-                <Link href={`/`} className="mt-2">
-                  <div className="flex bg-yellow px-2 py-1 rounded-3xl font-medium">
-                    Explore
-                  </div>
-                </Link>
-              </div>
-            )}
-        </div>
-      )}
+      ) : null}
 
       {user === null && (
         <div className="flex flex-col items-center gap-4">

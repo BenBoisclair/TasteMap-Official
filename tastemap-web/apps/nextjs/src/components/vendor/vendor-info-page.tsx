@@ -20,7 +20,7 @@ interface VendorInfoPageProps {
 
 export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
   return (
-    <div id="InfoPage" className="whitespace-pre-line py-8 text-sm">
+    <div id="InfoPage" className="whitespace-pre-line pt-6 text-sm bg-white">
       <div className="px-5">
         <div className="flex items-center gap-1">
           <Info size={25} />
@@ -30,7 +30,7 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
           {vendor.about}
         </div>
       </div>
-      {vendor?.informationItems.length > 0 && (
+      {!!vendor.informationItems && (
         <InformationSection InformationItems={vendor?.informationItems} />
       )}
       {vendor?.ingredients && (
@@ -53,15 +53,15 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
           {vendor.priceRange}
         </div>
       </div>
-      {vendor?.media.length > 0 && <MediaSection media={vendor?.media} />}
-      {vendor?.paymentOptions.length > 0 && (
+      {!!vendor?.media?.length && <MediaSection media={vendor?.media} />}
+      {!!vendor?.paymentOptions && (
         <div className="mt-5 px-5">
           <div className="flex items-center gap-1">
             <Wallet size={25} />
             <h1 className="text-lg font-bold">Payment Options</h1>
           </div>
           <div className="mt-2 flex gap-3">
-            {vendor?.paymentOptions.map((option) => (
+            {vendor?.paymentOptions.map(option => (
               <Tag type="Facility" key={option.id} size="lg">
                 {option.name}
               </Tag>
@@ -85,7 +85,7 @@ export const InformationSection = ({
         <h1 className="text-lg font-bold">Flash Cards</h1>
       </div>
       <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-black">
-        {InformationItems?.map((InformationItem) => {
+        {InformationItems?.map(InformationItem => {
           return (
             <InformationCard item={InformationItem} key={InformationItem.id} />
           );
@@ -191,7 +191,7 @@ const MediaSection = ({ media }: { media?: Media[] }) => {
         <h1 className="text-lg font-bold">Media</h1>
       </div>
       <div className="no-scrollbar mt-2 flex h-full w-full gap-3 overflow-x-auto px-5 font-medium text-black">
-        {media?.map((oneMedia) => {
+        {media?.map(oneMedia => {
           return <MediaCard media={oneMedia} key={oneMedia.id} />;
         })}
       </div>

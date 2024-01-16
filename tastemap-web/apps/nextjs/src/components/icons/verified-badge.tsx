@@ -35,6 +35,7 @@ const VerifiedBadge = ({
             src="/mascot/TastyBoiGreeting.png"
             alt={"TastyBoi Verified"}
             fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{
               objectFit: "contain",
               transform: "translate(-1px, 2px) rotate(30deg)",
@@ -78,6 +79,7 @@ const VerifiedBadge = ({
             src="/mascot/TastyBoiGreeting.png"
             alt={"TastyBoi Verified"}
             fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{
               objectFit: "contain",
               transform: "translate(-1px, 2px) rotate(30deg)",

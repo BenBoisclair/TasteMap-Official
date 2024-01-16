@@ -95,6 +95,7 @@ const CategoryCardVariant = ({ category }: { category: Category }) => {
             src={category.imagePath}
             alt={category.name}
             fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: "cover" }}
           />
           <div className="absolute left-0 top-0 flex h-full w-full flex-col bg-gradient-to-b from-transparent from-30% to-black/30 "></div>

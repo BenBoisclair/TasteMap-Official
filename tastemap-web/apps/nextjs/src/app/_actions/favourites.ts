@@ -3,7 +3,8 @@
 import { db, eq } from "@acme/db";
 import { favourites, market, vendor } from "@acme/db/schema/schema";
 import { auth } from "@clerk/nextjs";
-import { getMarkets, getVendors } from "./actions";
+import { getMarkets } from "./actions";
+import { getVendors } from "./vendors";
 
 export async function getFavourites() {
   const { userId }: { userId: string | null } = auth();

@@ -1,52 +1,42 @@
-import { KeyboardEvent, FC } from "react";
+"use client";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Search } from "lucide-react";
-import { Tag } from "./tag";
+import { useDebounce } from "~/utils/useDebounce";
 
-interface SearchBarProps {
-  search: string;
-  tags?: string[];
-  onSearchChange: (search: string) => void;
-  onTagChange?: (tags: string[]) => void;
-  onTagRemove?: (index: number) => void;
-  onEnter?: () => void;
-}
+type SearchBarProps<T extends Array<object>> = {
+  setFilteredData: Dispatch<SetStateAction<T>>;
+  data: T;
+};
 
-const SearchBar: FC<SearchBarProps> = ({
-  search,
-  tags,
-  onSearchChange,
-  onTagChange,
-  onTagRemove,
-  onEnter,
-}) => {
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Backspace" && search.length === 0 && !!tags) {
-      event.preventDefault();
-      if (onTagRemove) {
-        onTagRemove(tags.length - 1);
-      }
+function SearchBar<T extends Array<object>>({
+  data,
+  setFilteredData,
+}: SearchBarProps<T>) {
+  const [search, setSearch] = useState<string>("");
+  const debouncedSearch = useDebounce(search);
+
+  useEffect(() => {
+    if (debouncedSearch.length > 0) {
+      const filtered = data?.filter((node: any) => {
+        const searchLower = debouncedSearch.toLowerCase();
+
+        const matchesName = node.name.toLowerCase().includes(searchLower);
+        const matchesAbout = node.about.toLowerCase().includes(searchLower);
+
+        return matchesName || matchesAbout;
+      });
+      setFilteredData(filtered as T);
+    } else {
+      setFilteredData(data);
     }
-
-    if (event.key === "Enter") {
-      event.preventDefault();
-      onEnter && onEnter();
-    }
-  };
+  }, [debouncedSearch, data]);
 
   return (
     <div id="SearchBar" className="px-5">
       <div className="flex w-full items-center gap-2 rounded-3xl bg-neutral px-3 py-2">
         <Search size={25} color="gray" />
-        {!!tags &&
-          onTagRemove &&
-          tags.map((tag, index) => (
-            <Tag type="Product" key={index} onClick={() => onTagRemove(index)}>
-              {tag}
-            </Tag>
-          ))}
         <input
-          onKeyDown={handleKeyDown}
-          onChange={e => onSearchChange(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
           value={search}
           className="w-full bg-transparent outline-none ring-0"
           placeholder="Shop name, tags, etc"
@@ -54,6 +44,6 @@ const SearchBar: FC<SearchBarProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default SearchBar;

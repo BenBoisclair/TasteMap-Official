@@ -31,12 +31,12 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
       </div>
       <div
         id="bannerWrapper"
-        className="w-full overflow-hidden"
+        className="w-full overflow-hidden "
         style={{ position: "relative", height: "240px" }}
       >
         <Image
           src={vendor?.bannerUrl ?? `https://placehold.co/600x400/png`}
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill={true}
           style={{
             objectFit: "cover",
@@ -67,7 +67,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
       <div
         ref={headerRef}
         id="vendorInfo"
-        className="w-full bg-white pb-5 text-black"
+        className="w-full bg-white pb-5 text-black rounded-b-3xl mb-1"
       >
         <div className="flex px-5 pt-5">
           <div className="flex grow flex-col">

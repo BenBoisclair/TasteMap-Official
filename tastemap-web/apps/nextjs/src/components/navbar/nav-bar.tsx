@@ -4,14 +4,22 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Heart, Menu, X } from "lucide-react";
+import { Heart, Menu, Search, X } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 import LogInButton from "../auth/log-in-button";
 import TasteMapFullLogo from "../icons/taste-map-logo-full";
 import { SideMenuSignedIn } from "./side-menu-signed-in";
 
-export function NavBar({ className = "" }: { className?: string }) {
+export function NavBar({
+  className = "",
+  page = "Home",
+  marketId,
+}: {
+  className?: string;
+  page?: "Home" | "Vendor" | "Market";
+  marketId?: string;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
@@ -30,7 +38,15 @@ export function NavBar({ className = "" }: { className?: string }) {
           <TasteMapFullLogo />
         </div>
         <div className="flex gap-4 items-center">
-          {/* <Search size={30} /> */}
+          {page !== "Vendor" && (
+            <Link
+              href={
+                page === "Home" ? `/vendors` : `/markets/${marketId}/vendors`
+              }
+            >
+              <Search size={28} />
+            </Link>
+          )}
           <Link href="/profile/favourites">
             <Heart strokeWidth={2} size={28} />
           </Link>

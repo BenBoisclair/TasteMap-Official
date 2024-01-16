@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
@@ -33,11 +31,13 @@ export default function VendorCardRecommendations({
               src={vendor.bannerUrl ?? ""}
               alt={`${vendor.name} Banner`}
               fill={true}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
                 objectFit: "cover",
               }}
               className=" rounded-3xl "
             />
+
             <div className="absolute top-0 w-full h-full flex flex-col items-end p-2.5">
               <FavouriteHeart
                 color="white"
@@ -58,34 +58,38 @@ export default function VendorCardRecommendations({
             </div>
           </div>
         )}
+        <Link
+          href={`/vendors/${vendor.id}?tab=Info`}
+          className="w-full h-full z-40"
+        />
       </div>
 
-      <Link href={`/vendors/${vendor.id}?tab=Info`}>
-        <div className="flex grow flex-col justify-between overflow-hidden">
+      <div className="flex grow flex-col justify-between overflow-hidden">
+        <Link href={`/vendors/${vendor.id}?tab=Info`}>
           <h1 className="line-clamp-2 font-bold">{vendor.name}</h1>
+        </Link>
 
-          <div className="flex items-center gap-2">
-            <Ratings
-              average={vendor?.ratings?.average}
-              total={vendor?.ratings?.total}
-            />
-            {vendor.isVerified && <VerifiedBadge toggleBorder={false} />}
-          </div>
-          <div className="mt-2 flex gap-1">
-            {productTags.length > 0 &&
-              productTags.slice(0, 2).map(tag => (
-                <Tag type={tag.type} key={tag.id} size="default">
-                  {tag.name}
-                </Tag>
-              ))}
-            {productTags.length > 0 && productTags?.length > 2 && (
-              <Tag type="Product" size="default">
-                +{productTags?.length - 2}
-              </Tag>
-            )}
-          </div>
+        <div className="flex items-center gap-2">
+          <Ratings
+            average={vendor?.ratings?.average}
+            total={vendor?.ratings?.total}
+          />
+          {vendor.isVerified && <VerifiedBadge toggleBorder={false} />}
         </div>
-      </Link>
+        <div className="mt-2 flex gap-1">
+          {productTags.length > 0 &&
+            productTags.slice(0, 2).map(tag => (
+              <Tag type={tag.type} key={tag.id} size="default">
+                {tag.name}
+              </Tag>
+            ))}
+          {productTags.length > 0 && productTags?.length > 2 && (
+            <Tag type="Product" size="default">
+              +{productTags?.length - 2}
+            </Tag>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

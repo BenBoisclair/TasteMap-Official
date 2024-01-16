@@ -23,20 +23,20 @@ export const VendorCard = ({
   return (
     <div className="flex w-[210px] flex-col">
       <div className="relative flex h-[160px] w-[210px] place-content-center overflow-hidden rounded-3xl">
-        <Link href={`/vendors/${vendor.id}?tab=Info`}>
-          {vendor.bannerUrl ? (
-            <Image
-              src={vendor.bannerUrl ?? ""}
-              alt={`${vendor.name}'s Banner`}
-              fill={true}
-              style={{ objectFit: "cover" }}
-            />
-          ) : (
-            <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
-              <TasteMapLogo size={100} />
-            </div>
-          )}
-        </Link>
+        {vendor.bannerUrl ? (
+          <Image
+            src={vendor.bannerUrl ?? ""}
+            alt={`${vendor.name}'s Banner`}
+            fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <div className="flex h-[160px] w-[210px] shrink-0 items-center justify-center rounded-3xl bg-neutral">
+            <TasteMapLogo size={100} />
+          </div>
+        )}
+
         <div className="absolute top-0 flex h-full w-full items-start justify-end p-2 gap-2 pointer-events-none">
           <VerifiedBadge size="sm" />
           <FavouriteHeart
@@ -45,6 +45,10 @@ export const VendorCard = ({
             isFavourite={vendor.isFavourite}
           />
         </div>
+        <Link
+          href={`/vendors/${vendor.id}?tab=Info`}
+          className="absolute top-0 w-full h-full"
+        />
       </div>
 
       <div className="mt-1 flex flex-col">

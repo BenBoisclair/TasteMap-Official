@@ -44,7 +44,7 @@ export default async function MarketPage({
 
   return (
     <div className="relative bg-neutral-200">
-      <NavBar />
+      <NavBar page="Market" marketId={marketId} />
       <MarketHeader market={market} />
       <Tabs tabs={["Highlights", "Map & Info", "Reviews"]} />
 

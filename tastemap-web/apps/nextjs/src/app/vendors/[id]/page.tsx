@@ -1,10 +1,7 @@
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { Tag, Vendor } from "~/types/types";
-import fetchAt from "~/utils/fetchAt";
-import queryClient from "~/utils/queryClient";
+import { Tag } from "~/types/types";
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
-import { db } from "@acme/db";
+import { getVendor } from "~/app/_actions/vendors";
 
 export async function generateMetadata({
   params,
@@ -37,13 +34,8 @@ export default async function VendorPage({
 }: {
   params: { id: string };
 }) {
-  await queryClient.prefetchQuery({
-    queryKey: ["vendor", vendorId],
-    queryFn: () => fetchAt<Vendor>(`/api/vendors/${vendorId}`),
-  });
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <VendorView params={{ id: vendorId }} />
-    </HydrationBoundary>
-  );
+  const vendor = await getVendor(vendorId);
+
+  if (!vendor) return;
+  return <VendorView vendor={vendor} />;
 }

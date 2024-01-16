@@ -17,14 +17,13 @@ export function MarketCard({ market }: { market: Market }) {
   return (
     <div className="shrink-0 overflow-hidden">
       <div className="relative flex h-[120px] w-[316px] place-content-center overflow-hidden rounded-3xl">
-        <Link href={`/market/${market.id}?tab=Highlights`}>
-          <Image
-            src={market.bannerUrl || ""}
-            alt={`${market.name}'s Banner`}
-            fill={true}
-            style={{ objectFit: "cover" }}
-          />
-        </Link>
+        <Image
+          src={market.bannerUrl || ""}
+          alt={`${market.name}'s Banner`}
+          fill={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: "cover" }}
+        />
 
         <div className="absolute flex h-full w-full flex-col justify-between p-3 bg-transparent pointer-events-none">
           <div className="flex justify-end">
@@ -45,10 +44,14 @@ export function MarketCard({ market }: { market: Market }) {
             {market.isVerified && <VerifiedBadge />}
           </div>
         </div>
+        <Link
+          href={`/markets/${market.id}?tab=Highlights`}
+          className="absolute top-0 w-full h-full"
+        />
       </div>
 
       <div className="mt-[10px] flex flex-col">
-        <Link href={`/market/${market.id}?tab=Highlights`}>
+        <Link href={`/markets/${market.id}?tab=Highlights`}>
           <h1 className=" text-xl font-black">{market.name}</h1>
           <h2 className="font-medium">{market.type}</h2>
         </Link>
