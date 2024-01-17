@@ -1,5 +1,5 @@
 import { remember } from "@epic-web/remember";
-import { drizzle } from "drizzle-orm/postgres-js";
+import { PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
 import * as schema from "./schema/schema";
@@ -8,8 +8,34 @@ import * as schema from "./schema/schema";
 
 export * from "drizzle-orm";
 
-const connectionString = process.env.DATABASE_URL!;
+if (!process.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL");
+}
 
-const client = postgres(connectionString);
+let db: PostgresJsDatabase<typeof schema>;
+if (process.env.NODE_ENV === "development") {
+  db = singleton("db", () => {
+    if (!process.env.DATABASE_URL) {
+      throw new Error("Missing DATABASE_URL");
+    }
+    // const migrationClient = postgres(process.env.DATABASE_URL, { max: 1 });
+    // migrate(drizzle(migrationClient), {
+    //   migrationsFolder: "app/db/migrations",
+    // });
+    const queryClient = postgres(process.env.DATABASE_URL);
+    return drizzle(queryClient, { schema });
+  });
+}
+if (process.env.NODE_ENV === "production") {
+  const queryClient = postgres(process.env.DATABASE_URL);
+  db = drizzle(queryClient, { schema });
+}
 
-export const db = drizzle(client, { schema });
+export function singleton<Value>(name: string, value: () => Value): Value {
+  const yolo = global as any;
+  yolo.__singletons ??= {};
+  yolo.__singletons[name] ??= value();
+  return yolo.__singletons[name];
+}
+
+export { db };
