@@ -8,7 +8,7 @@ import RatingStarIcon from "../../icons/rating-star-icon";
 import { ReviewsSkeleton } from "../../skeletons/reviews-skeleton";
 import AspectBar from "./aspect-bar";
 import ReviewItem from "./review-card";
-import WriteReviewButton from "~/components/write-review-button";
+import WriteReviewButton from "~/components/sections/RatingsAndReviews/write-review-button";
 
 interface RatingAndReviewSectionProps {
   id: string;

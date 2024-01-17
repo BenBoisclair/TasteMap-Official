@@ -8,7 +8,7 @@ import VerifiedBadge from "../icons/verified-badge";
 import { Ratings } from "../sections/RatingsAndReviews/ratings";
 import { Tag } from "../tag";
 import FavouriteHeart from "../favouriteHeart";
-import DistancePin from "../distance-pin";
+import DistancePin from "./distance-pin";
 
 export function MarketCard({ market }: { market: Market }) {
   const productTags = market?.tags?.filter(tag => tag.type === "Product");

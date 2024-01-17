@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { MessageSquarePlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { WriteReviewModal } from "./sections/RatingsAndReviews/write-review-modal";
+import { WriteReviewModal } from "./write-review-modal";
 import { cn } from "~/utils/cn";
 
 interface openWriteReviewModalProps {

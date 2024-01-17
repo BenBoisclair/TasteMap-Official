@@ -1,15 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Heart, Menu, Search, X } from "lucide-react";
+import { Heart, Menu, Search } from "lucide-react";
 
 import { cn } from "~/utils/cn";
-import LogInButton from "../auth/log-in-button";
 import TasteMapFullLogo from "../icons/taste-map-logo-full";
-import { SideMenuSignedIn } from "./side-menu-signed-in";
+import SideMenu from "./sidebar-menu";
 
 export function NavBar({
   className = "",
@@ -41,7 +38,7 @@ export function NavBar({
           {page !== "Vendor" && (
             <Link
               href={
-                page === "Home" ? `/vendors` : `/market/${marketId}/vendors`
+                page === "Home" ? `/vendors` : `/markets/${marketId}/vendors`
               }
             >
               <Search size={28} />
@@ -70,74 +67,4 @@ export function NavBar({
   );
 }
 
-export const SideMenu = ({
-  isMenuOpen,
-  toggleMenu,
-}: {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
-}) => {
-  return (
-    <>
-      <div
-        className={cn(
-          `fixed left-0 top-0 z-[200] h-screen w-[300px] bg-white duration-500 ease-in-out`,
-          {
-            "left-[0%]": isMenuOpen,
-            "left-[-100%]": !isMenuOpen,
-          }
-        )}
-      >
-        <div className="h-full w-full">
-          <div className="flex cursor-pointer  justify-end p-4">
-            <X size={28} onClick={() => toggleMenu()} />
-          </div>
-          <div className="flex h-full px-5 pb-5">
-            <SignedOut>
-              <div className="flex h-full flex-col items-center">
-                <span className="mb-2 font-medium">
-                  Join us in supporting{" "}
-                  <span className="text-green">local Tourism!</span>
-                </span>
-                <LogInButton />
-                <Link
-                  href={`/`}
-                  className="mt-5 w-full border-b-2 border-neutral py-5"
-                >
-                  <span className="text-xl font-bold">Home</span>
-                </Link>
-                <GeneralSideBar />
-                <div className="flow-col flex w-full grow items-end justify-center">
-                  <Image
-                    src={`/mascot/TastyBoiSurprised.png`}
-                    alt="TastyBoi!"
-                    width={200}
-                    height={300}
-                  />
-                </div>
-              </div>
-            </SignedOut>
-            <SignedIn>
-              <SideMenuSignedIn />
-            </SignedIn>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
 export default NavBar;
-
-export const GeneralSideBar = () => {
-  return (
-    <div className="flex w-full flex-col gap-4 border-b-2 border-neutral py-5 text-lg font-bold">
-      <span className=" text-base text-neutral-400 font-medium">General</span>
-      {/* <span>Language</span>
-                  <span>FAQs</span>
-                  <span>Report issues</span> */}
-      <Link href={`/policy`}>
-        <span>Privacy Policy</span>
-      </Link>
-    </div>
-  );
-};

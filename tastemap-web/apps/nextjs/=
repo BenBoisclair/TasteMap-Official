@@ -1,4 +1,0 @@
-../..                                    |  WARN  `node_modules` is present. Lockfile only installation will make it out-of-date
- ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  # isn't supported by any available resolver.
-
-This error happened while installing a direct dependency of /Users/benedictboisclair/Projects/TasteMap-Official/tastemap-web/apps/nextjs
