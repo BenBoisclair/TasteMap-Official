@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning={true}>
+      <html lang="en">
         <Head>
           <script
             type="application/ld+json"

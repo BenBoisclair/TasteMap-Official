@@ -42,7 +42,7 @@ export default async function MarketPage({
   const market = await getMarket(marketId);
   const activeTab = searchParams["tab"] || "Highlights";
 
-  if (!market) return;
+  if (market === undefined) return;
 
   return (
     <div className="relative bg-neutral-200">

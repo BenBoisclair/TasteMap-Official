@@ -16,7 +16,7 @@ export default async function VendorsPage({
   }
 
   const vendors = await getVendors({ tag: tag });
-  if (!vendors) return;
+  if (vendors === undefined) return;
   return (
     <SearchVendorsUI
       vendors={vendors}
