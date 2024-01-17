@@ -38,7 +38,7 @@ export function NavBar({
           {page !== "Vendor" && (
             <Link
               href={
-                page === "Home" ? `/vendors` : `/markets/${marketId}/vendors`
+                page === "Home" ? `/vendors` : `/market/${marketId}/vendors`
               }
             >
               <Search size={28} />
