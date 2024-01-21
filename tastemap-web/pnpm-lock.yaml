@@ -83,6 +83,9 @@ importers:
       next:
         specifier: ^14.0.4
         version: 14.0.4(react-dom@18.2.0)(react@18.2.0)
+      next-plausible:
+        specifier: ^3.12.0
+        version: 3.12.0(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
       next-safe-action:
         specifier: ^6.0.1
         version: 6.0.1(next@14.0.4)(react@18.2.0)
@@ -4246,6 +4249,18 @@ packages:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
     dev: true
+
+  /next-plausible@3.12.0(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-SSkEqKQ6PgR8fx3sYfIAT69k2xuCUXO5ngkSS19CjxY97lAoZxsfZpYednxB4zo0mHYv87JzhPynrdBPlCBVHg==}
+    peerDependencies:
+      next: ^11.1.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      next: 14.0.4(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /next-safe-action@6.0.1(next@14.0.4)(react@18.2.0):
     resolution: {integrity: sha512-iXkjorrUrz3sHMo1MVdBx5WzcCGktrBe+XqMfBav++eegXMdOkZB2+LqUTPXmaidv0lo+/fSRLOcNmr/S9IqTw==}
