@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import PlausibleProvider from "next-plausible";
 
 export function Providers(props: {
   children: React.ReactNode;
