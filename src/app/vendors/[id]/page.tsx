@@ -1,7 +1,7 @@
-import { Tag, Vendor } from "~/types/types";
+import { Tag, Vendor } from "@/types/types";
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
-import { getVendor, getVendors } from "~/app/_actions/vendors";
+import { getVendor, getVendors } from "@/app/_actions/vendors";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +14,7 @@ export async function generateMetadata({
 
   const vendor = await fetch(
     process.env.NEXT_PUBLIC_URL + `/api/vendors/${vendorId}`
-  ).then(res => res.json());
+  ).then((res) => res.json());
 
   return {
     title: vendor.name,
