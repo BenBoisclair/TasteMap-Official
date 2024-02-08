@@ -1,10 +1,10 @@
 "use client";
 import { useInView } from "react-intersection-observer";
-import RatingAndReviewSection from "~/components/sections/RatingsAndReviews/rating-and-reviews-section";
-import Tabs from "~/components/tabs";
-import VendorHeader from "~/components/vendor/vendor-header";
-import VendorInfoPage from "~/components/vendor/vendor-info-page";
-import type { Vendor } from "~/types/types";
+import RatingAndReviewSection from "@/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import Tabs from "@/components/tabs";
+import VendorHeader from "@/components/vendor/vendor-header";
+import VendorInfoPage from "@/components/vendor/vendor-info-page";
+import type { Vendor } from "@/types/types";
 import { useSearchParams } from "next/navigation";
 
 export default function VendorView({ vendor }: { vendor: Vendor }) {
