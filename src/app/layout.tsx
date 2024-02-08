@@ -17,6 +17,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://taste-map.com"),
   title: {
     template: "%s | TasteMap",
     default: "TasteMap",
@@ -34,6 +35,9 @@ export const metadata: Metadata = {
       url: "https://www.linkedin.com/in/benedict-boisclair-971958169/",
     },
   ],
+  openGraph: {
+    images: "/opengraph-image.png",
+  },
 };
 
 export default function Layout(props: { children: React.ReactNode }) {
