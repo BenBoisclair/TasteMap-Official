@@ -18,7 +18,9 @@ interface VendorInfoPageProps {
 
 export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
   return (
-    <div id="InfoPage" className="whitespace-pre-line pt-6 text-sm bg-white">
+    <div
+      id="InfoPage"
+      className="whitespace-pre-line pt-6 text-sm bg-white pb-10">
       <div className="px-5">
         <div className="flex items-center gap-1">
           <Info size={25} />

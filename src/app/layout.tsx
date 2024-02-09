@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 
 import ttnorms from "@/fonts/ttnorms";
 
+// import { Inter } from "next/font/google";
+
 import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -15,6 +17,8 @@ import PlausibleProvider from "next-plausible";
 export const viewport: Viewport = {
   themeColor: "#FFD14E",
 };
+
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://taste-map.com"),

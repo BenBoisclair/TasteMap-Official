@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 if (process.env.NODE_ENV === "production") {
-  const queryClient = postgres(process.env.DATABASE_URL);
+  const queryClient = postgres(process.env.DATABASE_URL, { prepare: false });
   db = drizzle(queryClient, { schema });
 }
 

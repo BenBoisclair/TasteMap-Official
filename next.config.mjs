@@ -1,7 +1,6 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   images: {
@@ -21,7 +20,7 @@ const config = {
       {
         protocol: "https",
         hostname: "adlvkgocidkmifehftjz.supabase.co",
-        port: "",
+        port: "5432",
         pathname: "/**",
       },
     ],
