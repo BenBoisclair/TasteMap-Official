@@ -20,7 +20,7 @@ const config = {
       {
         protocol: "https",
         hostname: "adlvkgocidkmifehftjz.supabase.co",
-        port: "5432",
+        port: "",
         pathname: "/**",
       },
     ],
