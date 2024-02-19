@@ -26,6 +26,7 @@ export function HomeScreen() {
       })
     )
     if (successResponse.error) {
+      console.error(successResponse.error)
       setIsError(true)
       return null
     }

@@ -46,7 +46,7 @@ export const CoreSummary = () => {
                 books
                   .filter((book) => book.type === 'INCOME')
                   .map((book) => Number(book.amount))
-                  .reduce((a, b) => a + b)
+                  .reduce((a, b) => a + b, 0)
               )} บาท`}
           </Text>
         </YStack>
@@ -74,7 +74,7 @@ export const CoreSummary = () => {
                 books
                   .filter((book) => book.type === 'EXPENSE')
                   .map((book) => Number(book.amount))
-                  .reduce((a, b) => a + b)
+                  .reduce((a, b) => a + b, 0)
               )} บาท`}
           </Text>
         </YStack>
@@ -119,7 +119,7 @@ export const CoreSummary = () => {
                   .map((book) =>
                     book.type === 'EXPENSE' ? Number(-book.amount) : Number(book.amount)
                   )
-                  .reduce((a, b) => a + b)
+                  .reduce((a, b) => a + b, 0)
               )} บาท`}
           </Text>
         </YStack>

@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tastemap.app"
+      "bundleIdentifier": "com.taste-map.app"
     },
     "android": {
       "adaptiveIcon": {

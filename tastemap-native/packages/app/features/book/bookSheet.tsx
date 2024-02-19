@@ -358,7 +358,7 @@ const BookSheetBottom = ({ refetch }: { refetch: BookRefetch }) => {
           fontWeight="700"
           letterSpacing={0.16}
         >
-          เพิ่ม
+          {ledgerOperation.action === 'ADD' ? 'เพิ่ม' : 'เปลี่ยน'}
         </Text>
       </Button>
       <Button

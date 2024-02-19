@@ -524,7 +524,7 @@ const CoreBookFilledLists = ({
           {addComma(
             books
               .map((e) => Number(`${e.type === 'EXPENSE' ? '-' : ''}${e.amount}`))
-              .reduce((a, b) => a + b)
+              .reduce((a, b) => a + b, 0)
           )}
         </Text>
       </YStack>
