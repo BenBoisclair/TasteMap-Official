@@ -13,6 +13,7 @@ interface TabProps {
 }
 
 export default function Tabs({ tabs, inView }: TabProps) {
+  const [activeTab, setActiveTab] = React.useState(tabs[0]);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   return (
@@ -24,11 +25,23 @@ export default function Tabs({ tabs, inView }: TabProps) {
       <div className="flex justify-center">
         <div className="flex w-full justify-between p-2 md:justify-around text-center">
           {tabs.slice(0, 3).map((tab, index) => {
+            let isActive = false;
             const tabSearchParams = new URLSearchParams(
               searchParams.toString()
             );
-            tabSearchParams.set("tab", tab);
-            const isActive = searchParams.get("tab") === tab;
+
+            // If there are no search params, set the tab to the first one
+            if (searchParams.get("tab") === null) {
+              tabSearchParams.set("tab", activeTab);
+              if (activeTab === tab) {
+                isActive = true;
+              }
+            } else {
+              tabSearchParams.set("tab", tab);
+              if (searchParams.get("tab") === tab) {
+                isActive = true;
+              }
+            }
             const tabUrl = createUrl(pathname, tabSearchParams);
             return (
               <Link

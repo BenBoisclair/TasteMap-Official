@@ -1,4 +1,4 @@
-import { getVendors } from "@/app/_actions/vendors";
+import { getVendors } from "@/actions/vendors";
 import { VendorCard } from "./vendor-card";
 import Section from "@/components/section";
 

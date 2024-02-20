@@ -2,7 +2,7 @@
 import type { QueryStatus } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 
-import type { Market } from "~/types/types";
+import type { Market } from "@/types/types";
 import fetchAt from "./fetchAt";
 
 const useMarket = (

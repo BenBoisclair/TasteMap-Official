@@ -1,6 +1,6 @@
 import Section from "@/components/section";
 import { VendorCard } from "../RecommendedForYou/vendor-card";
-import { getVendors } from "@/app/_actions/vendors";
+import { getVendors } from "@/actions/vendors";
 
 export const dynamic = "force-dynamic";
 

@@ -1,4 +1,4 @@
-import { getVendors } from "../_actions/vendors";
+import { getVendors } from "../../actions/vendors";
 import SearchVendorsUI from "./search-vendors-ui";
 
 export const dynamic = "force-dynamic";

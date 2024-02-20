@@ -1,6 +1,7 @@
 import { createInsertSchema } from "drizzle-zod";
 
-import { review, reviewAspect } from "@/db/schema/schema";
+import { market, review, reviewAspect } from "@/db/schema/schema";
+import { z } from "zod";
 
 export interface Author {
   id: string;
@@ -162,3 +163,7 @@ export type Favourites = {
 // Zod Validators
 export const insertReviewSchema = createInsertSchema(review);
 export const insertReviewAspectSchema = createInsertSchema(reviewAspect);
+
+export const insertMarketSchema = createInsertSchema(market, {
+  bannerUrl: z.string().url(),
+});

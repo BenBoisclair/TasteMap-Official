@@ -1,9 +1,9 @@
 import { addDays, format, isWithinInterval } from "date-fns";
 
-import type { OpeningHour } from "~/types/types";
+import type { OpeningHour } from "@/types/types";
 
 export default function isMarketOpen(
-  openingHours: OpeningHour[] | OpeningHour,
+  openingHours: OpeningHour[] | OpeningHour
 ): boolean {
   const now = new Date();
   const today = format(now, "EEEE"); // Format day as "Monday", "Tuesday", etc.
@@ -26,14 +26,14 @@ export default function isMarketOpen(
     now.getMonth(),
     now.getDate(),
     openTime[0],
-    openTime[1],
+    openTime[1]
   );
   let closingDate = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
     closeTime[0],
-    closeTime[1],
+    closeTime[1]
   );
 
   // Adjust closingDate to next day if closing time is earlier than opening time

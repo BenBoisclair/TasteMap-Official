@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { favouriteAction } from "@/app/_actions/actions";
+import { favouriteAction } from "@/actions/favourites";
 import { cn } from "@/utils/cn";
 
 type FavouriteHeartProps = {

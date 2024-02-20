@@ -59,7 +59,7 @@ export const userPreferencesRelations = relations(
       fields: [userPreferences.userId],
       references: [users.id],
     }),
-  }),
+  })
 );
 
 export const informationItem = pgTable("information_item", {
@@ -81,22 +81,26 @@ export const informationItemRelations = relations(
       fields: [informationItem.vendorId],
       references: [vendor.id],
     }),
-  }),
+  })
 );
 
-export const favourites = pgTable("favourites", {
-  id: varchar("id", { length: 20 }).primaryKey().notNull(),
-  marketId: varchar("market_id").references(() => market.id),
-  vendorId: varchar("vendor_id").references(() => vendor.id),
-  userExternalId: varchar("user_external_id")
-    .notNull()
-    .references(() => users.externalId),
+export const favourites = pgTable(
+  "favourites",
+  {
+    id: varchar("id", { length: 20 }).primaryKey().notNull(),
+    marketId: varchar("market_id").references(() => market.id),
+    vendorId: varchar("vendor_id").references(() => vendor.id),
+    userExternalId: varchar("user_external_id")
+      .notNull()
+      .references(() => users.externalId),
 
-  createdAt: timestamp("created_at").defaultNow(),
-}, (t) => ({
-  marketIdUserId: unique('marketId_UserId').on(t.marketId, t.userExternalId),
-  vendorIdUserId: unique('vendorId_UserId').on(t.vendorId, t.userExternalId)
-}));
+    createdAt: timestamp("created_at").defaultNow(),
+  }
+  // (t) => ({
+  //   marketIdUserId: unique("marketId_UserId").on(t.marketId, t.userExternalId),
+  //   vendorIdUserId: unique("vendorId_UserId").on(t.vendorId, t.userExternalId),
+  // })
+);
 
 export const favouritesRelations = relations(favourites, ({ one }) => ({
   user: one(users, {
@@ -129,10 +133,11 @@ export const market = pgTable("market", {
   history: text("history").notNull(),
   historyTH: text("history_th"),
 
-  latitude: numeric("latitude"),
-  longitude: numeric("longitude"),
+  latitude: numeric("latitude").notNull().default("0"),
+  longitude: numeric("longitude").notNull().default("0"),
 
   isVerified: boolean("is_verified").default(false),
+  isActive: boolean("is_active").default(true),
 
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -198,7 +203,7 @@ export const marketsOnTags = pgTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.marketId, t.tagId] }),
-  }),
+  })
 );
 
 export const marketOnTagsRelation = relations(marketsOnTags, ({ one }) => ({
@@ -250,11 +255,11 @@ export const review = pgTable(
       .references(() => users.externalId),
 
     createdAt: timestamp("created_at").defaultNow(),
-  },
-  (t) => ({
-    authorIdToMarketId: unique().on(t.authorId, t.marketReviewedID),
-    authorIdToVendorId: unique().on(t.authorId, t.vendorReviewedID),
-  }),
+  }
+  // (t) => ({
+  //   authorIdToMarketId: unique().on(t.authorId, t.marketReviewedID),
+  //   authorIdToVendorId: unique().on(t.authorId, t.vendorReviewedID),
+  // })
 );
 
 export const reviewRelations = relations(review, ({ one, many }) => ({
@@ -315,7 +320,7 @@ export const reviewAspect = pgTable(
   },
   (t) => ({
     aspectIdToReviewId: unique().on(t.id, t.reviewId),
-  }),
+  })
 );
 
 export const reviewAspectRelations = relations(reviewAspect, ({ one }) => ({
@@ -396,7 +401,7 @@ export const vendorOnPaymentOption = pgTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.vendorId, t.paymentOptionId] }),
-  }),
+  })
 );
 
 export const vendorOnPaymentOptionRelations = relations(
@@ -410,7 +415,7 @@ export const vendorOnPaymentOptionRelations = relations(
       fields: [vendorOnPaymentOption.paymentOptionId],
       references: [paymentOption.id],
     }),
-  }),
+  })
 );
 
 export const vendorsOnTags = pgTable(
@@ -425,7 +430,7 @@ export const vendorsOnTags = pgTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.vendorId, t.tagId] }),
-  }),
+  })
 );
 
 export const vendorOnTagsRelation = relations(vendorsOnTags, ({ one }) => ({
@@ -509,10 +514,10 @@ export const nativeUser = pgTable(
   (table) => {
     return {
       nativeUserPhoneNumberKey: unique("native_user_phone_number_key").on(
-        table.phoneNumber,
+        table.phoneNumber
       ),
     };
-  },
+  }
 );
 
 export const nativeBook = pgTable("native_book", {

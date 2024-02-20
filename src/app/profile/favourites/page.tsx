@@ -2,7 +2,7 @@ import { Frown, LogIn } from "lucide-react";
 import { MarketCard } from "@/components/market/market-card";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
-import { getFavourites } from "@/app/_actions/favourites";
+import { getFavourites } from "@/actions/favourites";
 import VendorCardRecommendations from "@/components/sections/RecommendedForYou/vendor-card-recommendations";
 import BackButton from "@/components/back-button";
 import { currentUser } from "@clerk/nextjs";

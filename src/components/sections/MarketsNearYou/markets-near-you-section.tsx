@@ -1,11 +1,11 @@
 import Section from "@/components/section";
 import { MarketCard } from "../../market/market-card";
-import { getMarkets } from "@/app/_actions/actions";
+import { getMarkets } from "@/actions/markets";
 
 export const dynamic = "force-dynamic";
 
 export async function MarketsNearYouSection() {
-  const markets = await getMarkets();
+  const markets = await getMarkets({});
 
   if (!markets) return;
 

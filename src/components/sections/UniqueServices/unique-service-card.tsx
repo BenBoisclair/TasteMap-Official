@@ -1,11 +1,11 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Dialog } from "@headlessui/react";
 import { Coins } from "lucide-react";
 
-import type { UniqueService } from "~/types/types";
+import type { UniqueService } from "@/types/types";
 import TasteMapLogo from "../../assets/taste-map-logo";
 
 interface UniqueServiceCardProps {
@@ -18,8 +18,7 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
     <>
       <div
         onClick={() => setIsServiceOpen(true)}
-        className="relative h-[160px] w-[210px] flex-shrink-0 rounded-3xl text-start text-white"
-      >
+        className="relative h-[160px] w-[210px] flex-shrink-0 rounded-3xl text-start text-white">
         <Image
           src={service.imageUrl || `https://placehold.co/600x400/png`}
           fill={true}
@@ -46,14 +45,12 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
       <Dialog
         open={isServiceOpen}
         onClose={() => setIsServiceOpen(false)}
-        className={"fixed inset-0 z-[200] flex items-center justify-center"}
-      >
+        className={"fixed inset-0 z-[200] flex items-center justify-center"}>
         <div className="fixed inset-0 bg-black/20" aria-hidden="true" />
         <Dialog.Panel
           className={
             "z-[200] flex h-fit w-fit flex-col rounded-3xl bg-white p-5"
-          }
-        >
+          }>
           <div className="mb-4 flex">
             <TasteMapLogo size={24} />
           </div>
@@ -69,16 +66,14 @@ const UniqueServiceCard = ({ service }: UniqueServiceCardProps) => {
             {service.name}
           </Dialog.Title>
           <Dialog.Description
-            className={"mt-2 flex items-center gap-1 text-lg"}
-          >
+            className={"mt-2 flex items-center gap-1 text-lg"}>
             <Coins size={20} />
             <div className=" font-medium">Price:</div>
             <div> {service.price <= 0 ? "Free" : service.price + " baht"}</div>
           </Dialog.Description>
           <button
             onClick={() => setIsServiceOpen(false)}
-            className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600"
-          >
+            className="mt-5 rounded-3xl bg-yellow py-2 hover:bg-yellow-600">
             <div className="text-xl font-bold">Got it!</div>
           </button>
         </Dialog.Panel>

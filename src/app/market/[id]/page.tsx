@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getMarket } from "@/app/_actions/markets";
+import { getMarket } from "@/actions/markets";
 import MarketHeader from "@/components/market/market-header";
 import HighlightsPage from "@/components/market/market-highlights";
 import MarketInfoPage from "@/components/market/market-info-page";

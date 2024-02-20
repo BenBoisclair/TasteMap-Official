@@ -1,5 +1,5 @@
 import VendorCardRecommendations from "@/components/sections/RecommendedForYou/vendor-card-recommendations";
-import { getVendors } from "@/app/_actions/vendors";
+import { getVendors } from "@/actions/vendors";
 import BackButton from "@/components/back-button";
 
 export default async function RecommendationsPage({
