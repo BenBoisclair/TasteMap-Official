@@ -32,5 +32,14 @@
     "preview4": {
       "distribution": "internal"
     }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "benedictb@taste-map.com",
+        "ascAppId": "6478119363",
+        "appleTeamId": "6LR85XKBZ7"
+      }
+    }
   }
 }

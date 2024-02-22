@@ -16,7 +16,7 @@
     "@tamagui/lucide-icons": "latest",
     "@tamagui/shorthands": "latest",
     "@tamagui/themes": "latest",
-    "burnt": "^0.11.0",
+    "burnt": "^0.12.2",
     "expo-constants": "~14.4.2",
     "expo-image": "^1.5.1",
     "expo-linking": "~5.0.2",
