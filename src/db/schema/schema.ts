@@ -374,6 +374,7 @@ export const vendorRelations = relations(vendor, ({ one, many }) => ({
   promotions: many(promotion),
   media: many(mediaFiles),
   informationItems: many(informationItem),
+  products: many(product),
 }));
 
 export const paymentOption = pgTable("payment_option", {
@@ -466,12 +467,38 @@ export const promotion = pgTable("promotion", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const promotionRelations = relations(promotion, ({ one }) => ({
+export const promotionRelations = relations(promotion, ({ one, many }) => ({
   vendor: one(vendor, {
     fields: [promotion.vendorId],
     references: [vendor.id],
   }),
+  relatedProducts: many(product),
 }));
+
+export type Promotion = typeof promotion.$inferSelect;
+
+export const product = pgTable("product", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  name: text("name").notNull(),
+  nameTH: text("name_th"),
+  description: text("description"),
+  descriptionTH: text("description_th"),
+  price: integer("price"),
+  imageUrl: varchar("image_url", { length: 2000 }),
+  vendorId: varchar("vendor_id")
+    .notNull()
+    .references(() => vendor.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const productRelations = relations(product, ({ one }) => ({
+  vendor: one(vendor, {
+    fields: [product.vendorId],
+    references: [vendor.id],
+  }),
+}));
+
+export type Product = typeof product.$inferSelect;
 
 export const eventBanners = pgTable("event_banner", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
@@ -534,3 +561,30 @@ export const nativeBook = pgTable("native_book", {
   category: text("category").notNull(),
   amount: text("amount").notNull(),
 });
+
+export const vendorOrder = pgTable("vendor_order", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  userId: varchar("user_id", { length: 20 }).notNull(),
+  vendorId: varchar("vendor_id", { length: 20 }).notNull(),
+  total: integer("total").notNull(),
+  orderJson: jsonb("order_json"),
+  status: text("status").notNull(),
+
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const vendorOrderRelations = relations(vendorOrder, ({ one, many }) => ({
+  user: one(users, {
+    fields: [vendorOrder.userId],
+    references: [users.id],
+  }),
+  vendor: one(vendor, {
+    fields: [vendorOrder.vendorId],
+    references: [vendor.id],
+  }),
+  relatedProducts: many(product),
+  relatedPromotions: many(promotion),
+}));
+
+export type VendorOrderInsert = typeof vendorOrder.$inferInsert;
+export type VendorOrderSelect = typeof vendorOrder.$inferSelect;
