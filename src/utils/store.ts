@@ -100,7 +100,7 @@ export const useOfferStore = create<OfferStore>((set) => ({
         )
         .filter((promotion) => promotion.quantity > 0), // Remove the promotion if the quantity is 0
     })),
-  reset: () => set({ vendorId: "", products: [] }),
+  reset: () => set({ vendorId: "", products: [], promotions: [] }),
   getTotalPrice: () => {
     const totalProductPrice: number = useOfferStore
       .getState()
