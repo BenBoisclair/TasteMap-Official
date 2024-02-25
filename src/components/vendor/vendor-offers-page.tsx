@@ -1,6 +1,6 @@
 import { OffersType } from "@/app/vendors/[id]/vendor-view";
 import OfferForm from "./offer-form";
-import { auth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
 
@@ -15,7 +15,7 @@ export interface VendorOffersPageProps {
 }
 
 export default function VendorOffersPage({ offers }: VendorOffersPageProps) {
-  const { userId } = auth();
+  const { userId } = useAuth();
   return (
     <div className="bg-white px-5 py-5">
       <h3 className="text-xl font-bold">{VENDOR_OFFERS_PAGE.title}</h3>
