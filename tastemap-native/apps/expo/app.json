@@ -26,41 +26,40 @@
         "resizeMode": "contain",
         "backgroundColor": "#33BFBE"
       }
-      }
+    }
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#33BFBE"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#33BFBE"
-      },
-      "package": "com.tastemap.app"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "compileSdkVersion": 31,
-            "targetSdkVersion": 31,
-            "buildToolsVersion": "31.0.0"
-          },
-          "ios": {
-            "deploymentTarget": "13.4"
-          }
+    "package": "com.tastemap.app"
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  },
+  "plugins": [
+    "expo-router",
+    [
+      "expo-build-properties",
+      {
+        "android": {
+          "compileSdkVersion": 31,
+          "targetSdkVersion": 31,
+          "buildToolsVersion": "31.0.0"
+        },
+        "ios": {
+          "deploymentTarget": "13.4"
         }
-      ]
-    ],
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "4d57d021-8b4a-4a3c-ac8d-8a49c0639382"
       }
+    ]
+  ],
+  "extra": {
+    "router": {
+      "origin": false
+    },
+    "eas": {
+      "projectId": "fb2a835d-2f7f-42f3-acaf-77146ad02d38"
     }
   }
 }
