@@ -1,7 +1,6 @@
 {
   "expo": {
     "name": "tastemap",
-    "owner": "tastemap",
     "slug": "tastemap",
     "scheme": "tastemap",
     "version": "1.0.0",
@@ -16,7 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.taste-map.app",
@@ -25,6 +26,11 @@
         "image": "./assets/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#33BFBE"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fb2a835d-2f7f-42f3-acaf-77146ad02d38"
       }
     }
   },
