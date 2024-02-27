@@ -99,10 +99,10 @@ export default function Cart({ userId }: { userId: string }) {
             </p>
           </div>
           <textarea
+            value={additionalInfo ? additionalInfo : "No additional info."}
             disabled={true}
-            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40 text-black">
-            {additionalInfo ? additionalInfo : "No additional info."}
-          </textarea>
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40 text-black"
+          />
         </div>
       </div>
       <div className="bg-white p-4">
