@@ -100,7 +100,7 @@ export default function Cart({ userId }: { userId: string }) {
           </div>
           <textarea
             disabled={true}
-            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40">
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40 text-black">
             {additionalInfo ? additionalInfo : "No additional info."}
           </textarea>
         </div>
