@@ -12,7 +12,7 @@ export default async function CartUI({ orderId }: { orderId: string }) {
   const { orderJson, total, additionalInfo } = currentOrder;
   const orders = JSON.parse(orderJson as string);
 
-  const translatedInfo = await Translate(additionalInfo as string);
+  const translatedInfo = await Translate(additionalInfo || "");
   return (
     <>
       <div className="flex flex-col grow overflow-y-auto gap-1">
@@ -71,10 +71,10 @@ export default async function CartUI({ orderId }: { orderId: string }) {
             </p>
           </div>
           <textarea
+            value={translatedInfo ? translatedInfo : "ไม่มีข้อมูลเพิ่มเติม"}
             disabled={true}
-            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40">
-            {translatedInfo ? translatedInfo : "ไม่มีข้อมูลเพิ่มเติม"}
-          </textarea>
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40"
+          />
         </div>
       </div>
       <div className="bg-white p-4">

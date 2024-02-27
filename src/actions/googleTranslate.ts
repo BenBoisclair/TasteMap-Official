@@ -2,6 +2,7 @@
 import axios from "axios";
 
 export const Translate = async (text: string) => {
+  if (text === "") return "";
   try {
     const translation = await axios({
       url: `https://translation.googleapis.com/language/translate/v2?key=${process.env.GOOGLE_TRANSLATE_API_KEY}`,
