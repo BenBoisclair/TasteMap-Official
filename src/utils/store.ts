@@ -20,12 +20,14 @@ interface Promotion {
 }
 
 interface OfferStore {
-  vendorId: string;
-  setVendorId: (vendorId: string) => void;
+  products: Product[];
   promotions: Promotion[];
+  vendorId: string;
+  additionalInfo: string;
+  setAdditionalInfo: (additionalInfo: string) => void;
+  setVendorId: (vendorId: string) => void;
   addPromotion: (promotion: Promotion) => void;
   removePromotion: (promotionId: string) => void;
-  products: Product[];
   addProduct: (product: Product) => void;
   removeProduct: (productId: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -34,10 +36,12 @@ interface OfferStore {
 }
 
 export const useOfferStore = create<OfferStore>((set) => ({
-  vendorId: "",
-  setVendorId: (vendorId) => set({ vendorId }),
   products: [],
   promotions: [],
+  vendorId: "",
+  additionalInfo: "",
+  setAdditionalInfo: (additionalInfo) => set({ additionalInfo }),
+  setVendorId: (vendorId) => set({ vendorId }),
   addPromotion: (promotion) =>
     set((state) => {
       const existingPromotion = state.promotions.find(
@@ -100,7 +104,8 @@ export const useOfferStore = create<OfferStore>((set) => ({
         )
         .filter((promotion) => promotion.quantity > 0), // Remove the promotion if the quantity is 0
     })),
-  reset: () => set({ vendorId: "", products: [], promotions: [] }),
+  reset: () =>
+    set({ vendorId: "", products: [], promotions: [], additionalInfo: "" }),
   getTotalPrice: () => {
     const totalProductPrice: number = useOfferStore
       .getState()

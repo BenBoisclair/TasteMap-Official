@@ -1,7 +1,7 @@
 "use client";
 import { createOrder } from "@/actions/vendorOrder";
 import { useOfferStore } from "@/utils/store";
-import { ShoppingBasket } from "lucide-react";
+import { Info, ShoppingBasket } from "lucide-react";
 import { nanoid } from "nanoid";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ export default function Cart({ userId }: { userId: string }) {
   const totalPrice = useOfferStore((state) => state.getTotalPrice());
   const vendorId = useOfferStore((state) => state.vendorId);
   const resetCart = useOfferStore((state) => state.reset);
+  const additionalInfo = useOfferStore((state) => state.additionalInfo);
   const router = useRouter();
 
   const handleOrder = async () => {
@@ -22,6 +23,7 @@ export default function Cart({ userId }: { userId: string }) {
       userId: userId,
       total: totalPrice,
       orderJson: JSON.stringify({ products: products, promotions: promotions }),
+      additionalInfo: additionalInfo,
       status: "pending",
       relatedProducts: products.map((product) => product.id),
     };
@@ -89,6 +91,19 @@ export default function Cart({ userId }: { userId: string }) {
             </div>
           </div>
         ))}
+        <div className="bg-white px-5 pt-5 pb-6 flex flex-col gap-3 rounded-3xl">
+          <div className="flex items-center">
+            <Info size={25} />
+            <p className="ml-1 text-lg font-medium">
+              Additional Info for Vendor.
+            </p>
+          </div>
+          <textarea
+            disabled={true}
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40">
+            {additionalInfo ? additionalInfo : "No additional info."}
+          </textarea>
+        </div>
       </div>
       <div className="bg-white p-4">
         <div className="flex justify-between">

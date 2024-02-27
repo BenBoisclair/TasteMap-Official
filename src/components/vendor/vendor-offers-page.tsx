@@ -15,29 +15,13 @@ export interface VendorOffersPageProps {
 }
 
 export default function VendorOffersPage({ offers }: VendorOffersPageProps) {
-  const { userId } = useAuth();
   return (
     <div className="bg-white px-5 py-5">
       <h3 className="text-xl font-bold">{VENDOR_OFFERS_PAGE.title}</h3>
       <p className="mt-5 text-sm font-medium">
         {VENDOR_OFFERS_PAGE.description}
       </p>
-      {userId ? (
-        <OfferForm offers={offers} />
-      ) : (
-        <div className="bg-white px-5 py-5 mt-5 justify-center flex flex-col items-center">
-          <LogIn size={40} color="#33BFBE" />
-          <h3 className="text-xl mt-3">
-            Please{" "}
-            <Link
-              href={`/auth/sign-in`}
-              className="text-green underline underline-offset-2 cursor-pointer">
-              login
-            </Link>{" "}
-            to view offers.
-          </h3>
-        </div>
-      )}
+      <OfferForm offers={offers} />
     </div>
   );
 }

@@ -3,12 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { PromotionSchema } from "./promotion-item";
 import { ProductSchema } from "./product-item";
+import { Info } from "lucide-react";
+import { Translate } from "@/actions/googleTranslate";
 
 export default async function CartUI({ orderId }: { orderId: string }) {
   const currentOrder = await getOrder(orderId);
   if (!currentOrder) return <h1>Order not found</h1>;
-  const { orderJson, total } = currentOrder;
+  const { orderJson, total, additionalInfo } = currentOrder;
   const orders = JSON.parse(orderJson as string);
+
+  const translatedInfo = await Translate(additionalInfo as string);
   return (
     <>
       <div className="flex flex-col grow overflow-y-auto gap-1">
@@ -59,6 +63,19 @@ export default async function CartUI({ orderId }: { orderId: string }) {
             </div>
           </div>
         ))}
+        <div className="bg-white px-5 pt-5 pb-6 flex flex-col gap-3 rounded-3xl">
+          <div className="flex items-center">
+            <Info size={25} />
+            <p className="ml-1 text-lg font-medium">
+              ข้อมูลเพิ่มเติมสำหรับร้านค้า
+            </p>
+          </div>
+          <textarea
+            disabled={true}
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40">
+            {translatedInfo ? translatedInfo : "ไม่มีข้อมูลเพิ่มเติม"}
+          </textarea>
+        </div>
       </div>
       <div className="bg-white p-4">
         <div className="flex justify-between">

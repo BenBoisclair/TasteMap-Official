@@ -568,6 +568,7 @@ export const vendorOrder = pgTable("vendor_order", {
   vendorId: varchar("vendor_id", { length: 20 }).notNull(),
   total: integer("total").notNull(),
   orderJson: jsonb("order_json"),
+  additionalInfo: text("additional_info"),
   status: text("status").notNull(),
 
   createdAt: timestamp("created_at").defaultNow(),

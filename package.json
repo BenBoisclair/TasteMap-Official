@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.6",
+    "@google-cloud/translate": "^8.1.0",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -32,6 +33,7 @@
     "@tanstack/react-query-devtools": "^5.18.1",
     "@tanstack/react-query-next-experimental": "5.8.7",
     "@tanstack/react-table": "^8.11.8",
+    "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^2.30.0",
     "lucide-react": "^0.293.0",
