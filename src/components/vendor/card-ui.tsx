@@ -73,7 +73,7 @@ export default async function CartUI({ orderId }: { orderId: string }) {
           <textarea
             value={translatedInfo ? translatedInfo : "ไม่มีข้อมูลเพิ่มเติม"}
             disabled={true}
-            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40"
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40 text-black"
           />
         </div>
       </div>
