@@ -28,7 +28,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "fb2a835d-2f7f-42f3-acaf-77146ad02d38"
+        "projectId": "030ec3c5-e485-4d1e-9cb3-ac87d931a278"
       }
     },
     "android": {
@@ -56,7 +56,7 @@
           "buildToolsVersion": "31.0.0"
         },
         "ios": {
-          "deploymentTarget": "16.7.5"
+          "deploymentTarget": "13.4"
         }
       }
     ]
@@ -66,7 +66,7 @@
       "origin": false
     },
     "eas": {
-      "projectId": "fb2a835d-2f7f-42f3-acaf-77146ad02d38"
+      "projectId": "030ec3c5-e485-4d1e-9cb3-ac87d931a278"
     }
   }
 }
