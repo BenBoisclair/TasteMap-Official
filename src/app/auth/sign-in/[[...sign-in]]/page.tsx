@@ -41,7 +41,7 @@ const SignUpPage = () => {
             layout: {
               socialButtonsPlacement: "bottom",
               socialButtonsVariant: "blockButton",
-              termsPageUrl: "/terms",
+              termsPageUrl: "/policy",
             },
             variables: {
               colorPrimary: "#FFD14E",

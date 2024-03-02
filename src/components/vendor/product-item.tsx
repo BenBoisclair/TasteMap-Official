@@ -38,7 +38,7 @@ const ProductItem = (product: Product) => {
     <div key={product.id}>
       <div className="flex items-center justify-between mt-5">
         <div>
-          <h4 className="font-medium">{product.name}</h4>
+          <h4 className="font-medium text-[15px]">{product.name}</h4>
         </div>
         <div className="flex items-center gap-4">
           {!!product.price && (

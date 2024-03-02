@@ -24,8 +24,13 @@ const SignUpPage = () => {
       <div className="flex flex-col px-4 text-center">
         <h1 className="text-2xl font-bold">New here?</h1>
         <p className="mt-2 text-sm font-medium text-neutral-400">
-          Welcome! We’re delighted to meet you. Please fill in your email and
-          create a password for it.
+          Welcome! We’re delighted to meet you. By continuing, you agree to our{" "}
+          <Link
+            href={`/policy`}
+            className="underline text-blue font-bold"
+            target="_blank">
+            privacy policy
+          </Link>
         </p>
       </div>
       <div className="flex justify-center">
@@ -34,7 +39,7 @@ const SignUpPage = () => {
             layout: {
               socialButtonsPlacement: "bottom",
               socialButtonsVariant: "blockButton",
-              termsPageUrl: "/terms",
+              termsPageUrl: "/policy",
             },
             variables: {
               colorPrimary: "#FFD14E",

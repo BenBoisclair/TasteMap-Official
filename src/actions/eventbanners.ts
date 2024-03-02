@@ -5,7 +5,7 @@ import { eventBanners } from "@/db/schema/schema";
 export async function getEventBanners() {
   try {
     const banners = await db.select().from(eventBanners);
-    return banners;
+    return { data: banners };
   } catch (error) {
     console.log(error);
   }

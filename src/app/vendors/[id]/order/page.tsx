@@ -26,9 +26,9 @@ export default async function OrderPage({
               alt={vendor?.name}
             />
           </div>
-          <div className="flex flex-col text-center mt-3">
-            <p>You're ordering at</p>
-            <h1 className="text-2xl font-bold -mt-2">{vendor?.name}</h1>
+          <div className="flex flex-col text-center mt-3 gap-2">
+            <p>{vendor?.name}</p>
+            <h1 className="text-2xl font-bold -mt-2">{`Confirm your order`}</h1>
           </div>
         </div>
         <Cart userId={userId} />

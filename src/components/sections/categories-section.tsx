@@ -86,7 +86,7 @@ type Category = {
 const CategoryCardVariant = ({ category }: { category: Category }) => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-1 overflow-hidden rounded-xl">
+      <div className="flex flex-col items-center justify-center gap-1 overflow-hidden rounded-3xl">
         <div className="relative h-[280px] w-[200px] overflow-hidden ">
           <Image
             src={category.imagePath}
@@ -100,8 +100,8 @@ const CategoryCardVariant = ({ category }: { category: Category }) => {
             <span className="mb-2 px-4 text-center text-3xl font-bold text-white">
               {category.name}
             </span>
-            <div className="rounded-3xl bg-yellow px-4 py-1 font-medium">
-              Explore
+            <div className="rounded-3xl bg-yellow px-4 py-1">
+              <p className="font-medium text-yellow-800">Explore</p>
             </div>
           </div>
         </div>

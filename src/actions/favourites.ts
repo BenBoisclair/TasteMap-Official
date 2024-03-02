@@ -52,8 +52,6 @@ export async function favouriteAction({
         marketId: marketId || undefined,
         vendorId: vendorId || undefined,
       });
-
-      // console.log("Favourited!");
     }
     revalidatePath("/", "layout");
   } catch (error) {

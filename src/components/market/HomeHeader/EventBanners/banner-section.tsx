@@ -2,7 +2,8 @@ import { Banner } from "./banner";
 import { getEventBanners } from "@/actions/eventbanners";
 
 export async function BannerSection() {
-  const banners = await getEventBanners();
+  const response = await getEventBanners();
+  const banners = response?.data;
 
   if (!banners) return;
 

@@ -12,14 +12,14 @@ const AdditionalInfoTextarea = () => {
     <div className="mt-5">
       <div className="flex items-center">
         <Info size={20} />
-        <p className="ml-1">Additional Info for Vendor.</p>
+        <p className="ml-1">Additional Request</p>
       </div>
-      <p className="italic text-neutral-400">{`(It will automatically be translated.)`}</p>
+      <p className="italic text-neutral-400 text-sm">{`(We will translate any language for the vendors)`}</p>
       <textarea
         maxLength={150}
         value={additionalInfo}
         onChange={handleChange}
-        className="w-full h-24 bg-neutral-200 rounded-xl p-3 mt-2"
+        className="w-full h-16 bg-neutral-200 rounded-xl p-3 mt-2"
         placeholder="Low Spicy, No Onions, etc."
       />
     </div>

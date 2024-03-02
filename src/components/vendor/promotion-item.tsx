@@ -4,6 +4,7 @@ import { useOfferStore } from "@/utils/store";
 import { Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import PromotionIcon from "../icons/promotion-icon";
 
 export type PromotionSchema = {
   id: string;
@@ -42,38 +43,35 @@ const PromotionItem = (promotion: Promotion) => {
 
   return (
     <div key={promotion.id}>
-      <div className="flex items-center justify-between mt-5">
-        <div className="rounded-full p-2 bg-neutral-300">
-          <Image
-            alt={`Promotion and Discounts`}
-            src={`/icons/promotion_icon.png`}
-            width={40}
-            height={40}
-          />
-        </div>
-        <div className="mx-2">
-          <h4 className="font-medium">{promotion.name}</h4>
-          <p className="text-sm">{promotion.description}</p>
-        </div>
-        <div className="flex items-center gap-4">
-          {!!promotion.price && (
-            <div>
-              <p className=" text-neutral-400 font-medium">{`${promotion.price}฿`}</p>
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center justify-between">
+          <p className="font-medium text-[15px]">{promotion.name}</p>
+          <div className="flex items-center gap-4">
+            {!!promotion.price && (
+              <div>
+                <p className=" text-neutral-400 font-medium">{`${promotion.price}฿`}</p>
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <button
+                className="bg-neutral-300 rounded-full p-0.5"
+                onClick={decrement}>
+                <Minus size={15} />
+              </button>
+              <p>{quantity}</p>
+              <button
+                className="bg-neutral-400 rounded-full p-0.5"
+                onClick={increment}>
+                <Plus size={15} />
+              </button>
             </div>
-          )}
-          <div className="flex items-center gap-2">
-            <button
-              className="bg-neutral-300 rounded-full p-0.5"
-              onClick={decrement}>
-              <Minus size={15} />
-            </button>
-            <p>{quantity}</p>
-            <button
-              className="bg-neutral-400 rounded-full p-0.5"
-              onClick={increment}>
-              <Plus size={15} />
-            </button>
           </div>
+        </div>
+        <div className="flex items-center gap-2 w-[220px] ">
+          <PromotionIcon />
+          <p className="text-sm text-neutral-400 font-medium leading-4">
+            {promotion.description}
+          </p>
         </div>
       </div>
     </div>

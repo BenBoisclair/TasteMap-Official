@@ -43,6 +43,10 @@ export default function VendorCardRecommendations({
                 isFavourite={vendor.isFavourite}
                 vendorId={vendor.id}
               />
+              <Link
+                href={`/vendors/${vendor.id}?tab=Info`}
+                className="w-full h-full z-40"
+              />
             </div>
           </>
         ) : (

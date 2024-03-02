@@ -6,6 +6,8 @@ import { nanoid } from "nanoid";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import PromotionIcon from "../icons/promotion-icon";
+import convertBahtToDollars from "@/utils/convertToDollars";
 
 export default function Cart({ userId }: { userId: string }) {
   const products = useOfferStore((state) => state.products);
@@ -15,6 +17,7 @@ export default function Cart({ userId }: { userId: string }) {
   const resetCart = useOfferStore((state) => state.reset);
   const additionalInfo = useOfferStore((state) => state.additionalInfo);
   const router = useRouter();
+  const totalPriceInDollars = convertBahtToDollars(totalPrice);
 
   const handleOrder = async () => {
     const order = {
@@ -59,20 +62,17 @@ export default function Cart({ userId }: { userId: string }) {
             <div className="bg-neutral-300 rounded-full text-center px-4 py-1">
               <p className="font-bold text-lg">{`${promotion.quantity}x`}</p>
             </div>
-            <div className="rounded-full p-2 bg-neutral-300">
-              <Image
-                alt={`Promotion and Discounts`}
-                src={`/icons/promotion_icon.png`}
-                width={40}
-                height={40}
-              />
-            </div>
-            <div className=" w-56">
-              <p className="font-bold text-lg">{promotion.name}</p>
-              <p>{promotion.description}</p>
+            <div className=" w-56 flex flex-col gap-1">
+              <p className="font-medium">{promotion.name}</p>
+              <div className="flex items-center gap-2">
+                <PromotionIcon />
+                <p className="font-medium text-sm text-neutral-400">
+                  {promotion.description}
+                </p>
+              </div>
             </div>
             <div className="shrink-0">
-              <p className="font-medium text-lg">{promotion.price}</p>
+              <p className="font-medium">{`${promotion.price} ฿`}</p>
             </div>
           </div>
         ))}
@@ -84,31 +84,32 @@ export default function Cart({ userId }: { userId: string }) {
               <p className="font-bold text-lg">{`${product.quantity}x`}</p>
             </div>
             <div className=" w-56">
-              <p className="font-bold text-lg">{product.name}</p>
+              <p className="font-medium">{product.name}</p>
             </div>
             <div className="shrink-0">
-              <p className="font-medium text-lg">{product.price}</p>
+              <p className="font-medium">{`${product.price} ฿`}</p>
             </div>
           </div>
         ))}
         <div className="bg-white px-5 pt-5 pb-6 flex flex-col gap-3 rounded-3xl">
           <div className="flex items-center">
             <Info size={25} />
-            <p className="ml-1 text-lg font-medium">
-              Additional Info for Vendor.
-            </p>
+            <p className="ml-1 text-lg font-medium">Additional Request</p>
           </div>
           <textarea
             value={additionalInfo ? additionalInfo : "No additional info."}
             disabled={true}
-            className="bg-neutral-200 rounded-2xl py-2 px-4 h-40 text-black"
+            className="bg-neutral-200 rounded-2xl py-2 px-4 h-16 text-black"
           />
         </div>
       </div>
       <div className="bg-white p-4">
         <div className="flex justify-between">
-          <p className="text-xl">Total price</p>
-          <p className="text-xl font-bold">{totalPrice}</p>
+          <p className="text-lg">Total price</p>
+          <div className="flex items-center gap-2">
+            <p className="font-bold text-[18px]">{`${totalPrice}฿`}</p>
+            <p className="font-medium text-[18px]">{`( $${totalPriceInDollars} USD )`}</p>
+          </div>
         </div>
         <button
           onClick={handleOrder}
