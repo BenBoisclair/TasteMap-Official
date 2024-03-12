@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.taste-map.app",
-      "buildNumber": "2",
+      "buildNumber": "3",
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
@@ -28,7 +28,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "030ec3c5-e485-4d1e-9cb3-ac87d931a278"
+        "projectId": "714c5289-9533-474a-8cbd-42f29ead0163"
       }
     },
     "android": {
@@ -66,7 +66,7 @@
       "origin": false
     },
     "eas": {
-      "projectId": "030ec3c5-e485-4d1e-9cb3-ac87d931a278"
+      "projectId": "714c5289-9533-474a-8cbd-42f29ead0163"
     }
   }
 }
