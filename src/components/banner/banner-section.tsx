@@ -13,7 +13,7 @@ export async function BannerSection() {
   ));
 
   return (
-    <Section className=" bg-[#FFF3D1] rounded-3xl">
+    <Section className=" bg-[#FFF3D1] rounded-3xl my-6">
       <Section.Title>About TasteMap</Section.Title>
       <Section.Description>
         Taste the local experience with us.

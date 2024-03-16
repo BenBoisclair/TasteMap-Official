@@ -17,9 +17,9 @@ const CategoriesSection = ({
   const categoriesCardVariant = [
     { name: "Meals", imagePath: "/categories/meals.jpg" },
     { name: "Drinks", imagePath: "/categories/drinks.jpg" },
-    { name: "Desserts", imagePath: "/categories/snacks.jpg" },
+    { name: "Desserts", imagePath: "/categories/desserts_card.png" },
     { name: "Souvenirs", imagePath: "/categories/souvenirs.jpg" },
-    { name: "Fashion", imagePath: "/categories/fashion.jpg" },
+    { name: "Fashion", imagePath: "/categories/fashion_card.png" },
     { name: "Ingredients", imagePath: "/categories/ingredients.jpg" },
     { name: "Services", imagePath: "/categories/services.jpg" },
     { name: "Personal Use", imagePath: "/categories/personaluse.jpg" },
