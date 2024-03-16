@@ -13,6 +13,8 @@ import Link from "next/link";
 import { Dialog } from "@radix-ui/react-dialog";
 import OnboardingModal from "@/components/onboarding-modal";
 import ImageOverlay from "@/components/image-overlay";
+import { VendorSectionSkeleton } from "@/components/skeletons/recommended-for-you-section-skeleton";
+import VendorsHomePageSection from "@/components/vendor/vendors-homepage-section";
 
 export const dynamic = "force-dynamic";
 
@@ -86,7 +88,7 @@ export default function HomePage() {
           <BannerSection />
         </Suspense>
 
-        {/* <Suspense fallback={<VendorSectionSkeleton />}>
+        <Suspense fallback={<VendorSectionSkeleton />}>
           <VendorsHomePageSection name="Grab a Quick Bite!" tag="Quick Bites" />
         </Suspense>
         <Suspense fallback={<VendorSectionSkeleton />}>
@@ -94,7 +96,7 @@ export default function HomePage() {
             name="Souvenirs to Take Home"
             tag="Souvenirs"
           />
-        </Suspense> */}
+        </Suspense>
       </main>
       <OnboardingModal />
     </>

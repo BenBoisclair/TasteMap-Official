@@ -74,7 +74,7 @@ export const VendorCard = ({
               )}
             </div>
           )}
-          {shopTypeTags.length > 0 && (
+          {/* {shopTypeTags.length > 0 && (
             <div className="mt-1 flex gap-1">
               {shopTypeTags.slice(0, 2).map((tag) => (
                 <Tag type={"Facility"} key={tag.id}>
@@ -85,7 +85,7 @@ export const VendorCard = ({
                 <Tag type="Facility">+{shopTypeTags?.length - 2}</Tag>
               )}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
