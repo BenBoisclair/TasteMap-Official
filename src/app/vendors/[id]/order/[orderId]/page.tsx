@@ -1,9 +1,6 @@
-import { getOrder } from "@/server-actions/vendorOrder";
 import { getVendor } from "@/server-actions/vendors";
 import NavBar from "@/components/navbar/nav-bar";
-import CartUI from "@/components/vendor/card-ui";
-import Cart from "@/components/vendor/cart";
-import { Info } from "lucide-react";
+import CartUI from "@/components/vendor/cart-ui";
 import Image from "next/image";
 
 export default async function OrderConfirmedPage({

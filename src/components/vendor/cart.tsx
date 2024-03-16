@@ -1,6 +1,6 @@
 "use client";
 import { createOrder } from "@/server-actions/vendorOrder";
-import { useOfferStore } from "@/utils/store";
+import { useOfferStore } from "@/hooks/cart-store";
 import { Info, ShoppingBasket } from "lucide-react";
 import { nanoid } from "nanoid";
 import Image from "next/image";

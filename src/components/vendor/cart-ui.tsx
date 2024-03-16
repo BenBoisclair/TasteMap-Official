@@ -1,5 +1,4 @@
 import { getOrder } from "@/server-actions/vendorOrder";
-import Image from "next/image";
 import Link from "next/link";
 import { PromotionSchema } from "./promotion-item";
 import { ProductSchema } from "./product-item";
