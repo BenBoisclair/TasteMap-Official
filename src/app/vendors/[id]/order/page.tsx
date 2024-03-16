@@ -1,5 +1,5 @@
-import { getUserId } from "@/actions/user";
-import { getVendor } from "@/actions/vendors";
+import { getUserId } from "@/server-actions/user";
+import { getVendor } from "@/server-actions/vendors";
 import NavbarBack from "@/components/navbar/nav-bar-back";
 import Cart from "@/components/vendor/cart";
 import Image from "next/image";

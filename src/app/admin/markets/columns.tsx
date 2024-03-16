@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteMarket } from "@/actions/markets";
+import { deleteMarket } from "@/server-actions/markets";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

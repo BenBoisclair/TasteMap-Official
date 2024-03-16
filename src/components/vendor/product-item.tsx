@@ -1,8 +1,7 @@
 "use client";
 import { Product } from "@/db/schema/schema";
-import { useOfferStore } from "@/utils/store";
+import { useOfferStore } from "@/hooks/cart-store";
 import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
 
 export type ProductSchema = {
   id: string;

@@ -7,8 +7,10 @@ import type { Vendor } from "@/types/types";
 import { cn } from "@/utils/cn";
 import VerifiedBadge from "../icons/verified-badge";
 import NavBar from "../navbar/nav-bar";
-import { Ratings } from "../sections/RatingsAndReviews/ratings";
+import { Ratings } from "../reviews/ratings";
 import { Tag } from "../tag";
+import ImageFill from "../image-fill";
+import ImageOverlay from "../image-overlay";
 
 interface VendorHeaderProps {
   vendor: Vendor;
@@ -18,51 +20,34 @@ interface VendorHeaderProps {
 
 const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
   const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
+  const shopTypeTags = vendor?.tags?.filter((tag) => tag.type === "Shop Type");
+  console.log(shopTypeTags);
   return (
     <div id="vendHeader">
-      <div className="absolute left-0 top-0 w-full">
-        <NavBar
-          className={cn(`z-40`, {
-            "bg-transparent bg-gradient-to-b from-black/60 to-transparent text-white":
-              inView,
-            "bg-white text-black": !inView,
-          })}
-        />
-      </div>
-      <div
-        id="bannerWrapper"
-        className="w-full overflow-hidden "
-        style={{ position: "relative", height: "240px" }}>
-        <Image
-          src={vendor?.bannerUrl ?? `https://placehold.co/600x400/png`}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          fill={true}
-          style={{
-            objectFit: "cover",
-          }}
-          alt={`${vendor?.name} Banner`}
-          priority={true}
-        />
-        {vendor.isVerified && (
-          <div className="absolute top-0 flex h-full w-full items-end justify-end p-3">
-            <VerifiedBadge size="lg" />
-          </div>
-        )}
-        <div className="absolute top-0 flex h-full w-full items-end p-5">
-          <div className="relative h-[75px] w-[75px] overflow-hidden rounded-full bg-white">
-            <Image
-              src={vendor?.logoUrl ?? `/logos/tastemap_logo.png`}
-              sizes="100vw"
-              fill={true}
-              style={{
-                objectFit: "cover",
-              }}
-              alt={`${vendor?.name} Logo`}
-              priority={true}
-            />
-          </div>
-        </div>
-      </div>
+      <NavBar
+        page="Vendor"
+        className={cn(`z-40`, {
+          "bg-transparent bg-gradient-to-b from-black/60 to-transparent text-white":
+            inView,
+          "bg-white text-black": !inView,
+        })}
+      />
+
+      <ImageFill
+        src={vendor?.bannerUrl ?? `https://placehold.co/600x400/png`}
+        alt={`${vendor?.name} Banner`}
+        className="rounded-3xl md:rounded-none h-[240px] mx-4 mt-[60px]">
+        {/* <div className="absolute top-0 flex h-full w-full items-end p-5">           */}
+        <ImageOverlay className="justify-between items-end">
+          <ImageFill
+            className="h-[75px] w-[75px] rounded-full bg-white"
+            src={vendor?.logoUrl ?? `/logos/tastemap_logo.png`}
+            alt={`${vendor?.name}`}
+          />
+          {vendor.isVerified && <VerifiedBadge size="lg" />}
+        </ImageOverlay>
+      </ImageFill>
+
       <div
         ref={headerRef}
         id="vendorInfo"
@@ -93,9 +78,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
             <span>{vendor?.code}</span>
           </div>
         </div>
-        <div
-          id="marTags"
-          className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium">
+        <div className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium">
           {productTags.length > 0 && (
             <div id="productTags" className="flex items-center">
               <p className="mr-2">Products</p>
@@ -105,6 +88,22 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
                 {productTags?.map((tag, key: number) => {
                   return (
                     <Tag key={key} type={tag.type} size="lg">
+                      {tag.name}
+                    </Tag>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {shopTypeTags.length > 0 && (
+            <div id="shopTypeTags" className="flex items-center">
+              <p className="mr-2">Shop Types</p>
+              <div
+                id="STTags"
+                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll">
+                {shopTypeTags?.map((tag, key: number) => {
+                  return (
+                    <Tag key={key} type={"Facility"} size="lg">
                       {tag.name}
                     </Tag>
                   );

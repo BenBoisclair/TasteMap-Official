@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { FC, ReactNode } from "react";
@@ -12,15 +13,21 @@ interface TitleProps {
   link?: string;
 }
 
+interface DescriptionProps {
+  children?: ReactNode;
+}
+
 // Defining the type for Section's sub-components
 interface SectionProps {
   Title?: FC<TitleProps>;
+  Description?: FC<DescriptionProps>;
   Carousel?: FC<CarouselProps>;
   children: ReactNode;
+  className?: string;
 }
 
-const Section = ({ children }: SectionProps) => (
-  <div className="w-full rounded-3xl bg-white py-5">{children}</div>
+const Section = ({ children, className }: SectionProps) => (
+  <div className={cn(`w-full bg-white py-5`, className)}>{children}</div>
 );
 
 // Title Sub-component
@@ -33,6 +40,11 @@ Section.Title = ({ children, link }: TitleProps) => (
       </Link>
     )}
   </div>
+);
+
+// Description Sub-component
+Section.Description = ({ children }: DescriptionProps) => (
+  <div className="px-5 font-medium">{children}</div>
 );
 
 // Carousel Sub-component

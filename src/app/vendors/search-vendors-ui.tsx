@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Frown } from "lucide-react";
 
-import VendorCardRecommendations from "@/components/sections/RecommendedForYou/vendor-card-recommendations";
+import VendorCardRecommendations from "@/components/recommendations/vendor-card-recommendations";
 import type { Vendor } from "@/types/types";
 import SearchBar from "@/components/search-bar";
 import BackButton from "@/components/back-button";

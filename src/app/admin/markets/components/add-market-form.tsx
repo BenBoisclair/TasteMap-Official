@@ -26,7 +26,7 @@ import { nanoid } from "nanoid";
 import { insertMarketSchema } from "@/types/types";
 import { DialogFooter } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { createMarket } from "@/actions/markets";
+import { createMarket } from "@/server-actions/markets";
 import checkIfMarketCodeExists from "@/utils/checkIfMarketCodeExists";
 import toast from "react-hot-toast";
 

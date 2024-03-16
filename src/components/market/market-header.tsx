@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import type { Market } from "@/types/types";
 import removeSubstrings from "@/utils/removeSubstrings";
 import VerifiedBadge from "../icons/verified-badge";
-import NavBar from "../navbar/nav-bar";
-import { Ratings } from "../sections/RatingsAndReviews/ratings";
+import { Ratings } from "../reviews/ratings";
+import ImageFill from "../image-fill";
 
 interface MarketHeaderProps {
   market: Market;
@@ -13,37 +12,22 @@ interface MarketHeaderProps {
 
 const MarketHeader = ({ market }: MarketHeaderProps) => {
   return (
-    <>
-      <div className="mt-[60px] h-[200px] bg-white">
-        <div className="relative mx-4 flex h-full md:mx-0">
-          <Image
-            src={market?.bannerUrl || `https://placehold.co/600x400/png`}
-            fill={true}
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-3xl md:rounded-none"
-            alt={`Market Banner`}
-            priority={true}
-          />
-        </div>
-      </div>
+    <div className="bg-white">
+      <ImageFill
+        src={market?.bannerUrl}
+        alt="Market Banner"
+        className="rounded-3xl md:rounded-none h-[200px] mx-4 mt-[60px] md:mx-0"
+      />
       <div className="mb-1 w-full rounded-b-3xl bg-white pb-5 ">
         <div className="px-5 pt-2">
           <div className="flex items-center justify-between">
             <div className="text-[26px] font-bold">
               {removeSubstrings(market?.name, ["Floating Market"])}
             </div>
-            {market.isVerified && (
-              <div>
-                <VerifiedBadge size="lg" variant="icon" />
-              </div>
-            )}
+            {market.isVerified && <VerifiedBadge size="lg" variant="icon" />}
           </div>
           <div className="font-medium">{market?.type}</div>
-          <div
-            id="marRatingInfo"
-            className="mt-2 flex w-full items-center text-sm font-medium">
+          <div className="mt-2 flex w-full items-center text-sm font-medium">
             <Ratings
               average={market?.ratings?.average}
               total={market?.ratings?.total}
@@ -55,7 +39,7 @@ const MarketHeader = ({ market }: MarketHeaderProps) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

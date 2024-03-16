@@ -1,5 +1,5 @@
 "use client";
-import { createOrder } from "@/actions/vendorOrder";
+import { createOrder } from "@/server-actions/vendorOrder";
 import { useOfferStore } from "@/utils/store";
 import { Info, ShoppingBasket } from "lucide-react";
 import { nanoid } from "nanoid";

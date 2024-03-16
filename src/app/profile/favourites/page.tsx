@@ -2,10 +2,10 @@ import { Frown, LogIn } from "lucide-react";
 import { MarketCard } from "@/components/market/market-card";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
-import { getFavourites } from "@/actions/favourites";
-import VendorCardRecommendations from "@/components/sections/RecommendedForYou/vendor-card-recommendations";
-import BackButton from "@/components/back-button";
+import { getFavourites } from "@/server-actions/favourites";
+import VendorCardRecommendations from "@/components/recommendations/vendor-card-recommendations";
 import { currentUser } from "@clerk/nextjs";
+import NavbarBack from "@/components/navbar/nav-bar-back";
 
 export const dynamic = "force-dynamic";
 
@@ -22,10 +22,7 @@ export default async function FavouritesPage({
 
   return (
     <div>
-      <div className="flex items-center px-5 py-4">
-        <BackButton />
-        <div className="grow text-xl font-bold">Favorites</div>
-      </div>
+      <NavbarBack title="Favourites" />
       <div className="flex px-5 gap-2">
         {tabs.map((tab, index) => {
           return (

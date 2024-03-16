@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProductItem from "./product-item";
 import { VendorOffersPageProps } from "./vendor-offers-page";
-import { useOfferStore } from "@/utils/store";
+import { useOfferStore } from "@/hooks/cart-store";
 import PromotionItem from "./promotion-item";
 import { useAuth } from "@clerk/nextjs";
 import AdditionalInfoTextarea from "./additional-info-textarea";

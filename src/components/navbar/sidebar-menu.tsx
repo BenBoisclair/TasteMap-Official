@@ -15,8 +15,7 @@ export function DefaultSideMenu({ className }: { className?: string }) {
       className={cn(
         `flex w-full flex-col gap-4 text-lg font-bold py-5`,
         className
-      )}
-    >
+      )}>
       <Link href={`/`} className="w-full">
         <span className="font-bold">Home</span>
       </Link>
@@ -30,12 +29,14 @@ export function GeneralSideMenu({ className }: { className?: string }) {
       className={cn(
         `flex w-full flex-col gap-4 py-5 text-lg font-bold`,
         className
-      )}
-    >
+      )}>
       <span className=" text-base text-neutral-400 font-medium">General</span>
       {/* <span>Language</span>
                   <span>FAQs</span>
                   <span>Report issues</span> */}
+      <Link href={`https://www.thehominians.com`}>
+        <span>Our Team</span>
+      </Link>
       <Link href={`/policy`}>
         <span>Privacy Policy</span>
       </Link>
@@ -49,8 +50,7 @@ export function UserSideMenu({ className }: { className?: string }) {
       className={cn(
         `flex w-full flex-col gap-4 py-5 text-lg font-bold`,
         className
-      )}
-    >
+      )}>
       <span className=" text-base text-neutral-400 font-medium">Profile</span>
 
       {/* <Link href={`/profile/reviews`}>
@@ -78,8 +78,7 @@ export default function SideMenu({ isMenuOpen, toggleMenu }: SideMenuProps) {
             "left-[0%]": isMenuOpen,
             "left-[-100%]": !isMenuOpen,
           }
-        )}
-      >
+        )}>
         <div className="h-full w-full">
           <div className="flex cursor-pointer  justify-end p-4">
             <X size={28} onClick={() => toggleMenu()} />

@@ -1,9 +1,7 @@
 "use client";
-import { Promotion, promotion } from "@/db/schema/schema";
-import { useOfferStore } from "@/utils/store";
+import { Promotion } from "@/db/schema/schema";
+import { useOfferStore } from "@/hooks/cart-store";
 import { Minus, Plus } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
 import PromotionIcon from "../icons/promotion-icon";
 
 export type PromotionSchema = {

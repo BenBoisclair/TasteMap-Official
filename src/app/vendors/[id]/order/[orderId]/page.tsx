@@ -1,5 +1,5 @@
-import { getOrder } from "@/actions/vendorOrder";
-import { getVendor } from "@/actions/vendors";
+import { getOrder } from "@/server-actions/vendorOrder";
+import { getVendor } from "@/server-actions/vendors";
 import NavBar from "@/components/navbar/nav-bar";
 import CartUI from "@/components/vendor/card-ui";
 import Cart from "@/components/vendor/cart";

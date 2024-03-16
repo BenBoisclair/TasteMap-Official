@@ -1,4 +1,4 @@
-import { getVendors } from "../../actions/vendors";
+import { getVendors } from "../../server-actions/vendors";
 import SearchVendorsUI from "./search-vendors-ui";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export default async function VendorsPage({
   }
 
   const vendors = await getVendors({ tag: tag });
-  if (vendors === undefined) return;
+  if (!vendors) return;
   return (
     <SearchVendorsUI
       vendors={vendors}

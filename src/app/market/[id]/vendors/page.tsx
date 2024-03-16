@@ -1,5 +1,5 @@
 import SearchVendorsUI from "@/app/vendors/search-vendors-ui";
-import { getVendors } from "@/actions/vendors";
+import { getVendors } from "@/server-actions/vendors";
 import { db, eq } from "@/db";
 import { market } from "@/db/schema/schema";
 

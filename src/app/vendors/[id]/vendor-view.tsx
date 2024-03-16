@@ -1,6 +1,6 @@
 "use client";
 import { useInView } from "react-intersection-observer";
-import RatingAndReviewSection from "@/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import RatingAndReviewSection from "@/components/reviews/rating-and-reviews-section";
 import Tabs from "@/components/tabs";
 import VendorHeader from "@/components/vendor/vendor-header";
 import VendorInfoPage from "@/components/vendor/vendor-info-page";
@@ -8,7 +8,7 @@ import type { Vendor } from "@/types/types";
 import { useSearchParams } from "next/navigation";
 import { Product, Promotion, product } from "@/db/schema/schema";
 import VendorOffersPage from "@/components/vendor/vendor-offers-page";
-import { setVendorId, useOfferStore } from "@/utils/store";
+import { setVendorId } from "@/hooks/cart-store";
 
 export type OffersType = {
   products: Product[] | undefined;
@@ -42,7 +42,7 @@ export default function VendorView({
   return (
     <div className="relative bg-neutral-200">
       <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
-      <Tabs inView={inView} tabs={tabs} />
+      <Tabs tabs={tabs} />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
       {activeTab === "Offers" && <VendorOffersPage offers={offers} />}
       {activeTab === "Reviews" && (

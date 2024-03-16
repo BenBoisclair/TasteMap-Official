@@ -1,4 +1,4 @@
-import { useOfferStore } from "@/utils/store";
+import { useOfferStore } from "@/hooks/cart-store";
 import { Info } from "lucide-react";
 
 const AdditionalInfoTextarea = () => {

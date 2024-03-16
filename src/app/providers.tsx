@@ -23,7 +23,6 @@ export function Providers(props: {
     <QueryClientProvider client={queryClient}>
       {props.children}
       <Toaster position="top-center" />
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

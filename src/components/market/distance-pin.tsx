@@ -23,6 +23,8 @@ export default function DistancePin({
     undefined
   );
 
+  if (latitude === 0 && longitude === 0) return;
+
   useEffect(() => {
     // Define a function to fetch the user's location
     const fetchLocation = () => {

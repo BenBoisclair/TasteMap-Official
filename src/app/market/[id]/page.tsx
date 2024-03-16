@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import { getMarket } from "@/actions/markets";
+import { getMarket } from "@/server-actions/markets";
 import MarketHeader from "@/components/market/market-header";
 import HighlightsPage from "@/components/market/market-highlights";
 import MarketInfoPage from "@/components/market/market-info-page";
-import RatingAndReviewSection from "@/components/sections/RatingsAndReviews/rating-and-reviews-section";
+import RatingAndReviewSection from "@/components/reviews/rating-and-reviews-section";
 import Tabs from "@/components/tabs";
 import { Market, Tag } from "@/types/types";
 import NavBar from "@/components/navbar/nav-bar";
@@ -15,9 +15,7 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const marketId = params.id;
-
-  const market = await getMarket(marketId);
+  const market = await getMarket(params.id);
 
   if (!market)
     return {
@@ -42,7 +40,7 @@ export default async function MarketPage({
   const market = await getMarket(marketId);
   const activeTab = searchParams["tab"] || "Highlights";
 
-  if (market === undefined) return;
+  if (!market) return;
 
   return (
     <div className="relative bg-neutral-200">
@@ -63,20 +61,3 @@ export default async function MarketPage({
     </div>
   );
 }
-// if (!market) {
-//   return <LoadingPage />;
-// }
-
-// const marketJsonLd: WithContext<Place> = {
-//   "@context": "https://schema.org",
-//   "@type": "Place",
-//   name: market.name,
-//   description: market.about,
-//   // branchCode: market.code,
-//   latitude: parseFloat(market.latitude!),
-//   longitude: parseFloat(market.longitude!),
-//   isAccessibleForFree: true,
-//   publicAccess: true,
-//   alternateName: market.nameTH || undefined,
-//   additionalType: market.type,
-// };

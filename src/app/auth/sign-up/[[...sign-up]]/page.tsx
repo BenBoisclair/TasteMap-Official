@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { SignUp } from "@clerk/nextjs";
-import { ArrowLeft } from "lucide-react";
 
-import TasteMapLogo from "@/components/assets/taste-map-logo";
 import { Metadata } from "next";
+import NavbarBack from "@/components/navbar/nav-bar-back";
 
 export const metadata: Metadata = {
   title: "Register",
@@ -12,15 +11,7 @@ export const metadata: Metadata = {
 const SignUpPage = () => {
   return (
     <main className="flex flex-col">
-      <nav className="mb-5 flex items-center px-5 py-4">
-        <Link href="/">
-          <ArrowLeft />
-        </Link>
-
-        <div className="flex grow justify-center">
-          <TasteMapLogo />
-        </div>
-      </nav>
+      <NavbarBack />
       <div className="flex flex-col px-4 text-center">
         <h1 className="text-2xl font-bold">New here?</h1>
         <p className="mt-2 text-sm font-medium text-neutral-400">

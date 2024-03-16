@@ -1,9 +1,9 @@
 import VendorView from "./vendor-view";
 import { Metadata } from "next";
-import { getVendor } from "@/actions/vendors";
-import { getProducts } from "@/actions/products";
-import ResetCart from "@/components/ResetCart";
-import { getPromotions } from "@/actions/promotions";
+import { getVendor } from "@/server-actions/vendors";
+import { getProducts } from "@/server-actions/products";
+import ResetCart from "@/hooks/reset-cart";
+import { getPromotions } from "@/server-actions/promotions";
 
 export const dynamic = "force-dynamic";
 
@@ -33,9 +33,15 @@ export default async function VendorPage({
 }: {
   params: { id: string };
 }) {
-  const vendor = await getVendor(vendorId);
-  const products = await getProducts(vendorId);
-  const promotions = await getPromotions(vendorId);
+  const vendorData = getVendor(vendorId);
+  const productsData = getProducts(vendorId);
+  const promotionsData = getPromotions(vendorId);
+
+  const [vendor, products, promotions] = await Promise.all([
+    vendorData,
+    productsData,
+    promotionsData,
+  ]);
 
   if (!vendor) return;
   return (
