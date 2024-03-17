@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function LoadingPage() {
   return (
-    <div className="flex h-screen justify-center bg-yellow text-center">
+    <div className="flex h-screen justify-center bg-yellow text-center -mt-14">
       <div className="mb-24 flex flex-col justify-center">
         <Image
           src="/logos/tastemap_logo_white.png"

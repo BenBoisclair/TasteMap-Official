@@ -3,7 +3,6 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 import type { Vendor } from "@/types/types";
-import TasteMapLogo from "../assets/taste-map-logo";
 import VerifiedBadge from "../icons/verified-badge";
 import { Tag } from "../tag";
 import { Ratings } from "../reviews/ratings";
@@ -24,43 +23,30 @@ export default function VendorCardRecommendations({
         classNames
       )}>
       <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-xl">
-        {vendor.bannerUrl ? (
-          <>
-            <Image
-              src={vendor.bannerUrl ?? ""}
-              alt={`${vendor.name} Banner`}
-              fill={true}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{
-                objectFit: "cover",
-              }}
-              className=" rounded-3xl "
-            />
+        <>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
+            alt={`${vendor.name} Banner`}
+            fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{
+              objectFit: "cover",
+            }}
+            className=" rounded-3xl "
+          />
 
-            <div className="absolute top-0 w-full h-full flex flex-col items-end p-2.5">
-              <FavouriteHeart
-                color="white"
-                isFavourite={vendor.isFavourite}
-                vendorId={vendor.id}
-              />
-              <Link
-                href={`/vendors/${vendor.id}?tab=Info`}
-                className="w-full h-full z-40"
-              />
-            </div>
-          </>
-        ) : (
-          <div className="flex justify-center items-center rounded-3xl h-full bg-neutral">
-            <TasteMapLogo size={100} />
-            <div className="absolute top-0 w-full h-full flex flex-col items-end p-2.5">
-              <FavouriteHeart
-                color="black"
-                isFavourite={vendor.isFavourite}
-                vendorId={vendor.id}
-              />
-            </div>
+          <div className="absolute top-0 w-full h-full flex flex-col items-end p-2.5">
+            <FavouriteHeart
+              color="white"
+              isFavourite={vendor.isFavourite}
+              vendorId={vendor.id}
+            />
+            <Link
+              href={`/vendors/${vendor.id}?tab=Info`}
+              className="w-full h-full z-40"
+            />
           </div>
-        )}
+        </>
         <Link
           href={`/vendors/${vendor.id}?tab=Info`}
           className="w-full h-full z-40"

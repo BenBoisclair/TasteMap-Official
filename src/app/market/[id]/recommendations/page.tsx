@@ -1,6 +1,7 @@
 import VendorCardRecommendations from "@/components/recommendations/vendor-card-recommendations";
 import { getVendors } from "@/server-actions/vendors";
 import BackButton from "@/components/back-button";
+import NavbarBack from "@/components/navbar/nav-bar-back";
 
 export default async function RecommendationsPage({
   params,
@@ -14,12 +15,7 @@ export default async function RecommendationsPage({
 
   return (
     <div className="h-full bg-neutral">
-      <div className="bg-white">
-        <div className="flex items-center px-5 py-4">
-          <BackButton />
-          <div className="grow text-xl font-bold">Recommended for You</div>
-        </div>
-      </div>
+      <NavbarBack title="Recommended for you" />
       <div className="z-10 flex flex-col gap-2 bg-transparent">
         {vendors?.map((vendor, index) => (
           <VendorCardRecommendations
