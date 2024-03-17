@@ -31,7 +31,7 @@ export function MarketCard({ market }: { market: Market }) {
     <div className="shrink-0 overflow-hidden">
       <ImageFill
         className="h-[160px] w-[270px] rounded-3xl"
-        src={market.bannerUrl || ""}
+        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${market.id}/banner`}
         alt={`${market.name}'s Banner`}>
         <ImageOverlay className="flex-col justify-between">
           <div className="flex justify-between">

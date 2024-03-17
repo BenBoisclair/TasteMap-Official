@@ -20,7 +20,7 @@ export default async function OrderConfirmedPage({
             <Image
               fill={true}
               style={{ objectFit: "cover" }}
-              src={vendor?.bannerUrl || "/opengraph-image.png"}
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
               alt={vendor?.name}
             />
             <div className=" text-white absolute border w-full flex h-full bg-black/40 flex-col">

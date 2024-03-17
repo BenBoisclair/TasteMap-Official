@@ -76,7 +76,6 @@ export interface Ratings {
 export interface Market {
   id: string;
   code: string;
-  bannerUrl: string | null;
   type: string;
   name: string;
   nameTH: string | null;
@@ -108,8 +107,6 @@ export interface Vendor {
     name: string;
     id?: string;
   } | null;
-  bannerUrl: string | null;
-  logoUrl: string | null;
   name: string;
   nameTH: string | null;
   ingredients: string | null;
@@ -164,6 +161,4 @@ export type Favourites = {
 export const insertReviewSchema = createInsertSchema(review);
 export const insertReviewAspectSchema = createInsertSchema(reviewAspect);
 
-export const insertMarketSchema = createInsertSchema(market, {
-  bannerUrl: z.string().url(),
-});
+export const insertMarketSchema = createInsertSchema(market);

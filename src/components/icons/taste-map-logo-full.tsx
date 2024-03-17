@@ -7,7 +7,7 @@ const TasteMapFullLogo = ({ size = 24 }: { size?: number }) => {
     <Link href={`/`}>
       <div className="flex items-center">
         <TasteMapLogo size={size} />
-        <span className="ml-1 text-lg font-bold">Taste Map</span>
+        <span className="ml-1 text-xl font-black">TASTE MAP</span>
       </div>
     </Link>
   );

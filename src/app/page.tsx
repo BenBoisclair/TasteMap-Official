@@ -28,13 +28,13 @@ export default function HomePage() {
     <>
       <NavBar page="Home" />
       {/* <OpenMainMapButton /> */}
-      <main className=" flex w-full flex-col bg-white py-14">
+      <main className=" flex w-full flex-col bg-white pb-14">
         <div className="flex flex-col bg-white gap-4 md:hidden mb-6">
           <div className="flex gap-2">
             <div className="flex flex-col">
               <ImageFill
                 src={`/images/3.png`}
-                className=" rounded-br-3xl w-[215px] h-[130px]"
+                className=" rounded-br-3xl w-full h-full min-w-[215px]"
                 alt="Picture">
                 <div className="bg-black/30 absolute w-full h-full" />
               </ImageFill>

@@ -50,7 +50,7 @@ export default function VendorView({
           id={vendor.id}
           type="vendor"
           name={vendor.name}
-          imageUrl={vendor.bannerUrl ?? ""}
+          imageUrl={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
         />
       )}
     </div>

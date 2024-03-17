@@ -56,7 +56,11 @@ export default function Layout(props: { children: React.ReactNode }) {
     <ClerkProvider>
       <html lang="en">
         <Head />
-        <body className={cn(ttnorms.className, "text-neutral-800 antialiased")}>
+        <body
+          className={cn(
+            ttnorms.className,
+            "text-neutral-800 antialiased pt-14"
+          )}>
           <Providers>{props.children}</Providers>
         </body>
       </html>

@@ -120,8 +120,6 @@ export const favouritesRelations = relations(favourites, ({ one }) => ({
 export const market = pgTable("market", {
   id: varchar("id", { length: 20 }).primaryKey().notNull(),
   code: varchar("code", { length: 4 }).notNull().unique(),
-
-  bannerUrl: varchar("banner_url", { length: 2000 }),
   type: varchar("type", { length: 50 }).notNull(),
 
   name: text("name").notNull(),
@@ -330,36 +328,39 @@ export const reviewAspectRelations = relations(reviewAspect, ({ one }) => ({
   }),
 }));
 
-export const vendor = pgTable("vendor", {
-  id: varchar("id", { length: 20 }).primaryKey().notNull(),
-  code: varchar("code", { length: 4 }).notNull().unique(),
+export const vendor = pgTable(
+  "vendor",
+  {
+    id: varchar("id", { length: 20 }).primaryKey().notNull(),
+    code: varchar("code", { length: 4 }).notNull().unique(),
 
-  bannerUrl: varchar("banner_url", { length: 2000 }),
-  logoUrl: varchar("logo_url", { length: 2000 }),
+    name: text("name").notNull(),
+    nameTH: text("name_th"),
 
-  name: text("name").notNull(),
-  nameTH: text("name_th"),
+    ingredients: text("ingredients"),
+    ingredientsTH: text("ingredients_th"),
 
-  ingredients: text("ingredients"),
-  ingredientsTH: text("ingredients_th"),
+    ownerName: text("owner_name"),
+    ownerTelephone: text("owner_telephone"),
 
-  ownerName: text("owner_name"),
-  ownerTelephone: text("owner_telephone"),
+    about: text("about").notNull(),
+    aboutTH: text("about_th"),
 
-  about: text("about").notNull(),
-  aboutTH: text("about_th"),
+    priceRange: varchar("price_range").notNull(),
 
-  priceRange: varchar("price_range").notNull(),
+    marketId: varchar("market_id")
+      .notNull()
+      .references(() => market.id),
 
-  marketId: varchar("market_id")
-    .notNull()
-    .references(() => market.id),
+    isVerified: boolean("is_verified").default(false),
+    sequence: integer("sequence"),
 
-  isVerified: boolean("is_verified").default(false),
-  sequence: integer("sequence"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-});
+    createdAt: timestamp("created_at").defaultNow(),
+  },
+  (t) => ({
+    uniqueCodeMarketId: unique("code_marketId").on(t.code, t.marketId),
+  })
+);
 
 export const vendorRelations = relations(vendor, ({ one, many }) => ({
   market: one(market, {

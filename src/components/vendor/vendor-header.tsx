@@ -34,14 +34,14 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
       />
 
       <ImageFill
-        src={vendor?.bannerUrl ?? `https://placehold.co/600x400/png`}
+        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
         alt={`${vendor?.name} Banner`}
         className="rounded-3xl md:rounded-none h-[240px] mx-4 mt-[60px]">
         {/* <div className="absolute top-0 flex h-full w-full items-end p-5">           */}
         <ImageOverlay className="justify-between items-end">
           <ImageFill
             className="h-[75px] w-[75px] rounded-full bg-white"
-            src={vendor?.logoUrl ?? `/logos/tastemap_logo.png`}
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/logo`}
             alt={`${vendor?.name}`}
           />
           {vendor.isVerified && <VerifiedBadge size="lg" />}

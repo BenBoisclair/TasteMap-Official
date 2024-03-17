@@ -14,9 +14,9 @@ const MarketHeader = ({ market }: MarketHeaderProps) => {
   return (
     <div className="bg-white">
       <ImageFill
-        src={market?.bannerUrl}
+        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${market.id}/banner`}
         alt="Market Banner"
-        className="rounded-3xl md:rounded-none h-[200px] mx-4 mt-[60px] md:mx-0"
+        className="rounded-3xl md:rounded-none h-[200px] mx-4 mt-2 md:mx-0"
       />
       <div className="mb-1 w-full rounded-b-3xl bg-white pb-5 ">
         <div className="px-5 pt-2">
