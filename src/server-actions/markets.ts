@@ -45,7 +45,7 @@ export async function getMarkets({
           },
         },
       },
-      orderBy: [desc(market.isVerified)],
+      orderBy: [desc(market.isVerified), asc(market.code)],
     });
     const marketsWithReview = await Promise.all(
       markets.map(async (market) => {
