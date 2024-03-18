@@ -14,7 +14,7 @@ import removeSubstrings from "@/utils/removeSubstrings";
 
 export function MarketCard({ market }: { market: Market }) {
   return (
-    <div className="shrink-0 overflow-hidden border flex flex-col">
+    <div className="shrink-0 overflow-hidden flex flex-col">
       <ImageFill
         className="h-[160px] min-w-[270px] rounded-3xl w-full"
         src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${market.id}/banner`}
