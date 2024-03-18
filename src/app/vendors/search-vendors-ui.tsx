@@ -19,7 +19,7 @@ export default function SearchVendorsUI({
   const [filteredVendors, setFilteredVendors] = useState<Vendor[]>([]);
 
   return (
-    <div className="h-full bg-neutral">
+    <div className="h-full bg-neutral -mt-14">
       <div className="bg-white">
         <div className="flex items-center px-5 py-4">
           <BackButton />

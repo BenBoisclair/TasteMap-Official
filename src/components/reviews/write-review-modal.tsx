@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import RatingChooser from "./rating-chooser";
 import { createReview } from "@/server-actions/reviews";
 import ImageFill from "../image-fill";
-import { revalidatePath } from "next/cache";
 
 export const WriteReviewModal = ({
   name,

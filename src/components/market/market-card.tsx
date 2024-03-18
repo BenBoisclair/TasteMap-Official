@@ -13,24 +13,10 @@ import ImageOverlay from "../image-overlay";
 import removeSubstrings from "@/utils/removeSubstrings";
 
 export function MarketCard({ market }: { market: Market }) {
-  const productTags = market?.tags?.filter((tag) => tag.type === "Product");
-  const facilityTags = market?.tags?.filter((tag) => tag.type === "Facility");
-
-  const productTagsList = productTags.slice(0, 3).map((tag) => (
-    <Tag type={tag.type} key={tag.id}>
-      {tag.name}
-    </Tag>
-  ));
-  const facilityTagsList = facilityTags.slice(0, 3).map((tag) => (
-    <Tag type={tag.type} key={tag.id}>
-      {tag.name}
-    </Tag>
-  ));
-
   return (
-    <div className="shrink-0 overflow-hidden">
+    <div className="shrink-0 overflow-hidden border flex flex-col">
       <ImageFill
-        className="h-[160px] w-[270px] rounded-3xl"
+        className="h-[160px] min-w-[270px] rounded-3xl w-full"
         src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${market.id}/banner`}
         alt={`${market.name}'s Banner`}>
         <ImageOverlay className="flex-col justify-between">

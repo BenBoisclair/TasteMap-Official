@@ -584,3 +584,4 @@ export const vendorOrderRelations = relations(vendorOrder, ({ one, many }) => ({
 
 export type VendorOrderInsert = typeof vendorOrder.$inferInsert;
 export type VendorOrderSelect = typeof vendorOrder.$inferSelect;
+export type InsertReview = typeof review.$inferInsert;

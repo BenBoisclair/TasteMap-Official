@@ -1,8 +1,7 @@
 "use server";
 import { reviewAspect } from "./../db/drizzle/schema";
-import { InsertReview } from "@/app/api/_actions/writeReview";
 import { db, eq, sql } from "@/db";
-import { review, users } from "@/db/schema/schema";
+import { InsertReview, review, users } from "@/db/schema/schema";
 import {
   InsertReviewAspect,
   Review,

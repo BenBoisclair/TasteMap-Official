@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import { MoreVertical } from "lucide-react";
 import toast from "react-hot-toast";
 import { deleteReview } from "@/server-actions/reviews";
-import { revalidatePath } from "next/cache";
 
 export const KebabMenu = ({
   reviewId,
@@ -16,7 +14,6 @@ export const KebabMenu = ({
     useState<boolean>(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const queryClient = useQueryClient();
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);

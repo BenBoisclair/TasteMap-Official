@@ -6,12 +6,17 @@ import UniqueServicesSection from "../unique-services/unique-services-section";
 import { Suspense } from "react";
 import { VendorSectionSkeleton } from "../skeletons/recommended-for-you-section-skeleton";
 import { UniqueServiceSectionSkeleton } from "../skeletons/unique-service-section-skeleton";
+import { ReviewsProps } from "@/server-actions/reviews";
 
 interface HighlightsPageProps {
   market: Market;
+  reviews: ReviewsProps;
 }
 
-export default function HighlightsPage({ market }: HighlightsPageProps) {
+export default function HighlightsPage({
+  market,
+  reviews,
+}: HighlightsPageProps) {
   return (
     <div id="HighlightsPage" className="flex flex-col bg-white py-8">
       <Suspense fallback={<VendorSectionSkeleton />}>
@@ -31,8 +36,8 @@ export default function HighlightsPage({ market }: HighlightsPageProps) {
       <RatingAndReviewSection
         id={market.id}
         name={market.name}
-        imageUrl={market.bannerUrl}
-        type="market"
+        type="Market"
+        reviews={reviews}
       />
     </div>
   );

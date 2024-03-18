@@ -50,7 +50,9 @@ export default async function MarketPage({
       <MarketHeader market={market} />
       <Tabs tabs={["Highlights", "Map & Info", "Reviews"]} />
 
-      {activeTab === "Highlights" && <HighlightsPage market={market} />}
+      {activeTab === "Highlights" && (
+        <HighlightsPage market={market} reviews={reviewsData} />
+      )}
       {activeTab === "Map & Info" && <MarketInfoPage market={market} />}
       {activeTab === "Reviews" && (
         <RatingAndReviewSection
