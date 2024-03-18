@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 
 interface ImageOverlayProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 

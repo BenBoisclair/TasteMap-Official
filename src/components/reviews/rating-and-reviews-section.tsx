@@ -1,33 +1,24 @@
-"use client";
-
-import { useQuery } from "@tanstack/react-query";
-
-import type { ReviewsResponse } from "@/types/types";
-import fetchAt from "@/utils/fetchAt";
+import { Review } from "@/types/types";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { ReviewsSkeleton } from "../skeletons/reviews-skeleton";
 import AspectBar from "./aspect-bar";
 import ReviewItem from "./review-card";
 import WriteReviewButton from "@/components/reviews/write-review-button";
+import { ReviewsProps, getReviews } from "@/server-actions/reviews";
 
 interface RatingAndReviewSectionProps {
   id: string;
   name: string;
-  imageUrl: string | null;
-  type: "market" | "vendor";
+  type: "Market" | "Vendor";
+  reviews: ReviewsProps;
 }
 
-export default function RatingAndReviewSection({
+export default async function RatingAndReviewSection({
   id,
   name,
-  imageUrl,
-  type = "market",
+  type = "Market",
+  reviews,
 }: RatingAndReviewSectionProps) {
-  const { data: reviewsData, status: reviewStatus } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: () => fetchAt<ReviewsResponse>(`/api/${type}s/${id}/reviews`),
-  });
-
   return (
     <div className="mb-5 bg-white" id="RatingsAndReviews">
       <div className="flex justify-between px-5">
@@ -36,7 +27,7 @@ export default function RatingAndReviewSection({
 
       <div className=" flex flex-col px-5 py-2">
         <div className="mt-4 flex px-2">
-          {reviewsData && reviewStatus === "success" && (
+          {reviews && reviews.status === 200 && (
             <div className="flex flex-col items-center justify-center">
               <div className="text-center">
                 <div className="mr-2 flex items-center leading-tight">
@@ -44,37 +35,31 @@ export default function RatingAndReviewSection({
                     <RatingStarIcon size={24} />
                   </div>
                   <div className="text-[32px] font-bold">
-                    {reviewsData?.average?.toFixed(2) ?? 0}
+                    {reviews?.data.average?.toFixed(2) ?? 0}
                   </div>
                 </div>
-                <div className="whitespace-nowrap text-sm">{`(${reviewsData?.total} reviews)`}</div>
+                <div className="whitespace-nowrap text-sm">{`(${reviews?.data?.total} reviews)`}</div>
               </div>
             </div>
           )}
 
           <div className="flex flex-col gap-1">
-            {reviewsData?.reviewAspects.map((aspect, key) => (
+            {reviews?.data?.reviewAspects.map((aspect, key) => (
               <AspectBar aspect={aspect} key={key} />
             ))}
           </div>
         </div>
 
-        <WriteReviewButton
-          name={name}
-          id={id}
-          imageUrl={imageUrl}
-          type={type}
-          className="mt-10"
-        />
+        <WriteReviewButton name={name} id={id} type={type} className="mt-10" />
 
-        {reviewsData && reviewStatus === "success" && (
+        {reviews && reviews.status === 200 && (
           <div className="mt-10 flex flex-col gap-8">
-            {reviewsData?.reviews.map((review, key) => {
+            {reviews.data?.reviews.map((review, key) => {
               return <ReviewItem review={review} key={key} />;
             })}
           </div>
         )}
-        {reviewStatus === "pending" && <ReviewsSkeleton />}
+        {!reviews && <ReviewsSkeleton />}
       </div>
     </div>
   );

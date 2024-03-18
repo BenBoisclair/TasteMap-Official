@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { MoreVertical } from "lucide-react";
 import toast from "react-hot-toast";
-
-import deleteReview from "../../app/api/_actions/deleteReview";
+import { deleteReview } from "@/server-actions/reviews";
+import { revalidatePath } from "next/cache";
 
 export const KebabMenu = ({
   reviewId,
@@ -47,11 +47,11 @@ export const KebabMenu = ({
 
   const handleDeleteReview = async ({ reviewId }: { reviewId: string }) => {
     try {
-      await deleteReview({ reviewId });
-      await queryClient.invalidateQueries({
-        queryKey: ["reviews", businessId],
-      });
-      toast.success("Review Deleted!");
+      const deleteReviewStatus = await deleteReview(reviewId);
+      if (deleteReviewStatus.status === 200) {
+        toast.success("Review Deleted!");
+        toggleDeleteModal();
+      }
     } catch (error) {
       toast.error("Delete failed..");
     }

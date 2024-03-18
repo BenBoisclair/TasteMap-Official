@@ -5,5 +5,5 @@ interface ContainerProps {
   className?: string;
 }
 export default function Container({ children, className }: ContainerProps) {
-  return <div className={cn(`p-5`, className)}>{children}</div>;
+  return <div className={cn(`px-5 py-3`, className)}>{children}</div>;
 }

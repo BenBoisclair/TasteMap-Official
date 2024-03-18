@@ -4,6 +4,7 @@ import { getVendor } from "@/server-actions/vendors";
 import { getProducts } from "@/server-actions/products";
 import ResetCart from "@/hooks/reset-cart";
 import { getPromotions } from "@/server-actions/promotions";
+import { getReviews } from "@/server-actions/reviews";
 
 export const dynamic = "force-dynamic";
 
@@ -36,11 +37,13 @@ export default async function VendorPage({
   const vendorData = getVendor(vendorId);
   const productsData = getProducts(vendorId);
   const promotionsData = getPromotions(vendorId);
+  const reviewsData = getReviews(vendorId, "Vendor");
 
-  const [vendor, products, promotions] = await Promise.all([
+  const [vendor, products, promotions, reviews] = await Promise.all([
     vendorData,
     productsData,
     promotionsData,
+    reviewsData,
   ]);
 
   if (!vendor) return;
@@ -50,6 +53,7 @@ export default async function VendorPage({
       <VendorView
         vendor={vendor}
         offers={{ products: products?.data, promotions: promotions?.data }}
+        reviews={reviews}
       />
     </>
   );

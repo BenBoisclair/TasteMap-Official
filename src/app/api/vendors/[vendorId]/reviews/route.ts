@@ -129,14 +129,6 @@ export const POST = async (
           { status: 409 }
         );
       }
-
-      // if (reviewWrite[0] !== undefined) {
-      //   await db.insert(reviewAspect).values(reviewAspects).returning();
-      // }
-
-      // return new Response(JSON.stringify(reviewWrite), {
-      //   headers: { "Content-Type": "application/json" },
-      // });
       return Response.json({ message: "Review Created!" }, { status: 200 });
     }
   } catch (error) {

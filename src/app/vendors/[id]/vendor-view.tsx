@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { Product, Promotion, product } from "@/db/schema/schema";
 import VendorOffersPage from "@/components/vendor/vendor-offers-page";
 import { setVendorId } from "@/hooks/cart-store";
+import { ReviewsProps } from "@/server-actions/reviews";
 
 export type OffersType = {
   products: Product[] | undefined;
@@ -18,9 +19,11 @@ export type OffersType = {
 export default function VendorView({
   vendor,
   offers,
+  reviews,
 }: {
   vendor: Vendor;
   offers: OffersType;
+  reviews: ReviewsProps;
 }) {
   const searchParams = useSearchParams();
 
@@ -48,9 +51,9 @@ export default function VendorView({
       {activeTab === "Reviews" && (
         <RatingAndReviewSection
           id={vendor.id}
-          type="vendor"
+          type="Vendor"
           name={vendor.name}
-          imageUrl={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
+          reviews={reviews}
         />
       )}
     </div>

@@ -7,6 +7,7 @@ import RatingAndReviewSection from "@/components/reviews/rating-and-reviews-sect
 import Tabs from "@/components/tabs";
 import { Market, Tag } from "@/types/types";
 import NavBar from "@/components/navbar/nav-bar";
+import { getReviews } from "@/server-actions/reviews";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,7 @@ export default async function MarketPage({
 }) {
   const marketId = params.id;
   const market = await getMarket(marketId);
+  const reviewsData = await getReviews(marketId, "Market");
   const activeTab = searchParams["tab"] || "Highlights";
 
   if (!market) return;
@@ -54,8 +56,8 @@ export default async function MarketPage({
         <RatingAndReviewSection
           id={marketId}
           name={market?.name}
-          imageUrl={market?.bannerUrl}
-          type={"market"}
+          type={"Market"}
+          reviews={reviewsData}
         />
       )}
     </div>

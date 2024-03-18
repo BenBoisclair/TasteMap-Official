@@ -19,11 +19,8 @@ interface VendorHeaderProps {
 }
 
 const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
-  const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
-  const shopTypeTags = vendor?.tags?.filter((tag) => tag.type === "Shop Type");
-  console.log(shopTypeTags);
   return (
-    <div id="vendHeader">
+    <div className="-mt-14 bg-white">
       <NavBar
         page="Vendor"
         className={cn(`z-40`, {
@@ -77,40 +74,6 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
           <div>
             <span>{vendor?.code}</span>
           </div>
-        </div>
-        <div className="mt-2 flex flex-col gap-2 pl-5 text-sm font-medium">
-          {productTags.length > 0 && (
-            <div id="productTags" className="flex items-center">
-              <p className="mr-2">Products</p>
-              <div
-                id="PTags"
-                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll">
-                {productTags?.map((tag, key: number) => {
-                  return (
-                    <Tag key={key} type={tag.type} size="lg">
-                      {tag.name}
-                    </Tag>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-          {shopTypeTags.length > 0 && (
-            <div id="shopTypeTags" className="flex items-center">
-              <p className="mr-2">Shop Types</p>
-              <div
-                id="STTags"
-                className="hide-scrollbar no-scrollbar flex items-center gap-3 overflow-scroll">
-                {shopTypeTags?.map((tag, key: number) => {
-                  return (
-                    <Tag key={key} type={"Facility"} size="lg">
-                      {tag.name}
-                    </Tag>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

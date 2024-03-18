@@ -4,20 +4,20 @@ import { market, review, reviewAspect } from "@/db/schema/schema";
 import { z } from "zod";
 
 export interface Author {
-  id: string;
-  firstName: string;
-  lastName: string;
-  imageUrl: string;
+  id: string | null | undefined;
+  firstName: string | null | undefined;
+  lastName: string | null | undefined;
+  imageUrl: string | null | undefined;
 }
 
 export interface Review {
   id: string;
   rating: number;
   content: string;
-  marketReviewedID: string;
+  marketReviewedID: string | null;
   vendorReviewedID: string | null;
   authorId: string;
-  createdAt: string;
+  createdAt: Date | null;
   author: Author;
 }
 

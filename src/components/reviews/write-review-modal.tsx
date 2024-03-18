@@ -1,28 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { nanoid } from "nanoid";
 import toast from "react-hot-toast";
-
-import type { InsertReviewAspect } from "@/types/types";
-import type { InsertReview } from "../../app/api/_actions/writeReview";
-import writeReview from "../../app/api/_actions/writeReview";
 import RatingChooser from "./rating-chooser";
+import { createReview } from "@/server-actions/reviews";
+import ImageFill from "../image-fill";
+import { revalidatePath } from "next/cache";
 
 export const WriteReviewModal = ({
   name,
-  imageUrl,
   type,
   writeReviewToggle,
   id,
   setWriteReviewToggle,
 }: {
   name: string;
-  imageUrl: string;
   type: string;
   id: string;
   writeReviewToggle: boolean;
@@ -30,19 +25,18 @@ export const WriteReviewModal = ({
 }) => {
   const { user, isSignedIn } = useUser();
   const [overall, setOverall] = useState<number>(5);
-  const queryClient = useQueryClient();
 
   const reviewId = nanoid(20);
 
   const [aspects, setAspects] = useState(
-    type === "market"
+    type === "Market"
       ? [
           { id: nanoid(20), name: "Facility", rating: 5 },
           { id: nanoid(20), name: "Safety", rating: 5 },
           { id: nanoid(20), name: "Convenience", rating: 5 },
           { id: nanoid(20), name: "Culture", rating: 5 },
         ]
-      : type === "vendor"
+      : type === "Vendor"
         ? [
             { id: nanoid(20), name: "Taste", rating: 5 },
             { id: nanoid(20), name: "Hygiene", rating: 5 },
@@ -54,52 +48,13 @@ export const WriteReviewModal = ({
 
   const [reviewContent, setReviewContent] = useState<string>("");
 
-  const createReview = useMutation({
-    mutationFn: async ({
-      reviewData,
-      reviewAspects,
-      id,
-      type,
-    }: {
-      reviewData: InsertReview;
-      reviewAspects: InsertReviewAspect[];
-      id: string;
-      type: string;
-    }) => {
-      return await writeReview({
-        reviewAspects,
-        reviewData,
-        id,
-        type,
-      }).then(async (data) => {
-        if (data?.status === 409 || data?.status === 404) {
-          toast.error(data?.data.message);
-        } else if (data?.status === 200) {
-          await queryClient.invalidateQueries({
-            queryKey: ["reviews", id],
-          });
-          if (type === "market") {
-            await queryClient.invalidateQueries({
-              queryKey: ["market", id],
-            });
-          } else if (type === "vendor") {
-            await queryClient.invalidateQueries({
-              queryKey: ["vendor", id],
-            });
-          }
-
-          toast.success(data?.data.message);
-        }
-      });
-    },
-  });
-
-  const submitReview = () => {
+  const submitReview = async () => {
     if (!isSignedIn) {
       toast.error("Please Sign in to Write Reviews");
       return;
     }
-    createReview.mutate({
+
+    const createReviewStatus = await createReview({
       reviewData: {
         id: reviewId,
         rating: overall,
@@ -111,9 +66,19 @@ export const WriteReviewModal = ({
         reviewId,
       })),
       id: id,
-      type: type === "Market" ? "markets" : "vendors",
+      type,
     });
-    setWriteReviewToggle(!writeReviewToggle);
+
+    if (
+      createReviewStatus?.status === 409 ||
+      createReviewStatus?.status === 404 ||
+      createReviewStatus?.status === 500
+    ) {
+      toast.error(createReviewStatus?.message);
+    } else if (createReviewStatus?.status === 200) {
+      toast.success(createReviewStatus?.message);
+      setWriteReviewToggle(!writeReviewToggle);
+    }
   };
 
   const handleAspectRatingChange = (index: number, newRating: number) => {
@@ -137,14 +102,11 @@ export const WriteReviewModal = ({
           </div>
         </div>
         <div className="flex flex-col items-center justify-center rounded-b-3xl bg-white pb-6">
-          <div className="relative h-[138px] w-[350px] overflow-hidden rounded-3xl">
-            <Image
-              src={imageUrl}
-              alt={`${name} Banner`}
-              fill={true}
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+          <ImageFill
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/${type === "Market" ? "markets" : "vendors"}/${id}/banner`}
+            alt={`${name} Banner`}
+            className="rounded-3xl h-[138px] w-[350px]"
+          />
           <div className="mt-4">
             <span className="text-lg font-bold">{`How would you rate this ${type} overall?`}</span>
             <div className="mt-4 flex justify-center">
@@ -187,10 +149,11 @@ export const WriteReviewModal = ({
         <div className="mb-8 mt-4 flex justify-center items-center flex-col">
           <button
             id="Write a Review Button"
-            onClick={submitReview}
-            className="rounded-3xl bg-yellow px-4 py-2">
+            className="rounded-3xl bg-yellow px-4 py-2"
+            onClick={submitReview}>
             <span className="text-xl font-bold">Submit review.</span>
           </button>
+
           <button
             onClick={() => setWriteReviewToggle(false)}
             className="mt-4 border-2 rounded-3xl px-4 py-2">

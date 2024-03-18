@@ -4,7 +4,6 @@ import React from "react";
 import { useUser } from "@clerk/nextjs";
 
 import type { Review } from "@/types/types";
-import formatDate from "@/utils/formatDate";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { KebabMenu } from "./kebab-menu";
 
@@ -28,7 +27,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
     return stars;
   };
 
-  const formattedDate = formatDate(review.createdAt);
+  // const formattedDate = formatDate(review.createdAt);
   const firstLetter = review?.author?.firstName?.charAt(0);
 
   return (
@@ -41,7 +40,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-bold">{`${review.author.firstName} ${review.author.lastName}`}</span>
-            <span className="text-sm">{formattedDate}</span>
+            <span className="text-sm">{review.createdAt?.toDateString()}</span>
           </div>
         </div>
         {isSignedIn && review.authorId === user.id && (

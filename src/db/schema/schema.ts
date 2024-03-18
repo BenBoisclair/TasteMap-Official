@@ -253,11 +253,11 @@ export const review = pgTable(
       .references(() => users.externalId),
 
     createdAt: timestamp("created_at").defaultNow(),
-  }
-  // (t) => ({
-  //   authorIdToMarketId: unique().on(t.authorId, t.marketReviewedID),
-  //   authorIdToVendorId: unique().on(t.authorId, t.vendorReviewedID),
-  // })
+  },
+  (t) => ({
+    authorIdToMarketId: unique().on(t.authorId, t.marketReviewedID),
+    authorIdToVendorId: unique().on(t.authorId, t.vendorReviewedID),
+  })
 );
 
 export const reviewRelations = relations(review, ({ one, many }) => ({
@@ -328,39 +328,33 @@ export const reviewAspectRelations = relations(reviewAspect, ({ one }) => ({
   }),
 }));
 
-export const vendor = pgTable(
-  "vendor",
-  {
-    id: varchar("id", { length: 20 }).primaryKey().notNull(),
-    code: varchar("code", { length: 4 }).notNull().unique(),
+export const vendor = pgTable("vendor", {
+  id: varchar("id", { length: 20 }).primaryKey().notNull(),
+  code: varchar("code", { length: 4 }).notNull().unique(),
 
-    name: text("name").notNull(),
-    nameTH: text("name_th"),
+  name: text("name").notNull(),
+  nameTH: text("name_th"),
 
-    ingredients: text("ingredients"),
-    ingredientsTH: text("ingredients_th"),
+  ingredients: text("ingredients"),
+  ingredientsTH: text("ingredients_th"),
 
-    ownerName: text("owner_name"),
-    ownerTelephone: text("owner_telephone"),
+  ownerName: text("owner_name"),
+  ownerTelephone: text("owner_telephone"),
 
-    about: text("about").notNull(),
-    aboutTH: text("about_th"),
+  about: text("about").notNull(),
+  aboutTH: text("about_th"),
 
-    priceRange: varchar("price_range").notNull(),
+  priceRange: varchar("price_range").notNull(),
 
-    marketId: varchar("market_id")
-      .notNull()
-      .references(() => market.id),
+  marketId: varchar("market_id")
+    .notNull()
+    .references(() => market.id),
 
-    isVerified: boolean("is_verified").default(false),
-    sequence: integer("sequence"),
+  isVerified: boolean("is_verified").default(false),
+  sequence: integer("sequence"),
 
-    createdAt: timestamp("created_at").defaultNow(),
-  },
-  (t) => ({
-    uniqueCodeMarketId: unique("code_marketId").on(t.code, t.marketId),
-  })
-);
+  createdAt: timestamp("created_at").defaultNow(),
+});
 
 export const vendorRelations = relations(vendor, ({ one, many }) => ({
   market: one(market, {

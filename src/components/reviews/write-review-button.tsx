@@ -8,15 +8,13 @@ import { cn } from "@/utils/cn";
 
 interface openWriteReviewModalProps {
   name: string;
-  imageUrl: string | null;
-  type: "market" | "vendor";
+  type: "Market" | "Vendor";
   id: string;
   className?: string;
 }
 
 export default function WriteReviewButton({
   name,
-  imageUrl,
   type,
   id,
   className,
@@ -47,7 +45,6 @@ export default function WriteReviewButton({
       {writeReviewToggle && (
         <WriteReviewModal
           name={name}
-          imageUrl={imageUrl || ""}
           type={type}
           id={id}
           writeReviewToggle={writeReviewToggle}
