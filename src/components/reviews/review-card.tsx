@@ -1,10 +1,8 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
-
 import type { Review } from "@/types/types";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { KebabMenu } from "./kebab-menu";
-import ImageFill from "../image-fill";
 import formatDate from "@/utils/formatDate";
 
 interface ReviewItemProps {
@@ -27,8 +25,6 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
     }
     return stars;
   };
-
-  const colors = ["yellow", "orange", "green", "blue"];
 
   const formattedDate = formatDate(review.createdAt as Date);
   const firstLetter = review?.author?.username?.charAt(1).toUpperCase();

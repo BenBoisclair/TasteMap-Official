@@ -19,6 +19,14 @@ export default async function RatingAndReviewSection({
   type = "Market",
   reviews,
 }: RatingAndReviewSectionProps) {
+  const aspects = reviews?.data?.reviewAspects.map((aspect, key) => (
+    <AspectBar aspect={aspect} key={key} />
+  ));
+
+  const reviewsUI = reviews.data?.reviews.map((review, key) => {
+    return <ReviewItem review={review} key={key} />;
+  });
+
   return (
     <div className="mb-5 bg-white" id="RatingsAndReviews">
       <div className="flex justify-between px-5">
@@ -43,21 +51,13 @@ export default async function RatingAndReviewSection({
             </div>
           )}
 
-          <div className="flex flex-col gap-1">
-            {reviews?.data?.reviewAspects.map((aspect, key) => (
-              <AspectBar aspect={aspect} key={key} />
-            ))}
-          </div>
+          <div className="flex flex-col gap-1">{aspects}</div>
         </div>
 
         <WriteReviewButton name={name} id={id} type={type} className="mt-10" />
 
         {reviews && reviews.status === 200 && (
-          <div className="mt-10 flex flex-col gap-8">
-            {reviews.data?.reviews.map((review, key) => {
-              return <ReviewItem review={review} key={key} />;
-            })}
-          </div>
+          <div className="mt-10 flex flex-col gap-8">{reviewsUI}</div>
         )}
         {!reviews && <ReviewsSkeleton />}
       </div>
