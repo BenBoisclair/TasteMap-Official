@@ -1,6 +1,6 @@
 "use server";
 import { reviewAspect } from "./../db/drizzle/schema";
-import { db, eq, sql } from "@/db";
+import { asc, db, desc, eq, sql } from "@/db";
 import { InsertReview, review, users } from "@/db/schema/schema";
 import {
   InsertReviewAspect,
@@ -148,7 +148,8 @@ export const getReviews = async (id: string, type: "Market" | "Vendor") => {
     .select()
     .from(review)
     .where(eq(review[reviewIDField], id)) // And once more for retrieving all reviews
-    .leftJoin(users, eq(users.externalId, review.authorId));
+    .leftJoin(users, eq(users.externalId, review.authorId))
+    .orderBy(desc(review.createdAt));
 
   const allReviews = allReviewsRaw.map((reviewRaw) => {
     return {
