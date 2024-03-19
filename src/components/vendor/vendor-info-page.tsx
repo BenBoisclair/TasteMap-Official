@@ -1,19 +1,10 @@
-import Image from "next/image";
-import {
-  BookOpenText,
-  Coins,
-  Info,
-  PlayCircle,
-  Refrigerator,
-  Wallet,
-} from "lucide-react";
-
-import type { InformationItems, Media, Vendor } from "@/types/types";
+import type { Media, Vendor } from "@/types/types";
 import { Tag } from "../tag";
 import { InformationCard } from "./information-card";
 import Title from "../title";
 import Container from "../container";
 import ImageFill from "../image-fill";
+import Markdown from "react-markdown";
 
 interface VendorInfoPageProps {
   vendor: Vendor;
@@ -21,17 +12,18 @@ interface VendorInfoPageProps {
 
 export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
   const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
+  const shopTags = vendor?.tags?.filter((tag) => tag.type === "Shop Type");
   return (
     <div className="whitespace-pre-line text-sm bg-white pb-10">
       <Container>
         <Title title="On their products" />
         <div className=" mt-2 h-full w-full font-medium text-black">
-          {vendor.about}
+          <Markdown>{vendor.about}</Markdown>
         </div>
       </Container>
       {(vendor.informationItems || []).length > 0 && (
-        <Container>
-          <div className="no-scrollbar flex h-full w-full gap-3 overflow-x-auto font-medium text-black">
+        <Container className="-px-5">
+          <div className="no-scrollbar flex h-full w-full gap-3 overflow-x-auto font-medium text-black px-5">
             {vendor.informationItems?.map((item, key) => {
               return <InformationCard item={item} key={key} />;
             })}
@@ -41,14 +33,25 @@ export default function VendorInfoPage({ vendor }: VendorInfoPageProps) {
       {productTags.length > 0 && (
         <Container>
           <div className="flex items-center">
-            <div className="flex items-center gap-3 flex-wrap">
-              {productTags?.map((tag, key: number) => {
-                return (
-                  <Tag key={key} type={tag.type}>
-                    {tag.name}
-                  </Tag>
-                );
-              })}
+            <div className="flex gap-2 flex-col w-full">
+              <div className="flex gap-3 items-center">
+                {productTags?.map((tag, key: number) => {
+                  return (
+                    <Tag key={key} type={tag.type} size="lg">
+                      {tag.name}
+                    </Tag>
+                  );
+                })}
+              </div>
+              <div className="flex gap-3 items-center">
+                {shopTags?.map((tag, key: number) => {
+                  return (
+                    <Tag key={key} type={"Facility"} size="lg">
+                      {tag.name}
+                    </Tag>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </Container>
