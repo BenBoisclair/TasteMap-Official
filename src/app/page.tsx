@@ -15,6 +15,7 @@ import OnboardingModal from "@/components/onboarding-modal";
 import ImageOverlay from "@/components/image-overlay";
 import { VendorSectionSkeleton } from "@/components/skeletons/recommended-for-you-section-skeleton";
 import VendorsHomePageSection from "@/components/vendor/vendors-homepage-section";
+import LandingHeader from "@/components/landing-header";
 
 export const dynamic = "force-dynamic";
 
@@ -29,56 +30,7 @@ export default function HomePage() {
       <NavBar page="Home" />
       {/* <OpenMainMapButton /> */}
       <main className=" flex w-full flex-col bg-white pb-14">
-        <div className="flex flex-col bg-white gap-4 md:hidden mb-6">
-          <div className="flex gap-2">
-            <div className="flex flex-col">
-              <ImageFill
-                src={`/images/3.png`}
-                className=" rounded-br-3xl w-full h-full min-w-[215px]"
-                alt="Picture">
-                <div className="bg-black/30 absolute w-full h-full" />
-              </ImageFill>
-              <div className="p-3">
-                <span className="text-2xl font-bold leading-none">{`Thailand’s greatest local markets---all in one place.`}</span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <ImageFill
-                src={`/images/4.png`}
-                alt="Picture"
-                className="w-[167px] h-[51px] rounded-bl-3xl"
-              />
-              <ImageFill
-                src={`/images/1.png`}
-                alt="Picture"
-                className="w-[167px] h-[200px] rounded-l-3xl"
-              />
-            </div>
-          </div>
-          <div id="SearchBar" className="px-5">
-            <Link
-              href={`/vendors`}
-              className="flex w-full items-center gap-2 rounded-3xl bg-neutral px-3 py-2">
-              <Search size={25} color="gray" />
-              <input
-                className="w-full bg-transparent outline-none ring-0"
-                placeholder="markets, shop types, products, etc"
-              />
-            </Link>
-          </div>
-          <div className="flex gap-2">
-            <ImageFill
-              src={`/images/2.png`}
-              className="w-[145px] h-[90px] rounded-bl-3xl rounded-tr-3xl shrink-0"
-              alt="Picture"
-            />
-            <ImageFill
-              src={`/images/5.png`}
-              className="w-full h-[90px] rounded-tl-3xl rounded-br-3xl"
-              alt="Picture"
-            />
-          </div>
-        </div>
+        <LandingHeader />
         <Suspense fallback={<MarketsNearYouSectionSkeleton />}>
           <MarketsNearYouSection />
         </Suspense>

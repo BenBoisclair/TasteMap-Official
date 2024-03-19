@@ -137,9 +137,9 @@ export const WriteReviewModal = ({
         </div>
         <div className="mt-2 flex flex-col justify-start rounded-3xl bg-white p-4 md:items-center">
           <span className="text-lg font-bold">Drop your review here.</span>
-          <input
-            type="textarea"
-            placeholder="Write your review..."
+          <textarea
+            rows={5}
+            placeholder={`What did you like and not like about this shop? \nWould you recommend others to try it?`}
             className="mt-3 rounded-3xl bg-neutral px-5 py-4"
             value={reviewContent}
             onChange={(e) => setReviewContent(e.target.value)}

@@ -7,6 +7,7 @@ import { Heart, Menu, Search } from "lucide-react";
 import TasteMapFullLogo from "../icons/taste-map-logo-full";
 import SideMenu from "./sidebar-menu";
 import { cn } from "../../utils/cn";
+import BackButton from "../back-button";
 
 export function NavBar({
   className = "",
@@ -18,7 +19,7 @@ export function NavBar({
   marketId?: string;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <>
@@ -26,11 +27,13 @@ export function NavBar({
         className={cn(
           ` fixed top-0 z-[200] flex w-full items-center bg-white px-5 py-3.5`,
           className
-        )}
-      >
-        <button onClick={() => toggleMenu()} className="cursor-pointer">
-          <Menu size={30} />
-        </button>
+        )}>
+        <div className="flex gap-4">
+          <button onClick={() => toggleMenu()} className="cursor-pointer">
+            <Menu size={30} />
+          </button>
+          <BackButton size={30} />
+        </div>
         <div className=" flex grow justify-center pr-10">
           <TasteMapFullLogo />
         </div>
@@ -39,8 +42,7 @@ export function NavBar({
             <Link
               href={
                 page === "Home" ? `/vendors` : `/market/${marketId}/vendors`
-              }
-            >
+              }>
               <Search size={28} />
             </Link>
           )}

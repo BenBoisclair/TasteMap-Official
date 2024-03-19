@@ -11,6 +11,7 @@ import OpeningHourItem from "../opening-hour-item";
 import { Tag } from "../tag";
 import Title from "../title";
 import Container from "../container";
+import Markdown from "react-markdown";
 
 interface MarketInfoPageProps {
   market: Market;
@@ -27,29 +28,31 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
     <div className="bg-white text-sm">
       {/* About Section */}
       <Container>
-        <Title title={"About"} icon={<Info size={25} />} />
+        <Title title={"About"} />
         <div className="mt-2">
           <div className="flex flex-col gap-2">
             <div className="flex h-fit w-full font-medium text-black">
-              {market.about}
+              <Markdown>{market.about}</Markdown>
             </div>
-            {facilityTags.length > 0 && (
-              <div className="hide-scrollbar no-scrollbar flex items-center gap-2 overflow-scroll">
-                {facilityTags?.map((tag, key: number) => {
-                  return (
-                    <Tag key={key} type={tag.type} size="default">
-                      {tag.name}
-                    </Tag>
-                  );
-                })}
-              </div>
-            )}
+            <div className="mt-2">
+              {facilityTags.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap">
+                  {facilityTags?.map((tag, key: number) => {
+                    return (
+                      <Tag key={key} type={tag.type} size="lg">
+                        {tag.name}
+                      </Tag>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Container>
       {/* Opening Hours Section */}
-      <Container>
-        <Title title="Opening Hours" icon={<CalendarDays size={25} />} />
+      {/* <Container>
+        <Title title="Opening Hours" />
         <div className="mt-2">
           {sortedOpeningHours.map((hour, index) => {
             const isOpen = isMarketOpen(hour);
@@ -65,13 +68,13 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
             );
           })}
         </div>
-      </Container>
+      </Container> */}
       {/* History Section */}
       <Container>
-        <Title title="History" icon={<BookText size={25} />} />
+        <Title title="History" />
         <div className="mt-2">
           <div className="flex h-fit w-full font-medium text-black">
-            {market.history}
+            <Markdown>{market.history}</Markdown>
           </div>
         </div>
       </Container>
