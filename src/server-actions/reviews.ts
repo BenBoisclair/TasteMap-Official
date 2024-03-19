@@ -155,6 +155,7 @@ export const getReviews = async (id: string, type: "Market" | "Vendor") => {
       ...reviewRaw.review,
       author: {
         id: reviewRaw?.user?.id,
+        username: reviewRaw.user?.username,
         firstName: reviewRaw?.user?.firstName,
         lastName: reviewRaw?.user?.lastName,
         imageUrl: reviewRaw?.user?.imageUrl,

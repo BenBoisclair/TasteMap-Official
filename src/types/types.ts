@@ -7,6 +7,7 @@ export interface Author {
   id: string | null | undefined;
   firstName: string | null | undefined;
   lastName: string | null | undefined;
+  username: string | null | undefined;
   imageUrl: string | null | undefined;
 }
 

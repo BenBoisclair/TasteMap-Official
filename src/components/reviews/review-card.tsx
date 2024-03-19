@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import type { Review } from "@/types/types";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { KebabMenu } from "./kebab-menu";
+import { getUsername } from "@/server-actions/user";
 
 interface ReviewItemProps {
   review: Review;
@@ -13,6 +14,7 @@ interface ReviewItemProps {
 
 const ReviewItem = ({ review }: ReviewItemProps) => {
   const { isSignedIn, user } = useUser();
+
   const renderStars = (count: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -39,7 +41,7 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
             <span className="text-lg text-white">{firstLetter}</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-bold">{`${review.author.firstName} ${review.author.lastName}`}</span>
+            <span className="text-lg font-bold">{`${review.author.username}`}</span>
             <span className="text-sm">{review.createdAt?.toDateString()}</span>
           </div>
         </div>
