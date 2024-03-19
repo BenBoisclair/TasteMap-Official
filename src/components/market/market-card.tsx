@@ -5,7 +5,6 @@ import isMarketOpen from "@/utils/isMarketOpen";
 import { MarketStatusIcon } from "../icons/market-status-icon";
 import VerifiedBadge from "../icons/verified-badge";
 import { Ratings } from "../reviews/ratings";
-import { Tag } from "../tag";
 import FavouriteHeart from "../favouriteHeart";
 import DistancePin from "./distance-pin";
 import ImageFill from "../image-fill";

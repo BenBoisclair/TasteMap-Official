@@ -1,4 +1,4 @@
-export default function formatDate(dateString: string) {
+export default function formatDate(dateString: Date) {
   const months = [
     "January",
     "February",
@@ -14,11 +14,9 @@ export default function formatDate(dateString: string) {
     "December",
   ];
 
-  const date = new Date(dateString);
-
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
+  const day = dateString.getDate();
+  const monthIndex = dateString.getMonth();
+  const year = dateString.getFullYear();
 
   return `Visited on ${day} ${months[monthIndex]} ${year}`;
 }

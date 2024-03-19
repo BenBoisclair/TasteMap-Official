@@ -1,13 +1,11 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import type { Review } from "@/types/types";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { KebabMenu } from "./kebab-menu";
-import { getUsername } from "@/server-actions/user";
 import ImageFill from "../image-fill";
+import formatDate from "@/utils/formatDate";
 
 interface ReviewItemProps {
   review: Review;
@@ -30,28 +28,30 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
     return stars;
   };
 
-  // const formattedDate = formatDate(review.createdAt);
-  const firstLetter = review?.author?.username?.charAt(0);
+  const colors = ["yellow", "orange", "green", "blue"];
+
+  const formattedDate = formatDate(review.createdAt as Date);
+  const firstLetter = review?.author?.username?.charAt(1).toUpperCase();
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          {review?.author?.imageUrl ? (
+          {/* {review?.author?.imageUrl ? (
             <ImageFill
               src={review.author.imageUrl}
               alt="User Image"
               className="rounded-full h-[42px] w-[42px] mr-2"
             />
-          ) : (
-            <div
-              className={`mr-2 flex h-[42px] w-[42px] items-center justify-center rounded-full bg-gradient-to-b from-yellow from-40% to-orange font-bold`}>
-              <span className="text-lg text-white">{firstLetter}</span>
-            </div>
-          )}
+          ) : ( */}
+          <div
+            className={`mr-2 flex h-[42px] w-[42px] items-center justify-center rounded-full bg-gradient-to-b from-yellow from-40% to-orange font-bold`}>
+            <span className="text-lg text-white">{firstLetter}</span>
+          </div>
+          {/* )} */}
           <div className="flex flex-col">
             <span className="text-lg font-bold">{`${review.author.username}`}</span>
-            <span className="text-sm">{review.createdAt?.toDateString()}</span>
+            <span className="text-sm">{formattedDate}</span>
           </div>
         </div>
         {isSignedIn && review.authorId === user.id && (
@@ -65,10 +65,6 @@ const ReviewItem = ({ review }: ReviewItemProps) => {
       </div>
       <div className="mt-2 flex gap-0.5">{renderStars(review.rating)}</div>
       <div className="mt-3 font-medium text-[#333]">{review.content}</div>
-      {/* <div className="flex mt-3 items-center">
-        <div className="material-symbols-outlined text-xs mr-2">thumb_up</div>
-        <span className="text-xs">Helpful?</span>
-      </div> */}
     </div>
   );
 };
