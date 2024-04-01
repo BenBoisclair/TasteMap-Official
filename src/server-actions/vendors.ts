@@ -5,13 +5,13 @@ import { auth } from "@clerk/nextjs";
 import { asc, desc, eq, sql } from "drizzle-orm";
 
 type getVendorsProps = {
-  tag?: string;
+  tag?: string | string[];
   marketId?: string;
   query?: string;
 };
 
 export async function getVendors({
-  tag: searchTag,
+  tag: searchTags,
   marketId,
   query,
 }: getVendorsProps) {
@@ -50,11 +50,16 @@ export async function getVendors({
       orderBy: [desc(vendor.isVerified), asc(vendor.sequence)],
     });
 
-    const filteredVendors = !!searchTag
-      ? allVendors.filter((vendor) =>
-          vendor?.tags.some(({ tag }) => tag.name === searchTag)
-        )
-      : allVendors;
+    const filteredVendors =
+      typeof searchTags === "string"
+        ? !!searchTags
+          ? allVendors.filter((vendor) =>
+              vendor?.tags.some(({ tag }) => tag.name === searchTags)
+            )
+          : allVendors
+        : allVendors.filter((vendor) =>
+            vendor?.tags.some(({ tag }) => searchTags?.includes(tag.name))
+          );
 
     const vendorsWithReview = await Promise.all(
       filteredVendors.map(async (vendor) => {

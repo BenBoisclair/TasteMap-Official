@@ -11,8 +11,18 @@ export default async function VendorsPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   let tag = searchParams["category"];
+  let shownTag;
   if (Array.isArray(tag)) {
     tag = tag[0];
+  }
+  shownTag = tag;
+
+  if (tag === "Fashion") {
+    tag = ["Clothing", "Accessory"];
+  }
+
+  if (tag === "Services") {
+    tag = ["Service", "Fortune Telling"];
   }
 
   const vendors = await getVendors({ tag: tag });
@@ -20,7 +30,7 @@ export default async function VendorsPage({
   return (
     <SearchVendorsUI
       vendors={vendors}
-      title={tag ? `Explore all ${tag}!` : "Explore all Shops"}
+      title={tag ? `Explore all ${shownTag}!` : "Explore all Shops"}
     />
   );
 }
