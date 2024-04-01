@@ -2,10 +2,20 @@ import { addDays, format, isWithinInterval } from "date-fns";
 
 import type { OpeningHour } from "@/types/types";
 
+function toThaiTime(date: Date) {
+  const thaiZoneTimeOffset = 7; // for UTC+7
+  const localTimeInMs = date.getTime();
+  const localOffsetInMs = date.getTimezoneOffset() * 60 * 1000; // to milliseconds
+  const thaiTimeInMs =
+    localTimeInMs + localOffsetInMs + thaiZoneTimeOffset * 60 * 60 * 1000; // to milliseconds
+  return new Date(thaiTimeInMs);
+}
+
 export default function isMarketOpen(
   openingHours: OpeningHour[] | OpeningHour
 ): boolean {
-  const now = new Date();
+  const now = toThaiTime(new Date());
+
   const today = format(now, "EEEE");
 
   let todayOpening: OpeningHour | undefined;
