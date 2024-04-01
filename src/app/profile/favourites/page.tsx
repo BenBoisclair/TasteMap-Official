@@ -108,10 +108,10 @@ export default async function FavouritesPage({
                   {favourites?.data.vendors &&
                     favourites?.data.vendors
                       .filter((vendor) => vendor.marketId === market.id)
-                      .map((vendor) => (
+                      .map((vendor, key) => (
                         <VendorCardRecommendations
                           classNames="bg-transparent"
-                          key={vendor.id}
+                          key={vendor.id + key}
                           vendor={vendor}
                         />
                       ))}
@@ -126,8 +126,11 @@ export default async function FavouritesPage({
                     ?.map((market) => market.id)
                     .includes(vendor.marketId)
               )
-              .map((vendor) => (
-                <VendorCardRecommendations key={vendor.id} vendor={vendor} />
+              .map((vendor, key) => (
+                <VendorCardRecommendations
+                  key={vendor.id + key}
+                  vendor={vendor}
+                />
               ))}
         </div>
       ) : null}
