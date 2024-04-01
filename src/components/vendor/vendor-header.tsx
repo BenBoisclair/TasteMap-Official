@@ -70,9 +70,9 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
               </Link>
             </div>
           </div>
-          <div>
+          {/* <div>
             <span>{vendor?.code}</span>
-          </div>
+          </div>  */}
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ interface ReviewItemProps {
 }
 
 const ReviewItem = ({ review }: ReviewItemProps) => {
+  if (review.visible === false) return null;
   const { isSignedIn, user } = useUser();
 
   const renderStars = (count: number) => {

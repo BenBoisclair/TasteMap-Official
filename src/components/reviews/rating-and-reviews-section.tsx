@@ -1,3 +1,4 @@
+"use client";
 import { Review } from "@/types/types";
 import RatingStarIcon from "../icons/rating-star-icon";
 import { ReviewsSkeleton } from "../skeletons/reviews-skeleton";
@@ -19,14 +20,7 @@ export default async function RatingAndReviewSection({
   type = "Market",
   reviews,
 }: RatingAndReviewSectionProps) {
-  const aspects = reviews?.data?.reviewAspects.map((aspect, key) => (
-    <AspectBar aspect={aspect} key={key} />
-  ));
-
-  const reviewsUI = reviews.data?.reviews.map((review, key) => {
-    return <ReviewItem review={review} key={key} />;
-  });
-
+  console.log(reviews);
   return (
     <div className="mb-5 bg-white" id="RatingsAndReviews">
       <div className="flex justify-between px-5">
@@ -35,7 +29,7 @@ export default async function RatingAndReviewSection({
 
       <div className=" flex flex-col px-5 py-2">
         <div className="mt-4 flex px-2">
-          {reviews && reviews.status === 200 && (
+          {!!reviews && (
             <div className="flex flex-col items-center justify-center">
               <div className="text-center">
                 <div className="mr-2 flex items-center leading-tight">
@@ -43,21 +37,29 @@ export default async function RatingAndReviewSection({
                     <RatingStarIcon size={24} />
                   </div>
                   <div className="text-[32px] font-bold">
-                    {reviews?.data.average?.toFixed(2) ?? 0}
+                    {reviews?.data.average?.toFixed(2) || 0}
                   </div>
                 </div>
-                <div className="whitespace-nowrap text-sm">{`(${reviews?.data?.total} reviews)`}</div>
+                <div className="whitespace-nowrap text-sm">{`(${reviews.data.total || 0} reviews)`}</div>
               </div>
             </div>
           )}
 
-          <div className="flex flex-col gap-1">{aspects}</div>
+          <div className="flex flex-col gap-1">
+            {reviews?.data?.reviewAspects.map((aspect, key) => (
+              <AspectBar aspect={aspect} key={key} />
+            ))}
+          </div>
         </div>
 
         <WriteReviewButton name={name} id={id} type={type} className="mt-10" />
 
-        {reviews && reviews.status === 200 && (
-          <div className="mt-10 flex flex-col gap-8">{reviewsUI}</div>
+        {reviews.data?.reviews.length > 0 && (
+          <div className="mt-10 flex flex-col gap-8">
+            {reviews.data?.reviews.map((review, key) => (
+              <ReviewItem review={review} key={key} />
+            ))}
+          </div>
         )}
         {!reviews && <ReviewsSkeleton />}
       </div>

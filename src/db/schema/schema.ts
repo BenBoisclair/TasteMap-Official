@@ -245,6 +245,7 @@ export const review = pgTable(
 
     rating: integer("rating").notNull(),
     content: text("content").notNull(),
+    visible: boolean("visible").default(true),
 
     marketReviewedID: varchar("market_id").references(() => market.id),
     vendorReviewedID: varchar("vendor_id").references(() => vendor.id),
