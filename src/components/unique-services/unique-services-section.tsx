@@ -13,6 +13,8 @@ export default async function UniqueServicesSection({
 }: UniqueServicesSectionProps) {
   const services = await getUniqueServices(marketId);
 
+  if (services.length === 0) return;
+
   return (
     <Section>
       <Section.Title>Unique Services</Section.Title>

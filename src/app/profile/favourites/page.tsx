@@ -98,26 +98,34 @@ export default async function FavouritesPage({
           favourites?.data?.vendors?.length !== 0) ? (
         <div className="flex flex-col mt-6 md:grid md:grid-cols-2 lg:grid-cols-4 md:px-5 gap-6 ">
           {favourites?.data.markets &&
-            favourites?.data.markets.map((market) => (
-              <>
-                <MarketCard key={market.id} market={market} className="mx-3" />
-                <div className=" bg-neutral">
-                  <span className="font-medium text-sm text-neutral-400 flex justify-center mt-2">{`Your favourited ${removeSubstrings(
-                    market.name
-                  )} Vendors`}</span>
-                  {favourites?.data.vendors &&
-                    favourites?.data.vendors
-                      .filter((vendor) => vendor.marketId === market.id)
-                      .map((vendor, key) => (
+            favourites?.data.markets.map((market) => {
+              const marketVendors = favourites?.data.vendors?.filter(
+                (vendor) => vendor.marketId === market.id
+              );
+              return (
+                <>
+                  <MarketCard
+                    key={market.id}
+                    market={market}
+                    className="mx-3"
+                  />
+                  {marketVendors && marketVendors.length > 0 && (
+                    <div className="bg-neutral">
+                      <span className="font-medium text-sm text-neutral-400 flex justify-center mt-2">
+                        {`Your favourited ${removeSubstrings(market.name)} Vendors`}
+                      </span>
+                      {marketVendors.map((vendor, key) => (
                         <VendorCardRecommendations
                           classNames="bg-transparent"
                           key={vendor.id + key}
                           vendor={vendor}
                         />
                       ))}
-                </div>
-              </>
-            ))}
+                    </div>
+                  )}
+                </>
+              );
+            })}
           {favourites?.data.vendors &&
             favourites?.data.vendors
               .filter(

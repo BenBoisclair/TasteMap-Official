@@ -18,7 +18,7 @@ export default function HighlightsPage({
   reviews,
 }: HighlightsPageProps) {
   return (
-    <div id="HighlightsPage" className="flex flex-col bg-white py-8">
+    <div id="HighlightsPage" className="flex flex-col bg-white py-4">
       <Suspense fallback={<VendorSectionSkeleton />}>
         <RecommendedForYouSection marketId={market.id} />
       </Suspense>

@@ -37,7 +37,7 @@ export default function VendorView({
   const tabs = ["Info", "Reviews"];
 
   if (offers.products?.length) {
-    tabs.splice(1, 0, "Offers");
+    tabs.splice(1, 0, "Menu");
   }
 
   setVendorId(vendor.id);
@@ -47,7 +47,7 @@ export default function VendorView({
       <VendorHeader vendor={vendor} inView={inView} headerRef={headerRef} />
       <Tabs tabs={tabs} />
       {activeTab === "Info" && <VendorInfoPage vendor={vendor} />}
-      {activeTab === "Offers" && <VendorOffersPage offers={offers} />}
+      {activeTab === "Menu" && <VendorOffersPage offers={offers} />}
       {activeTab === "Reviews" && (
         <RatingAndReviewSection
           id={vendor.id}

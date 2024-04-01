@@ -46,7 +46,7 @@ const CategoriesSection = ({
         <h1 className="text-xl font-bold">Explore by Categories</h1>
       </div>
       <div
-        className={cn(`no-scrollbar mt-4 px-5`, {
+        className={cn(`no-scrollbar my-4 px-5`, {
           "flex gap-4 overflow-x-scroll": variant === "Default",
           "grid grid-cols-4 grid-rows-2 gap-1.5 gap-y-6": variant === "Icon",
         })}>
