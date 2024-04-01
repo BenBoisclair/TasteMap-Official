@@ -50,8 +50,7 @@ export const VendorCard = ({
           <h1 className="truncate text-lg font-bold">{vendor.name}</h1>
           {toggleMarketName && (
             <h2 className="font-medium -mt-1">
-              {!!vendor?.market?.name &&
-                removeSubstrings(vendor?.market?.name, ["Floating Market"])}
+              {!!vendor?.market?.name && removeSubstrings(vendor?.market?.name)}
             </h2>
           )}
         </Link>

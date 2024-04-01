@@ -3,13 +3,19 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState } from "react";
-import { InformationItems } from "@/types/types";
+import { InformationItems, Vendor } from "@/types/types";
 import TasteMapLogo from "../assets/taste-map-logo";
 import ImageFill from "../image-fill";
 import ImageOverlay from "../image-overlay";
 import { Maximize2 } from "lucide-react";
 
-export const InformationCard = ({ item }: { item: InformationItems }) => {
+export const InformationCard = ({
+  item,
+  vendor,
+}: {
+  item: InformationItems;
+  vendor: Vendor;
+}) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   return (
     <>
@@ -17,7 +23,7 @@ export const InformationCard = ({ item }: { item: InformationItems }) => {
         onClick={() => setIsCardOpen(!isCardOpen)}
         className="flex flex-col rounded-3xl bg-white pb-3 text-start">
         <ImageFill
-          src={item.imageUrl}
+          src={`https://adlvkgocidkmifehftjz.supabase.co/storage/v1/object/public/public-assets/markets/${vendor.marketId}/vendors/${vendor.id}/information-items/${item.id}`}
           alt={item.name || ""}
           className="rounded-3xl h-[160px] w-[210px]">
           <ImageOverlay className=" bg-gradient-to-b from-transparent to-black" />
