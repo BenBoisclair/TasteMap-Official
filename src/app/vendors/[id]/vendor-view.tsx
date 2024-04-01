@@ -37,7 +37,7 @@ export default function VendorView({
   const tabs = ["Info", "Reviews"];
 
   if (offers.products?.length) {
-    tabs.splice(1, 0, "Menu");
+    tabs.unshift("Menu");
   }
 
   setVendorId(vendor.id);

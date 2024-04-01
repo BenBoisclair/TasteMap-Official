@@ -17,7 +17,7 @@ export interface Review {
   content: string;
   marketReviewedID: string | null;
   vendorReviewedID: string | null;
-  visible: boolean;
+  visible: boolean | null;
   authorId: string;
   createdAt: Date | null;
   author: Author;
