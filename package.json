@@ -54,6 +54,7 @@
     "sharp": "^0.33.2",
     "tailwindcss-animate": "^1.0.7",
     "tastemap": "link:",
+    "use-optimistic": "^1.0.0",
     "zustand": "^4.5.1"
   },
   "devDependencies": {

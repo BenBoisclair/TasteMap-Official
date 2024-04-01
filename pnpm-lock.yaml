@@ -119,6 +119,9 @@ dependencies:
   tastemap:
     specifier: 'link:'
     version: 'link:'
+  use-optimistic:
+    specifier: ^1.0.0
+    version: 1.0.0(react@18.2.0)
   zustand:
     specifier: ^4.5.1
     version: 4.5.1(@types/react@18.2.55)(react@18.2.0)
@@ -6501,6 +6504,14 @@ packages:
       '@types/react': 18.2.55
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /use-optimistic@1.0.0(react@18.2.0):
+    resolution: {integrity: sha512-1ZIZKuIjIdAok1R5XHboqNeB4/CegbFOTL+UoZOs1bYSyriCsQEiqKp4jqGkkmpKpAhtjbaeY+4yvzdAdik64g==}
+    peerDependencies:
+      react: ^16.8.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.2.55)(react@18.2.0):

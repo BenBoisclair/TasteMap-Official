@@ -29,6 +29,10 @@ export default async function VendorsPage({
     tag = ["Ingredients", "Fruits"];
   }
 
+  if (tag === "Quick Bites") {
+    tag = ["Meal"];
+  }
+
   const vendors = await getVendors({ tag: tag });
   if (!vendors) return;
   return (
