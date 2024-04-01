@@ -25,7 +25,7 @@ export default function VendorCardRecommendations({
       <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-xl">
         <>
           <Image
-            src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${vendor.marketId}/vendors/${vendor.id}/banner`}
             alt={`${vendor.name} Banner`}
             fill={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

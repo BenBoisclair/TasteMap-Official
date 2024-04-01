@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import AddMarketForm from "../components/add-market-form";
+import AddMarketForm from "./add-market-form";
 
 export default function AddMarketButton() {
   return (

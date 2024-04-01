@@ -31,7 +31,7 @@ const VendorHeader = ({ vendor, inView, headerRef }: VendorHeaderProps) => {
       />
 
       <ImageFill
-        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
+        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${vendor.marketId}/vendors/${vendor.id}/banner`}
         alt={`${vendor?.name} Banner`}
         className="rounded-3xl h-[240px] mx-4 mt-[60px]">
         <ImageOverlay className="justify-end items-end">

@@ -51,7 +51,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
         </div>
       </Container>
       {/* Opening Hours Section */}
-      {/* <Container>
+      <Container>
         <Title title="Opening Hours" />
         <div className="mt-2">
           {sortedOpeningHours.map((hour, index) => {
@@ -68,7 +68,7 @@ export default function MarketInfoPage({ market }: MarketInfoPageProps) {
             );
           })}
         </div>
-      </Container> */}
+      </Container>
       {/* History Section */}
       <Container>
         <Title title="History" />

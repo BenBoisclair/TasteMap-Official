@@ -28,7 +28,7 @@ export const VendorCard = ({
   return (
     <div className="flex w-[210px] flex-col">
       <ImageFill
-        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/vendors/${vendor.id}/banner`}
+        src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${vendor.marketId}/vendors/${vendor.id}/banner`}
         alt={`${vendor.name}'s Banner`}
         className="h-[160px] w-[210px] rounded-3xl">
         <ImageOverlay className="flex-col justify-between items-end">
