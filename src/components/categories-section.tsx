@@ -20,7 +20,7 @@ const CategoriesSection = ({
     { name: "Desserts", imagePath: "/categories/desserts_card.png" },
     { name: "Souvenirs", imagePath: "/categories/souvenirs.jpg" },
     { name: "Fashion", imagePath: "/categories/fashion_card.png" },
-    { name: "Ingredients", imagePath: "/categories/ingredients.jpg" },
+    { name: "Fresh", imagePath: "/categories/ingredients.jpg" },
     { name: "Services", imagePath: "/categories/services.jpg" },
     { name: "Personal Use", imagePath: "/categories/personaluse.jpg" },
   ];
@@ -31,7 +31,7 @@ const CategoriesSection = ({
     { name: "Desserts", imagePath: "/categories/snacks.png" },
     { name: "Souvenirs", imagePath: "/categories/souvenirs.png" },
     { name: "Fashion", imagePath: "/categories/fashion.png" },
-    { name: "Ingredients", imagePath: "/categories/ingredients.png" },
+    { name: "Fresh", imagePath: "/categories/ingredients.png" },
     { name: "Services", imagePath: "/categories/services.png" },
     { name: "Personal Use", imagePath: "/categories/personaluse.png" },
   ];

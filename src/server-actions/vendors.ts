@@ -50,16 +50,15 @@ export async function getVendors({
       orderBy: [desc(vendor.isVerified), asc(vendor.sequence)],
     });
 
-    const filteredVendors =
-      typeof searchTags === "string"
-        ? !!searchTags
-          ? allVendors.filter((vendor) =>
-              vendor?.tags.some(({ tag }) => tag.name === searchTags)
-            )
-          : allVendors
+    const filteredVendors = !!searchTags
+      ? typeof searchTags === "string"
+        ? allVendors.filter((vendor) =>
+            vendor?.tags.some(({ tag }) => tag.name === searchTags)
+          )
         : allVendors.filter((vendor) =>
             vendor?.tags.some(({ tag }) => searchTags?.includes(tag.name))
-          );
+          )
+      : allVendors;
 
     const vendorsWithReview = await Promise.all(
       filteredVendors.map(async (vendor) => {
