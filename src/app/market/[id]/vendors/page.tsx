@@ -15,9 +15,25 @@ export default async function MarketVendorsPage({
   const marketId = params.id;
 
   let tag = searchParams["category"];
+
+  let shownTag;
   if (Array.isArray(tag)) {
     tag = tag[0];
   }
+  shownTag = tag;
+
+  if (tag === "Fashion") {
+    tag = ["Clothing", "Accessory"];
+  }
+
+  if (tag === "Services") {
+    tag = ["Service", "Fortune Telling"];
+  }
+
+  if (tag === "Fresh") {
+    tag = ["Ingredients", "Fruits"];
+  }
+
   const vendors = await getVendors({ marketId: marketId, tag: tag });
   const marketName = await db.query.market.findFirst({
     where: eq(market.id, marketId),
@@ -31,7 +47,7 @@ export default async function MarketVendorsPage({
   return (
     <SearchVendorsUI
       vendors={vendors}
-      title={tag ? `${tag}` : "Explore Shops"}
+      title={tag ? `${shownTag}` : "Explore all Shops"}
       subTitle={`in ${marketName?.name}`}
     />
   );
