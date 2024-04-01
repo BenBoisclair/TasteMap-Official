@@ -1,7 +1,11 @@
-export default function removeSubstrings(
-  mainString: string,
-  substringsToRemove: string[],
-): string {
+export default function removeSubstrings(mainString: string): string {
+  const substringsToRemove = [
+    "Floating Market",
+    "Night Market",
+    "Creative Park",
+    "Center Market",
+  ];
+
   let cleanedString = mainString;
   // Iterate over each substring to remove.
   substringsToRemove.forEach((substring) => {

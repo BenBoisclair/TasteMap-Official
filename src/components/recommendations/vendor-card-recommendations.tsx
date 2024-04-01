@@ -17,11 +17,7 @@ export default function VendorCardRecommendations({
 }) {
   const productTags = vendor?.tags?.filter((tag) => tag.type === "Product");
   return (
-    <div
-      className={twMerge(
-        "flex cursor-pointer rounded-[40px] bg-white p-3",
-        classNames
-      )}>
+    <div className={twMerge("flex cursor-pointer bg-white p-3", classNames)}>
       <div className=" relative mr-4 h-[120px] w-[150px] shrink-0 rounded-xl">
         <>
           <Image

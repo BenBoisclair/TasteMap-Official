@@ -22,7 +22,7 @@ const MarketHeader = ({ market }: MarketHeaderProps) => {
         <div className="px-5 pt-2">
           <div className="flex items-center justify-between">
             <div className="text-[26px] font-bold">
-              {removeSubstrings(market?.name, ["Floating Market"])}
+              {removeSubstrings(market?.name)}
             </div>
             {market.isVerified && <VerifiedBadge size="lg" variant="icon" />}
           </div>

@@ -140,7 +140,7 @@ export const WriteReviewModal = ({
           <textarea
             rows={5}
             placeholder={`What did you like and not like about this shop? \nWould you recommend others to try it?`}
-            className="mt-3 rounded-3xl bg-neutral px-5 py-4"
+            className="mt-3 rounded-3xl bg-neutral px-5 py-4 w-full max-w-[400px] resize-none"
             value={reviewContent}
             onChange={(e) => setReviewContent(e.target.value)}
           />

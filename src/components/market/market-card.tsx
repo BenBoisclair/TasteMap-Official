@@ -10,10 +10,17 @@ import DistancePin from "./distance-pin";
 import ImageFill from "../image-fill";
 import ImageOverlay from "../image-overlay";
 import removeSubstrings from "@/utils/removeSubstrings";
+import { cn } from "@/utils/cn";
 
-export function MarketCard({ market }: { market: Market }) {
+export function MarketCard({
+  market,
+  className,
+}: {
+  market: Market;
+  className?: string;
+}) {
   return (
-    <div className="shrink-0 overflow-hidden flex flex-col">
+    <div className={cn(`shrink-0 overflow-hidden flex flex-col`, className)}>
       <ImageFill
         className="h-[160px] min-w-[270px] rounded-3xl w-full"
         src={`${process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL}/storage/v1/object/public/public-assets/markets/${market.id}/banner`}
@@ -43,12 +50,7 @@ export function MarketCard({ market }: { market: Market }) {
       <div className="mt-[10px] flex">
         <Link href={`/market/${market.id}?tab=Highlights`} className=" w-full">
           <h1 className=" text-xl font-black whitespace-nowrap">
-            {removeSubstrings(market.name, [
-              "Floating Market",
-              "Night Market",
-              "Creative Park",
-              "Center Market",
-            ])}
+            {removeSubstrings(market.name)}
           </h1>
           <h2 className="font-medium">{market.type}</h2>
         </Link>
