@@ -8,6 +8,7 @@ import { getVendors } from "./vendors";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface FavouriteActionProps {
   marketId: string | undefined;
@@ -25,14 +26,17 @@ export async function favouriteAction({
 
   try {
     let query;
+    let type;
     if (marketId) {
       query = db.query.favourites.findFirst({
         where: (favourites) => eq(favourites.marketId, marketId),
       });
+      type = "Market";
     } else if (vendorId) {
       query = db.query.favourites.findFirst({
         where: (favourites) => eq(favourites.vendorId, vendorId),
       });
+      type = "Vendor";
     } else {
       console.log("No marketId or vendorId provided");
     }
@@ -54,6 +58,7 @@ export async function favouriteAction({
     revalidatePath("/", "layout");
   } catch (error) {
     console.error("Error querying the database", error);
+    return { success: false };
   }
 }
 

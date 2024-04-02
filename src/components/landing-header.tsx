@@ -6,8 +6,8 @@ export default function LandingHeader() {
   const featuredMarketId = `Hx_IO9ngLgfRzqkna6SH`;
 
   return (
-    <div className="flex flex-col bg-white gap-4 md:hidden mb-6">
-      <div className="flex gap-2">
+    <div className="flex flex-col bg-white gap-4 mb-6 md:hidden">
+      <div className="flex gap-2 md:w-full ">
         <div className="flex flex-col">
           <ImageFill
             src={`/images/3.png`}
@@ -21,23 +21,22 @@ export default function LandingHeader() {
             <span className="text-2xl font-bold leading-none">{`Thailand’s greatest local markets---all in one place.`}</span>
           </div>
         </div>
-        <Link href={`/market/${featuredMarketId}`}>
-          <div className="flex flex-col gap-2">
-            <ImageFill
-              src={`/images/4.png`}
-              alt="Picture"
-              className="w-[167px] h-[51px] rounded-bl-3xl"
-            />
-            <ImageFill
-              src={`/images/1.png`}
-              alt="Picture"
-              className="w-[167px] h-[200px] rounded-l-3xl"
-            />
-          </div>
-        </Link>
+
+        <div className="flex flex-col gap-2  md:grow md:max-w-[200px]">
+          <ImageFill
+            src={`/images/4.png`}
+            alt="Picture"
+            className="w-[167px] h-[51px] rounded-bl-3xl md:w-full"
+          />
+          <ImageFill
+            src={`/images/1.png`}
+            alt="Picture"
+            className="w-[167px] h-[200px] rounded-l-3xl md:w-full"
+          />
+        </div>
       </div>
-      <div id="SearchBar" className="px-5">
-        <div className="border-neutral-400 border-2 rounded-3xl relative">
+      <div id="SearchBar" className="px-5 md:w-[400px]">
+        <div className="-neutral-400 -2 rounded-3xl relative">
           <Link
             href={`/vendors`}
             className="flex w-full items-center gap-2 rounded-3xl bg-neutral px-3 py-2">
