@@ -46,13 +46,6 @@ const OpenMainMapButton = ({
           className
         )}>
         <div className="p-5 flex items-center">
-          {isMapOpen ? (
-            <></>
-          ) : (
-            <div className="h-[30px] bg-yellow w-[60px] -mr-3 rounded-l-3xl flex justify-center items-center font-bold text-orange">
-              Map
-            </div>
-          )}
           <button
             disabled={!markets}
             onClick={toggleMapOpen}
