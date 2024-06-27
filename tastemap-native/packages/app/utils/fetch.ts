@@ -1,5 +1,5 @@
-import env from 'app/env'
 import { getAuthStorage } from './storage'
+import env from 'app/env'
 
 type FetchOptions = RequestInit & {
   headers?: Record<string, string>

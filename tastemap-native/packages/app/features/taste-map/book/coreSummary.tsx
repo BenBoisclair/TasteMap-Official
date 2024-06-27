@@ -1,4 +1,4 @@
-import { Books } from '../../../../apps/next/pages/api/book/interface'
+import { Books } from '../../../../../apps/next/pages/api/book/interface'
 import { getApi } from 'app/utils/fetch'
 import { useQuery } from 'react-query'
 import { YStack, Text } from '@my/ui'

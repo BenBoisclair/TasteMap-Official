@@ -42,7 +42,7 @@ export function VerificationScreen() {
     const authToken = AuthTokenResponse.parse(authTokenResponse.data)
     await setAuth(authToken)
 
-    return authTokenResponse.data ? '/book' : null
+    return authTokenResponse.data ? '/taste-map' : null
   }
 
   useEffect(() => {

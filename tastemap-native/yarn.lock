@@ -5123,6 +5123,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node-fetch@npm:^2.6.11":
+  version: 2.6.11
+  resolution: "@types/node-fetch@npm:2.6.11"
+  dependencies:
+    "@types/node": "*"
+    form-data: ^4.0.0
+  checksum: 180e4d44c432839bdf8a25251ef8c47d51e37355ddd78c64695225de8bc5dc2b50b7bb855956d471c026bb84bd7295688a0960085e7158cbbba803053492568b
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 20.10.5
   resolution: "@types/node@npm:20.10.5"
@@ -9717,6 +9727,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"form-data@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "form-data@npm:4.0.0"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
+  languageName: node
+  linkType: hard
+
 "framer-motion@npm:^6.5.1":
   version: 6.5.1
   resolution: "framer-motion@npm:6.5.1"
@@ -13054,7 +13075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
+"node-fetch@npm:2.7.0, node-fetch@npm:^2.2.0, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -15620,6 +15641,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"simple-line-notify@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "simple-line-notify@npm:2.0.0"
+  dependencies:
+    node-fetch: 2.6.7
+  checksum: 7228b356cc14f176d53638becb8129caa4fd3c8fca5f9f99451761b75459a26f7532206250910437099fa0ebefbd3b0b92a991e2a8605f094a8ab1d75a06d361
+  languageName: node
+  linkType: hard
+
 "simple-plist@npm:^1.1.0":
   version: 1.4.0
   resolution: "simple-plist@npm:1.4.0"
@@ -16366,6 +16396,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/runtime": ^7.18.9
     "@manypkg/cli": ^0.19.1
+    "@types/node-fetch": ^2.6.11
     check-dependency-version-consistency: ^3.0.3
     eslint: ^8.21.0
     expo: ~49.0.23
@@ -16373,6 +16404,7 @@ __metadata:
     expo-splash-screen: ~0.20.5
     expo-status-bar: ~1.6.0
     expo-updates: ~0.18.19
+    node-fetch: 2.7.0
     node-gyp: ^9.3.1
     patch-package: ^8.0.0
     prettier: ^2.7.1
@@ -16380,6 +16412,7 @@ __metadata:
     react-native: 0.72.10
     react-native-fetch-api: ^3.0.0
     react-native-polyfill-globals: ^3.1.0
+    simple-line-notify: ^2.0.0
     text-encoding: ^0.7.0
     turbo: ^1.10.3
     typescript: ^5.1.3

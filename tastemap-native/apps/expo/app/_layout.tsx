@@ -1,6 +1,6 @@
-import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream'
-import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding'
-import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch'
+// import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream'
+// import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding'
+// import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { useColorScheme } from 'react-native'
 import { Provider } from 'app/provider'
@@ -21,9 +21,9 @@ export default function HomeLayout() {
   })
   const scheme = useColorScheme()
 
-  polyfillFetch()
-  polyfillEncoding()
-  polyfillReadableStream()
+  // polyfillFetch()
+  // polyfillEncoding()
+  // polyfillReadableStream()
 
   if (!loaded) {
     return null

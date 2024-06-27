@@ -1,6 +1,6 @@
 import { createWithOpenSheet, LedgerAction, useLedgerOperation, addComma } from './utils'
 import { createWithDiaglogOpen, useIsDialogOpen } from 'app/atoms/isDialogOpen'
-import { Book, Books } from '../../../../apps/next/pages/api/book/interface'
+import { Book, Books } from '../../../../../apps/next/pages/api/book/interface'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useIsSheetOpen } from 'app/atoms/isSheetOpen'
 import { YStack, Text, Button } from '@my/ui'
@@ -134,7 +134,7 @@ const CoreBookFilledTop = ({
           {toggleStatus === 'EDIT' ? (
             <>
               <SolitoImage
-                src={require('../../assets/check.png')}
+                src={require('../../../assets/check.png')}
                 width={12}
                 height={12}
                 contentFit="cover"
@@ -156,7 +156,7 @@ const CoreBookFilledTop = ({
           ) : (
             <>
               <SolitoImage
-                src={require('../../assets/edit.png')}
+                src={require('../../../assets/edit.png')}
                 width={12}
                 height={12}
                 contentFit="cover"
@@ -204,7 +204,7 @@ const CoreBookFilledTop = ({
           {toggleStatus === 'DELETE' ? (
             <>
               <SolitoImage
-                src={require('../../assets/check.png')}
+                src={require('../../../assets/check.png')}
                 width={12}
                 height={12}
                 contentFit="cover"
@@ -226,7 +226,7 @@ const CoreBookFilledTop = ({
           ) : (
             <>
               <SolitoImage
-                src={require('../../assets/delete.png')}
+                src={require('../../../assets/delete.png')}
                 width={12}
                 height={12}
                 contentFit="cover"
@@ -447,8 +447,8 @@ const CoreBookFilledLists = ({
               <SolitoImage
                 src={
                   toggleStatus === 'EDIT'
-                    ? require('../../assets/edit.png')
-                    : require('../../assets/delete.png')
+                    ? require('../../../assets/edit.png')
+                    : require('../../../assets/delete.png')
                 }
                 width={17}
                 height={17}

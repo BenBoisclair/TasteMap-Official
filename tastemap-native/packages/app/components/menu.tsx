@@ -3,6 +3,7 @@ import { SolitoImage } from 'solito/image'
 import { YStack, Button, Text } from '@my/ui'
 import { Dispatch, SetStateAction } from 'react'
 import { useCurrentRoute } from 'app/utils/hooks'
+import { useInternalScreen } from 'app/atoms/internalScreen'
 
 export enum BookState {
   BOOK = 'BOOK',
@@ -125,8 +126,7 @@ export const FinancialMenuBar = ({
 }
 
 export const NavHorizontalBar = () => {
-  const { push } = useRouter()
-  const currentRoute = useCurrentRoute()
+  const [internalScreen, setInternalScreen] = useInternalScreen()
 
   return (
     <YStack
@@ -173,11 +173,11 @@ export const NavHorizontalBar = () => {
           pressStyle={{
             backgroundColor: '#FFF',
           }}
-          onPress={() => push('/book')}
+          onPress={() => setInternalScreen('book')}
         >
           <SolitoImage
             src={
-              currentRoute === '/book'
+              internalScreen === 'book'
                 ? require('../assets/book.png')
                 : require('../assets/book-disabled.png')
             }
@@ -189,7 +189,7 @@ export const NavHorizontalBar = () => {
             resizeMode="cover"
           />
           <Text
-            color={currentRoute === '/book' ? '#82630E' : '#6F6F6F'}
+            color={internalScreen === 'book' ? '#82630E' : '#6F6F6F'}
             textAlign="center"
             fontFamily="$body"
             fontSize={12}
@@ -201,6 +201,62 @@ export const NavHorizontalBar = () => {
           </Text>
         </YStack>
       </Button>
+      {
+        // <Button
+        //   display="flex"
+        //   flexDirection="column"
+        //   justifyContent="center"
+        //   alignItems="center"
+        //   gap={3}
+        //   backgroundColor="#FFF"
+        //   outlineWidth={0}
+        //   borderWidth={0}
+        //   hoverStyle={{
+        //     backgroundColor: '#FFF',
+        //   }}
+        //   pressStyle={{
+        //     backgroundColor: '#FFF',
+        //     outlineWidth: 0,
+        //     borderWidth: 0,
+        //   }}
+        //   onPress={() => setInternalScreen('dashboard')}
+        // >
+        //   <YStack
+        //     display="flex"
+        //     width={74}
+        //     height={74}
+        //     flexDirection="column"
+        //     justifyContent="center"
+        //     alignItems="center"
+        //     gap={6}
+        //     flexShrink={0}
+        //   >
+        //     <SolitoImage
+        //       src={
+        //         internalScreen === 'dashboard'
+        //           ? require('../assets/dashboard.png')
+        //           : require('../assets/dashboard-disabled.png')
+        //       }
+        //       width={24}
+        //       height={24}
+        //       contentFit="cover"
+        //       alt="book"
+        //       onLayout={() => {}}
+        //       resizeMode="cover"
+        //     />
+        //     <Text
+        //       color={internalScreen === 'dashboard' ? '#82630E' : '#6F6F6F'}
+        //       fontFamily="$body"
+        //       fontSize={12}
+        //       fontStyle="normal"
+        //       fontWeight="500"
+        //       letterSpacing={0.12}
+        //     >
+        //       ประสิทธิภาพ
+        //     </Text>
+        //   </YStack>
+        // </Button>
+      }
       <Button
         display="flex"
         flexDirection="column"
@@ -218,61 +274,7 @@ export const NavHorizontalBar = () => {
           outlineWidth: 0,
           borderWidth: 0,
         }}
-        onPress={() => null}
-      >
-        <YStack
-          display="flex"
-          width={74}
-          height={74}
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={6}
-          flexShrink={0}
-        >
-          <SolitoImage
-            src={
-              currentRoute === '/dashboard'
-                ? require('../assets/dashboard.png')
-                : require('../assets/dashboard-disabled.png')
-            }
-            width={24}
-            height={24}
-            contentFit="cover"
-            alt="book"
-            onLayout={() => {}}
-            resizeMode="cover"
-          />
-          <Text
-            color={currentRoute === '/dashboard' ? '#82630E' : '#6F6F6F'}
-            fontFamily="$body"
-            fontSize={12}
-            fontStyle="normal"
-            fontWeight="500"
-            letterSpacing={0.12}
-          >
-            ประสิทธิภาพ
-          </Text>
-        </YStack>
-      </Button>
-      <Button
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        gap={3}
-        backgroundColor="#FFF"
-        outlineWidth={0}
-        borderWidth={0}
-        hoverStyle={{
-          backgroundColor: '#FFF',
-        }}
-        pressStyle={{
-          backgroundColor: '#FFF',
-          outlineWidth: 0,
-          borderWidth: 0,
-        }}
-        onPress={() => push('/account')}
+        onPress={() => setInternalScreen('account')}
       >
         <YStack
           display="flex"
@@ -286,7 +288,7 @@ export const NavHorizontalBar = () => {
         >
           <SolitoImage
             src={
-              currentRoute === '/account'
+              internalScreen === 'account'
                 ? require('../assets/account.png')
                 : require('../assets/account-disabled.png')
             }
@@ -298,7 +300,7 @@ export const NavHorizontalBar = () => {
             resizeMode="cover"
           />
           <Text
-            color={currentRoute === '/account' ? '#82630E' : '#6F6F6F'}
+            color={internalScreen === 'account' ? '#82630E' : '#6F6F6F'}
             fontFamily="$body"
             fontSize={12}
             fontStyle="normal"

@@ -1,4 +1,4 @@
-import { AccountResponse } from '../../../../apps/next/pages/api/user/interface'
+import { AccountResponse } from '../../../../../apps/next/pages/api/user/interface'
 import { NavHorizontalBar } from 'app/components/menu'
 import { Bottom } from 'app/components/core'
 import { YStack, Text, Button } from '@my/ui'
@@ -34,39 +34,41 @@ export function AccountScreen() {
             backgroundColor="#FFF"
             borderRadius={10}
           >
-            <Button
-              display="flex"
-              width="auto"
-              height="auto"
-              paddingVertical={6}
-              paddingHorizontal={10}
-              justifyContent="space-between"
-              alignItems="center"
-              borderRadius={24}
-              borderWidth={1.5}
-              borderColor="#6F6F6F"
-              backgroundColor="#FFF"
-            >
-              <SolitoImage
-                src={require('../../assets/edit.png')}
-                width={12}
-                height={12}
-                contentFit="cover"
-                alt="edit"
-                onLayout={() => {}}
-                resizeMode="cover"
-              />
-              <Text
-                color="#3F3F3F"
-                fontFamily="$body"
-                fontSize={14}
-                fontStyle="normal"
-                fontWeight="400"
-                letterSpacing={0.14}
-              >
-                แก้ไข
-              </Text>
-            </Button>
+            {
+              // <Button
+              //   display="flex"
+              //   width="auto"
+              //   height="auto"
+              //   paddingVertical={6}
+              //   paddingHorizontal={10}
+              //   justifyContent="space-between"
+              //   alignItems="center"
+              //   borderRadius={24}
+              //   borderWidth={1.5}
+              //   borderColor="#6F6F6F"
+              //   backgroundColor="#FFF"
+              // >
+              //   <SolitoImage
+              //     src={require('../../../assets/edit.png')}
+              //     width={12}
+              //     height={12}
+              //     contentFit="cover"
+              //     alt="edit"
+              //     onLayout={() => {}}
+              //     resizeMode="cover"
+              //   />
+              //   <Text
+              //     color="#3F3F3F"
+              //     fontFamily="$body"
+              //     fontSize={14}
+              //     fontStyle="normal"
+              //     fontWeight="400"
+              //     letterSpacing={0.14}
+              //   >
+              //     แก้ไข
+              //   </Text>
+              // </Button>
+            }
           </YStack>
           <YStack
             display="flex"
@@ -81,7 +83,7 @@ export function AccountScreen() {
             borderRadius={10}
           >
             <SolitoImage
-              src={require('../../assets/chicken.png')}
+              src={require('../../../assets/chicken.png')}
               width={90}
               height={90}
               contentFit="cover"

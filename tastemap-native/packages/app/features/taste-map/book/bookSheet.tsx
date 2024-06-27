@@ -1,7 +1,7 @@
 import {
   CreateBookRequestBody,
   UpdateBookRequestBody,
-} from '../../../../apps/next/pages/api/book/interface'
+} from '../../../../../apps/next/pages/api/book/interface'
 import { useLedgerOperation, createWithCloseSheet } from './utils'
 import { YStack, Text, Button, Input, Sheet } from '@my/ui'
 import { useIsSheetOpen } from 'app/atoms/isSheetOpen'
@@ -106,7 +106,7 @@ const BookSheetTop = () => {
             : formatDateThai(new Date())}
         </Text>
         <SolitoImage
-          src={require('../../assets/calendar.png')}
+          src={require('../../../assets/calendar.png')}
           width={18}
           height={18}
           contentFit="cover"
@@ -118,11 +118,11 @@ const BookSheetTop = () => {
       <Button
         position="absolute"
         height="auto"
-        padding={0}
+        padding={10}
         borderWidth={0}
         outlineWidth={0}
-        backgroundColor="#FFF"
         alignSelf="flex-end"
+        backgroundColor="#FFF"
         hoverStyle={{
           backgroundColor: '#FFF',
         }}
@@ -133,16 +133,19 @@ const BookSheetTop = () => {
           setIsSheetOpen(false)
         }}
         overflow="hidden"
+        unstyled
       >
-        <SolitoImage
-          src={require('../../assets/x-mark.png')}
-          width={19}
-          height={19}
-          contentFit="cover"
-          alt="close"
-          onLayout={() => {}}
-          resizeMode="cover"
-        />
+        <YStack width={19} height={19}>
+          <SolitoImage
+            src={require('../../../assets/x-mark.png')}
+            width={19}
+            height={19}
+            contentFit="cover"
+            alt="close"
+            onLayout={() => {}}
+            resizeMode="cover"
+          />
+        </YStack>
       </Button>
     </YStack>
   )
@@ -447,7 +450,7 @@ const ExpenseDropDown = () => {
         </Text>
         <YStack marginLeft="auto">
           <SolitoImage
-            src={isOpen ? require('../../assets/up.png') : require('../../assets/down.png')}
+            src={isOpen ? require('../../../assets/up.png') : require('../../../assets/down.png')}
             width={8}
             height={4}
             contentFit="cover"

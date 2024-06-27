@@ -10,6 +10,7 @@ import { YStack, Text, Input } from '@my/ui'
 import { useMutation } from 'react-query'
 import { postApi } from 'app/utils/fetch'
 import { Keyboard } from 'react-native'
+import { logger } from 'app/utils/log'
 
 export function HomeScreen() {
   const { mutateAsync } = useMutation((body: LoginRequestBody) => postApi('/auth/login', body))
@@ -20,13 +21,19 @@ export function HomeScreen() {
   const [getAuth, setAuth] = getAuthStorage()
 
   const onNavigate = async () => {
+    // for apple dev to test
+    if (phoneNumber === '0110') {
+      return '/taste-map'
+    }
+
     const successResponse = await mutateAsync(
       LoginRequestBody.parse({
         phone_number: phoneNumber,
       })
     )
+    logger.log({ successResponse })
     if (successResponse.error) {
-      console.error(successResponse.error)
+      logger.error(successResponse.error)
       setIsError(true)
       return null
     }
@@ -44,7 +51,7 @@ export function HomeScreen() {
       //   expiration_date: '',
       // })
       // console.log(await getAuth())
-      ;(await getAuth()).access_token !== '' && push('/book')
+      ;(await getAuth()).access_token !== '' && push('/taste-map')
     })()
   }, [])
 
@@ -151,6 +158,7 @@ const PhoneNumberInput = ({
       <YStack width="100%" padding={0}>
         <Input
           fontFamily="$body"
+          color="#000"
           fontSize={20}
           fontStyle="normal"
           fontWeight="500"

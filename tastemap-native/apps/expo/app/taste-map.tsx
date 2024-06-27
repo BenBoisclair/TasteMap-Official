@@ -1,4 +1,4 @@
-import { AccountScreen } from 'app/features/account/screen'
+import { TasteMapScreen } from 'app/features/taste-map/screen'
 import { Stack } from 'expo-router'
 
 export default function Screen() {
@@ -6,11 +6,11 @@ export default function Screen() {
     <>
       <Stack.Screen
         options={{
-          title: 'Account',
+          title: 'TasteMap',
           headerShown: false,
         }}
       />
-      <AccountScreen />
+      <TasteMapScreen />
     </>
   )
 }
