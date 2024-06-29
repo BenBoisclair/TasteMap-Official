@@ -23,6 +23,11 @@ export function HomeScreen() {
   const onNavigate = async () => {
     // for apple dev to test
     if (phoneNumber === '0110') {
+      setAuth({
+        access_token: '0110',
+        refresh_token: '0110',
+        expiration_date: new Date('9999-12-30').toISOString(),
+      })
       return '/taste-map'
     }
 

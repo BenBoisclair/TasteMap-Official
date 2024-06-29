@@ -16,17 +16,6 @@ export const CoreBook = () => {
   const { data, refetch } = useQuery('books', () => getApi('/book/today'))
   const [phoneNumber] = usePhoneNumber()
 
-  // for apple dev to test
-  if (phoneNumber === '0110') {
-    return (
-      <>
-        <CoreBookEmpty />
-        <BookDialog refetch={refetch as BookRefetch} />
-        <BookSheet refetch={refetch as BookRefetch} />
-      </>
-    )
-  }
-
   return (
     <>
       {data && data?.data.length !== 0 ? (
