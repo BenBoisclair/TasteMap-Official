@@ -26,7 +26,7 @@ export const withAuthentication =
     }
 
     if (!token || !token.startsWith('Bearer ') || token.split(' ').length !== 2) {
-      return res.status(401).json({ error: 'Wrong Authorization' })
+      return res.status(401).json({ error: `Wrong Authorization, received ${token}` })
     }
 
     const accessToken = z.string().parse(token.split(' ')[1])
@@ -37,7 +37,9 @@ export const withAuthentication =
     } = await supabase.auth.getUser(accessToken)
 
     if (getUserError || !user) {
-      return res.status(401).json({ error: 'Unauthorized' })
+      return res
+        .status(401)
+        .json({ error: `Unauthorized expected Bearer xxxx, but received ${token}` })
     }
 
     return handler(req, res, user)
