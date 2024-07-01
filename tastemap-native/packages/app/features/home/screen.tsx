@@ -7,13 +7,14 @@ import { getAuthStorage } from 'app/utils/storage'
 import { useSlowRouter } from 'app/utils/hooks'
 import { Bottom } from '../../components/core'
 import { YStack, Text, Input } from '@my/ui'
-import { useMutation } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { postApi } from 'app/utils/fetch'
 import { Keyboard } from 'react-native'
 import { logger } from 'app/utils/log'
 
 export function HomeScreen() {
   const { mutateAsync } = useMutation((body: LoginRequestBody) => postApi('/auth/login', body))
+  const { data } = useQuery('todo', () => fetch('/api/smth'))
   const [phoneNumber, setPhoneNumber] = usePhoneNumber()
   const [isError, setIsError] = useState(false)
   const { push } = useSlowRouter()
@@ -47,18 +48,22 @@ export function HomeScreen() {
     return success ? '/verification' : null
   }
 
-  useEffect(() => {
-    ;(async () => {
-      setPhoneNumber('')
-      // await setAuth({
-      //   refresh_token: '',
-      //   access_token: '',
-      //   expiration_date: '',
-      // })
-      // console.log(await getAuth())
-      ;(await getAuth()).access_token !== '' && push('/taste-map')
-    })()
-  }, [])
+  //useEffect(() => {
+  //  push('/taste-map')
+  //}, [])
+
+  //useEffect(() => {
+  //  ;(async () => {
+  //    setPhoneNumber('')
+  //    // await setAuth({
+  //    //   refresh_token: '',
+  //    //   access_token: '',
+  //    //   expiration_date: '',
+  //    // })
+  //    // console.log(await getAuth())
+  //    ;(await getAuth()).access_token !== '' && push('/taste-map')
+  //  })()
+  //}, [])
 
   return (
     <YStack

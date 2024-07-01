@@ -37,7 +37,9 @@ export const withAuthentication =
     } = await supabase.auth.getUser(accessToken)
 
     if (getUserError || !user) {
-      return res.status(401).json({ error: 'Unauthorized' })
+      return res
+        .status(401)
+        .json({ error: `Unauthorized expected Bearer xxxx, but received ${token}` })
     }
 
     return handler(req, res, user)
