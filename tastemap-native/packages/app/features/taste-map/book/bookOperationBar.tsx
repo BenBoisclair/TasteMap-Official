@@ -15,7 +15,8 @@ export const BookOperationBar = () => {
           ...ledgerOperation,
           action: 'ADD',
           type: 'INCOME',
-        }
+          category: 'รายรับจากการขาย',
+        } as const
       })
     )
   }
@@ -26,7 +27,8 @@ export const BookOperationBar = () => {
           ...ledgerOperation,
           action: 'ADD',
           type: 'EXPENSE',
-        }
+          category: 'เลือกประเภท',
+        } as const
       })
     )
   }
