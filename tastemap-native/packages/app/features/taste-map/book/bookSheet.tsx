@@ -9,7 +9,7 @@ import { patchApi, postApi } from 'app/utils/fetch'
 import { formatDateThai } from 'app/utils/date'
 import { useEffect, useState } from 'react'
 import { SolitoImage } from 'solito/image'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { BookRefetch } from './core'
 
 export const BookSheet = ({ refetch }: { refetch: BookRefetch }) => {
@@ -297,6 +297,8 @@ const BookSheetBottom = ({ refetch }: { refetch: BookRefetch }) => {
 
   const withCloseSheet = createWithCloseSheet(setIsSheetOpen)
 
+  const queryClient = useQueryClient()
+
   type BindedMutate = () => Promise<{ data: any; error: null } | { data: null; error: any }>
   const partialOnCreateOrUpdate = (bindedMutate: BindedMutate) => async () => {
     withCloseSheet(async () => {
@@ -308,7 +310,8 @@ const BookSheetBottom = ({ refetch }: { refetch: BookRefetch }) => {
           category: '',
         }
       })
-      refetch()
+      await queryClient.invalidateQueries({ queryKey: 'books' })
+      await refetch()
     })
   }
   const onCreate = partialOnCreateOrUpdate(() =>
