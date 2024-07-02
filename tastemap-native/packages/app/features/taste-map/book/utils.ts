@@ -20,13 +20,12 @@ const ledgerOperationAtom = atom<LedgerOperation>({
   action: 'ADD',
   amount: '0',
   date: formatDate(new Date()),
-})
+} as const)
 
 export function useLedgerOperation() {
   const [ledgerOperation, setLedgerOperation] = [...useAtom(ledgerOperationAtom)] as const
-
-  return [
-    {
+  const ledgerAdaptor = (ledgerOperation: LedgerOperation) =>
+    ({
       ...ledgerOperation,
       category:
         ledgerOperation.category === ''
@@ -36,8 +35,20 @@ export function useLedgerOperation() {
             ? 'เลือกประเภท'
             : ''
           : ledgerOperation.category,
-    },
-    setLedgerOperation,
+    } as const)
+
+  const ledgerAdaptorFunction = (setter: (update: SetStateAction<LedgerOperation>) => void) => {
+    return (update: SetStateAction<LedgerOperation>) => {
+      setter((prev: LedgerOperation) => {
+        const newState = typeof update === 'function' ? update(prev) : update
+        return ledgerAdaptor(newState)
+      })
+    }
+  }
+
+  return [
+    ledgerAdaptor(ledgerOperation) as typeof ledgerOperation,
+    ledgerAdaptorFunction(setLedgerOperation) as typeof setLedgerOperation,
   ] as const
 }
 

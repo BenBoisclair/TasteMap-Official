@@ -26,7 +26,7 @@ export const withAuthentication =
     }
 
     if (!token || !token.startsWith('Bearer ') || token.split(' ').length !== 2) {
-      return res.status(401).json({ error: 'Wrong Authorization' })
+      return res.status(401).json({ error: `Wrong Authorization, received ${token}` })
     }
 
     const accessToken = z.string().parse(token.split(' ')[1])
