@@ -5,15 +5,30 @@ import {
 import { useLedgerOperation, createWithCloseSheet } from './utils'
 import { YStack, Text, Button, Input, Sheet } from '@my/ui'
 import { useIsSheetOpen } from 'app/atoms/isSheetOpen'
-import { patchApi, postApi } from 'app/utils/fetch'
+import { getApi, patchApi, postApi } from 'app/utils/fetch'
 import { formatDateThai } from 'app/utils/date'
 import { useEffect, useState } from 'react'
 import { SolitoImage } from 'solito/image'
-import { useMutation, useQueryClient } from 'react-query'
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type UseMutateAsyncFunction,
+  type QueryClient,
+} from 'react-query'
 import { BookRefetch } from './core'
 
 export const BookSheet = ({ refetch }: { refetch: BookRefetch }) => {
   const [isSheetOpen, setIsSheetOpen] = useIsSheetOpen()
+  const { mutateAsync: mutateCreateAsync } = useMutation((body: CreateBookRequestBody) =>
+    postApi('/book/create', body)
+  )
+
+  const { mutateAsync: mutateUpdateAsync } = useMutation((body: UpdateBookRequestBody) =>
+    patchApi('/book/update', body)
+  )
+
+  const queryClient = useQueryClient()
 
   useEffect(() => {
     setIsSheetOpen(false)
@@ -60,7 +75,12 @@ export const BookSheet = ({ refetch }: { refetch: BookRefetch }) => {
             alignSelf="stretch"
           >
             <BookSheetContent />
-            <BookSheetBottom refetch={refetch} />
+            <BookSheetBottom
+              refetch={refetch}
+              queryClient={queryClient}
+              mutateCreateAsync={mutateCreateAsync}
+              mutateUpdateAsync={mutateUpdateAsync}
+            />
           </YStack>
         </YStack>
       </Sheet.Frame>
@@ -284,20 +304,46 @@ const BookSheetContent = () => {
   )
 }
 
-const BookSheetBottom = ({ refetch }: { refetch: BookRefetch }) => {
+const BookSheetBottom = ({
+  refetch,
+  mutateCreateAsync,
+  mutateUpdateAsync,
+  queryClient,
+}: {
+  refetch: BookRefetch
+  mutateCreateAsync: UseMutateAsyncFunction<
+    | {
+        data: any
+        readonly error?: undefined
+      }
+    | {
+        readonly error: any
+        data?: undefined
+      },
+    unknown,
+    {
+      type: 'INCOME' | 'EXPENSE'
+      category: string
+      amount: string
+    },
+    unknown
+  >
+  mutateUpdateAsync: UseMutateAsyncFunction<
+    { data: any; readonly error?: undefined } | { readonly error: any; data?: undefined },
+    unknown,
+    {
+      type: 'INCOME' | 'EXPENSE'
+      category: string
+      amount: string
+      id: number
+    },
+    unknown
+  >
+  queryClient: QueryClient
+}) => {
   const [, setIsSheetOpen] = useIsSheetOpen()
   const [ledgerOperation, setLedgerOperation] = useLedgerOperation()
-  const { mutateAsync: mutateCreateAsync } = useMutation((body: CreateBookRequestBody) =>
-    postApi('/book/create', body)
-  )
-
-  const { mutateAsync: mutateUpdateAsync } = useMutation((body: UpdateBookRequestBody) =>
-    patchApi('/book/update', body)
-  )
-
   const withCloseSheet = createWithCloseSheet(setIsSheetOpen)
-
-  const queryClient = useQueryClient()
 
   type BindedMutate = () => Promise<{ data: any; error: null } | { data: null; error: any }>
   const partialOnCreateOrUpdate = (bindedMutate: BindedMutate) => async () => {

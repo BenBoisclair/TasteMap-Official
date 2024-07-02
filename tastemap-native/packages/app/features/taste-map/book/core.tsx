@@ -15,7 +15,6 @@ export const CoreBook = () => {
   const [toggleStatus, setToggleStatus] = useState<BookToggleStatus>('NORMAL')
   const { data, refetch } = useQuery('books', () => getApi('/book/today'))
   const [phoneNumber] = usePhoneNumber()
-  console.log(data)
 
   return (
     <>
@@ -28,10 +27,8 @@ export const CoreBook = () => {
       ) : (
         <CoreBookEmpty />
       )}
-      {
-        //<BookDialog refetch={refetch as BookRefetch} />
-        //<BookSheet refetch={refetch as BookRefetch} />
-      }
+      <BookDialog refetch={refetch as BookRefetch} />
+      <BookSheet refetch={refetch as BookRefetch} />
     </>
   )
 }

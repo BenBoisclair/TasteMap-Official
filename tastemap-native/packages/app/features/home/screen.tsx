@@ -14,7 +14,6 @@ import { logger } from 'app/utils/log'
 
 export function HomeScreen() {
   const { mutateAsync } = useMutation((body: LoginRequestBody) => postApi('/auth/login', body))
-  const { data } = useQuery('todo', () => fetch('/api/smth'))
   const [phoneNumber, setPhoneNumber] = usePhoneNumber()
   const [isError, setIsError] = useState(false)
   const { push } = useSlowRouter()
@@ -48,22 +47,18 @@ export function HomeScreen() {
     return success ? '/verification' : null
   }
 
-  //useEffect(() => {
-  //  push('/taste-map')
-  //}, [])
-
-  //useEffect(() => {
-  //  ;(async () => {
-  //    setPhoneNumber('')
-  //    // await setAuth({
-  //    //   refresh_token: '',
-  //    //   access_token: '',
-  //    //   expiration_date: '',
-  //    // })
-  //    // console.log(await getAuth())
-  //    ;(await getAuth()).access_token !== '' && push('/taste-map')
-  //  })()
-  //}, [])
+  useEffect(() => {
+    ;(async () => {
+      setPhoneNumber('')
+      // await setAuth({
+      //   refresh_token: '',
+      //   access_token: '',
+      //   expiration_date: '',
+      // })
+      // console.log(await getAuth())
+      ;(await getAuth()).access_token !== '' && push('/taste-map')
+    })()
+  }, [])
 
   return (
     <YStack

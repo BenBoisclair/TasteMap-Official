@@ -204,12 +204,17 @@ const OtpInput = ({
       display="flex"
       flexDirection="row"
       alignItems="flex-start"
-      gap="10px"
+      gap={10}
       alignSelf="stretch"
+      justifyContent="center"
     >
       {otpCode.map((code, i) => {
         return (
           <Input
+            display="flex"
+            alignSelf="center"
+            justifyContent="center"
+            alignItems="center"
             width={50}
             height={74}
             margin={0}
@@ -224,7 +229,7 @@ const OtpInput = ({
             textAlign="center"
             textAlignVertical="center"
             fontFamily="$body"
-            fontSize={49}
+            fontSize={20}
             letterSpacing={0.49}
             fontWeight="500"
             borderWidth={!isError ? 0 : 1.5}

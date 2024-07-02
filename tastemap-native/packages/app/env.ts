@@ -6,8 +6,8 @@ const envSchema = z.object({
 })
 
 const env = {
-  //PUBLIC_API_URL: 'https://taste-map-official.vercel.app',
-  PUBLIC_API_URL: 'http://localhost:3000',
+  PUBLIC_API_URL: 'https://taste-map-official.vercel.app',
+  //PUBLIC_API_URL: 'http://localhost:3000',
   PUBLIC_DEV_LOG_ENV: 'Bearer 1NiTg14ldFcJeBFKAou81BfsdLP9GDw6bHnhm3l4dSD',
 }
 
