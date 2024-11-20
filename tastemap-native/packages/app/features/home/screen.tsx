@@ -50,11 +50,11 @@ export function HomeScreen() {
   useEffect(() => {
     ;(async () => {
       setPhoneNumber('')
-      // await setAuth({
-      //   refresh_token: '',
-      //   access_token: '',
-      //   expiration_date: '',
-      // })
+      //await setAuth({
+      //  refresh_token: '',
+      //  access_token: '',
+      //  expiration_date: '',
+      //})
       // console.log(await getAuth())
       ;(await getAuth()).access_token !== '' && push('/taste-map')
     })()
