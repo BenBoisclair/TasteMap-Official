@@ -3,7 +3,7 @@
     "name": "tastemap",
     "slug": "tastemap",
     "scheme": "tastemap",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,18 +13,20 @@
       "backgroundColor": "#33BFBE"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/50e499e7-2487-473c-9a15-5df1eb73bb70"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.taste-map.app",
-      "buildNumber": "10",
+      "buildNumber": "11",
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
         "backgroundColor": "#33BFBE"
-      }
+      },
+      "runtimeVersion": "1.0.0"
     },
     "extra": {
       "eas": {
@@ -32,7 +34,10 @@
       }
     },
     "android": {
-      "package": "com.akritw.tastemap"
+      "package": "com.akritw.tastemap",
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     }
   },
   "android": {

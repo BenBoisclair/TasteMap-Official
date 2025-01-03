@@ -32,5 +32,13 @@
     "preview4": {
       "distribution": "internal"
     }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "tastemap-444915-1c930f84ec10.json",
+        "track": "internal"
+      }
+    }
   }
 }

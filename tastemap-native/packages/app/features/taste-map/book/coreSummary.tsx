@@ -5,7 +5,7 @@ import { YStack, Text } from '@my/ui'
 import { addComma } from './utils'
 
 export const CoreSummary = () => {
-  const { data } = useQuery('books', () => getApi('/book/today'))
+  const { data } = useQuery('booksAll', () => getApi('/book/all'))
   const books = data?.data && Books.safeParse(data.data).success ? Books.parse(data.data) : []
 
   return (
@@ -41,13 +41,14 @@ export const CoreSummary = () => {
             fontWeight="700"
             letterSpacing={0.35}
           >
-            {books.length !== 0 &&
-              `${addComma(
-                books
-                  .filter((book) => book.type === 'INCOME')
-                  .map((book) => Number(book.amount))
-                  .reduce((a, b) => a + b, 0)
-              )} บาท`}
+            {books.length !== 0
+              ? `${addComma(
+                  books
+                    .filter((book) => book.type === 'INCOME')
+                    .map((book) => Number(book.amount))
+                    .reduce((a, b) => a + b, 0)
+                )} บาท`
+              : '0 บาท'}
           </Text>
         </YStack>
         <YStack display="flex" flexDirection="column" alignItems="flex-start" alignSelf="stretch">
@@ -69,13 +70,16 @@ export const CoreSummary = () => {
             fontWeight="700"
             letterSpacing={0.35}
           >
-            {books.length !== 0 &&
-              `${addComma(
-                books
-                  .filter((book) => book.type === 'EXPENSE')
-                  .map((book) => Number(book.amount))
-                  .reduce((a, b) => a + b, 0)
-              )} บาท`}
+            {books.length !== 0
+              ? `${
+                  addComma(
+                    books
+                      .filter((book) => book.type === 'EXPENSE')
+                      .map((book) => Number(book.amount))
+                      .reduce((a, b) => a + b, 0)
+                  ) ?? 0
+                } บาท`
+              : '0 บาท'}
           </Text>
         </YStack>
       </YStack>
@@ -113,14 +117,17 @@ export const CoreSummary = () => {
             fontWeight="700"
             letterSpacing={0.35}
           >
-            {books.length !== 0 &&
-              `${addComma(
-                books
-                  .map((book) =>
-                    book.type === 'EXPENSE' ? Number(-book.amount) : Number(book.amount)
-                  )
-                  .reduce((a, b) => a + b, 0)
-              )} บาท`}
+            {books.length !== 0
+              ? `${
+                  addComma(
+                    books
+                      .map((book) =>
+                        book.type === 'EXPENSE' ? Number(-book.amount) : Number(book.amount)
+                      )
+                      .reduce((a, b) => a + b, 0)
+                  ) ?? 0
+                } บาท`
+              : '0 บาท'}
           </Text>
         </YStack>
       </YStack>

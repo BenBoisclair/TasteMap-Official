@@ -13,7 +13,7 @@ export type BookRefetch = () => Promise<QueryObserverResult<Books, Error>>
 
 export const CoreBook = () => {
   const [toggleStatus, setToggleStatus] = useState<BookToggleStatus>('NORMAL')
-  const { data, refetch } = useQuery('books', () => getApi('/book/all'))
+  const { data, refetch } = useQuery('booksToday', () => getApi('/book/today'))
   const [phoneNumber] = usePhoneNumber()
 
   return (
