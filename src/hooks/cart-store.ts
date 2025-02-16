@@ -34,7 +34,7 @@ interface OfferStore {
   getTotalPrice: () => number;
 }
 
-export const useOfferStore = create<OfferStore>((set) => ({
+export const useOfferStore = create<OfferStore>((set, get) => ({
   products: [],
   promotions: [],
   vendorId: "",
@@ -47,7 +47,6 @@ export const useOfferStore = create<OfferStore>((set) => ({
         (p) => p.id === promotion.id
       );
       if (existingPromotion) {
-        // If the promotion exists, just update the quantity
         return {
           promotions: state.promotions.map((p) =>
             p.id === promotion.id
@@ -56,7 +55,6 @@ export const useOfferStore = create<OfferStore>((set) => ({
           ),
         };
       } else {
-        // If the promotion doesn't exist, add it to the cart
         return { promotions: [...state.promotions, promotion] };
       }
     }),
@@ -66,12 +64,10 @@ export const useOfferStore = create<OfferStore>((set) => ({
         (promotion) => promotion.id !== promotionId
       ),
     })),
-
   addProduct: (product) =>
     set((state) => {
       const existingProduct = state.products.find((p) => p.id === product.id);
       if (existingProduct) {
-        // If the product exists, just update the quantity
         return {
           products: state.products.map((p) =>
             p.id === product.id
@@ -80,55 +76,53 @@ export const useOfferStore = create<OfferStore>((set) => ({
           ),
         };
       } else {
-        // If the product doesn't exist, add it to the cart
         return { products: [...state.products, product] };
       }
     }),
-
   removeProduct: (productId) =>
     set((state) => ({
       products: state.products.filter((product) => product.id !== productId),
     })),
-
   updateQuantity: (id, quantity) =>
     set((state) => ({
       products: state.products
         .map((product) =>
           product.id === id ? { ...product, quantity } : product
         )
-        .filter((product) => product.quantity > 0), // Remove the product if the quantity is 0
+        .filter((product) => product.quantity > 0),
       promotions: state.promotions
         .map((promotion) =>
           promotion.id === id ? { ...promotion, quantity } : promotion
         )
-        .filter((promotion) => promotion.quantity > 0), // Remove the promotion if the quantity is 0
+        .filter((promotion) => promotion.quantity > 0),
     })),
   reset: () =>
     set({ vendorId: "", products: [], promotions: [], additionalInfo: "" }),
   getTotalPrice: () => {
-    const totalProductPrice: number = useOfferStore
-      .getState()
-      .products.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0
-      );
-    const totalPromotionPrice: number = useOfferStore
-      .getState()
-      .promotions.reduce(
-        (total, promotion) => total + promotion.price * promotion.quantity,
-        0
-      );
+    const state = get();
+    const totalProductPrice = state.products.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+    const totalPromotionPrice = state.promotions.reduce(
+      (total, promotion) => total + promotion.price * promotion.quantity,
+      0
+    );
     return totalProductPrice + totalPromotionPrice;
   },
 }));
 
-export const useResetCart = () => {
-  const reset = useOfferStore((state) => state.reset);
+// Helper functions that don't use hooks
+export const getStoreState = () => useOfferStore.getState();
 
-  return { resetCart: reset };
+// Modified VendorView component usage
+export const initializeVendor = (vendorId: string) => {
+  const store = getStoreState();
+  store.setVendorId(vendorId);
 };
 
-export const setVendorId = (vendorId: string) => {
-  const setVendorId = useOfferStore((state) => state.setVendorId);
-  setVendorId(vendorId);
+// Usage in components remains the same
+export const useResetCart = () => {
+  const reset = useOfferStore((state) => state.reset);
+  return { resetCart: reset };
 };

@@ -6,6 +6,7 @@ import AspectBar from "./aspect-bar";
 import ReviewItem from "./review-card";
 import WriteReviewButton from "@/components/reviews/write-review-button";
 import { ReviewsProps, getReviews } from "@/server-actions/reviews";
+import { useEffect, useState } from "react";
 
 interface RatingAndReviewSectionProps {
   id: string;
@@ -14,13 +15,18 @@ interface RatingAndReviewSectionProps {
   reviews: ReviewsProps;
 }
 
-export default async function RatingAndReviewSection({
+export default function RatingAndReviewSection({
   id,
   name,
   type = "Market",
   reviews,
 }: RatingAndReviewSectionProps) {
-  console.log(reviews);
+  const [reviewData, setReviewData] = useState(reviews);
+
+  useEffect(() => {
+    setReviewData(reviews);
+  }, [reviews]);
+
   return (
     <div className="mb-5 bg-white" id="RatingsAndReviews">
       <div className="flex justify-between px-5">
@@ -29,7 +35,7 @@ export default async function RatingAndReviewSection({
 
       <div className=" flex flex-col px-5 py-2">
         <div className="mt-4 flex px-2">
-          {!!reviews && (
+          {!!reviewData && (
             <div className="flex flex-col items-center justify-center">
               <div className="text-center">
                 <div className="mr-2 flex items-center leading-tight">
@@ -37,16 +43,16 @@ export default async function RatingAndReviewSection({
                     <RatingStarIcon size={24} />
                   </div>
                   <div className="text-[32px] font-bold">
-                    {reviews?.data.average?.toFixed(2) || 0}
+                    {reviewData?.data.average?.toFixed(2) || 0}
                   </div>
                 </div>
-                <div className="whitespace-nowrap text-sm">{`(${reviews.data.total || 0} reviews)`}</div>
+                <div className="whitespace-nowrap text-sm">{`(${reviewData.data.total || 0} reviews)`}</div>
               </div>
             </div>
           )}
 
           <div className="flex flex-col gap-1">
-            {reviews?.data?.reviewAspects.map((aspect, key) => (
+            {reviewData?.data?.reviewAspects.map((aspect, key) => (
               <AspectBar aspect={aspect} key={key} />
             ))}
           </div>
@@ -54,14 +60,14 @@ export default async function RatingAndReviewSection({
 
         <WriteReviewButton name={name} id={id} type={type} className="mt-10" />
 
-        {reviews.data?.reviews.length > 0 && (
+        {reviewData.data?.reviews.length > 0 && (
           <div className="mt-10 flex flex-col gap-8">
-            {reviews.data?.reviews.map((review, key) => (
+            {reviewData.data?.reviews.map((review, key) => (
               <ReviewItem review={review} key={key} />
             ))}
           </div>
         )}
-        {!reviews && <ReviewsSkeleton />}
+        {!reviewData && <ReviewsSkeleton />}
       </div>
     </div>
   );

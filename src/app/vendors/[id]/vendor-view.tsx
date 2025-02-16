@@ -8,8 +8,9 @@ import type { Vendor } from "@/types/types";
 import { useSearchParams } from "next/navigation";
 import { Product, Promotion, product } from "@/db/schema/schema";
 import VendorOffersPage from "@/components/vendor/vendor-offers-page";
-import { setVendorId } from "@/hooks/cart-store";
+import { initializeVendor } from "@/hooks/cart-store";
 import { ReviewsProps } from "@/server-actions/reviews";
+import { useEffect } from "react";
 
 export type OffersType = {
   products: Product[] | undefined;
@@ -35,12 +36,13 @@ export default function VendorView({
   const activeTab = searchParams.get("tab");
 
   const tabs = ["Info", "Reviews"];
-
   if (offers.products?.length) {
     tabs.unshift("Menu");
   }
 
-  setVendorId(vendor.id);
+  useEffect(() => {
+    initializeVendor(vendor.id);
+  }, [vendor.id]);
 
   return (
     <div className="relative bg-neutral-200">
