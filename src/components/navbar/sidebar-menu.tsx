@@ -34,7 +34,7 @@ export function GeneralSideMenu({ className }: { className?: string }) {
       {/* <span>Language</span>
                   <span>FAQs</span>
                   <span>Report issues</span> */}
-      <Link href={`https://www.thehominians.com`}>
+      <Link href={`https://the-hominians-website.vercel.app/`}>
         <span>Our Team</span>
       </Link>
       <Link href={`/policy`}>
